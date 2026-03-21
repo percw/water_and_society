@@ -20,3 +20,7 @@ Master log for tracking limitations and their resolution across iterations.
 | 1 | Fossil Capital critique — temporal precedence ≠ causal primacy | `resolved` | Bidirectional Granger: Hydro→GDP p=0.005, GDP→Hydro p=0.23 (reverse causation ruled out) | [01](01/) |
 | 2 | Lexical conflation — early steam terms overlap with water terms | `resolved` | Unambiguous vocab (18 pure-hydro terms): Pure Hydro→GDP p=0.003 survives disambiguation | [01](01/) |
 | 3 | Library bias — Ngram corpus skewed toward technical literature | `resolved` | OLS detrending against tech baseline: Detrended Hydro→GDP p=0.019 survives bias correction | [01](01/) |
+| 4 | TY failure — causal claim holds only in differences, not levels | `pending` | — | [02](02/) |
+| 5 | IRF sign inversion — VAR mechanism contradicts thesis | `pending` | — | [02](02/) |
+| 6 | Pechenick ratio non-significance — linear detrend may under-correct | `pending` | — | [02](02/) |
+| 7 | Small-N fragility + no multiple comparison correction | `pending` | — | [02](02/) |
