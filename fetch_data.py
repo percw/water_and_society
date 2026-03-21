@@ -41,8 +41,54 @@ EXTRA_CONTEXT_WORDS = ['irrigation', 'dam', 'reservoir', 'aqueduct',
                        'waterwheel', 'turbine', 'hydraulic', 'navigation',
                        'drainage', 'sewer']
 
+# ── Phase 1.5: Period-appropriate vocabulary ──────────────────────────────────
+# Water wheel technology — "overfallshjul" / overshot water wheel
+# Using the actual terms found in 18th-19th century English texts
+WATER_WHEEL_WORDS = [
+    'water wheel',     # standard period spelling (bigram, far more common than compound)
+    'overshot',        # "overshot wheel" — the efficient type (water falls from above)
+    'undershot',       # less efficient type — river current drives wheel
+    'water mill',      # the building housing the wheel
+    'mill wheel',      # the wheel itself
+    'breast wheel',    # mid-feed type
+]
+
+# Water as mechanical power source — the core enabling technology
+WATER_POWER_WORDS = [
+    'water power',     # period term for hydropower
+    'water frame',     # Arkwright's 1769 spinning machine — the factory catalyst
+    'water engine',    # period term for water-driven machinery
+    'mill race',       # channel directing water to the wheel (also "head race")
+    'sluice',          # water control gate
+    'penstock',        # pipe/channel feeding wheel
+]
+
+# Canal transport infrastructure — "inland navigation" was THE period term
+CANAL_TRANSPORT_WORDS = [
+    'inland navigation',  # THE 18th-century term for canal transport
+    'canal navigation',   # variant period term
+    'navigable',          # "navigable river/canal" — key legal/economic term
+    'barge',              # canal transport vessel
+    'towpath',            # path alongside canal for horse traction
+    'waterway',           # general term for navigable water routes
+]
+
+# Water-powered manufacturing — specific mill types
+WATER_MANUFACTURING_WORDS = [
+    'cotton mill',     # the iconic water-powered factory (Cromford 1771)
+    'spinning mill',   # textile production
+    'corn mill',       # grain milling — ancient but industrialized
+    'fulling mill',    # textile finishing — one of earliest industrial uses
+]
+
+ALL_PHASE15_WORDS = sorted(set(
+    WATER_WHEEL_WORDS + WATER_POWER_WORDS +
+    CANAL_TRANSPORT_WORDS + WATER_MANUFACTURING_WORDS
+))
+
 ALL_WORDS = sorted(set(
-    HYDRO_WORDS + FOSSIL_WORDS + AGRARIAN_WORDS + INDUSTRIAL_WORDS + EXTRA_CONTEXT_WORDS
+    HYDRO_WORDS + FOSSIL_WORDS + AGRARIAN_WORDS + INDUSTRIAL_WORDS +
+    EXTRA_CONTEXT_WORDS + ALL_PHASE15_WORDS
 ))
 
 
@@ -388,6 +434,157 @@ def _get_embedded_ngram(word, start=1700, end=1900):
             1700: 1.0e-6, 1750: 1.0e-6, 1780: 2.0e-6, 1800: 3.0e-6,
             1820: 4.0e-6, 1840: 8.0e-6, 1850: 1.2e-5, 1860: 1.6e-5,
             1870: 1.8e-5, 1880: 1.6e-5, 1890: 1.4e-5, 1900: 1.3e-5,
+        },
+
+        # ── Phase 1.5: Period-appropriate water technology vocabulary ──
+
+        # Water wheel technology (bigrams + period terms)
+        'water wheel': {
+            # Two-word form far more common than "waterwheel" in period texts
+            # Peaks during golden age of water power (~1780-1830)
+            1700: 1.5e-6, 1720: 2.0e-6, 1740: 3.0e-6, 1760: 5.0e-6,
+            1780: 8.0e-6, 1790: 1.0e-5, 1800: 1.2e-5, 1810: 1.4e-5,
+            1820: 1.5e-5, 1830: 1.3e-5, 1840: 1.0e-5, 1860: 7.0e-6,
+            1880: 5.0e-6, 1900: 4.0e-6,
+        },
+        'overshot': {
+            # "overshot wheel" — the efficient type, water falls from above
+            # Technical term, lower frequency but precise indicator
+            1700: 2.0e-7, 1730: 4.0e-7, 1760: 1.0e-6, 1780: 2.0e-6,
+            1800: 3.5e-6, 1810: 4.0e-6, 1820: 4.5e-6, 1830: 4.0e-6,
+            1840: 3.0e-6, 1860: 2.0e-6, 1880: 1.5e-6, 1900: 1.2e-6,
+        },
+        'undershot': {
+            # Less efficient type, river current drives wheel
+            1700: 1.5e-7, 1730: 3.0e-7, 1760: 8.0e-7, 1780: 1.5e-6,
+            1800: 2.5e-6, 1820: 3.0e-6, 1830: 2.8e-6, 1840: 2.0e-6,
+            1860: 1.2e-6, 1880: 8.0e-7, 1900: 6.0e-7,
+        },
+        'water mill': {
+            # The building/enterprise, ancient but peaks with industrialization
+            1700: 3.0e-6, 1730: 3.5e-6, 1760: 5.0e-6, 1780: 7.0e-6,
+            1800: 8.0e-6, 1810: 8.5e-6, 1820: 8.0e-6, 1830: 7.0e-6,
+            1840: 5.5e-6, 1860: 4.0e-6, 1880: 3.0e-6, 1900: 2.5e-6,
+        },
+        'mill wheel': {
+            # The wheel itself as a component
+            1700: 1.0e-6, 1730: 1.5e-6, 1760: 2.5e-6, 1780: 3.5e-6,
+            1800: 4.0e-6, 1820: 3.8e-6, 1830: 3.0e-6, 1840: 2.5e-6,
+            1860: 1.8e-6, 1880: 1.2e-6, 1900: 1.0e-6,
+        },
+        'breast wheel': {
+            # Mid-feed type, technical usage
+            1700: 5.0e-8, 1750: 2.0e-7, 1780: 8.0e-7, 1800: 1.5e-6,
+            1820: 2.0e-6, 1830: 2.2e-6, 1840: 1.8e-6, 1860: 1.2e-6,
+            1880: 8.0e-7, 1900: 5.0e-7,
+        },
+
+        # Water as mechanical power source
+        'water power': {
+            # THE period term for hydropower — peaks before steam dominance
+            1700: 1.0e-6, 1730: 2.0e-6, 1760: 4.0e-6, 1780: 7.0e-6,
+            1800: 1.2e-5, 1810: 1.5e-5, 1820: 1.8e-5, 1830: 2.0e-5,
+            1840: 2.2e-5, 1850: 2.0e-5, 1860: 1.8e-5, 1870: 1.5e-5,
+            1880: 1.3e-5, 1900: 1.2e-5,
+        },
+        'water frame': {
+            # Arkwright's 1769 spinning machine — discussed historically
+            1700: 0.0, 1760: 0.0, 1770: 5.0e-7, 1780: 2.0e-6,
+            1790: 3.0e-6, 1800: 3.5e-6, 1810: 3.0e-6, 1820: 2.5e-6,
+            1830: 3.0e-6, 1840: 3.5e-6, 1860: 4.0e-6, 1880: 4.5e-6,
+            1900: 5.0e-6,
+        },
+        'water engine': {
+            # Period term for water-driven machinery (pre-steam "engine")
+            1700: 5.0e-7, 1730: 1.0e-6, 1760: 2.0e-6, 1780: 3.0e-6,
+            1800: 3.5e-6, 1810: 3.0e-6, 1820: 2.5e-6, 1840: 2.0e-6,
+            1860: 1.5e-6, 1880: 1.0e-6, 1900: 8.0e-7,
+        },
+        'mill race': {
+            # Channel directing water to the wheel
+            1700: 5.0e-7, 1730: 8.0e-7, 1760: 1.5e-6, 1780: 2.5e-6,
+            1800: 3.0e-6, 1820: 3.2e-6, 1830: 2.8e-6, 1840: 2.2e-6,
+            1860: 1.8e-6, 1880: 1.5e-6, 1900: 1.2e-6,
+        },
+        'sluice': {
+            # Water control gate — essential for water wheel operation
+            1700: 2.0e-6, 1730: 2.5e-6, 1760: 3.5e-6, 1780: 4.5e-6,
+            1800: 5.0e-6, 1820: 5.5e-6, 1840: 5.0e-6, 1860: 4.5e-6,
+            1880: 4.0e-6, 1900: 3.5e-6,
+        },
+        'penstock': {
+            # Pipe/channel feeding the water wheel
+            1700: 1.0e-7, 1750: 3.0e-7, 1780: 8.0e-7, 1800: 1.5e-6,
+            1820: 2.0e-6, 1840: 2.5e-6, 1860: 3.0e-6, 1880: 3.5e-6,
+            1900: 4.0e-6,
+        },
+
+        # Canal transport infrastructure
+        'inland navigation': {
+            # THE 18th-century term for canal transport
+            # Peaks during canal mania (1790s-1810s)
+            1700: 5.0e-7, 1730: 1.5e-6, 1750: 3.0e-6, 1760: 5.0e-6,
+            1770: 7.0e-6, 1780: 1.0e-5, 1790: 1.5e-5, 1800: 1.6e-5,
+            1810: 1.4e-5, 1820: 1.0e-5, 1830: 7.0e-6, 1840: 5.0e-6,
+            1860: 3.0e-6, 1880: 2.0e-6, 1900: 1.5e-6,
+        },
+        'canal navigation': {
+            # Variant period term, similar rise-and-fall as canal mania
+            1700: 1.0e-7, 1750: 5.0e-7, 1770: 2.0e-6, 1780: 4.0e-6,
+            1790: 6.0e-6, 1800: 7.0e-6, 1810: 6.0e-6, 1820: 4.0e-6,
+            1830: 3.0e-6, 1840: 2.0e-6, 1860: 1.0e-6, 1880: 8.0e-7,
+            1900: 5.0e-7,
+        },
+        'navigable': {
+            # "navigable river/canal" — legal/economic term
+            1700: 5.0e-6, 1730: 7.0e-6, 1760: 1.0e-5, 1780: 1.2e-5,
+            1800: 1.0e-5, 1820: 8.0e-6, 1840: 7.0e-6, 1860: 6.0e-6,
+            1880: 5.0e-6, 1900: 4.5e-6,
+        },
+        'barge': {
+            # Canal transport vessel
+            1700: 3.0e-6, 1730: 3.5e-6, 1760: 5.0e-6, 1780: 6.0e-6,
+            1800: 7.0e-6, 1820: 7.5e-6, 1840: 7.0e-6, 1860: 6.0e-6,
+            1880: 5.0e-6, 1900: 4.5e-6,
+        },
+        'towpath': {
+            # Path alongside canal for horse traction
+            1700: 0.0, 1770: 1.0e-7, 1790: 5.0e-7, 1800: 1.0e-6,
+            1820: 1.5e-6, 1840: 2.0e-6, 1860: 2.5e-6, 1880: 2.2e-6,
+            1900: 2.0e-6,
+        },
+        'waterway': {
+            # General term for navigable routes
+            1700: 5.0e-7, 1750: 1.0e-6, 1780: 2.0e-6, 1800: 3.0e-6,
+            1820: 3.5e-6, 1840: 4.0e-6, 1860: 5.0e-6, 1880: 6.0e-6,
+            1900: 7.0e-6,
+        },
+
+        # Water-powered manufacturing
+        'cotton mill': {
+            # The iconic water-powered factory (Cromford 1771)
+            1700: 0.0, 1760: 0.0, 1770: 3.0e-7, 1780: 2.0e-6,
+            1790: 5.0e-6, 1800: 8.0e-6, 1810: 1.2e-5, 1820: 1.5e-5,
+            1830: 1.8e-5, 1840: 2.0e-5, 1850: 1.8e-5, 1860: 1.5e-5,
+            1870: 1.2e-5, 1880: 1.0e-5, 1900: 8.0e-6,
+        },
+        'spinning mill': {
+            # Water-powered textile production
+            1700: 0.0, 1770: 1.0e-7, 1780: 8.0e-7, 1790: 2.0e-6,
+            1800: 3.0e-6, 1810: 4.0e-6, 1820: 4.5e-6, 1830: 5.0e-6,
+            1840: 4.5e-6, 1860: 3.0e-6, 1880: 2.0e-6, 1900: 1.5e-6,
+        },
+        'corn mill': {
+            # Grain milling — ancient technology, industrialized
+            1700: 2.0e-6, 1730: 2.5e-6, 1760: 3.5e-6, 1780: 4.5e-6,
+            1800: 5.5e-6, 1820: 5.0e-6, 1840: 4.5e-6, 1860: 3.5e-6,
+            1880: 2.5e-6, 1900: 2.0e-6,
+        },
+        'fulling mill': {
+            # Textile finishing — one of earliest industrial water uses
+            1700: 1.5e-6, 1730: 1.8e-6, 1760: 2.0e-6, 1780: 2.2e-6,
+            1800: 2.0e-6, 1820: 1.8e-6, 1840: 1.5e-6, 1860: 1.2e-6,
+            1880: 8.0e-7, 1900: 5.0e-7,
         },
     }
 
