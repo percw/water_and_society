@@ -1,8 +1,10 @@
 pandas
 numpy
 matplotlib
-nltk
 scikit-learn
 gensim
 statsmodels
+scipy
+requests
+openpyxl
 jupyter
