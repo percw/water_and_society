@@ -16,6 +16,12 @@ The analysis is split into three computational phases:
 2. **Diachronic Word Embeddings (Temporal Word2Vec)** — Trains decade-specific Word2Vec models to measure the semantic shift of "water", "steam", and "coal" relative to an industrial vocabulary cluster.
 3. **Macroeconomic Overlay & Granger Causality** — Merges the NLP findings with Maddison Project GDP per capita data to test whether the hydro-linguistic shift preceded and Granger-caused the economic takeoff.
 
+## Iterative Research Workflow
+
+To ensure rigorous scientific development, this project uses a structured logging system in the `Iterations/` directory to document and address methodological challenges as they arise:
+- **`XX.limitations.md`**: Captures critical scientific counter-arguments, corpus biases, or methodological weaknesses discovered during analysis (e.g., the lexical conflation of "steam mills" and "water mills").
+- **`XX.addressing_limitations.md`**: Outlines the specific quantitative adjustments, data filters, or theoretical updates implemented to resolve the vulnerabilities raised in the corresponding limitations log.
+
 ## Quick Start
 
 ### Run Online (recommended)
@@ -42,6 +48,7 @@ jupyter notebook hydro_social_analysis.ipynb
 ```
 ├── hydro_social_analysis.ipynb   # Main analysis notebook (Colab-ready)
 ├── hydro_social_analysis.py      # Equivalent Python script
+├── Iterations/                   # Structured research logs (limitations & solutions)
 ├── research_proposal.md          # Full research proposal
 ├── requirements.txt              # Python dependencies
 └── README.md
