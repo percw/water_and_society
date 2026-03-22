@@ -20,3 +20,7 @@ Master log for tracking limitations and their resolution across iterations.
 | 1 | Fossil Capital critique — temporal precedence ≠ causal primacy | `pending` | — | [01](01/) |
 | 2 | Lexical conflation — early steam terms overlap with water terms | `pending` | — | [01](01/) |
 | 3 | Library bias — Ngram corpus skewed toward technical literature | `pending` | — | [01](01/) |
+| 4 | The Cliometric Fallacy — Granger causality on interpolated GDP data | `pending` | — | [02](02/) |
+| 5 | NLP Methodological Catastrophe — pseudo-documents destroy co-occurrence | `pending` | — | [02](02/) |
+| 6 | Uncontrolled Polysemy — highly polysemous words lack disambiguation | `pending` | — | [02](02/) |
+| 7 | Endogeneity of Print Culture — technical vocabulary surge as effect, not cause | `pending` | — | [02](02/) |
