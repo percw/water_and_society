@@ -24,3 +24,6 @@ Master log for tracking limitations and their resolution across iterations.
 | 5 | NLP Methodological Catastrophe — pseudo-documents destroy co-occurrence | `pending` | — | [02](02/) |
 | 6 | Uncontrolled Polysemy — highly polysemous words lack disambiguation | `pending` | — | [02](02/) |
 | 7 | Endogeneity of Print Culture — technical vocabulary surge as effect, not cause | `pending` | — | [02](02/) |
+| 8 | The Spurious Regression Fallacy — correlating non-stationary time series | `pending` | — | [03](03/) |
+| 9 | The Asymmetry of the Comparative Asian Corpus — divergence claim without Asian linguistic data | `pending` | — | [03](03/) |
+| 10 | Dictionary Cherry-Picking and Confirmation Bias — subjective categorizations | `pending` | — | [03](03/) |
