@@ -24,3 +24,4 @@ Master log for tracking limitations and their resolution across iterations.
 | 5 | NLP Methodological Catastrophe — pseudo-documents destroy co-occurrence | `pending` | — | [02](02/) |
 | 6 | Uncontrolled Polysemy — highly polysemous words lack disambiguation | `pending` | — | [02](02/) |
 | 7 | Endogeneity of Print Culture — technical vocabulary surge as effect, not cause | `pending` | — | [02](02/) |
+| 8 | Geographic Conflation — 'en-2019' corpus dilutes British signal with American texts | `pending` | — | [03](03/) |
