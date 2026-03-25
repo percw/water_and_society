@@ -24,3 +24,7 @@ Master log for tracking limitations and their resolution across iterations.
 | 5 | NLP Methodological Catastrophe — pseudo-documents destroy co-occurrence | `pending` | — | [02](02/) |
 | 6 | Uncontrolled Polysemy — highly polysemous words lack disambiguation | `pending` | — | [02](02/) |
 | 7 | Endogeneity of Print Culture — technical vocabulary surge as effect, not cause | `pending` | — | [02](02/) |
+| 8 | The Retronymic Artifact — "water power" as a reactive lexical formation | `pending` | — | [03](03/) |
+| 9 | Ontological Category Error — comparing prime movers to infrastructure | `pending` | — | [03](03/) |
+| 10 | Transatlantic Conflation — the 'en-2019' corpus and the American lag | `pending` | — | [03](03/) |
+| 11 | Syntactic Normalization Trap — unstable 18th-century orthography | `pending` | — | [03](03/) |
