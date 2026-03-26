@@ -28,3 +28,6 @@ Master log for tracking limitations and their resolution across iterations.
 | 9 | Ontological Category Error — comparing prime movers to infrastructure | `pending` | — | [03](03/) |
 | 10 | Transatlantic Conflation — the 'en-2019' corpus and the American lag | `pending` | — | [03](03/) |
 | 11 | Syntactic Normalization Trap — unstable 18th-century orthography | `pending` | — | [03](03/) |
+| 12 | The Diachronic Alignment Failure — incomparable vector spaces | `pending` | — | [04](04/) |
+| 13 | The Geographical Mismatch — London print vs. Northern industry | `pending` | — | [04](04/) |
+| 14 | The Patent/Legal Bias — "inland navigation" inflated by Acts of Parliament | `pending` | — | [04](04/) |
