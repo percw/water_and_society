@@ -31,3 +31,6 @@ Master log for tracking limitations and their resolution across iterations.
 | 12 | The Diachronic Alignment Failure — incomparable vector spaces | `pending` | — | [04](04/) |
 | 13 | The Geographical Mismatch — London print vs. Northern industry | `pending` | — | [04](04/) |
 | 14 | The Patent/Legal Bias — "inland navigation" inflated by Acts of Parliament | `pending` | — | [04](04/) |
+| 15 | The "Survivor Bias" of the Digitized Archive | `pending` | — | [05](05/) |
+| 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `pending` | — | [05](05/) |
+| 17 | The Teleological Fallacy in Topic Modeling (LDA) | `pending` | — | [05](05/) |
