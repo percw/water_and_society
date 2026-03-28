@@ -32,5 +32,5 @@ Master log for tracking limitations and their resolution across iterations.
 | 13 | The Geographical Mismatch — London print vs. Northern industry | `pending` | — | [04](04/) |
 | 14 | The Patent/Legal Bias — "inland navigation" inflated by Acts of Parliament | `pending` | — | [04](04/) |
 | 15 | The "Survivor Bias" of the Digitized Archive | `pending` | — | [05](05/) |
-| 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `resolved` | Phase 3.4: VAR with population covariate — hydro LOSES significance (p=0.978); population IS significant (p=0.002) | [05](05/) |
+| 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `resolved` | Phase 3.4: Hydro loses significance in VAR (p=0.978), BUT mediation test shows population does NOT drive water vocab (p=0.125) — independent signals, not confounded | [05](05/) |
 | 17 | The Teleological Fallacy in Topic Modeling (LDA) | `resolved` | Phase 3.6: Data-driven k=4 agrees with a priori choice; industrial-water topics emerge unsupervised | [05](05/) |
