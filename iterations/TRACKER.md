@@ -34,3 +34,5 @@ Master log for tracking limitations and their resolution across iterations.
 | 15 | The "Survivor Bias" of the Digitized Archive | `pending` | — | [05](05/) |
 | 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `resolved` | Phase 3.4: Hydro loses significance in VAR (p=0.978), BUT mediation test shows population does NOT drive water vocab (p=0.125) — independent signals, not confounded | [05](05/) |
 | 17 | The Teleological Fallacy in Topic Modeling (LDA) | `resolved` | Phase 3.6: Data-driven k=4 agrees with a priori choice; industrial-water topics emerge unsupervised | [05](05/) |
+| 18 | Index Construction Fallacy — Domination by High-Frequency Unigrams | `pending` | — | [06](06/) |
+| 19 | Epistemological Overreach in Comparative Analysis — The Missing Multilingual Corpus | `pending` | — | [06](06/) |
