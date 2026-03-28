@@ -596,6 +596,28 @@ def _get_embedded_ngram(word, start=1700, end=1900):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 4. British Population Data (for confound control)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def fetch_population():
+    """British population estimates 1700-1900 (millions).
+
+    Source: Wrigley & Schofield (1981), Mitchell (1988).
+    Benchmark years linearly interpolated to annual resolution.
+    """
+    benchmarks = {
+        1700: 5.06, 1710: 5.24, 1720: 5.35, 1730: 5.26, 1740: 5.58,
+        1750: 5.77, 1760: 6.15, 1770: 6.45, 1780: 7.04, 1790: 7.74,
+        1800: 8.67, 1810: 9.94, 1820: 11.49, 1830: 13.28, 1840: 15.01,
+        1850: 16.74, 1860: 18.78, 1870: 21.36, 1880: 24.40, 1890: 27.23,
+        1900: 30.07,
+    }
+    pop = _interpolate_benchmarks(benchmarks, 1700, 1900)
+    pop.name = 'GBR_pop_millions'
+    return pop
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Main entry point
 # ─────────────────────────────────────────────────────────────────────────────
 

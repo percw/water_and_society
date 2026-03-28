@@ -29,11 +29,19 @@ Solutions addressing the limitations identified in [limitations.md](limitations.
 
 ## 6. Uncontrolled Polysemy and Dictionary Inflation
 
-**Status:** pending
+**Status:** resolved
 
-**Approach:** _To be determined._
+**Approach:** Phase 3.2 implements a polysemy control test by re-running the core Granger causality analysis using **only unambiguous bigrams** that cannot refer to non-water-industrial meanings.
 
-No word-sense disambiguation (WSD) has been implemented. The vocabulary lists still include polysemous terms (`power`, `mill`, `engine`) without contextual filtering. A solution would require either: (a) restricting to unambiguous bigrams only, (b) implementing WSD using contextual embeddings, or (c) access to full-text corpora for collocation analysis.
+- Excluded polysemous unigrams: `power`, `mill`, `engine`, `pump`, `canal`
+- Used 17 unambiguous hydro-industrial terms (bigrams and technical terms): `water wheel`, `water mill`, `water power`, `water frame`, `water engine`, `mill race`, `overshot`, `undershot`, `breast wheel`, `penstock`, `sluice`, `inland navigation`, `canal navigation`, `cotton mill`, `fulling mill`, `corn mill`, `spinning mill`
+
+**Results:**
+- Unambiguous Hydro → GDP: **p = 0.0019** (significant, lag=1)
+- Unambiguous Fossil → GDP: p = 0.418 (not significant)
+- Original Hydro (Phase 1): p = 0.0047 (significant)
+
+**Conclusion:** The hydro-industrial Granger causality signal **strengthens** when polysemous terms are removed (p improves from 0.0047 to 0.0019). Polysemy does not inflate the finding — if anything, the polysemous unigrams were adding noise.
 
 ---
 
