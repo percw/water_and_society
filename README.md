@@ -24,33 +24,34 @@ To ensure rigorous scientific development, this project uses a structured loggin
 
 ## Quick Start
 
-### Run Online (recommended)
-Click the **"Open in Colab"** badge above — no local setup required. The notebook installs all dependencies automatically.
-
 ### Run Locally
 ```bash
 git clone https://github.com/percw/water_and_society.git
 cd water_and_society
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-jupyter notebook hydro_social_analysis.ipynb
+python src/fetch_data.py --force
+python src/did_analysis.py
 ```
 
 ## Data Sources
 
 | Dataset | Description |
 |---|---|
-| **HathiTrust Extracted Features** | Volume-level metadata, token counts, and POS tagging (1700–1900) |
-| **Google Books Ngram Corpus** | Frequency trajectories for engineering/technological vocabulary |
-| **Maddison Project Database** | Historical GDP per capita for Britain, China, and India |
+| **Google Books Ngram Corpus** | Frequency trajectories for engineering/technological vocabulary (strict `eng_gb_2019` British corpus) |
+| **Maddison Project Database** | Historical GDP per capita for Britain, Netherlands, France, China, and India |
 
 ## Repository Structure
 
-```
-├── hydro_social_analysis.ipynb   # Main analysis notebook (Colab-ready)
-├── hydro_social_analysis.py      # Equivalent Python script
-├── Iterations/                   # Structured research logs (limitations & solutions)
-├── research_proposal.md          # Full research proposal
-├── requirements.txt              # Python dependencies
+```text
+├── archive/        # Legacy Jupyter notebooks and iteration trackers
+├── data/           # Curated datasets and generated DiD plots (.png)
+├── docs/           # Research drafts, proposals, and pipeline results
+├── src/            # Core Python pipeline
+│   ├── fetch_data.py     # Pulls and merges Google Ngrams with Maddison GDP
+│   └── did_analysis.py   # Runs DiD regressions, event studies, and permutation tests
+├── requirements.txt
 └── README.md
 ```
 
