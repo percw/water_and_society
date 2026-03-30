@@ -4,6 +4,8 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
+📖 **[Read the Full Pre-Print Manuscript Draft Here](archive/paper/compiled_manuscript.md)**
+
 > **Did water infrastructure trigger the British Industrial Revolution before the steam engine?**  
 > This project applies natural language processing (NLP) to historical texts to quantify the integration of "hydro-social" vocabulary over the 18th and 19th centuries. By merging these linguistic milestones with real GDP data in a Difference-in-Differences (DiD) framework, we successfully isolate the macroeconomic "First Mover" advantage of Britain's canal and water-wheel network.
 
