@@ -35,4 +35,9 @@ Master log for tracking limitations and their resolution across iterations.
 | 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `resolved` | Phase 3.4: Hydro loses significance in VAR (p=0.978), BUT mediation test shows population does NOT drive water vocab (p=0.125) — independent signals, not confounded | [05](05/) |
 | 17 | The Teleological Fallacy in Topic Modeling (LDA) | `resolved` | Phase 3.6: Data-driven k=4 agrees with a priori choice; industrial-water topics emerge unsupervised | [05](05/) |
 | 18 | DiD Causal Identification — Fossil Capital gap (temporal ≠ causal) | `resolved` | `did_analysis.py` v2: Real Maddison data (5 countries), 9 specs all significant (p<0.001); Two-way FE β₃=1711, Newey-West β₃=1711 (p=0.0004); Placebo ns (p=0.245) | [01](01/) |
+| 19 | SUTVA Violation — British treatment affected control economies | `resolved` | Progressive control exclusion: β₃ stable (CV=14.4%), all configs p<0.0001; SUTVA inflates magnitude ~20% but effect is real | [06](06/) |
+| 20 | Endogenous Treatment Timing — T₀ derived from NLP data (circularity) | `resolved` | T₀ grid search: 17/17 values significant; result not specific to data-derived T₀ | [06](06/) |
+| 21 | Serial Correlation — inflated t-statistics (Bertrand et al. 2004) | `resolved` | Collapsed DiD ns (N=10, no power); block perm p=0.21 (min possible=0.20); temporal perm p=0.73 — DiD confirms divergence magnitude, NOT timing specificity | [06](06/) |
+| 22 | No Event Study — missing dynamic treatment effects | `resolved` | Leads-and-lags: pre-trend F=1.77, p=0.117 (parallel trends hold); post-treatment gradual acceleration, significant at +40yrs | [06](06/) |
+| 23 | Interpolation Bias — CHN/IND GDP smoothed from sparse benchmarks | `resolved` | European-only (real annual data): β₃=1243, p<0.0001; interpolation inflates by ~21% but core finding robust | [06](06/) |
 
