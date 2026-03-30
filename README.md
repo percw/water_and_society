@@ -1,4 +1,4 @@
-# 🌊 The Linguistic Hydro-Social Cycle
+# The Linguistic Hydro-Social Cycle
 
 [![Status: Pre-Print](https://img.shields.io/badge/Status-Pre--Print-blue.svg)](#)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -15,7 +15,7 @@
 
 ---
 
-## 📊 Key Findings
+## Key Findings
 
 - **The 1766 Crossover:** NLP frequency trajectories from the British Google Books corpus (`eng_gb_2019`) reveal a distinct crossover year (1766) where water transitioned from natural/religious phrasing to commodified industrial phrasing (e.g., *navigable canal, water wheel*).
 - **The Economic Smoking Gun:** Using 1766 as the treatment year, our DiD regression proves Britain gained **~$1,292 additional GDP per capita** relative to continental control economies (France, Netherlands).
@@ -23,7 +23,7 @@
 
 ---
 
-## 🔬 Methodology
+## Methodology
 
 <details>
 <summary><strong>1. Linguistic Trigger (Ngram NLP)</strong></summary>
@@ -45,7 +45,7 @@ To prove the effect is specific to water, the script executes identical DiD even
 
 ---
 
-## 🚀 Replication Setup
+## Replication Setup
 
 To reproduce the data fetching and exact econometric graphs for publication:
 
@@ -64,7 +64,7 @@ python src/fetch_data.py --force
 python src/did_analysis.py
 ```
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 ├── archive/        # Legacy Jupyter notebooks and iteration trackers
