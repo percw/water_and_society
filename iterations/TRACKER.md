@@ -34,5 +34,6 @@ Master log for tracking limitations and their resolution across iterations.
 | 15 | The "Survivor Bias" of the Digitized Archive | `pending` | — | [05](05/) |
 | 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `resolved` | Phase 3.4: Hydro loses significance in VAR (p=0.978), BUT mediation test shows population does NOT drive water vocab (p=0.125) — independent signals, not confounded | [05](05/) |
 | 17 | The Teleological Fallacy in Topic Modeling (LDA) | `resolved` | Phase 3.6: Data-driven k=4 agrees with a priori choice; industrial-water topics emerge unsupervised | [05](05/) |
-| 18 | DiD Causal Identification — Fossil Capital gap (temporal ≠ causal) | `resolved` | `did_analysis.py` v2: Real Maddison data (5 countries), 9 specs all significant (p<0.001); Two-way FE β₃=1711, Newey-West β₃=1711 (p=0.0004); Placebo ns (p=0.245) | [01](01/) |
+| 18 | DiD Causal Identification — Fossil Capital gap (temporal ≠ causal) | `resolved` | `did_analysis.py` v3: 9 baseline + 5 v3 specs; Event study shows flat pre-trends (all p>0.2) + significant divergence post-T₀ (p<0.001); Randomization Inference p=0.000 (200 perms); Pre-trends test passes (p=0.894); European controls (NLD, FRA) as primary | [01](01/) |
+| 19 | Publication-Quality DiD Extensions (v3) | `resolved` | Event Study/Dynamic DiD, Placebo-in-Space, Randomization Inference (permutation), Sub-Period DiD (pre-steam vs steam era), Formal Pre-Trends Test, honest causal framing caveat | [01](01/) |
 
