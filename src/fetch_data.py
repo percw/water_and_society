@@ -24,7 +24,7 @@ import pandas as pd
 from pathlib import Path
 
 # ── Paths ────────────────────────────────────────────────────────────────────
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_DIR / "data"
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')

@@ -41,7 +41,7 @@ from pathlib import Path
 warnings.filterwarnings('ignore', category=FutureWarning)
 
 # ── Paths ────────────────────────────────────────────────────────────────────
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_DIR / "data"
 
 # ── Vocabulary (mirrors fetch_data.py) ───────────────────────────────────────
