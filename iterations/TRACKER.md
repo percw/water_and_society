@@ -35,4 +35,6 @@ Master log for tracking limitations and their resolution across iterations.
 | 16 | Confounding Variable — Population Growth and the "Malthusian Ceiling" | `resolved` | Phase 3.4: Hydro loses significance in VAR (p=0.978), BUT mediation test shows population does NOT drive water vocab (p=0.125) — independent signals, not confounded | [05](05/) |
 | 17 | The Teleological Fallacy in Topic Modeling (LDA) | `resolved` | Phase 3.6: Data-driven k=4 agrees with a priori choice; industrial-water topics emerge unsupervised | [05](05/) |
 | 18 | DiD Causal Identification — Fossil Capital gap (temporal ≠ causal) | `resolved` | `did_analysis.py` v2: Real Maddison data (5 countries), 9 specs all significant (p<0.001); Two-way FE β₃=1711, Newey-West β₃=1711 (p=0.0004); Placebo ns (p=0.245) | [01](01/) |
-
+| 19 | Endogenous Treatment Timing in DiD | `pending` | — | [06](06/) |
+| 20 | Violation of the Parallel Trends Assumption | `pending` | — | [06](06/) |
+| 21 | The Compositional Drift of the Google Books Corpus | `pending` | — | [06](06/) |
