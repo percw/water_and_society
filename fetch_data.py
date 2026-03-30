@@ -86,9 +86,25 @@ ALL_PHASE15_WORDS = sorted(set(
     CANAL_TRANSPORT_WORDS + WATER_MANUFACTURING_WORDS
 ))
 
+# ── Placebo vocabulary categories (for falsification tournament) ──────────────
+# Each represents a rival hypothesis for what drove the Great Divergence.
+# If water is special, ONLY water vocabulary should produce a clean
+# event study pattern — these should all produce noisy results.
+
+PLACEBO_COAL_MINING = ['mine', 'colliery', 'pit', 'coal mine']
+PLACEBO_TEXTILE = ['cotton', 'spinning', 'weaving', 'loom', 'wool', 'linen']
+PLACEBO_FINANCIAL = ['bank', 'credit', 'insurance', 'patent']
+PLACEBO_AGRICULTURAL = ['enclosure', 'turnip', 'crop', 'tillage']
+PLACEBO_STEAM_MECH = ['piston', 'boiler', 'locomotive', 'horsepower']
+
+ALL_PLACEBO_WORDS = sorted(set(
+    PLACEBO_COAL_MINING + PLACEBO_TEXTILE + PLACEBO_FINANCIAL +
+    PLACEBO_AGRICULTURAL + PLACEBO_STEAM_MECH
+))
+
 ALL_WORDS = sorted(set(
     HYDRO_WORDS + FOSSIL_WORDS + AGRARIAN_WORDS + INDUSTRIAL_WORDS +
-    EXTRA_CONTEXT_WORDS + ALL_PHASE15_WORDS
+    EXTRA_CONTEXT_WORDS + ALL_PHASE15_WORDS + ALL_PLACEBO_WORDS
 ))
 
 
@@ -96,7 +112,7 @@ ALL_WORDS = sorted(set(
 # 1. Google Books Ngram API with caching + embedded fallback
 # ─────────────────────────────────────────────────────────────────────────────
 
-def fetch_ngram(word, start=1700, end=1900, corpus='en-2019', smoothing=3,
+def fetch_ngram(word, start=1700, end=1900, corpus='eng_gb_2019', smoothing=3,
                 force=False):
     """Fetch word frequency timeseries from Google Books Ngram Viewer.
 
@@ -149,7 +165,7 @@ def fetch_ngram(word, start=1700, end=1900, corpus='en-2019', smoothing=3,
     return series
 
 
-def fetch_all_ngrams(words=None, start=1700, end=1900, corpus='en-2019',
+def fetch_all_ngrams(words=None, start=1700, end=1900, corpus='eng_gb_2019',
                      smoothing=3, force=False):
     """Fetch Ngram data for all words. Returns DataFrame."""
     words = words or ALL_WORDS
