@@ -36,4 +36,8 @@ Master log for tracking limitations and their resolution across iterations.
 | 17 | The Teleological Fallacy in Topic Modeling (LDA) | `resolved` | Phase 3.6: Data-driven k=4 agrees with a priori choice; industrial-water topics emerge unsupervised | [05](05/) |
 | 18 | DiD Causal Identification — Fossil Capital gap (temporal ≠ causal) | `resolved` | `did_analysis.py` v3: 9 baseline + 5 v3 specs; Event study shows flat pre-trends (all p>0.2) + significant divergence post-T₀ (p<0.001); Randomization Inference p=0.000 (200 perms); Pre-trends test passes (p=0.894); European controls (NLD, FRA) as primary | [01](01/) |
 | 19 | Publication-Quality DiD Extensions (v3) | `resolved` | Event Study/Dynamic DiD, Placebo-in-Space, Randomization Inference (permutation), Sub-Period DiD (pre-steam vs steam era), Formal Pre-Trends Test, honest causal framing caveat | [01](01/) |
+| 20 | Control Group Contamination (English-Only Exogeneity Violation) | `pending` | — | [06](06/) |
+| 21 | Spurious Sharpness in Treatment Assignment ($T_0$) | `pending` | — | [06](06/) |
+| 22 | Dictionary Bias and "P-Hacking" via Manual Curation | `pending` | — | [06](06/) |
+| 23 | The Interpolation Fallacy: Artificial Deflation of Standard Errors | `pending` | — | [06](06/) |
 
