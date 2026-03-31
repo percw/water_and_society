@@ -3,9 +3,15 @@ import glob
 
 def compile_manuscript():
     """Compiles all markdown sections into a single manuscript."""
-    # Find all .md files in the current directory that start with a number
-    # This ensures abstract, introduction, etc. are grabbed in order.
-    section_files = sorted(glob.glob("*.md"))
+    section_files = [
+        "00_abstract.md",
+        "01_introduction.md",
+        "02_results.md",
+        "03_methodology.md",
+        "04_discussion.md",
+        "05_conclusion.md",
+        "06_references.md"
+    ]
     
     # Filter out the compiled manuscript if it already exists to avoid duplication
     section_files = [f for f in section_files if f != "compiled_manuscript.md"]
