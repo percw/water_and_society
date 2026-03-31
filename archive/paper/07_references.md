@@ -1,6 +1,10 @@
-# 4. References
+# References
 
 Allen, Robert C. 2009. *The British Industrial Revolution in Global Perspective*. Cambridge: Cambridge University Press.
+
+Bertrand, Marianne, Esther Duflo, and Sendhil Mullainathan. 2004. "How Much Should We Trust Differences-in-Differences Estimates?" *Quarterly Journal of Economics* 119 (1): 249–75.
+
+Bogart, Dan, Xuesheng You, Eduard J. Alvarez-Palau, Max Satchell, and Leigh Shaw-Taylor. 2024. "Transport and Urban Growth in the First Industrial Revolution." *The Economic Journal* 134 (662): 2168–2206.
 
 Bolt, Jutta, and Jan Luiten van Zanden. 2020. "Maddison style estimates of the evolution of the world economy. A new 2020 update." *Maddison-Project Working Paper*, WP-154.
 
@@ -20,8 +24,12 @@ Michel, Jean-Baptiste, Yuan Kui Shen, Aviva Presser Aiden, Adrian Veres, Matthew
 
 Mokyr, Joel. 2009. *The Enlightened Economy: An Economic History of Britain 1700-1850*. New Haven: Yale University Press.
 
+Pechenick, Eitan Adam, Christopher M. Danforth, and Peter Sheridan Dodds. 2015. "Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution." *PLoS ONE* 10 (10): e0137041.
+
 Pomeranz, Kenneth. 2000. *The Great Divergence: China, Europe, and the Making of the Modern World Economy*. Princeton: Princeton University Press.
 
-Tvedt, Terje. 2010. "Why England and not China and India? Water Systems and the History of the Industrial Revolution." *Journal of Global History* 5 (1): 29-50.
+Roth, Jonathan, Pedro H. C. Sant'Anna, Alyssa Bilinski, and John Poe. 2023. "What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature." *Journal of Econometrics* 235 (2): 2218–44.
+
+Tvedt, Terje. 2010. "Why England and not China and India? Water Systems and the History of the Industrial Revolution." *Journal of Global History* 5 (1): 29–50.
 
 Wrigley, E. A. 2010. *Energy and the English Industrial Revolution*. Cambridge: Cambridge University Press.
