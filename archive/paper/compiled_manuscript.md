@@ -9,7 +9,7 @@ Our analysis identifies 1766 as the mathematical crossover year of this linguist
 
 # 1. Introduction
 
-The origins of the British Industrial Revolution have been heavily debated, yet prominent perspectives often gravitate toward a singular technological rupture: the adoption of coal and the maturation of the steam engine. According to this narrative, macroeconomic modernity accelerated significantly when economies broke free from the natural limitations of the organic economy by extracting subterranean fossil fuels. Within this framework, industrialization is frequently characterized philosophically and economically as humanity’s uncoupling from, and mastery over, the natural environment.
+The origins of the British Industrial Revolution have been heavily debated, yet prominent perspectives often gravitate toward a singular technological rupture: the adoption of coal and the maturation of the steam engine. According to this narrative—deeply rooted in the *Unbound Prometheus* paradigm formalized by David S. Landes (1969) and enduring across both classical Marxist and neoclassical historiography—macroeconomic modernity accelerated significantly when economies broke free from the natural limitations of the organic economy by extracting subterranean fossil fuels. Within this framework, industrialization is frequently characterized philosophically and economically as humanity’s uncoupling from, and mastery over, the natural environment.
 
 This perspective is entrenched in the historiography of economic development. E.A. Wrigley famously conceptualized the Industrial Revolution as the necessary transition from an "organic economy"—limited by the photosynthetic capture of solar energy via wood and wind—to a "mineral-based energy economy" built on coal (Wrigley 2010). In his view, sustained exponential growth was physically impossible within the confines of organic flows. Similarly, Robert Allen’s robust "High Wage Economy" thesis posits that Britain’s unique matrix of cheap coal and high labor costs structurally induced the invention of the steam engine, treating geological luck as the prime engine of British divergence (Allen 2009).
 
@@ -108,6 +108,11 @@ These terms are divided into two primary matrices:
 
 Using unsupervised machine learning tools, these frequency matrices were standardized and smoothed using a Savitzky-Golay algorithm (window=11, degree=3) to eliminate temporary publishing noise. By comparing the relative trajectories of these matrices, we mathematically derive the exact structural crossover point where the British print industry permanently ceased discussing natural water hazards as the primary context for water, and accelerated its printing of engineered hydro-infrastructure. The resulting structural crossover year ($T_0=1766$) serves as the precise historical treatment intervention. 
 
+### 3.1 Data Construction
+The analysis depends on two primary datasets:
+1. **Google Books Ngram Corpus (English GB 2019):** Extracting annual frequencies of specifically compiled lexicons (`water_wheel`, `canal` vs. `steam_engine`, `coal`) from 1700 to 1900. By deploying this text-as-data approach, we build directly upon the methodological foundations of quantitative culturomics established by Michel et al. (2011).
+2. **Macroeconomic GDP Series:** Sourced from the Maddison Project Database (Bolt and van Zanden 2020), which aggregates pre-industrial growth accounting from pioneering works like Crafts (1985) and the definitive historical GDP reconstructions of Broadberry et al. (2015). We provide continuous annual GDP per capita estimates for Britain, matched against France, the Netherlands, China, and India. The inclusion of the latter two non-European controls directly engages the "Great Divergence" debate formalized by Kenneth Pomeranz (2000), allowing us to cleanly measure the timing of Britain's escape from the Malthusian constraints of its peers.
+
 ### 3.2 Econometric Merge (Difference-in-Differences)
 To explicitly test the causal correlation between this cultural phenomenon and exponential geometric growth—the hallmark of macroeconomic modernity—the 1766 structural shift is overlaid onto real historical GDP data from the Maddison Project Database (Bolt and van Zanden 2020). 
 
@@ -128,7 +133,7 @@ Where the coefficients $\beta_k$ isolate the dynamic divergence using 5-year bin
 
 # 4. Discussion: The Ideological Shift
 
-Our findings invite a reassessment of the prevailing institutional timeline that characterizes the Industrial Revolution primarily as a mineral energy transition. According to frameworks rooted in the mid-19th century fossil boom, sustained macroeconomic growth accelerated largely when economies began to decouple from natural ecosystems—burning subterranean coal and engineering high-pressure steam engines to bypass the physical limitations of hydrology and topography. This paradigm often treats early geometric growth as uniquely dependent on the subversion of natural constraints via extraction.
+Our findings invite a reassessment of the prevailing institutional timeline that characterizes the Industrial Revolution primarily as a mineral energy transition. According to frameworks rooted in the mid-19th century fossil boom, sustained macroeconomic growth accelerated largely when economies began to decouple from natural ecosystems. This conceptual tethering traces directly back to classical political economy; as Karl Marx (1847) famously summarized, "the hand-mill gives you society with the feudal lord; the steam-mill, society with the industrial capitalist." Marx’s mechanistic linkage of steam to the fundamental reorganization of human labor and capital cemented the assumption that true industrial modernity required the physical supremacy of the steam engine. Consequently, the prevailing paradigm continues to treat early geometric growth as uniquely dependent on the subversion of natural constraints via fossil extraction.
 
 The 1766 hydro-social crossover complicates this narrative. A substantial proportion of Britain's ultimate early industrial divergence relative to continental Europe was achieved not through fossil extraction, but through advanced topographical engineering and ecological cooperation. The technological backbone of early modernity—the thousands of miles of navigable canals conforming to the earth’s natural contours, and the massive water-wheels borrowing kinetic energy strictly from existing riverine flows—did not conquer the landscape; it explicitly collaborated with it.
 
@@ -160,11 +165,23 @@ Allen, Robert C. 2009. *The British Industrial Revolution in Global Perspective*
 
 Bolt, Jutta, and Jan Luiten van Zanden. 2020. "Maddison style estimates of the evolution of the world economy. A new 2020 update." *Maddison-Project Working Paper*, WP-154.
 
+Broadberry, Stephen, Bruce M. S. Campbell, Alexander Klein, Mark Overton, and Bas van Leeuwen. 2015. *British Economic Growth, 1270–1870*. Cambridge: Cambridge University Press.
+
+Crafts, Nicholas F. R. 1985. *British Economic Growth during the Industrial Revolution*. Oxford: Clarendon Press.
+
+Landes, David S. 1969. *The Unbound Prometheus: Technological Change and Industrial Development in Western Europe from 1750 to the Present*. Cambridge: Cambridge University Press.
+
 Malm, Andreas. 2016. *Fossil Capital: The Rise of Steam Power and the Roots of Global Warming*. London: Verso.
+
+Marx, Karl. (1847) 1955. *The Poverty of Philosophy*. Moscow: Progress Publishers.
 
 McCloskey, Deirdre N. 2010. *Bourgeois Dignity: Why Economics Can't Explain the Modern World*. Chicago: University of Chicago Press.
 
+Michel, Jean-Baptiste, Yuan Kui Shen, Aviva Presser Aiden, Adrian Veres, Matthew K. Gray, and Erez Lieberman Aiden. 2011. "Quantitative Analysis of Culture Using Millions of Digitized Books." *Science* 331 (6014): 176–82.
+
 Mokyr, Joel. 2009. *The Enlightened Economy: An Economic History of Britain 1700-1850*. New Haven: Yale University Press.
+
+Pomeranz, Kenneth. 2000. *The Great Divergence: China, Europe, and the Making of the Modern World Economy*. Princeton: Princeton University Press.
 
 Tvedt, Terje. 2010. "Why England and not China and India? Water Systems and the History of the Industrial Revolution." *Journal of Global History* 5 (1): 29-50.
 

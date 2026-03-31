@@ -11,6 +11,11 @@ These terms are divided into two primary matrices:
 
 Using unsupervised machine learning tools, these frequency matrices were standardized and smoothed using a Savitzky-Golay algorithm (window=11, degree=3) to eliminate temporary publishing noise. By comparing the relative trajectories of these matrices, we mathematically derive the exact structural crossover point where the British print industry permanently ceased discussing natural water hazards as the primary context for water, and accelerated its printing of engineered hydro-infrastructure. The resulting structural crossover year ($T_0=1766$) serves as the precise historical treatment intervention. 
 
+### 3.1 Data Construction
+The analysis depends on two primary datasets:
+1. **Google Books Ngram Corpus (English GB 2019):** Extracting annual frequencies of specifically compiled lexicons (`water_wheel`, `canal` vs. `steam_engine`, `coal`) from 1700 to 1900. By deploying this text-as-data approach, we build directly upon the methodological foundations of quantitative culturomics established by Michel et al. (2011).
+2. **Macroeconomic GDP Series:** Sourced from the Maddison Project Database (Bolt and van Zanden 2020), which aggregates pre-industrial growth accounting from pioneering works like Crafts (1985) and the definitive historical GDP reconstructions of Broadberry et al. (2015). We provide continuous annual GDP per capita estimates for Britain, matched against France, the Netherlands, China, and India. The inclusion of the latter two non-European controls directly engages the "Great Divergence" debate formalized by Kenneth Pomeranz (2000), allowing us to cleanly measure the timing of Britain's escape from the Malthusian constraints of its peers.
+
 ### 3.2 Econometric Merge (Difference-in-Differences)
 To explicitly test the causal correlation between this cultural phenomenon and exponential geometric growth—the hallmark of macroeconomic modernity—the 1766 structural shift is overlaid onto real historical GDP data from the Maddison Project Database (Bolt and van Zanden 2020). 
 
