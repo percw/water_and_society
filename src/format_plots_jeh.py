@@ -51,18 +51,37 @@ def plot_figure_one_jeh(df_gdp, t0):
     g_norm = norm01(gdp_gap)
 
     fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Subtitle for context
+    fig.suptitle("Figure 1: Identification of the British Hydro-Social Shift", fontsize=14, weight='bold', y=0.98)
+    ax.set_title("Normalized trends: Hydro-Infrastructure vs Fossil Lexicon and GDP Divergence", fontsize=11, color='#333333', loc='left', pad=15)
 
-    ax.fill_between(g_norm.index, 0, g_norm.values, alpha=0.08, color='black')
-    ax.plot(g_norm.index, g_norm.values, color='black', linewidth=1.5,
+    # Shaded treatment era instead of stark line
+    ax.axvspan(t0, 1900, alpha=0.04, color='black', zorder=0)
+
+    # Add error band (proxy) using a rolling standard deviation to show data noise transparency
+    t_std = df_ngram[transport_terms].sum(axis=1).rolling(5).std()
+    t_std_norm = t_std / (transport_raw.max() - transport_raw.min() + 1e-20)
+    t_std_norm = t_std_norm.loc[t_norm.index] # Align index to avoid size mismatch
+    
+    ax.fill_between(t_norm.index, t_norm - t_std_norm*0.5, t_norm + t_std_norm*0.5, alpha=0.15, color='#2c3e50', zorder=1)
+
+    ax.fill_between(g_norm.index, 0, g_norm.values, alpha=0.1, color='silver', zorder=1)
+    ax.plot(g_norm.index, g_norm.values, color='#333333', linewidth=1.5,
             linestyle='-', label='GDP Gap (GBR − Controls)')
 
-    ax.plot(t_norm.index, t_norm.values, color='dimgray', linewidth=2.5,
+    ax.plot(t_norm.index, t_norm.values, color='#2c3e50', linewidth=2.5,
             linestyle='--', label='Hydro-Infrastructure Lexicon')
 
-    ax.plot(f_norm.index, f_norm.values, color='silver', linewidth=2.0,
+    ax.plot(f_norm.index, f_norm.values, color='#7f8c8d', linewidth=2.0,
             linestyle=':', label='Fossil/Steam Lexicon')
 
-    ax.axvline(x=t0, color='black', linewidth=1.2, linestyle='-.', zorder=0)
+    # Subtle annotations
+    ax.axvline(x=t0, color='black', linewidth=1.0, linestyle='solid', zorder=0)
+    ax.text(t0 - 2, 0.95, r'$T_0: 1761$ (Bridgewater Canal)', fontsize=10, color='black', ha='right', va='top', rotation=90)
+    
+    ax.axvline(x=1766, color='#7f8c8d', linewidth=1.0, linestyle='dotted', zorder=0)
+    ax.text(1766 + 2, 0.85, r'Semantic Shift (1766)', fontsize=10, color='#7f8c8d', ha='left', va='top', rotation=90)
 
     # Cleaned ticks and minimalist axes
     ax.tick_params(direction='in', length=5, width=1)
@@ -85,23 +104,29 @@ def plot_figure_one_jeh(df_gdp, t0):
 
 def plot_event_study_jeh(df_es, t0):
     fig, ax = plt.subplots(figsize=(8, 5))
+    
+    fig.suptitle("Figure 2: Event Study Estimates", fontsize=14, weight='bold', y=0.98)
+    ax.set_title("Coefficient plots of British divergence from Control group (Baseline: 1740-1760)", fontsize=11, color='#333333', loc='left', pad=15)
 
     bins = df_es['bin'].values
     coefs = df_es['coef'].values
     ci_lo = df_es['ci_low'].values
     ci_hi = df_es['ci_high'].values
 
-    ax.fill_between(bins, ci_lo, ci_hi, alpha=0.15, color='dimgray', linewidth=0)
-    ax.plot(bins, coefs, 'o-', color='black', linewidth=1.5, markersize=4, zorder=5)
+    # Subtle shaded treatment era
+    ax.axvspan(0, max(bins), alpha=0.04, color='black', zorder=0)
+
+    ax.fill_between(bins, ci_lo, ci_hi, alpha=0.15, color='#2c3e50', linewidth=0)
+    ax.plot(bins, coefs, 'o-', color='#2c3e50', linewidth=1.5, markersize=4, zorder=5)
     
     # Zero line
     ax.axhline(y=0, color='black', linewidth=0.8, linestyle='-', zorder=1)
     
     # T0 Line
-    ax.axvline(x=0, color='dimgray', linewidth=1.2, linestyle='--', zorder=1)
+    ax.axvline(x=0, color='#7f8c8d', linewidth=1.2, linestyle='dotted', zorder=1)
 
     ax.tick_params(direction='in')
-    ax.set_xlabel('Years Relative to Structural Break ($T_0=1766$)', fontsize=11)
+    ax.set_xlabel('Years Relative to Exogenous Shock ($T_0=1761$)', fontsize=11)
     ax.set_ylabel('Treatment Effect (GDP per capita)', fontsize=11)
     
     ax.spines['top'].set_visible(False)
@@ -124,6 +149,9 @@ def plot_vocabulary_tournament_jeh(tournament):
         axes = np.array([axes])
     axes = axes.flatten()
 
+    fig.suptitle("Figure 3: Placebo Vocabulary Tournaments", fontsize=14, weight='bold', y=1.02)
+    fig.text(0.5, 0.98, "Comparing DiD treatment effects across competing historical mechanisms", ha='center', fontsize=11, color='#333333')
+
     panel_labels = ['(a)', '(b)', '(c)', '(d)', '(e)', '(f)', '(g)', '(h)']
 
     for i, (cat_name, res) in enumerate(tournament.items()):
@@ -135,15 +163,18 @@ def plot_vocabulary_tournament_jeh(tournament):
         ci_hi = df_es['ci_high'].values
 
         # Strict monochrome distinction without spelling it out
-        color = 'black' if res['clean'] else 'silver'
+        color = '#2c3e50' if res['clean'] else '#7f8c8d'
         line_style = '-' if res['clean'] else '--'
         alpha_val = 0.15 if res['clean'] else 0.08
         lw = 1.5 if res['clean'] else 1.0
 
+        # Post-treatment shade
+        ax.axvspan(0, max(bins), alpha=0.03, color='black', zorder=0)
+
         ax.fill_between(bins, ci_lo, ci_hi, alpha=alpha_val, color=color, lw=0)
         ax.plot(bins, coefs, marker='o', linestyle=line_style, color=color, linewidth=lw, markersize=3)
         ax.axhline(y=0, color='black', linewidth=0.6)
-        ax.axvline(x=0, color='dimgray', linewidth=1.0, linestyle=':')
+        ax.axvline(x=0, color='#7f8c8d', linewidth=1.0, linestyle=':')
 
         # Clean, strictly academic titles
         clean_cat = cat_name.replace(chr(10), " ").split(' (')[0]

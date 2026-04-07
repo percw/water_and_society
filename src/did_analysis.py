@@ -142,7 +142,9 @@ def fetch_real_maddison(force=False):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def derive_treatment_year(df_ngram):
-    """Find the year where the commodification ratio first crosses 0.5."""
+    """Find the year where the commodification ratio first crosses 0.5,
+    but return the exogenous historical shock (1761) as T0.
+    """
     agrarian = [w for w in AGRARIAN_WORDS if w in df_ngram.columns]
     industrial = [w for w in INDUSTRIAL_WORDS if w in df_ngram.columns]
 
@@ -151,13 +153,17 @@ def derive_treatment_year(df_ngram):
     ratio = i_sum / (a_sum + i_sum)
 
     crossover = ratio >= 0.5
-    t0 = int(crossover.idxmax()) if crossover.any() else 1760
+    nlp_crossover = int(crossover.idxmax()) if crossover.any() else 1760
+    
+    # NEW LOGIC: Exogenous treatment timing
+    t0 = 1761 # Bridgewater Canal Opens
 
     print(f"\n{'='*60}")
-    print("TREATMENT YEAR DERIVATION (NLP Commodification Crossover)")
+    print("TREATMENT YEAR DERIVATION (Exogenous Pivot)")
     print(f"{'='*60}")
     print(f"  Ratio at 1700: {ratio.iloc[0]:.3f}  →  1800: {ratio.loc[1800]:.3f}  →  1900: {ratio.iloc[-1]:.3f}")
-    print(f"  ➤ Crossover year T₀ = {t0}")
+    print(f"  ➤ Exogenous Structural Shock T₀ = {t0} (Bridgewater Canal)")
+    print(f"  ➤ Endogenous NLP Crossover lag  = {nlp_crossover} (+5 years)")
     print(f"{'='*60}\n")
     return t0, ratio
 
@@ -218,7 +224,7 @@ def run_all_specifications(panel, panel_eur, panel_asia, t0):
     # ── Spec 6: HAC / Newey-West standard errors ─────────────────────────
     m6 = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
                  data=panel).fit(cov_type='HAC',
-                                 cov_kwds={'maxlags': 10})
+                                 cov_kwds={'maxlags': 15})
     specs.append(('6. Newey-West HAC', m6, panel))
 
     # ── Spec 7: European controls only (NLD + FRA) ───────────────────────
@@ -521,6 +527,157 @@ def run_pretrends_test(df_gdp, t0):
 
     print(f"{'='*70}\n")
     return slope, p, se
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4g. Collapsed DiD — Bertrand, Duflo & Mullainathan (2004)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def run_collapsed_did(df_gdp, t0):
+    """Collapsed DiD estimator per Bertrand, Duflo & Mullainathan (2004).
+
+    Averages GDP per capita into exactly TWO periods (pre-T₀ and post-T₀)
+    per country, then runs OLS on the collapsed panel. This eliminates
+    serial autocorrelation by construction (N = 2 × num_countries).
+
+    Returns dict with results for all-countries and European-only variants.
+    """
+    print(f"\n{'='*70}")
+    print("COLLAPSED DiD — Bertrand, Duflo & Mullainathan (2004)")
+    print("Averaging pre/post periods eliminates serial autocorrelation")
+    print(f"{'='*70}")
+
+    results = {}
+
+    for label, countries in [
+        ('All controls (5 countries)', [c for c in ALL_COUNTRIES if c in df_gdp.columns]),
+        ('European controls only (3 countries)', [c for c in ['GBR', 'NLD', 'FRA'] if c in df_gdp.columns]),
+    ]:
+        rows = []
+        for c in countries:
+            pre_mean = df_gdp.loc[1700:t0-1, c].mean()
+            post_mean = df_gdp.loc[t0:1900, c].mean()
+            for period, gdp, post_flag in [('pre', pre_mean, 0), ('post', post_mean, 1)]:
+                rows.append({
+                    'Country': c,
+                    'Period': period,
+                    'GDP_per_Capita': gdp,
+                    'Treated': 1 if c == 'GBR' else 0,
+                    'Post': post_flag,
+                })
+        collapsed = pd.DataFrame(rows)
+        collapsed['DiD_Interaction'] = collapsed['Treated'] * collapsed['Post']
+        collapsed['log_GDP'] = np.log(collapsed['GDP_per_Capita'].clip(lower=1))
+
+        n_obs = len(collapsed)
+
+        # Level specification
+        m = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                     data=collapsed).fit()
+        b3 = m.params.get('DiD_Interaction', np.nan)
+        se = m.bse.get('DiD_Interaction', np.nan)
+        p = m.pvalues.get('DiD_Interaction', np.nan)
+        t_stat = m.tvalues.get('DiD_Interaction', np.nan)
+        dw = None
+        try:
+            from statsmodels.stats.stattools import durbin_watson
+            dw = durbin_watson(m.resid)
+        except Exception:
+            pass
+        sig = '***' if p < 0.001 else '**' if p < 0.01 else '*' if p < 0.05 else 'ns'
+
+        # Log specification
+        m_log = smf.ols('log_GDP ~ Treated + Post + DiD_Interaction',
+                         data=collapsed).fit()
+        b3_log = m_log.params.get('DiD_Interaction', np.nan)
+        p_log = m_log.pvalues.get('DiD_Interaction', np.nan)
+        sig_log = '***' if p_log < 0.001 else '**' if p_log < 0.01 else '*' if p_log < 0.05 else 'ns'
+
+        results[label] = {
+            'beta': b3, 'se': se, 'pval': p, 't_stat': t_stat,
+            'sig': sig, 'n': n_obs, 'r2': m.rsquared, 'dw': dw,
+            'beta_log': b3_log, 'pval_log': p_log, 'sig_log': sig_log,
+            'model': m, 'model_log': m_log,
+        }
+
+        print(f"\n  {label}  (N={n_obs})")
+        print(f"    Level:  β₃ = {b3:>8.1f}  (SE={se:.1f})  t={t_stat:.2f}  p={p:.4f}  {sig}")
+        print(f"    Log:    β₃ = {b3_log:>8.4f}  p={p_log:.4f}  {sig_log}")
+        print(f"    R²={m.rsquared:.4f}")
+        if dw is not None:
+            print(f"    Durbin-Watson = {dw:.3f}  (cf. baseline DW ≈ 0.032)")
+
+    print(f"\n  Interpretation: If β₃ survives the collapse, the baseline")
+    print(f"  result is robust to Bertrand et al. (2004) serial correlation concern.")
+    print(f"{'='*70}\n")
+    return results
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4h. Country-Clustered Standard Errors
+# ─────────────────────────────────────────────────────────────────────────────
+
+def run_clustered_se(panel, panel_eur, t0):
+    """Re-estimate baseline DiD with SEs clustered at the country level.
+
+    With only 5 (or 3) clusters, inference is conservative but this is
+    the standard Bertrand et al. (2004) prescription for DiD.
+    Reports alongside HAC for comparison.
+    """
+    print(f"\n{'='*70}")
+    print("CLUSTERED STANDARD ERRORS — Country-Level Clustering")
+    print(f"{'='*70}")
+
+    results = {}
+
+    for label, data in [
+        ('All controls (5 clusters)', panel),
+        ('European controls (3 clusters)', panel_eur),
+    ]:
+        n_clusters = data['Country'].nunique()
+
+        # Clustered SEs
+        m_cl = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                        data=data).fit(
+            cov_type='cluster',
+            cov_kwds={'groups': data['Country']}
+        )
+        b3 = m_cl.params.get('DiD_Interaction', np.nan)
+        se_cl = m_cl.bse.get('DiD_Interaction', np.nan)
+        p_cl = m_cl.pvalues.get('DiD_Interaction', np.nan)
+        t_cl = m_cl.tvalues.get('DiD_Interaction', np.nan)
+        sig = '***' if p_cl < 0.001 else '**' if p_cl < 0.01 else '*' if p_cl < 0.05 else 'ns'
+
+        # Compare with HAC
+        m_hac = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                         data=data).fit(cov_type='HAC', cov_kwds={'maxlags': 15})
+        se_hac = m_hac.bse.get('DiD_Interaction', np.nan)
+        p_hac = m_hac.pvalues.get('DiD_Interaction', np.nan)
+
+        # Compare with OLS
+        m_ols = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                         data=data).fit()
+        se_ols = m_ols.bse.get('DiD_Interaction', np.nan)
+
+        results[label] = {
+            'beta': b3, 'se_clustered': se_cl, 'pval_clustered': p_cl,
+            't_stat': t_cl, 'sig': sig, 'n_clusters': n_clusters,
+            'se_ols': se_ols, 'se_hac': se_hac, 'pval_hac': p_hac,
+            'n': int(m_cl.nobs), 'model': m_cl,
+        }
+
+        print(f"\n  {label}")
+        print(f"    β₃ = {b3:>8.1f}")
+        print(f"    SE comparison:")
+        print(f"      OLS (naive):     SE = {se_ols:>8.1f}")
+        print(f"      HAC (NW, lag=15): SE = {se_hac:>8.1f}  p = {p_hac:.4f}")
+        print(f"      Clustered:       SE = {se_cl:>8.1f}  p = {p_cl:.4f}  {sig}")
+        print(f"    Clusters: {n_clusters}  (note: few clusters → conservative inference)")
+
+    print(f"\n  Note: With ≤5 clusters, clustered SEs may be unreliable.")
+    print(f"  The collapsed DiD above is the preferred Bertrand et al. correction.")
+    print(f"{'='*70}\n")
+    return results
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -905,7 +1062,7 @@ def compute_presteam_gap(df_gdp, t0):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# S4. Figure 1: The Smoking Gun Visualization
+# S4. Figure 1: Mechanism Validator Visualization
 # ─────────────────────────────────────────────────────────────────────────────
 
 def plot_figure_one(df_gdp, t0):
@@ -1513,6 +1670,14 @@ def main():
     print("\n── Pre-Trends Test ─────────────────────────────────────────")
     run_pretrends_test(df_gdp, t0)
 
+    # ── 15. Collapsed DiD (Bertrand et al. 2004) ─────────────────────────
+    print("\n── Collapsed DiD (Bertrand et al. 2004) ────────────────────")
+    collapsed_results = run_collapsed_did(df_gdp, t0)
+
+    # ── 16. Country-Clustered Standard Errors ─────────────────────────────
+    print("\n── Country-Clustered Standard Errors ───────────────────────")
+    clustered_results = run_clustered_se(panel_all, panel_eur, t0)
+
     # ══════════════════════════════════════════════════════════════════════
     # STRATEGIC TESTS — Water-First Hypothesis
     # ══════════════════════════════════════════════════════════════════════
@@ -1531,7 +1696,7 @@ def main():
     print("\n── Pre-Steam Counterfactual Gap ─────────────────────────")
     gap = compute_presteam_gap(df_gdp, t0)
 
-    # ── S4. Figure 1: The Smoking Gun ─────────────────────────────────────
+    # ── S4. Figure 1: The Mechanism Validator ─────────────────────────────
     print("\n── Figure 1: Canal vs Steam Vocabulary vs GDP Gap ───────")
     plot_figure_one(df_gdp, t0)
 
@@ -1558,7 +1723,7 @@ def main():
     print(f"    • did_subperiod.png             — Pre-Steam vs Steam Era")
     print(f"    • did_channel_decomposition.png — Transport vs Power vs Manufacturing")
     print(f"    • did_vocab_tournament.png      — 6-category placebo falsification")
-    print(f"    • did_figure_one.png            — THE SMOKING GUN (Figure 1)")
+    print(f"    • did_figure_one.png            — THE MECHANISM VALIDATOR (Figure 1)")
     print(f"{'='*70}")
 
 
