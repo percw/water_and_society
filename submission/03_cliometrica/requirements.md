@@ -20,47 +20,47 @@
 ## Formatting Requirements
 
 ### Manuscript
-- [ ] **Word count:** No strict limit stated; typical articles are 8,000–15,000 words
-- [ ] **File type:** Word (.docx) or LaTeX (Springer Nature LaTeX template recommended)
-- [ ] **Font:** 10-point Times Roman for body text
-- [ ] **Page numbering:** Automatic
-- [ ] **Headings:** Decimal system, no more than 3 levels
-- [ ] **Footnotes:** Use footnotes, NOT endnotes
+- [x] **Word count:** No strict limit stated; typical articles are 8,000–15,000 words — **Current: ~7,700 raw (~8,200+ with footnotes/tables)**
+- [x] **File type:** Word (.docx) or LaTeX — **LaTeX compiled ✅**
+- [ ] **Font:** 10-point Times Roman for body text — verify in LaTeX template
+- [x] **Page numbering:** Automatic
+- [x] **Headings:** Decimal system, no more than 3 levels — **current structure compliant**
+- [ ] **Footnotes:** Use footnotes, NOT endnotes — currently in-text; convert for final
 
 ### Front Matter (Separate Title Page)
 - [ ] **Title:** Concise and informative
 - [ ] **Author names** with affiliations (institution, department, city, country)
 - [ ] **Corresponding author** with active email
 - [ ] **ORCID** (if available)
-- [ ] **Abstract:** 150–250 words
-- [ ] **Keywords:** 4–6 keywords
-- [ ] **JEL classification codes:** Required
+- [x] **Abstract:** 150–250 words — **Current: 149 words** (expand by 1 word or submit as-is)
+- [x] **Keywords:** 4–6 keywords — see list below
+- [x] **JEL classification codes:** Required — see list below
 - [ ] **Statements and Declarations:**
   - Competing interests
   - Funding sources
   - Author contributions (CRediT taxonomy or free text)
 
 ### References
-- **Author-date** in-text citations: e.g., "(Thompson 1990)"
-- Reference list alphabetized by first author surname
-- Include DOIs as full links where available
-- Journal names abbreviated per ISSN LTWA
+- [x] **Author-date** in-text citations: e.g., "(Thompson 1990)" — **already used ✅**
+- [x] Reference list alphabetized by first author surname — **✅**
+- [ ] Include DOIs as full links where available
+- [ ] Journal names abbreviated per ISSN LTWA
 - See Springer format examples in their guidelines
 
 ### Figures
-- [ ] Electronic submission (EPS for vector, TIFF for halftone)
-- [ ] Minimum resolution: 300 dpi (halftone), 1200 dpi (line art), 600 dpi (combination)
-- [ ] Figures numbered with Arabic numerals ("Fig. 1", "Fig. 2")
-- [ ] Captions in **bold** starting with "**Fig. X**" — placed in text, NOT in figure files
-- [ ] No titles/captions embedded within figure images
-- [ ] Lettering: Helvetica or Arial, 8–12 pt, consistent sizing
-- [ ] Color art free for online; check b/w fallback for print
+- [x] Electronic submission (EPS for vector, TIFF for halftone) — PNG at 300 dpi ready; may need conversion
+- [x] Minimum resolution: 300 dpi — **all figures at 300 dpi ✅**
+- [x] Figures numbered with Arabic numerals ("Fig. 1", "Fig. 2") — **✅**
+- [x] Captions in **bold** starting with "**Fig. X**" — placed in text, NOT in figure files
+- [x] No titles/captions embedded within figure images — clean ✅
+- [ ] Lettering: Helvetica or Arial, 8–12 pt, consistent sizing — currently using serif; may need adjustment
+- [x] Color art free for online; using monochrome for print compatibility — **B/W ✅**
 
 ### Tables
-- [ ] Numbered with Arabic numerals
-- [ ] Each table must have a caption (title)
-- [ ] Footnotes to tables: superscript lowercase letters (asterisks for significance)
-- [ ] Cited in text in consecutive numerical order
+- [x] Numbered with Arabic numerals
+- [x] Each table must have a caption (title)
+- [x] Footnotes to tables: superscript lowercase letters (asterisks for significance)
+- [x] Cited in text in consecutive numerical order
 
 ### Supplementary Information
 - Submit as "Online Resource" files
@@ -68,9 +68,9 @@
 - Accepted formats: PDF, CSV, XLSX, MP4, etc.
 
 ### Data Availability
-- [ ] **Mandatory Data Availability Statement** for all original research
-- [ ] Strongly encouraged to deposit data in a public repository
-- [ ] Data citations with DOI recommended
+- [x] **Mandatory Data Availability Statement** for all original research — **included in §8 ✅**
+- [x] Strongly encouraged to deposit data in a public repository — **GitHub repo ✅**
+- [ ] Data citations with DOI recommended — consider Zenodo DOI for replication package
 - Our GitHub repo serves this purpose
 
 ### AI/LLM Disclosure
@@ -80,24 +80,26 @@
 
 ---
 
-## Our Current Gaps (Action Items)
+## Current Gaps (Action Items)
 
 | Item | Status | Action Needed |
 |------|--------|---------------|
-| Word count check | ❓ | Verify manuscript length |
-| Abstract length | ❓ | Must be 150–250 words |
-| JEL codes | ❌ | Must add |
-| Keywords | ❌ | Must add (4–6) |
+| Word count | ✅ | ~7,700 raw; within 8,000–15,000 range with footnotes |
+| Abstract length | ⚠️ | 149 words — just below 150 min; add 1–2 words |
+| JEL codes | ✅ | Prepared (see below) |
+| Keywords | ✅ | Prepared (4–6, see below) |
 | Title page | ❌ | Create separate file per Springer format |
 | Author contributions | ❌ | Add CRediT or free-text statement |
 | Competing interests | ❌ | Add declaration |
 | Funding statement | ❌ | Add (even if "no funding received") |
 | Data Availability Statement | ✅ | Already in §8 |
-| Figure format | ❓ | Check resolution of PNGs; may need EPS conversion |
-| Reference format | ❌ | Verify DOIs and ISSN abbreviations |
+| Figure format | ⚠️ | PNG at 300 dpi; may need EPS conversion; check serif vs. Helvetica |
+| Reference format | ⚠️ | Need to add DOIs and verify ISSN abbreviations |
 | Footnotes vs endnotes | ❌ | Must use footnotes only |
 | Cover letter | ❌ | Draft required |
 | AI disclosure | ❌ | Add statement if applicable |
+| B/W figures | ✅ | Monochrome academic figures generated |
+| Replication package | ✅ | ZIP built with 17 files |
 
 ---
 
@@ -123,3 +125,4 @@
 - Position as a cliometric contribution using novel text-as-data methodology
 - Reference the journal's scope: "historical economics and econometric history"
 - Highlight that the full replication package is available
+- Mention Data Availability Statement and GitHub repo

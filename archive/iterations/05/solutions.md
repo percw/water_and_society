@@ -6,9 +6,11 @@ Solutions addressing the limitations identified in [limitations.md](limitations.
 
 **Status:** pending
 
-**Approach:** _To be determined._
+**Approach:** _Acknowledged as honest limitation in §7 (Limitations) and §2.3 (Literature Review)._
 
 No correction for differential survival rates of historical documents has been implemented. A solution would require either: (a) weighting by estimated survival rates per document type, (b) comparing against non-digitized archival samples, or (c) using the HathiTrust metadata to control for library-of-origin biases.
+
+**Note (2026-04-07):** The manuscript now explicitly engages with this concern via the Pechenick et al. (2015) discussion in §2.3, which acknowledges that the corpus becomes heavily dominated by scientific and technical texts post-1800. The paper reframes this as a feature rather than solely a bug: the explosion of engineering manuals and parliamentary acts is *itself* evidence of the structural economic transformation the paper documents. The placebo tournament further mitigates this concern — if survivor bias uniformly inflated all technical vocabularies, rival categories would produce equivalent event study patterns.
 
 ---
 
