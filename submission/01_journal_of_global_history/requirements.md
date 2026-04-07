@@ -66,15 +66,16 @@
 | Word count | ✅ | ~7,700 raw; ~8,200 with footnotes — within range |
 | Abstract length | ✅ | 149 words — within 100–150 range |
 | Keywords | ✅ | 10 keywords prepared (see below) |
-| Title page | ❌ | Create separate anonymized title page file |
-| Anonymization | ❌ | Strip author references from manuscript body |
-| Footnote format | ❌ | Convert in-text citations to footnote style |
-| Cover letter | ❌ | Draft required — lead with Tvedt (2010) connection |
-| Competing interests | ❌ | Add declaration |
-| .docx conversion | ❌ | Convert LaTeX/Markdown to Word if needed |
+| Title page | ✅ | `title_page.md` + `title_page.docx` — **fill in author details** |
+| Anonymization | ✅ | GitHub URL redacted; author details on separate title page only |
+| Footnote format | ✅ | `manuscript_jgh.md` — 8 footnotes converted from author-date |
+| Cover letter | ✅ | `cover_letter.md` + `cover_letter.docx` — **fill in author details + date** |
+| Competing interests | ✅ | Declared in title page ("no competing interests") |
+| .docx conversion | ✅ | `manuscript_jgh.docx` (35 KB), via Pandoc |
 | B/W figures | ✅ | Monochrome academic figures generated |
 | Replication package | ✅ | ZIP built with 17 files |
 | Data Availability | ✅ | Statement in §8 |
+| **REMAINING** | ⚠️ | **Fill in [AUTHOR NAME], [AFFILIATION], [EMAIL], [DATE] in title page + cover letter** |
 
 ---
 
