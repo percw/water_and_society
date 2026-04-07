@@ -153,6 +153,25 @@ industrial modernity---creating the integrated markets, capital
 accumulation, and systemic demand that the subsequent fossil transition
 would amplify---rather than representing an alternative to it.
 
+This paper makes three specific contributions. First, we introduce a
+novel text-as-data identification strategy to cliometrics, constructing
+composite vocabulary indices from 71 period-appropriate terms in the
+Google Books \texttt{eng\_gb\_2019} corpus and identifying the precise
+structural crossover year (1766) at which British print culture
+permanently shifted from naturalistic to engineered water terminology.
+Second, we anchor a formal Difference-in-Differences framework to the
+1761 opening of the Bridgewater Canal --- a universally recognized
+exogenous infrastructure shock --- allowing the NLP-derived crossover to
+serve as an independent mechanism validator rather than an endogenous
+treatment variable. Third, we estimate that Britain's post-1761
+trajectory diverged by approximately
+\(1,251 GDP per capita relative to continental controls (\)p = 0.042\$
+with HAC correction), with 47\% of the ultimate industrial lead
+established before steam power achieved commercial dominance. Placebo
+falsification tournaments across rival vocabularies (textiles, coal,
+finance, agriculture) confirm that only the water infrastructure shock
+uniquely predicts the timing of GDP divergence.
+
 By deploying a dual-pronged computational methodology---merging
 unsupervised natural language processing (NLP) of centuries of
 historical print culture with Difference-in-Differences (DiD)
@@ -184,10 +203,10 @@ power.
 
 Our methodological approach attempts to bridge this gap by introducing
 text-as-data techniques to classical cliometrics. In doing so, we engage
-with three distinct strands of literature: the historical economics of
-early infrastructure, the quantitative analysis of culture
-(culturomics), and the modern econometric literature on
-Difference-in-Differences (DiD) identification.
+with four distinct strands of literature: the historical economics of
+early infrastructure, the Great Divergence debate, the quantitative
+analysis of culture (culturomics), and the modern econometric literature
+on Difference-in-Differences (DiD) identification.
 
 \subsection{2.1 The Infrastructure and Transport
 Bottleneck}\label{the-infrastructure-and-transport-bottleneck}
@@ -197,21 +216,84 @@ role of pre-steam infrastructure in establishing the preconditions for
 industrialization. Bogart (2024) demonstrates that transport cost
 reductions realized during the British canal and turnpike era
 independently catalyzed significant macroeconomic integration long
-before the national railway network was conceptualized. This empirically
-aligns with the conceptual framework of Tvedt (2010), who argues
-theoretically that regional water systems and topographical manipulation
-were the necessary predecessors to the steam revolution, creating the
-market integration and capital accumulation required for subsequent
-transitions. Our paper quantitatively formalizes this hypothesis,
-seeking to isolate the exact timeline over which this hydro-social
-integration occurred.
+before the national railway network was conceptualized. Canal freight
+rates fell by as much as 50--75\% compared to overland carriage, and the
+canal network expanded from roughly 1,000 miles in 1760 to over 4,000
+miles by 1830, creating for the first time a nationally integrated
+commodity market in coal, grain, and manufactured goods.
 
-\subsection{2.2 Culturomics and the Digitized Print
+This empirically aligns with the conceptual framework of Tvedt (2010),
+who argues theoretically that regional water systems and topographical
+manipulation were the necessary predecessors to the steam revolution,
+creating the market integration and capital accumulation required for
+subsequent transitions. Tvedt's central insight is geographical:
+Britain's unique combination of high rainfall, short navigable rivers,
+and gentle topography gave it a water infrastructure advantage that no
+continental or Asian economy could replicate at equivalent cost. The
+Bridgewater Canal (1761), which halved the price of coal in Manchester,
+demonstrated that engineering could substitute for natural navigability
+--- a lesson that triggered the ``canal mania'' investment boom of the
+1790s and attracted the same capital markets that would later finance
+railway construction.
+
+The water-power dimension extends beyond transport. Musson and Robinson
+(1969) document that as late as 1800, water wheels still provided the
+majority of mechanical power for British manufacturing. Arkwright's
+water frame (1769) and Cromford Mill (1771) --- the prototypical factory
+--- were emphatically water-powered enterprises. The concentration of
+early cotton mills along Pennine river valleys created the first
+industrial districts, establishing patterns of factory organization,
+labor discipline, and capital investment that persisted long after steam
+engines replaced water wheels as the primary mover. Our paper
+quantitatively formalizes this hypothesis, seeking to isolate the exact
+timeline over which this hydro-social integration occurred and its
+measurable association with macroeconomic divergence.
+
+\subsection{2.2 The Great Divergence and
+Water}\label{the-great-divergence-and-water}
+
+This paper also directly engages the ``Great Divergence'' literature
+crystallized by Pomeranz (2000), who challenged the assumption that
+Europe's economic superiority was ancient or inevitable. Pomeranz argued
+that as late as 1750, the most advanced regions of China ---
+particularly the Yangtze Delta --- were broadly comparable to Western
+Europe in living standards, agricultural productivity, and market
+sophistication. Divergence, in his account, occurred primarily after
+1800, driven by Europe's privileged access to New World resources and
+coal deposits.
+
+Our findings both complement and refine this framework. The DiD results,
+which include China and India as extended controls alongside France and
+the Netherlands, confirm that measurable divergence was already underway
+by the final decades of the 18th century --- somewhat earlier than
+Pomeranz's core periodization suggests. However, our identification of
+the mechanism is importantly distinct from the coal-access argument.
+While Pomeranz and Wrigley both emphasize the fortuitous proximity of
+British coalfields, we demonstrate that the \emph{initial} phase of
+divergence is temporally and statistically associated with water
+infrastructure rather than fossil extraction. The coal deposits were
+geologically present for millennia; what changed after 1761 was the
+logistical capacity to move coal to markets via canal networks, and the
+capital accumulation generated by water-powered manufacturing.
+
+This sequential interpretation resonates with Broadberry et al.~(2015),
+whose meticulous reconstruction of British GDP from 1270 to 1870 reveals
+that per capita income growth accelerated noticeably from the mid-18th
+century --- precisely the period of canal construction --- rather than
+from the 1820s--1840s when steam power achieved dominance in
+manufacturing. Our DiD framework provides the econometric scaffolding to
+formally test whether this acceleration is statistically distinguishable
+from the trajectories of peer economies.
+
+\subsection{2.3 Culturomics and the Digitized Print
 Archive}\label{culturomics-and-the-digitized-print-archive}
 
-To identify this inflection point, we rely on the Google Books Ngram
-Corpus, building upon the foundations of quantitative culturomics
-established by Michel et al.~(2011). While text-as-data offers
+To identify the linguistic inflection point, we rely on the Google Books
+Ngram Corpus, building upon the foundations of quantitative culturomics
+established by Michel et al.~(2011). The Ngram corpus provides annual
+word frequency data derived from approximately 8 million digitized books
+spanning several centuries, offering an unprecedented quantitative
+window into the evolution of public discourse. While text-as-data offers
 unprecedented macroeconomic scale, its application to economic history
 is complex. Critical evaluations of the Ngram corpus, most notably
 Pechenick et al.~(2015), demonstrate that the underlying data set is
@@ -226,22 +308,47 @@ partially captures the explosion of engineering manuals and
 parliamentary acts, which is itself a vital proxy for structural
 economic realignment.
 
-\subsection{2.3 Difference-in-Differences and Structural
+Our use of the Ngram corpus extends beyond simple word counting. Rather
+than tracking individual terms in isolation, we construct two composite
+vocabulary matrices --- one representing naturalistic/agrarian
+conceptions of water (flood, rain, divine, harvest) and another
+representing engineered/commodified water (canal, pump, mill, water
+wheel, navigable, inland navigation) --- and identify the structural
+crossover point where the latter permanently exceeds the former. This
+composite approach mitigates the risk that any single term's trajectory
+is driven by idiosyncratic publishing events, and provides a more robust
+measure of the underlying epistemological shift.
+
+\subsection{2.4 Difference-in-Differences and Structural
 Breaks}\label{difference-in-differences-and-structural-breaks}
 
 Finally, we intersect with the modern econometric literature concerning
 historical DiD applications. Traditional causal DiD frameworks demand an
 explicit, exogenous policy shock (Angrist and Pischke 2009). However,
 historical macroeconomic transitions are rarely governed by isolated
-discrete treatments. In applying an NLP-derived semantic treatment year,
-we utilize the structural break essentially as an endogenous inflection
-point. In this, we are informed by recent methodological advances
-regarding the fragility of parallel trends and non-traditional treatment
-assignments in historical contexts (Roth et al.~2023; Rambachan and Roth
-2023). Our approach does not assert strict exogenous causality; rather,
-we propose that structurally identifying a linguistic paradigm shift
-allows us to test the directional association and timing of
-macroeconomic divergence with high precision.
+discrete treatments. The recent methodological literature has grappled
+extensively with the challenges of applying DiD to settings where
+treatment timing is uncertain or potentially endogenous (Roth et
+al.~2023; Rambachan and Roth 2023). De Chaisemartin and D'Haultfœuille
+(2020) further demonstrate that in settings with staggered adoption and
+heterogeneous treatment effects, the standard TWFE estimator may produce
+misleading results --- though this concern is less acute in our
+single-treatment-group design.
+
+In applying an NLP-derived semantic treatment year, we utilize the
+structural break essentially as an endogenous inflection point, which is
+why we deliberately anchor our primary specification to the exogenous
+1761 Bridgewater Canal opening rather than the endogenous 1766
+linguistic crossover. Our approach does not assert strict exogenous
+causality in the manner of a randomized controlled trial; rather, we
+propose that structurally identifying a linguistic paradigm shift allows
+us to test the directional association and timing of macroeconomic
+divergence with high precision. The severe serial autocorrelation
+inherent in annual GDP time series --- a fundamental concern raised by
+Bertrand, Duflo, and Mullainathan (2004) --- is addressed through
+multiple complementary corrections (HAC, clustered, and collapsed
+estimators), following the best-practice recommendations of Cameron,
+Gelbach, and Miller (2008) for inference with few clusters.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -286,7 +393,57 @@ infrastructural shock---as the precise historical treatment intervention
 robust ``mechanism validator,'' proving that the exogenous 1761 physical
 shock successfully catalyzed a profound cultural shift five years later.
 
-\subsubsection{3.1 Data Construction}\label{data-construction}
+\subsubsection{3.2 Vocabulary
+Construction}\label{vocabulary-construction}
+
+The 71 vocabulary terms are organized into six analytically distinct
+categories, each designed to capture a specific dimension of the
+hypothesized hydro-social transformation:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Core hydro-infrastructure} (4 terms): \emph{water, canal,
+  mill, pump} --- high-frequency terms capturing the broadest contour of
+  water's industrial role.
+\item
+  \textbf{Period-specific water technology} (18 terms): \emph{water
+  wheel, overshot, undershot, water mill, mill wheel, breast wheel,
+  water power, water frame, water engine, mill race, sluice, penstock,
+  cotton mill, spinning mill, corn mill, fulling mill, inland
+  navigation, canal navigation} --- drawn from period-appropriate
+  engineering vocabulary documented in primary sources.
+\item
+  \textbf{Canal transport infrastructure} (6 terms): \emph{navigable,
+  barge, towpath, waterway, inland navigation, canal navigation} ---
+  capturing the logistics revolution that canals enabled.
+\item
+  \textbf{Naturalistic/agrarian baseline} (6 terms): \emph{flood, rain,
+  river, harvest, holy, divine} --- representing the pre-industrial
+  conceptualization of water as natural phenomenon or divine force.
+\item
+  \textbf{Fossil/steam comparators} (3 terms): \emph{steam, coal,
+  engine} --- enabling direct temporal comparison with the conventional
+  ``Promethean'' narrative.
+\item
+  \textbf{Placebo categories} (20 terms across five rival hypotheses):
+  coal mining, textile, financial, agricultural, and steam-mechanical
+  vocabularies --- each representing an alternative explanation for the
+  Great Divergence, used in falsification tournaments.
+\end{enumerate}
+
+The selection of terms was guided by three criteria: documented usage in
+18th-century primary sources (parliamentary acts, engineering treatises,
+commercial directories), sufficient frequency in the Ngram corpus to
+produce stable annual estimates, and analytical distinctiveness (terms
+should not be semantically redundant within their category). While the
+vocabulary selection is ultimately heuristic, the placebo tournament
+design mitigates term-selection bias by demonstrating that rival
+vocabularies --- constructed with equivalent care --- fail to produce
+comparable event study patterns.
+
+\subsubsection{3.3 Data Construction}\label{data-construction}
 
 The analysis depends on two primary datasets: 1. \textbf{Google Books
 Ngram Corpus (English GB 2019):} Extracting annual frequencies of
@@ -294,18 +451,26 @@ specifically compiled lexicons (\texttt{water\_wheel}, \texttt{canal}
 vs.~\texttt{steam\_engine}, \texttt{coal}) from 1700 to 1900. By
 deploying this text-as-data approach, we build directly upon the
 methodological foundations of quantitative culturomics established by
-Michel et al.~(2011). 2. \textbf{Macroeconomic GDP Series:} Sourced from
-the Maddison Project Database (Bolt and van Zanden 2020), which
-aggregates pre-industrial growth accounting from pioneering works like
-Crafts (1985) and the definitive historical GDP reconstructions of
-Broadberry et al.~(2015). We provide continuous annual GDP per capita
-estimates for Britain, matched against France, the Netherlands, China,
-and India. The inclusion of the latter two non-European controls
-directly engages the ``Great Divergence'' debate formalized by Kenneth
-Pomeranz (2000), allowing us to cleanly measure the timing of Britain's
-escape from the Malthusian constraints of its peers.
+Michel et al.~(2011). We use the British English sub-corpus
+(\texttt{eng\_gb\_2019}) rather than the general English corpus to
+isolate British intellectual culture from American and colonial
+contributions that increasingly dominate the general corpus after 1800.
+2. \textbf{Macroeconomic GDP Series:} Sourced from the Maddison Project
+Database (Bolt and van Zanden 2020), which aggregates pre-industrial
+growth accounting from pioneering works like Crafts (1985) and the
+definitive historical GDP reconstructions of Broadberry et al.~(2015).
+We provide continuous annual GDP per capita estimates for Britain,
+matched against France, the Netherlands, China, and India. France and
+the Netherlands serve as European controls sharing comparable
+institutional development, maritime trade exposure, and Enlightenment
+intellectual traditions --- isolating the treatment effect of Britain's
+unique water infrastructure endowment. China and India serve as extended
+``Great Divergence'' controls, directly engaging the framework
+formalized by Pomeranz (2000) and allowing us to cleanly measure the
+timing of Britain's escape from the Malthusian constraints of its Asian
+peers.
 
-\subsubsection{3.2 Econometric Merge
+\subsubsection{3.4 Econometric Merge
 (Difference-in-Differences)}\label{econometric-merge-difference-in-differences}
 
 To explicitly test the structural association between this cultural
@@ -641,6 +806,9 @@ supremacy of the steam engine. Consequently, the prevailing paradigm
 continues to treat early geometric growth as uniquely dependent on the
 subversion of natural constraints via fossil extraction.
 
+\subsection{5.1 Water as Temporal
+Predecessor}\label{water-as-temporal-predecessor}
+
 The 1761 structural break and the 1766 hydro-social crossover complicate
 this narrative --- not by replacing the role of fossil energy, but by
 establishing its temporal context. A substantial proportion of Britain's
@@ -654,6 +822,20 @@ flows --- did not conquer the landscape; it explicitly collaborated with
 it. Our data demonstrates that this collaboration was associated with a
 measurable and temporally specific economic divergence.
 
+The chronological sequence merits emphasis. The Bridgewater Canal opened
+in 1761. The linguistic crossover occurred in 1766. James Watt patented
+his separate condenser in 1769 but commercially viable rotary steam
+engines did not enter factory production until the 1780s, and steam did
+not surpass water as the primary industrial power source until
+approximately 1830 (Kanefsky and Robey 1980). The 47\% pre-steam gap we
+document --- the share of Britain's divergence established before 1810
+--- thus corresponds to a period during which water infrastructure was
+the dominant enabling technology, not a marginal one. This temporal
+precedence is the empirical core of the precondition thesis.
+
+\subsection{5.2 The Epistemological
+Shift}\label{the-epistemological-shift}
+
 The linguistic shift identified in our \texttt{eng\_gb\_2019} dataset
 signals a profound epistemological transformation in the British
 printing of technical vocabulary. Rather than perceiving water purely as
@@ -663,6 +845,25 @@ from natural risk to \textbf{geographical symbiosis}. The
 infrastructural scaling of the canal network and water-wheel capacity
 relied upon leveraging, rather than overriding, existing gravitational
 and hydrological constraints.
+
+This epistemological dimension connects our findings to McCloskey's
+(2010) thesis that a transformation in rhetoric and attitudes toward
+commerce was a prerequisite for industrialization. McCloskey argues that
+before institutional or technological change could take root, society
+needed to reconceptualize commercial activity as dignified and virtuous.
+Our NLP evidence suggests that a parallel reconceptualization occurred
+in Britain's relationship with its physical environment: water ceased to
+be an unpredictable divine force and became a calculable engineering
+input. The printing of technical manuals, parliamentary navigation acts,
+and engineering treatises --- the material that Pechenick et al.~(2015)
+identify as increasingly dominating the corpus --- is itself evidence of
+this cognitive transformation. The ``hydro-social shift'' is thus
+simultaneously a material and an intellectual phenomenon, bridging
+McCloskey's cultural emphasis with the tangible infrastructure of Tvedt
+(2010) and Bogart (2024).
+
+\subsection{5.3 The Sequential
+Mechanism}\label{the-sequential-mechanism}
 
 This framing reinforces the analytical thesis of Terje Tvedt (2010), who
 argues that Britain's specific hydro-topographical endowments --- and
@@ -681,6 +882,24 @@ beyond the physical capacity of river valleys, necessitating the
 adoption of steam to allow geographically isolated capital and labor to
 participate more fully in the catalyzed economy.
 
+The mechanism can be decomposed into three interlocking channels. First,
+canal transport dramatically reduced the cost of moving bulk commodities
+--- particularly coal itself --- enabling the fuel to reach markets far
+from the pithead and making steam power economically viable in regions
+lacking local coal deposits. Second, water-powered factories (Cromford
+Mill, 1771; New Lanark, 1786) pioneered the organizational innovations
+of the factory system --- continuous production, hierarchical
+management, waged labor discipline --- establishing templates that
+steam-powered factories would later adopt wholesale. Third, the canal
+investment boom of the 1790s created the financial infrastructure ---
+joint-stock companies, parliamentary private bills, speculative capital
+markets --- that directly prefigured railway financing in the 1830s and
+1840s. Each of these channels represents a structural precondition that
+was necessary for the steam transition to succeed at scale.
+
+\subsection{5.4 The Horse Race: Interpreting Channel
+Decomposition}\label{the-horse-race-interpreting-channel-decomposition}
+
 Critically, our channel decomposition confirms this sequential reading.
 When fossil and transport channels are entered simultaneously in a horse
 race regression, the fossil channel dominates
@@ -693,6 +912,21 @@ compete with steam --- they created the conditions under which steam
 became necessary and profitable. The fossil channel captures not just
 steam power per se, but the entire market integration and capital base
 that canal infrastructure had built.
+
+An analogy clarifies the interpretation. Consider a regression
+predicting adult height that includes both childhood nutrition and
+adolescent growth hormones. The hormonal channel will dominate because
+it operates later and more directly on the outcome --- but this does not
+mean childhood nutrition was irrelevant. Rather, adequate childhood
+nutrition was a necessary precondition for the hormonal growth spurt to
+occur at full potential. Similarly, the attenuation of the transport
+channel when fossil terms are included does not diminish the historical
+importance of canal infrastructure; it confirms that water
+infrastructure's effects were mediated through the very economic
+structures that the fossil era subsequently exploited.
+
+\subsection{5.5 Implications for the Great
+Divergence}\label{implications-for-the-great-divergence}
 
 Consequently, locating water infrastructure as a leading indicator of
 sustained economic growth encourages a reassessment of the
@@ -712,6 +946,20 @@ evidence that symbiotic scaling was economically viable and temporally
 prior. The subsequent transition to fossil extraction can thus be viewed
 as a sociological and structural amplification, operating sequentially
 after the initial takeoff rather than originating it.
+
+For the Great Divergence debate specifically, our findings suggest that
+the question ``why Britain and not China?'' cannot be answered solely by
+reference to coal deposits or Atlantic trade. Tvedt's (2010) original
+insight --- that Britain's specific hydrological geography enabled a
+form of water infrastructure that Asian river systems, despite their
+scale, could not replicate --- receives quantitative support from our
+cross-country DiD. The Asian controls (China, India) show no comparable
+structural break around 1761, despite possessing extensive river
+networks and sophisticated hydraulic traditions. The divergence was not
+merely about water per se, but about the particular institutional and
+geographical capacity to convert water from a natural endowment into an
+engineered economic input --- the very transformation our NLP analysis
+captures.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -748,6 +996,20 @@ amplify. The channel decomposition supports this sequential reading:
 when entered simultaneously, the fossil channel dominates the transport
 channel --- a pattern expected if water infrastructure's contribution
 was absorbed into the broader economic structure it helped create.
+
+Three broader implications follow. First, methodologically, this paper
+demonstrates that NLP-derived structural breaks can serve as credible
+mechanism validators when paired with exogenous historical shocks --- a
+technique applicable to other episodes of institutional transformation
+where discourse shifts precede or accompany material changes. Second,
+for the Great Divergence debate, our findings suggest that Britain's
+initial escape from convergence with Asian economies was associated with
+its unique capacity to engineer water systems, not merely with its
+access to coal. Third, for contemporary development economics, the
+sequential relationship we document between infrastructure-led market
+integration and subsequent technological amplification may carry lessons
+for economies whose development strategies must navigate comparable
+transitions between resource endowments.
 
 Ultimately, Britain's industrial trajectory appears to have been
 initiated during an era of geographical symbiosis --- a period of
@@ -892,6 +1154,14 @@ Cameron, A. Colin, Jonah B. Gelbach, and Douglas L. Miller. 2008.
 Crafts, Nicholas F. R. 1985. \emph{British Economic Growth during the
 Industrial Revolution}. Oxford: Clarendon Press.
 
+De Chaisemartin, Clément, and Xavier D'Haultfœuille. 2020. ``Two-Way
+Fixed Effects Estimators with Heterogeneous Treatment Effects.''
+\emph{American Economic Review} 110 (9): 2964--2996.
+
+Kanefsky, John, and John Robey. 1980. ``Steam Engines in 18th-Century
+Britain: A Quantitative Assessment.'' \emph{Technology and Culture} 21
+(2): 161--186.
+
 Landes, David S. 1969. \emph{The Unbound Prometheus: Technological
 Change and Industrial Development in Western Europe from 1750 to the
 Present}. Cambridge: Cambridge University Press.
@@ -912,6 +1182,9 @@ of Culture Using Millions of Digitized Books.'' \emph{Science} 331
 
 Mokyr, Joel. 2009. \emph{The Enlightened Economy: An Economic History of
 Britain 1700-1850}. New Haven: Yale University Press.
+
+Musson, Albert E., and Eric Robinson. 1969. \emph{Science and Technology
+in the Industrial Revolution}. Manchester: Manchester University Press.
 
 Pechenick, Eitan Adam, Christopher M. Danforth, and Peter Sheridan
 Dodds. 2015. ``Characterizing the Google Books Corpus: Strong Limits to
@@ -948,7 +1221,9 @@ Historical GDP per capita data are sourced from the Maddison Project
 Database 2023 (Bolt and van Zanden 2020), accessible via the Dataverse
 repository. Linguistic frequency data are drawn from the Google Books
 Ngram Corpus (\texttt{eng\_gb\_2019}), publicly available at
-\url{https://books.google.com/ngrams}.
+\url{https://books.google.com/ngrams}. A self-contained replication
+package including all scripts, data files, and output figures is
+available as a supplementary archive.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

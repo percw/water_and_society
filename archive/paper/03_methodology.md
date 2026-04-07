@@ -13,12 +13,24 @@ Using unsupervised machine learning tools, these frequency matrices were standar
 
 To ensure rigorous causal identification, we instead deploy the opening of the Bridgewater Canal in 1761—a universally recognized exogenous infrastructural shock—as the precise historical treatment intervention ($T_0=1761$). The 1766 linguistic crossover thus serves primarily as a robust "mechanism validator," proving that the exogenous 1761 physical shock successfully catalyzed a profound cultural shift five years later. 
 
-### 3.1 Data Construction
-The analysis depends on two primary datasets:
-1. **Google Books Ngram Corpus (English GB 2019):** Extracting annual frequencies of specifically compiled lexicons (`water_wheel`, `canal` vs. `steam_engine`, `coal`) from 1700 to 1900. By deploying this text-as-data approach, we build directly upon the methodological foundations of quantitative culturomics established by Michel et al. (2011).
-2. **Macroeconomic GDP Series:** Sourced from the Maddison Project Database (Bolt and van Zanden 2020), which aggregates pre-industrial growth accounting from pioneering works like Crafts (1985) and the definitive historical GDP reconstructions of Broadberry et al. (2015). We provide continuous annual GDP per capita estimates for Britain, matched against France, the Netherlands, China, and India. The inclusion of the latter two non-European controls directly engages the "Great Divergence" debate formalized by Kenneth Pomeranz (2000), allowing us to cleanly measure the timing of Britain's escape from the Malthusian constraints of its peers.
+### 3.2 Vocabulary Construction
+The 71 vocabulary terms are organized into six analytically distinct categories, each designed to capture a specific dimension of the hypothesized hydro-social transformation:
 
-### 3.2 Econometric Merge (Difference-in-Differences)
+1. **Core hydro-infrastructure** (4 terms): *water, canal, mill, pump* — high-frequency terms capturing the broadest contour of water's industrial role.
+2. **Period-specific water technology** (18 terms): *water wheel, overshot, undershot, water mill, mill wheel, breast wheel, water power, water frame, water engine, mill race, sluice, penstock, cotton mill, spinning mill, corn mill, fulling mill, inland navigation, canal navigation* — drawn from period-appropriate engineering vocabulary documented in primary sources.
+3. **Canal transport infrastructure** (6 terms): *navigable, barge, towpath, waterway, inland navigation, canal navigation* — capturing the logistics revolution that canals enabled.
+4. **Naturalistic/agrarian baseline** (6 terms): *flood, rain, river, harvest, holy, divine* — representing the pre-industrial conceptualization of water as natural phenomenon or divine force.
+5. **Fossil/steam comparators** (3 terms): *steam, coal, engine* — enabling direct temporal comparison with the conventional "Promethean" narrative.
+6. **Placebo categories** (20 terms across five rival hypotheses): coal mining, textile, financial, agricultural, and steam-mechanical vocabularies — each representing an alternative explanation for the Great Divergence, used in falsification tournaments.
+
+The selection of terms was guided by three criteria: documented usage in 18th-century primary sources (parliamentary acts, engineering treatises, commercial directories), sufficient frequency in the Ngram corpus to produce stable annual estimates, and analytical distinctiveness (terms should not be semantically redundant within their category). While the vocabulary selection is ultimately heuristic, the placebo tournament design mitigates term-selection bias by demonstrating that rival vocabularies — constructed with equivalent care — fail to produce comparable event study patterns.
+
+### 3.3 Data Construction
+The analysis depends on two primary datasets:
+1. **Google Books Ngram Corpus (English GB 2019):** Extracting annual frequencies of specifically compiled lexicons (`water_wheel`, `canal` vs. `steam_engine`, `coal`) from 1700 to 1900. By deploying this text-as-data approach, we build directly upon the methodological foundations of quantitative culturomics established by Michel et al. (2011). We use the British English sub-corpus (`eng_gb_2019`) rather than the general English corpus to isolate British intellectual culture from American and colonial contributions that increasingly dominate the general corpus after 1800.
+2. **Macroeconomic GDP Series:** Sourced from the Maddison Project Database (Bolt and van Zanden 2020), which aggregates pre-industrial growth accounting from pioneering works like Crafts (1985) and the definitive historical GDP reconstructions of Broadberry et al. (2015). We provide continuous annual GDP per capita estimates for Britain, matched against France, the Netherlands, China, and India. France and the Netherlands serve as European controls sharing comparable institutional development, maritime trade exposure, and Enlightenment intellectual traditions — isolating the treatment effect of Britain's unique water infrastructure endowment. China and India serve as extended "Great Divergence" controls, directly engaging the framework formalized by Pomeranz (2000) and allowing us to cleanly measure the timing of Britain's escape from the Malthusian constraints of its Asian peers.
+
+### 3.4 Econometric Merge (Difference-in-Differences)
 To explicitly test the structural association between this cultural phenomenon and exponential geometric growth—the hallmark of macroeconomic modernity—the 1761 exogenous shock is overlaid as the treatment variable onto real historical GDP data from the Maddison Project Database (Bolt and van Zanden 2020). 
 
 We construct a multi-specification Difference-in-Differences (DiD) model treating Great Britain as the primary experimental group, using France and the Netherlands as contemporary 18th-century European controls. Formally, our baseline Two-Way Fixed Effects (TWFE) DiD specification is estimated as:

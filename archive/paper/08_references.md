@@ -14,6 +14,10 @@ Cameron, A. Colin, Jonah B. Gelbach, and Douglas L. Miller. 2008. "Bootstrap-Bas
 
 Crafts, Nicholas F. R. 1985. *British Economic Growth during the Industrial Revolution*. Oxford: Clarendon Press.
 
+De Chaisemartin, Clément, and Xavier D'Haultfœuille. 2020. "Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects." *American Economic Review* 110 (9): 2964–2996.
+
+Kanefsky, John, and John Robey. 1980. "Steam Engines in 18th-Century Britain: A Quantitative Assessment." *Technology and Culture* 21 (2): 161–186.
+
 Landes, David S. 1969. *The Unbound Prometheus: Technological Change and Industrial Development in Western Europe from 1750 to the Present*. Cambridge: Cambridge University Press.
 
 Malm, Andreas. 2016. *Fossil Capital: The Rise of Steam Power and the Roots of Global Warming*. London: Verso.
@@ -25,6 +29,8 @@ McCloskey, Deirdre N. 2010. *Bourgeois Dignity: Why Economics Can't Explain the 
 Michel, Jean-Baptiste, Yuan Kui Shen, Aviva Presser Aiden, Adrian Veres, Matthew K. Gray, and Erez Lieberman Aiden. 2011. "Quantitative Analysis of Culture Using Millions of Digitized Books." *Science* 331 (6014): 176–82.
 
 Mokyr, Joel. 2009. *The Enlightened Economy: An Economic History of Britain 1700-1850*. New Haven: Yale University Press.
+
+Musson, Albert E., and Eric Robinson. 1969. *Science and Technology in the Industrial Revolution*. Manchester: Manchester University Press.
 
 Pechenick, Eitan Adam, Christopher M. Danforth, and Peter Sheridan Dodds. 2015. "Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution." *PLOS ONE* 10 (10): e0137041.
 
@@ -42,4 +48,4 @@ Wrigley, E. A. 2010. *Energy and the English Industrial Revolution*. Cambridge: 
 
 # Data Availability Statement
 
-All data and code required to reproduce the analyses in this paper are publicly available at [https://github.com/percw/water_and_society](https://github.com/percw/water_and_society). Historical GDP per capita data are sourced from the Maddison Project Database 2023 (Bolt and van Zanden 2020), accessible via the Dataverse repository. Linguistic frequency data are drawn from the Google Books Ngram Corpus (`eng_gb_2019`), publicly available at [https://books.google.com/ngrams](https://books.google.com/ngrams).
+All data and code required to reproduce the analyses in this paper are publicly available at [https://github.com/percw/water_and_society](https://github.com/percw/water_and_society). Historical GDP per capita data are sourced from the Maddison Project Database 2023 (Bolt and van Zanden 2020), accessible via the Dataverse repository. Linguistic frequency data are drawn from the Google Books Ngram Corpus (`eng_gb_2019`), publicly available at [https://books.google.com/ngrams](https://books.google.com/ngrams). A self-contained replication package including all scripts, data files, and output figures is available as a supplementary archive.
