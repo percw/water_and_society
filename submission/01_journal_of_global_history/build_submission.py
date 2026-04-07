@@ -126,6 +126,56 @@ def convert_to_footnotes(text: str) -> str:
     return text
 
 
+def fix_for_docx(text: str) -> str:
+    """Fix math/dollar issues so Pandoc produces clean Word output.
+    
+    Two problems:
+    1. Currency $ signs (e.g., ~$1,251) confuse Pandoc's LaTeX parser
+    2. Double-escaped backslashes from markdown compilation (\\\\alpha → \\alpha)
+    """
+    # Step 1: Remove currency dollar signs — replace with plain text
+    # The context "GDP per capita" already implies the unit
+    text = text.replace('~\\\\$1,251', '~1,251')
+    text = text.replace('~\\$1,251', '~1,251')
+    text = text.replace('~$1,251', '~1,251')
+    text = text.replace('\\$1,251', '1,251')
+    text = text.replace('additional ~$1,251 in', 'additional ~1,251 in')
+    text = text.replace('additional ~\\\\$1,251 in', 'additional ~1,251 in')
+    text = text.replace('approximately $1,251', 'approximately 1,251')
+    text = text.replace('approximately \\$1,251', 'approximately 1,251')
+    
+    # Step 2: Fix double-escaped LaTeX backslashes
+    # The compiled_manuscript.md has \\\\alpha instead of \\alpha
+    text = text.replace('\\\\alpha', '\\alpha')
+    text = text.replace('\\\\beta', '\\beta')
+    text = text.replace('\\\\gamma', '\\gamma')
+    text = text.replace('\\\\delta', '\\delta')
+    text = text.replace('\\\\epsilon', '\\epsilon')
+    text = text.replace('\\\\text', '\\text')
+    text = text.replace('\\\\times', '\\times')
+    text = text.replace('\\\\sum', '\\sum')
+    text = text.replace('\\\\mathbb', '\\mathbb')
+    text = text.replace('\\\\ge', '\\ge')
+    
+    # Step 3: Fix table dollar signs (e.g., "1990 GK$" in stats tables)
+    text = text.replace('GK$)', 'GK\\$)')
+    
+    # Step 4: Fix LaTeX thousand separator: 1{,}250.9 → 1,250.9
+    text = text.replace('{,}', ',')
+    
+    # Step 5: Normalize display math double-backslashes
+    # The compiled manuscript has $$ Y_{it} = \\alpha ... $$ 
+    # which needs single backslashes for Pandoc OMML rendering
+    import re as _re
+    def _fix_display_math(m):
+        content = m.group(0)
+        content = content.replace('\\\\', '\\')
+        return content
+    text = _re.sub(r'\$\$.*?\$\$', _fix_display_math, text, flags=_re.DOTALL)
+    
+    return text
+
+
 def build_manuscript() -> Path:
     source = PAPER_DIR / "compiled_manuscript.md"
     if not source.exists():
@@ -140,6 +190,8 @@ def build_manuscript() -> Path:
     # Anonymize
     text = text.replace('https://github.com/percw/water_and_society', '[REPOSITORY URL REDACTED FOR REVIEW]')
     text = text.replace('percw/water_and_society', '[REPOSITORY REDACTED]')
+    # Fix dollar signs and math for clean docx conversion
+    text = fix_for_docx(text)
 
     header = '---\ntitle: "The Linguistic Hydro-Social Cycle: Water Infrastructure as a Precondition for British Industrialization"\njournal: Journal of Global History\ntype: Original Research Article\nword_count: ~8,000\n---\n\n'
 
@@ -264,7 +316,7 @@ This paper builds directly on the theoretical framework established by Terje Tve
 **Key findings:**
 
 - Using a 71-term vocabulary index applied to the Google Books British English corpus (1700–1900), we identify a permanent structural crossover in 1766 at which engineered water terminology overtook naturalistic water terminology in British print culture — five years after the exogenous shock of the Bridgewater Canal opening (1761).
-- A DiD framework anchored to the 1761 Canal opening estimates that Britain's post-shock trajectory diverged by approximately $1,251 GDP per capita relative to European controls (p = 0.042, HAC-corrected).
+- A DiD framework anchored to the 1761 Canal opening estimates that Britain's post-shock trajectory diverged by approximately \\$1,251 GDP per capita relative to European controls (p = 0.042, HAC-corrected).
 - Counterfactual analysis suggests 47% of Britain's ultimate industrial lead was established by 1810 — during the canal and water wheel era, before steam power achieved commercial dominance.
 - Placebo falsification tournaments across rival vocabularies (coal, textiles, finance, agriculture) confirm that only the water infrastructure shock uniquely predicts the timing of GDP divergence.
 
