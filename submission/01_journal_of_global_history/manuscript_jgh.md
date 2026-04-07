@@ -139,7 +139,7 @@ We validate this physical shock using trajectory analysis of the `eng_gb_2019` v
 This sequential alignment confirms that the physical 1761 shock successfully transformed water culturally from an uncontrollable natural force into a harnessed, engineered asset. This dynamic is visually isolated in **Figure 1**, plotting the linguistic shift relative to the exogenous shock and the concurrent takeoff of British GDP per capita.
 
 <div align="center">
-  <img src="../../data/did_figure_one.png" alt="Figure 1: Identification of the British Hydro-Social Shift" width="800">
+  ![Figure 1: Identification of the British Hydro-Social Shift](/Users/pcw/Documents/GitHub/Water_and_society/data/did_figure_one.png)
   <br>
   <em><strong>Figure 1: Identification of the British Hydro-Social Shift.</strong> The data plots the normalized rolling frequencies of technical hydro-infrastructure vocabulary against fossil/steam terminology. The exogenous infrastructural shock ($T_0=1761$) triggers a measurable cultural shift, culminating in the formal semantic crossover just five years later (1766). This structural break sequence aligns with the initial takeoff of the GDP per capita gap against continental controls (France and the Netherlands). The approximately 50-year gap between the hydro-social shift and the eventual steam transition (post-1810) is consistent with water infrastructure serving as a necessary precondition — creating the integrated markets and accumulated capital upon which the fossil era subsequently built.</em>
 </div>
@@ -181,7 +181,7 @@ With country-clustered standard errors ($G=3$ clusters), $\beta_3$ remains highl
 Calculations of a dynamic DiD event study validate the parallel trends assumption (**Figure 2**). Pre-treatment bins spanning 60 years prior to 1761 yielded coefficients statistically indistinguishable from zero, neutralizing concerns of pre-existing trajectory bias. Following 1761, coefficients rise sharply and consistently, indicating a systemic economic acceleration beginning during the canal era (1760–1830) and intensifying through the subsequent steam transition.
 
 <div align="center">
-  <img src="../../data/did_event_study.png" alt="Figure 2: Dynamic DiD Event Study" width="800">
+  ![Figure 2: Dynamic DiD Event Study](/Users/pcw/Documents/GitHub/Water_and_society/data/did_event_study.png)
   <br>
   <em><strong>Figure 2: Dynamic DiD Event Study.</strong> 5-year binned event study relative to the 1761 exogenous infrastructural treatment ($T_0=0$). The consistently flat line spanning 60 years prior to the break confirms the parallel trends assumption, neutralizing concerns of pre-existing trajectory bias. Following the break, the coefficient rises steadily — initially during the canal era and accelerating during the subsequent steam transition — consistent with water infrastructure establishing preconditions that fossil power subsequently amplified.</em>
 </div>
@@ -192,7 +192,7 @@ To ensure the observed effect was not the artifact of a generalized 18th-century
 **Vocabulary Falsification:** When substituting the hydro-social treatment dates with alternative industrial inflection points (e.g., extracting the crossover parameters for *coal*, *textile*, or *financial* vocabulary clusters), the statistical validity of the event study collapsed (**Figure 3**). Only the water hypothesis produced a clean, non-noisy event study — indicating that the 1761 structural break is uniquely associated with the *timing* of GDP divergence, even as the accumulated effect was later amplified by fossil adoption.
 
 <div align="center">
-  <img src="../../data/did_vocab_tournament.png" alt="Figure 3: Placebo Vocabulary Tournament" width="800">
+  ![Figure 3: Placebo Vocabulary Tournament](/Users/pcw/Documents/GitHub/Water_and_society/data/did_vocab_tournament.png)
   <br>
   <em><strong>Figure 3: Placebo Vocabulary Tournament.</strong> Falsification test executing event studies against the structural break dates of rival textual corpora. Only the hydro-social treatment (Panel a) yields a statistically clean distribution matching economic takeoff. Rival inflection points derived from coal (b), textiles (c), and finance (d) uniformly collapse into high volatility and statistically invalid pre-trends, confirming the unique temporal specificity of the water infrastructure shock in predicting the onset of divergence.</em>
 </div>

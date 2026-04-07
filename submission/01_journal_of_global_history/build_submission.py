@@ -173,6 +173,23 @@ def fix_for_docx(text: str) -> str:
         return content
     text = _re.sub(r'\$\$.*?\$\$', _fix_display_math, text, flags=_re.DOTALL)
     
+    # Step 6: Convert HTML <img> tags to Markdown images with absolute paths
+    # The source uses <img src="../../data/file.png"> which Pandoc can't resolve
+    # Convert to ![alt](absolute_path) so figures are embedded in the .docx
+    def _fix_img_tag(m):
+        src = m.group(1)
+        alt = m.group(2) if m.group(2) else ''
+        # Resolve relative path to absolute
+        abs_path = (SCRIPT_DIR / src).resolve()
+        if abs_path.exists():
+            return f'![{alt}]({abs_path})'
+        else:
+            return m.group(0)  # leave unchanged if file not found
+    text = _re.sub(
+        r'<img\s+src="([^"]+)"\s+alt="([^"]*)"\s*(?:width="[^"]*")?\s*/?>',
+        _fix_img_tag, text
+    )
+    
     return text
 
 
