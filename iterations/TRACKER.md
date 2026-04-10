@@ -40,4 +40,5 @@ Master log for tracking limitations and their resolution across iterations.
 | 21 | Serial Correlation — inflated t-statistics (Bertrand et al. 2004) | `resolved` | Collapsed DiD ns (N=10, no power); block perm p=0.21 (min possible=0.20); temporal perm p=0.73 — DiD confirms divergence magnitude, NOT timing specificity | [06](06/) |
 | 22 | No Event Study — missing dynamic treatment effects | `resolved` | Leads-and-lags: pre-trend F=1.77, p=0.117 (parallel trends hold); post-treatment gradual acceleration, significant at +40yrs | [06](06/) |
 | 23 | Interpolation Bias — CHN/IND GDP smoothed from sparse benchmarks | `resolved` | European-only (real annual data): β₃=1243, p<0.0001; interpolation inflates by ~21% but core finding robust | [06](06/) |
+| 24 | Attribution Gap — DiD proves divergence but not water-specific mechanism | `resolved` | Onset timing: water vocab accelerated 1760, GDP diverged 1804, fossil accelerated 1817 — water leads fossil by 57 years; 2/6 timing tests pass (MODERATE); Granger/xcorr fail on power asymmetry | [07](07/) |
 
