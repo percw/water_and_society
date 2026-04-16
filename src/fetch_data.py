@@ -210,11 +210,12 @@ def fetch_maddison(force=False):
                     df_full = pd.read_excel(BytesIO(resp.content), sheet_name='Full data')
                     df_full.columns = [str(c).strip().lower() for c in df_full.columns]
                     frames = {}
-                    for code in ['GBR', 'CHN', 'IND']:
+                    for code in ['GBR', 'NLD', 'FRA', 'BEL', 'SWE', 'DEU', 'CHN', 'IND']:
                         mask = ((df_full['countrycode'] == code) &
                                 (df_full['year'] >= 1700) & (df_full['year'] <= 1900))
                         sub = df_full.loc[mask, ['year', 'cgdppc']].dropna()
-                        frames[code] = sub.set_index('year')['cgdppc']
+                        if len(sub) > 0:
+                            frames[code] = sub.set_index('year')['cgdppc']
                     df = pd.DataFrame(frames)
                     df.index.name = 'Year'
                     df.to_csv(cache_file)
@@ -261,6 +262,7 @@ def _get_embedded_maddison():
 
     Source: Bolt & van Zanden (2024). Benchmark years from the published
     database, linearly interpolated to annual resolution.
+    Countries: GBR, NLD, FRA, BEL, SWE, DEU, CHN, IND
     """
     gbr = _interpolate_benchmarks({
         1700: 1630, 1710: 1710, 1720: 1843, 1730: 1853, 1740: 1843,
@@ -275,6 +277,43 @@ def _get_embedded_maddison():
         1897: 7866, 1898: 8043, 1899: 8122, 1900: 8009,
     }, 1700, 1900)
 
+    # Netherlands — notable Dutch Golden Age decline then recovery
+    nld = _interpolate_benchmarks({
+        1700: 2105, 1720: 2020, 1740: 1960, 1750: 2395, 1760: 2304,
+        1770: 1981, 1780: 1866, 1790: 1854, 1800: 1838, 1810: 1895,
+        1820: 1838, 1830: 1896, 1840: 2093, 1850: 2355, 1860: 2640,
+        1870: 2753, 1880: 3026, 1890: 3300, 1900: 3532,
+    }, 1700, 1900)
+
+    # France
+    fra = _interpolate_benchmarks({
+        1700: 1126, 1720: 1140, 1740: 1126, 1750: 1184, 1760: 1210,
+        1770: 1178, 1780: 1157, 1790: 1224, 1800: 1218, 1810: 1267,
+        1820: 1135, 1830: 1254, 1840: 1414, 1850: 1597, 1860: 1875,
+        1870: 1876, 1880: 2118, 1890: 2354, 1900: 2762,
+    }, 1700, 1900)
+
+    # Belgium — early continental industrializer, good pre-1830 reconstruction
+    bel = _interpolate_benchmarks({
+        1700: 1074, 1720: 1090, 1740: 1110, 1760: 1150, 1780: 1200,
+        1800: 1285, 1820: 1319, 1840: 1526, 1850: 1847, 1860: 2028,
+        1870: 2692, 1880: 3043, 1890: 3321, 1900: 3731,
+    }, 1700, 1900)
+
+    # Sweden — good Maddison coverage, later industrializer
+    swe = _interpolate_benchmarks({
+        1700: 838, 1720: 860, 1740: 890, 1760: 920, 1780: 950,
+        1800: 980, 1820: 1059, 1840: 1132, 1850: 1289, 1860: 1378,
+        1870: 1664, 1880: 1919, 1890: 2095, 1900: 2561,
+    }, 1700, 1900)
+
+    # Germany — important late industrializer comparison
+    deu = _interpolate_benchmarks({
+        1700: 898, 1720: 920, 1740: 940, 1760: 960, 1780: 990,
+        1800: 1040, 1820: 1058, 1840: 1157, 1850: 1428, 1860: 1584,
+        1870: 1839, 1880: 2102, 1890: 2428, 1900: 2985,
+    }, 1700, 1900)
+
     chn = _interpolate_benchmarks({
         1700: 803, 1720: 838, 1740: 820, 1750: 803, 1760: 838,
         1770: 855, 1780: 820, 1790: 803, 1800: 803, 1820: 803,
@@ -286,9 +325,10 @@ def _get_embedded_maddison():
         1870: 800, 1880: 800, 1890: 700, 1900: 700,
     }, 1700, 1900)
 
-    df = pd.DataFrame({'GBR': gbr, 'CHN': chn, 'IND': ind})
+    df = pd.DataFrame({'GBR': gbr, 'NLD': nld, 'FRA': fra, 'BEL': bel,
+                       'SWE': swe, 'DEU': deu, 'CHN': chn, 'IND': ind})
     df.index.name = 'Year'
-    log.info(f'  Embedded Maddison data: {len(df)} annual estimates')
+    log.info(f'  Embedded Maddison data: {len(df)} annual estimates ({len(df.columns)} countries)')
     return df
 
 

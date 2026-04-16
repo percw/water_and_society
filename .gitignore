@@ -34,3 +34,6 @@ submission/*/author_config.ini
 submission/*/title_page.*
 submission/*/cover_letter.*
 submission/*/manuscript_*.docx
+
+# Social Media
+social_media/

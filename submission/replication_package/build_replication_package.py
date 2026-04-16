@@ -23,6 +23,7 @@ INCLUDE_FILES = {
     # Core scripts
     "src/fetch_data.py": "code/fetch_data.py",
     "src/did_analysis.py": "code/did_analysis.py",
+    "src/dml_analysis.py": "code/dml_analysis.py",
 
     # Dependencies
     "requirements.txt": "requirements.txt",

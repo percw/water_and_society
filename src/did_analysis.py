@@ -35,7 +35,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import statsmodels.formula.api as smf
-from scipy import stats
+from scipy import stats, optimize
 from pathlib import Path
 
 warnings.filterwarnings('ignore', category=FutureWarning)
@@ -67,13 +67,17 @@ PLACEBO_STEAM_MECH = ['steam', 'engine', 'piston', 'boiler', 'locomotive', 'hors
 
 # Countries
 TREATMENT = ['GBR']
-CONTROLS_EUR = ['NLD', 'FRA']
-CONTROLS_ASIA = ['CHN', 'IND']
-ALL_COUNTRIES = TREATMENT + CONTROLS_EUR + CONTROLS_ASIA
+CONTROLS_EUR = ['NLD', 'FRA']          # core European controls (dense annual data)
+CONTROLS_EUR_EXT = ['NLD', 'FRA', 'BEL', 'SWE', 'DEU',
+                    'ESP', 'PRT', 'POL', 'ITA']  # extended European panel (9 controls)
+CONTROLS_ASIA = ['CHN', 'IND', 'JPN']
+ALL_COUNTRIES = TREATMENT + CONTROLS_EUR_EXT + CONTROLS_ASIA
 
 COUNTRY_LABELS = {
     'GBR': 'Great Britain', 'NLD': 'Netherlands', 'FRA': 'France',
-    'CHN': 'China', 'IND': 'India',
+    'BEL': 'Belgium', 'SWE': 'Sweden', 'DEU': 'Germany',
+    'ESP': 'Spain', 'PRT': 'Portugal', 'POL': 'Poland', 'ITA': 'Italy',
+    'CHN': 'China', 'IND': 'India', 'JPN': 'Japan',
 }
 
 
@@ -85,7 +89,7 @@ def fetch_real_maddison(force=False):
     """Download the real Maddison Project Database 2023 from Dataverse.
 
     Returns DataFrame with annual GDP per capita for all countries.
-    GBR, NLD, FRA have near-complete annual data (1500-1900).
+    GBR, NLD, FRA, BEL, SWE, DEU have annual/near-annual data.
     CHN, IND are interpolated from sparse benchmarks.
     """
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -93,8 +97,14 @@ def fetch_real_maddison(force=False):
 
     if cache.exists() and not force:
         df = pd.read_csv(cache, index_col='Year')
-        print(f"  Loaded cached real Maddison: {df.shape}")
-        return df
+        # Re-fetch if extended European countries are absent (cache pre-dates this version)
+        if not all(c in df.columns for c in CONTROLS_EUR_EXT):
+            missing = [c for c in CONTROLS_EUR_EXT if c not in df.columns]
+            print(f"  Cache missing {missing} — re-fetching...")
+            force = True
+        else:
+            print(f"  Loaded cached real Maddison: {df.shape}")
+            return df
 
     print("  Downloading Maddison 2023 from Dataverse...")
     try:
@@ -115,7 +125,6 @@ def fetch_real_maddison(force=False):
                     (df_full['year'] >= 1500) & (df_full['year'] <= 1900))
             sub = df_full.loc[mask, ['year', 'gdppc']].dropna(subset=['gdppc'])
             s = sub.set_index('year')['gdppc']
-            # Reindex to full range and interpolate gaps
             s = s.reindex(range(1500, 1901))
             n_real = s.notna().sum()
             s = s.interpolate(method='linear').ffill().bfill()
@@ -124,7 +133,6 @@ def fetch_real_maddison(force=False):
 
         df = pd.DataFrame(frames)
         df.index.name = 'Year'
-        # Trim to 1700-1900 for our analysis window
         df = df.loc[1700:1900]
         df.to_csv(cache)
         print(f"  ✓ Saved real Maddison data: {df.shape}")
@@ -132,9 +140,12 @@ def fetch_real_maddison(force=False):
 
     except Exception as e:
         print(f"  ⚠ Download failed: {e}")
-        print("  Falling back to fetch_data.py embedded data...")
-        from fetch_data import fetch_maddison
-        return fetch_maddison()
+        print("  Falling back to embedded Maddison data (all countries)...")
+        from fetch_data import _get_embedded_maddison
+        df = _get_embedded_maddison()
+        df = df.loc[1700:1900]
+        df.to_csv(cache)
+        return df
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -192,7 +203,7 @@ def build_panel(df_gdp, t0, countries=None):
 # 4. Multi-Specification DiD Regressions
 # ─────────────────────────────────────────────────────────────────────────────
 
-def run_all_specifications(panel, panel_eur, panel_asia, t0):
+def run_all_specifications(panel, panel_eur, panel_asia, t0, panel_eur_ext=None):
     """Run all DiD specifications and return results table."""
     specs = []
 
@@ -242,11 +253,21 @@ def run_all_specifications(panel, panel_eur, panel_asia, t0):
     panel_placebo = panel.copy()
     panel_placebo['Post'] = (panel_placebo['Year'] >= fake_t0).astype(int)
     panel_placebo['DiD_Interaction'] = panel_placebo['Treated'] * panel_placebo['Post']
-    # Only use pre-treatment data to test for false positive
     panel_placebo = panel_placebo[panel_placebo['Year'] < t0]
     m9 = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
                  data=panel_placebo).fit()
     specs.append((f'9. Placebo T₀={fake_t0}', m9, panel_placebo))
+
+    # ── Spec 10: Extended European controls (NLD, FRA, BEL, SWE, DEU) ────
+    if panel_eur_ext is not None:
+        m10 = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                      data=panel_eur_ext).fit()
+        specs.append(('10. Extended EUR (5 ctrl)', m10, panel_eur_ext))
+
+        m10_hac = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                           data=panel_eur_ext).fit(cov_type='HAC',
+                                                    cov_kwds={'maxlags': 15})
+        specs.append(('10b. Extended EUR + HAC', m10_hac, panel_eur_ext))
 
     return specs
 
@@ -549,9 +570,13 @@ def run_collapsed_did(df_gdp, t0):
 
     results = {}
 
+    eur_ext = ['GBR'] + [c for c in CONTROLS_EUR_EXT if c in df_gdp.columns]
+    n_eur_ext = len([c for c in CONTROLS_EUR_EXT if c in df_gdp.columns])
+    eur_ext_label = f'European extended ({n_eur_ext} controls)'
     for label, countries in [
-        ('All controls (5 countries)', [c for c in ALL_COUNTRIES if c in df_gdp.columns]),
-        ('European controls only (3 countries)', [c for c in ['GBR', 'NLD', 'FRA'] if c in df_gdp.columns]),
+        ('All controls', [c for c in ALL_COUNTRIES if c in df_gdp.columns]),
+        ('European core (NLD, FRA)', [c for c in ['GBR', 'NLD', 'FRA'] if c in df_gdp.columns]),
+        (eur_ext_label, eur_ext),
     ]:
         rows = []
         for c in countries:
@@ -570,6 +595,7 @@ def run_collapsed_did(df_gdp, t0):
         collapsed['log_GDP'] = np.log(collapsed['GDP_per_Capita'].clip(lower=1))
 
         n_obs = len(collapsed)
+        n_countries = len(countries)
 
         # Level specification
         m = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
@@ -593,22 +619,51 @@ def run_collapsed_did(df_gdp, t0):
         p_log = m_log.pvalues.get('DiD_Interaction', np.nan)
         sig_log = '***' if p_log < 0.001 else '**' if p_log < 0.01 else '*' if p_log < 0.05 else 'ns'
 
+        # ── Magnitude Metrics ─────────────────────────────────────────────
+        # Cohen's d: effect size relative to pooled SD of collapsed GDP
+        gbr_pre = collapsed.loc[(collapsed['Treated']==1) & (collapsed['Post']==0), 'GDP_per_Capita'].values
+        gbr_post = collapsed.loc[(collapsed['Treated']==1) & (collapsed['Post']==1), 'GDP_per_Capita'].values
+        ctrl_pre = collapsed.loc[(collapsed['Treated']==0) & (collapsed['Post']==0), 'GDP_per_Capita'].values
+        ctrl_post = collapsed.loc[(collapsed['Treated']==0) & (collapsed['Post']==1), 'GDP_per_Capita'].values
+
+        # DiD effect as raw and % of pre-treatment GBR GDP
+        gbr_pre_mean = float(gbr_pre.mean()) if len(gbr_pre) else np.nan
+        ctrl_pre_mean = float(ctrl_pre.mean()) if len(ctrl_pre) else np.nan
+        pct_of_baseline = (b3 / gbr_pre_mean * 100) if gbr_pre_mean else np.nan
+
+        # Cohen's d: β₃ / pooled SD of the collapsed residuals
+        pooled_sd = collapsed['GDP_per_Capita'].std()
+        cohens_d = b3 / pooled_sd if pooled_sd > 0 else np.nan
+
+        # Effect relative to control-group post-period mean
+        ctrl_post_mean = float(ctrl_post.mean()) if len(ctrl_post) else np.nan
+        pct_of_ctrl_post = (b3 / ctrl_post_mean * 100) if ctrl_post_mean else np.nan
+
         results[label] = {
             'beta': b3, 'se': se, 'pval': p, 't_stat': t_stat,
-            'sig': sig, 'n': n_obs, 'r2': m.rsquared, 'dw': dw,
+            'sig': sig, 'n': n_obs, 'n_countries': n_countries,
+            'r2': m.rsquared, 'dw': dw,
             'beta_log': b3_log, 'pval_log': p_log, 'sig_log': sig_log,
             'model': m, 'model_log': m_log,
+            'cohens_d': cohens_d, 'pct_of_baseline': pct_of_baseline,
+            'pct_of_ctrl_post': pct_of_ctrl_post,
+            'gbr_pre_mean': gbr_pre_mean, 'ctrl_pre_mean': ctrl_pre_mean,
         }
 
-        print(f"\n  {label}  (N={n_obs})")
+        print(f"\n  {label}  (N={n_obs}, {n_countries} countries)")
         print(f"    Level:  β₃ = {b3:>8.1f}  (SE={se:.1f})  t={t_stat:.2f}  p={p:.4f}  {sig}")
         print(f"    Log:    β₃ = {b3_log:>8.4f}  p={p_log:.4f}  {sig_log}")
         print(f"    R²={m.rsquared:.4f}")
         if dw is not None:
             print(f"    Durbin-Watson = {dw:.3f}  (cf. baseline DW ≈ 0.032)")
+        print(f"    ── Magnitude Metrics ──")
+        print(f"    Cohen's d          = {cohens_d:.2f}  ({'large' if abs(cohens_d)>0.8 else 'medium' if abs(cohens_d)>0.5 else 'small'})")
+        print(f"    β₃ / GBR pre-GDP   = {pct_of_baseline:.1f}%  (effect as % of pre-treatment British GDP)")
+        print(f"    β₃ / Ctrl post-GDP = {pct_of_ctrl_post:.1f}%  (effect as % of control post-GDP)")
 
     print(f"\n  Interpretation: If β₃ survives the collapse, the baseline")
     print(f"  result is robust to Bertrand et al. (2004) serial correlation concern.")
+    print(f"  Magnitude metrics help assess economic significance independent of p-values.")
     print(f"{'='*70}\n")
     return results
 
@@ -678,6 +733,292 @@ def run_clustered_se(panel, panel_eur, t0):
     print(f"  The collapsed DiD above is the preferred Bertrand et al. correction.")
     print(f"{'='*70}\n")
     return results
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4i. Wild Cluster Bootstrap (Cameron, Gelbach & Miller 2008)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def run_wild_bootstrap(panel, label='', n_boots=999, seed=42):
+    """Wild cluster bootstrap (WCR) for few-cluster inference.
+
+    Draws Rademacher {-1,+1} weights per cluster (country), imposes H₀:β₃=0
+    via the restricted model, and computes a p-value for the two-sided test.
+    With G clusters there are only 2^G unique Rademacher draws; n_boots cycles
+    through many of them.
+
+    References: Cameron, Gelbach & Miller (2008); Roodman et al. (2019).
+    """
+    print(f"\n{'='*70}")
+    print(f"WILD CLUSTER BOOTSTRAP{' — ' + label if label else ''}")
+    print("Rademacher weights per country cluster, 999 bootstrap replications")
+    print(f"{'='*70}")
+
+    rng = np.random.default_rng(seed)
+    countries = sorted(panel['Country'].unique())
+    G = len(countries)
+    country_idx = {c: i for i, c in enumerate(countries)}
+    cluster_ids = panel['Country'].map(country_idx).values
+
+    # Observed full-model t-statistic for β₃
+    m_full = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                     data=panel).fit()
+    b3_obs = m_full.params['DiD_Interaction']
+    t_obs  = m_full.tvalues['DiD_Interaction']
+
+    # Restricted model (impose H₀: β₃ = 0) — for WCR p-value
+    m_r = smf.ols('GDP_per_Capita ~ Treated + Post', data=panel).fit()
+    fitted_r = m_r.fittedvalues.values
+    resid_r  = m_r.resid.values
+
+    # Unrestricted residuals — for percentile CI
+    fitted_u = m_full.fittedvalues.values
+    resid_u  = m_full.resid.values
+
+    boot_t_stats = []
+    boot_betas   = []
+    for _ in range(n_boots):
+        eta = rng.choice([-1.0, 1.0], size=G)
+        obs_eta = eta[cluster_ids]
+
+        # WCR: p-value bootstrap (null-imposed)
+        y_wcr = fitted_r + resid_r * obs_eta
+        try:
+            m_wcr = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                             data=panel.assign(GDP_per_Capita=y_wcr)).fit()
+            boot_t_stats.append(m_wcr.tvalues['DiD_Interaction'])
+        except Exception:
+            pass
+
+        # Percentile CI bootstrap (unrestricted)
+        y_pct = fitted_u + resid_u * obs_eta
+        try:
+            m_pct = smf.ols('GDP_per_Capita ~ Treated + Post + DiD_Interaction',
+                             data=panel.assign(GDP_per_Capita=y_pct)).fit()
+            boot_betas.append(m_pct.params['DiD_Interaction'])
+        except Exception:
+            pass
+
+    boot_t_stats = np.array(boot_t_stats)
+    boot_betas   = np.array(boot_betas)
+
+    p_wb   = np.mean(np.abs(boot_t_stats) >= np.abs(t_obs)) if len(boot_t_stats) else np.nan
+    ci_lo, ci_hi = (np.percentile(boot_betas, [2.5, 97.5])
+                    if len(boot_betas) >= 10 else (np.nan, np.nan))
+    sig = ('***' if p_wb < 0.001 else '**' if p_wb < 0.01
+           else '*' if p_wb < 0.05 else 'ns')
+
+    print(f"\n  G = {G} clusters ({', '.join(countries)})")
+    print(f"  2^G = {2**G} unique Rademacher draws (n_boots={len(boot_t_stats)})")
+    print(f"  β₃ (observed)  = {b3_obs:>8.1f}")
+    print(f"  t (observed)   = {t_obs:>8.3f}")
+    print(f"  WCR p-value    = {p_wb:.4f}  {sig}")
+    print(f"  95% pct CI     = [{ci_lo:.1f}, {ci_hi:.1f}]")
+    print(f"{'='*70}\n")
+
+    return {
+        'b3': b3_obs, 't_obs': t_obs, 'p_wb': p_wb, 'sig': sig,
+        'ci': (ci_lo, ci_hi), 'G': G,
+        'boot_t_stats': boot_t_stats, 'boot_betas': boot_betas,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4j. Synthetic Control Method (Abadie, Diamond & Hainmueller 2010)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def run_synthetic_control(df_gdp, t0):
+    """Abadie-Diamond-Hainmueller (2010) synthetic control method.
+
+    Constructs a convex combination of European donor countries that best
+    replicates Britain's pre-1761 GDP trajectory. The post-treatment gap
+    (actual GBR − synthetic GBR) is the causal effect estimate.
+
+    Inference: in-space placebo — apply the same SCM to each donor country
+    using remaining donors, compute post/pre RMSPE ratio for each, and
+    report the Fisher exact p-value for GBR's ratio rank.
+
+    References: Abadie & Gardeazabal (2003); Abadie, Diamond & Hainmueller (2010).
+    """
+    print(f"\n{'='*70}")
+    print("SYNTHETIC CONTROL METHOD — Abadie, Diamond & Hainmueller (2010)")
+    print("Donor pool: European controls (NLD, FRA, BEL, SWE, DEU)")
+    print(f"{'='*70}")
+
+    donors = [c for c in CONTROLS_EUR_EXT if c in df_gdp.columns]
+    if len(donors) < 2:
+        print("  ⚠ Insufficient donors — skipping SCM")
+        return None
+
+    pre_idx  = df_gdp.loc[1700:t0-1].index
+    post_idx = df_gdp.loc[t0:1900].index
+
+    def _solve_weights(treated_series, donor_df):
+        """Non-negative least squares with sum-to-one constraint."""
+        Y1  = treated_series.loc[pre_idx].values
+        Y0  = donor_df.loc[pre_idx].values   # (T_pre, J)
+        J   = Y0.shape[1]
+
+        def loss(w):
+            return float(np.sum((Y1 - Y0 @ w) ** 2))
+
+        res = optimize.minimize(
+            loss,
+            x0=np.ones(J) / J,
+            method='SLSQP',
+            bounds=[(0, 1)] * J,
+            constraints={'type': 'eq', 'fun': lambda w: np.sum(w) - 1},
+            options={'ftol': 1e-12, 'maxiter': 2000},
+        )
+        return res.x
+
+    # ── Weights for GBR ──────────────────────────────────────────────────
+    donor_df = df_gdp[donors]
+    w_gbr = _solve_weights(df_gdp['GBR'], donor_df)
+    synthetic_gbr = (donor_df * w_gbr).sum(axis=1)
+    gap_gbr = df_gdp['GBR'] - synthetic_gbr
+
+    pre_rmse_gbr  = float(np.sqrt(np.mean(gap_gbr.loc[pre_idx]**2)))
+    post_rmse_gbr = float(np.sqrt(np.mean(gap_gbr.loc[post_idx]**2)))
+    ratio_gbr     = post_rmse_gbr / (pre_rmse_gbr + 1e-10)
+
+    print(f"\n  Optimal weights for synthetic GBR:")
+    for d, w in zip(donors, w_gbr):
+        print(f"    {COUNTRY_LABELS.get(d, d):<15}: {w:.4f}")
+    print(f"\n  Pre-treatment RMSE  : {pre_rmse_gbr:.1f}  (fit quality)")
+    print(f"  Post-treatment avg gap: {gap_gbr.loc[post_idx].mean():.1f} GDP/capita")
+    print(f"  Post/Pre RMSPE ratio  : {ratio_gbr:.2f}")
+
+    # ── In-space placebos ─────────────────────────────────────────────────
+    print(f"\n  In-space placebo tests:")
+    placebo_gaps   = {}
+    placebo_ratios = []
+    rmspe_threshold = 5 * pre_rmse_gbr   # exclude badly-fitting placebos
+
+    for d0 in donors:
+        placebo_donors = [d for d in donors if d != d0]
+        if len(placebo_donors) < 1:
+            continue
+        pd_df = df_gdp[placebo_donors]
+        w_p = _solve_weights(df_gdp[d0], pd_df)
+        synthetic_p = (pd_df * w_p).sum(axis=1)
+        gap_p = df_gdp[d0] - synthetic_p
+
+        pre_r  = float(np.sqrt(np.mean(gap_p.loc[pre_idx]**2)))
+        post_r = float(np.sqrt(np.mean(gap_p.loc[post_idx]**2)))
+        ratio_p = post_r / (pre_r + 1e-10)
+        excluded = pre_r > rmspe_threshold
+
+        placebo_gaps[d0] = gap_p
+        if not excluded:
+            placebo_ratios.append(ratio_p)
+
+        label = COUNTRY_LABELS.get(d0, d0)
+        excl_note = ' (excluded: poor pre-fit)' if excluded else ''
+        print(f"    {label:<15}: pre-RMSPE={pre_r:.0f}  ratio={ratio_p:.2f}{excl_note}")
+
+    # Fisher p-value: rank of GBR's ratio among all non-excluded units
+    all_ratios = placebo_ratios + [ratio_gbr]
+    p_fisher = np.mean(np.array(all_ratios) >= ratio_gbr)
+
+    print(f"\n  GBR post/pre RMSPE ratio: {ratio_gbr:.2f}")
+    print(f"  Donor placebos included : {len(placebo_ratios)}")
+    print(f"  Fisher p-value          : {p_fisher:.4f}  "
+          f"(min achievable = {1/(len(placebo_ratios)+1):.3f})")
+    sig = ('***' if p_fisher < 0.001 else '**' if p_fisher < 0.01
+           else '*' if p_fisher < 0.05 else f'ns (min={1/(len(placebo_ratios)+1):.2f})')
+    print(f"  Significance            : {sig}")
+    print(f"{'='*70}\n")
+
+    return {
+        'weights': dict(zip(donors, w_gbr)),
+        'synthetic_gbr': synthetic_gbr,
+        'gap': gap_gbr,
+        'pre_rmse': pre_rmse_gbr,
+        'post_gap_mean': float(gap_gbr.loc[post_idx].mean()),
+        'ratio_gbr': ratio_gbr,
+        'placebo_gaps': placebo_gaps,
+        'placebo_ratios': placebo_ratios,
+        'p_fisher': p_fisher,
+        'sig': sig,
+    }
+
+
+def plot_synthetic_control(sc_results, df_gdp, t0):
+    """Publication-quality synthetic control plot."""
+    if not sc_results:
+        return
+
+    fig, axes = plt.subplots(1, 2, figsize=(16, 7))
+
+    years = df_gdp.index
+    syn   = sc_results['synthetic_gbr']
+    gap   = sc_results['gap']
+
+    # ── Panel A: Actual vs Synthetic GBR ─────────────────────────────────
+    ax = axes[0]
+    ax.plot(years, df_gdp['GBR'], color='#1a5276', linewidth=2.5,
+            label='Great Britain (actual)')
+    ax.plot(syn.index, syn, color='#1a5276', linewidth=2.5,
+            linestyle='--', alpha=0.65, label='Synthetic Great Britain')
+
+    # Show individual donor countries faintly
+    for d, w in sc_results['weights'].items():
+        if w > 0.01 and d in df_gdp.columns:
+            ax.plot(years, df_gdp[d], linewidth=1, alpha=0.3,
+                    label=f"{COUNTRY_LABELS.get(d,d)} (w={w:.2f})")
+
+    ax.axvline(x=t0, color='darkorange', linewidth=2, linestyle=':',
+               label=f'T₀={t0}')
+    ax.axvspan(1700, t0, alpha=0.03, color='green')
+    ax.axvspan(t0, 1900, alpha=0.03, color='red')
+    ax.set_xlabel('Year', fontsize=12)
+    ax.set_ylabel('GDP per Capita (2011 int\'l $)', fontsize=12)
+    ax.set_title('A — Actual vs Synthetic Great Britain\n'
+                 'Synthetic = weighted average of European donors',
+                 fontsize=12, fontweight='bold')
+    ax.legend(fontsize=9, framealpha=0.9)
+    ax.grid(True, alpha=0.2)
+
+    # ── Panel B: Treatment gap + in-space placebos ────────────────────────
+    ax = axes[1]
+    rmspe_thresh = 5 * sc_results['pre_rmse']
+    for d, g in sc_results['placebo_gaps'].items():
+        pre_r = float(np.sqrt(np.mean(g.loc[g.index < t0]**2)))
+        color = '#aab7b8' if pre_r <= rmspe_thresh else '#d5d8dc'
+        ax.plot(g.index, g, color=color, linewidth=1, alpha=0.5)
+
+    ax.plot(gap.index, gap, color='#1a5276', linewidth=2.5,
+            label='Great Britain (gap)')
+    ax.axhline(y=0, color='black', linewidth=0.8)
+    ax.axvline(x=t0, color='darkorange', linewidth=2, linestyle=':',
+               label=f'T₀={t0}')
+
+    p = sc_results['p_fisher']
+    sig_str = sc_results['sig']
+    ax.text(0.97, 0.04,
+            f"Fisher p = {p:.3f}  {sig_str}\n"
+            f"Post-avg gap = {sc_results['post_gap_mean']:.0f} GDP/cap\n"
+            f"Post/Pre RMSPE = {sc_results['ratio_gbr']:.2f}",
+            transform=ax.transAxes, fontsize=10, ha='right', va='bottom',
+            bbox=dict(boxstyle='round,pad=0.4', facecolor='lightyellow',
+                      edgecolor='gray', alpha=0.9))
+
+    ax.set_xlabel('Year', fontsize=12)
+    ax.set_ylabel('GDP Gap: Actual − Synthetic (2011 int\'l $)', fontsize=12)
+    ax.set_title('B — Treatment Gap + In-Space Placebo Gaps\n'
+                 'Grey = donor country gaps; Blue = Britain gap',
+                 fontsize=12, fontweight='bold')
+    ax.legend(fontsize=10, framealpha=0.9)
+    ax.grid(True, alpha=0.2)
+
+    fig.suptitle(f'Synthetic Control Method (Abadie et al. 2010) — T₀={t0}',
+                 fontsize=14, fontweight='bold')
+    plt.tight_layout()
+    plt.savefig(DATA_DIR / 'did_synthetic_control.png', dpi=150,
+                bbox_inches='tight')
+    print("  ✓ Saved: data/did_synthetic_control.png")
+    plt.close()
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1258,8 +1599,12 @@ def plot_parallel_trends(df_gdp, t0, ratio=None):
     fig, axes = plt.subplots(2, 2, figsize=(16, 12))
 
     colors = {'GBR': '#1a5276', 'NLD': '#8e44ad', 'FRA': '#2980b9',
-              'CHN': '#c0392b', 'IND': '#27ae60'}
-    styles = {'GBR': '-', 'NLD': '--', 'FRA': '-.', 'CHN': ':', 'IND': ':'}
+              'BEL': '#e67e22', 'SWE': '#16a085', 'DEU': '#7f8c8d',
+              'ESP': '#d4ac0d', 'PRT': '#a04000', 'POL': '#5b2c6f', 'ITA': '#117a65',
+              'CHN': '#c0392b', 'IND': '#27ae60', 'JPN': '#884ea0'}
+    styles = {'GBR': '-', 'NLD': '--', 'FRA': '-.', 'BEL': '--', 'SWE': '-.',
+              'DEU': ':', 'ESP': '-', 'PRT': '--', 'POL': '-.', 'ITA': ':',
+              'CHN': ':', 'IND': ':', 'JPN': '--'}
 
     # ── Panel A: All countries full period ─────────────────────────────────
     ax = axes[0, 0]
@@ -1623,21 +1968,25 @@ def main():
 
     # ── Build panels ──────────────────────────────────────────────────────
     print("\n── Building Panel Data ──────────────────────────────────────")
-    panel_all = build_panel(df_gdp, t0, ['GBR'] + CONTROLS_EUR + CONTROLS_ASIA)
-    panel_eur = build_panel(df_gdp, t0, ['GBR'] + CONTROLS_EUR)
-    panel_asia = build_panel(df_gdp, t0, ['GBR'] + CONTROLS_ASIA)
+    eur_ext_avail  = ['GBR'] + [c for c in CONTROLS_EUR_EXT if c in df_gdp.columns]
+    panel_all      = build_panel(df_gdp, t0, eur_ext_avail + CONTROLS_ASIA)
+    panel_eur      = build_panel(df_gdp, t0, ['GBR'] + CONTROLS_EUR)
+    panel_eur_ext  = build_panel(df_gdp, t0, eur_ext_avail)
+    panel_asia     = build_panel(df_gdp, t0, ['GBR'] + CONTROLS_ASIA)
 
-    print(f"  All controls:      {len(panel_all)} obs ({panel_all['Country'].nunique()} countries)")
-    print(f"  European controls: {len(panel_eur)} obs ({panel_eur['Country'].nunique()} countries)")
-    print(f"  Asian controls:    {len(panel_asia)} obs ({panel_asia['Country'].nunique()} countries)")
+    print(f"  All controls:         {len(panel_all)} obs ({panel_all['Country'].nunique()} countries)")
+    print(f"  European core:        {len(panel_eur)} obs ({panel_eur['Country'].nunique()} countries)")
+    print(f"  European extended:    {len(panel_eur_ext)} obs ({panel_eur_ext['Country'].nunique()} countries)")
+    print(f"  Asian controls:       {len(panel_asia)} obs ({panel_asia['Country'].nunique()} countries)")
 
     # ── Parallel trends ───────────────────────────────────────────────────
     print("\n── Parallel Trends ─────────────────────────────────────────")
     plot_parallel_trends(df_gdp, t0, ratio)
 
     # ── Multi-specification regressions (original 9) ──────────────────────
-    print("\n── Running 9 DiD Specifications ─────────────────────────────")
-    specs = run_all_specifications(panel_all, panel_eur, panel_asia, t0)
+    print("\n── Running DiD Specifications ───────────────────────────────")
+    specs = run_all_specifications(panel_all, panel_eur, panel_asia, t0,
+                                   panel_eur_ext=panel_eur_ext)
     print_specification_table(specs)
     print_baseline_detail(specs)
     plot_specification_comparison(specs, t0)
@@ -1678,6 +2027,18 @@ def main():
     print("\n── Country-Clustered Standard Errors ───────────────────────")
     clustered_results = run_clustered_se(panel_all, panel_eur, t0)
 
+    # ── 17. Wild Cluster Bootstrap (few-cluster inference) ────────────────
+    print("\n── Wild Cluster Bootstrap ───────────────────────────────────")
+    wb_eur = run_wild_bootstrap(
+        panel_eur, label='European core (NLD, FRA)', n_boots=999)
+    wb_eur_ext = run_wild_bootstrap(
+        panel_eur_ext, label='European extended (NLD,FRA,BEL,SWE,DEU)', n_boots=999)
+
+    # ── 18. Synthetic Control Method ──────────────────────────────────────
+    print("\n── Synthetic Control Method ─────────────────────────────────")
+    sc_results = run_synthetic_control(df_gdp, t0)
+    plot_synthetic_control(sc_results, df_gdp, t0)
+
     # ══════════════════════════════════════════════════════════════════════
     # STRATEGIC TESTS — Water-First Hypothesis
     # ══════════════════════════════════════════════════════════════════════
@@ -1708,13 +2069,20 @@ def main():
     # SUMMARY
     # ══════════════════════════════════════════════════════════════════════
     print(f"\n{'='*70}")
-    print("DiD ANALYSIS v4 — STRATEGIC WATER-FIRST HYPOTHESIS TESTS")
+    print("DiD ANALYSIS v5 — STRATEGIC WATER-FIRST HYPOTHESIS TESTS")
     print(f"{'='*70}")
-    print(f"  Treatment year T₀:         {t0}")
-    print(f"  Primary controls:          Netherlands, France")
-    print(f"  Randomization Inference p: {p_ri:.4f}")
+    print(f"  Treatment year T₀:              {t0}")
+    print(f"  European controls (core):       NLD, FRA")
+    print(f"  European controls (extended):   NLD, FRA, BEL, SWE, DEU")
+    print(f"  Randomization Inference p:      {p_ri:.4f}")
     if gap:
-        print(f"  Pre-steam gap (by 1810):   {gap['pct_presteam']:.0f}% of ultimate divergence")
+        print(f"  Pre-steam gap (by 1810):        {gap['pct_presteam']:.0f}% of ultimate divergence")
+    if wb_eur:
+        print(f"  Wild bootstrap p (core EUR):    {wb_eur['p_wb']:.4f}  {wb_eur['sig']}")
+    if wb_eur_ext:
+        print(f"  Wild bootstrap p (ext EUR):     {wb_eur_ext['p_wb']:.4f}  {wb_eur_ext['sig']}")
+    if sc_results:
+        print(f"  Synthetic control Fisher p:     {sc_results['p_fisher']:.4f}  {sc_results['sig']}")
     print(f"\n  Outputs saved to data/:")
     print(f"    • did_parallel_trends.png       — Parallel trends validation")
     print(f"    • did_regression_results.png    — β₃ across specifications")
@@ -1724,6 +2092,7 @@ def main():
     print(f"    • did_channel_decomposition.png — Transport vs Power vs Manufacturing")
     print(f"    • did_vocab_tournament.png      — 6-category placebo falsification")
     print(f"    • did_figure_one.png            — THE MECHANISM VALIDATOR (Figure 1)")
+    print(f"    • did_synthetic_control.png     — Synthetic control + placebos")
     print(f"{'='*70}")
 
 
