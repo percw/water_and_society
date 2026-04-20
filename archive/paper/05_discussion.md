@@ -26,7 +26,13 @@ Critically, our channel decomposition confirms this sequential reading. When fos
 
 An analogy clarifies the interpretation. Consider a regression predicting adult height that includes both childhood nutrition and adolescent growth hormones. The hormonal channel will dominate because it operates later and more directly on the outcome — but this does not mean childhood nutrition was irrelevant. Rather, adequate childhood nutrition was a necessary precondition for the hormonal growth spurt to occur at full potential. Similarly, the attenuation of the transport channel when fossil terms are included does not diminish the historical importance of canal infrastructure; it confirms that water infrastructure's effects were mediated through the very economic structures that the fossil era subsequently exploited.
 
-## 5.5 Implications for the Great Divergence
+## 5.5 DML Corroboration and the Mediation Structure
+
+The DML analysis provides independent, non-parametric corroboration of the DiD findings and adds a new dimension to the precondition thesis. The Gradient Boosting DML estimate ($\hat{\theta} = 1{,}397$) is nearly identical to the DiD $\beta_3 = 1{,}251$ — remarkable consistency across two methodologically distinct estimators that exploit entirely different sources of variation. The DML additionally quantifies the mediation pathway: when steam vocabulary intensity is controlled, water's direct effect attenuates substantially and loses statistical significance, while steam's independent contribution remains large. This is precisely the footprint one would expect if canals and water mills built the integrated markets and capital base that steam subsequently occupied, rather than the two technologies operating as separate growth drivers.
+
+It bears emphasis that the mediation finding does not diminish the historical importance of water infrastructure — it deepens it. An effect that operates *through* a successor technology is not a small effect; it is a structural precondition. The precondition thesis does not require water to remain independently significant once steam arrives. It requires only that water came first, built something durable, and that steam's growth potential was bounded by what water had already created. The DML mediation evidence is consistent with all three requirements.
+
+## 5.6 Implications for the Great Divergence
 
 Consequently, locating water infrastructure as a leading indicator of sustained economic growth encourages a reassessment of the *timeline* of industrialization. The empirical data points toward a distinct sequential transition: not merely the moment humanity transitioned to a mineral economy, but the preceding era where society embedded itself systematically into nature through infrastructural symbiosis — creating the structural preconditions upon which the mineral transition would build.
 

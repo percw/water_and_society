@@ -44,3 +44,19 @@ This methodology strictly bounds the temporal investigation. Pre-treatment paral
 $$ Y_{it} = \alpha + \sum_{k=-K}^{L} \beta_k (\text{GBR}_i \times \mathbb{I}(t = 1761 + k)) + \gamma_i + \delta_t + \epsilon_{it} $$
 
 Where the coefficients $\beta_k$ isolate the dynamic divergence using 5-year binned increments ($k$) relative to the structural break. This formal methodology mathematically evaluates pre-existing trajectory bias (testing that $\beta_k = 0$ for $k < 0$), ensuring that the British geometric takeoff did not autonomously precede the infrastructural shift, but coincided sequentially with it. Finally, iterating the $T_0$ thresholds in the event study matrix across the linguistic trajectories of *textiles*, *coal*, and *finance* establishes a distinct placebo falsification tournament, guaranteeing that the statistical alignment of the 1761 structural break is not a generic artifact of 18th-century development.
+
+### 3.5 Double/Debiased Machine Learning (DML)
+
+As an independent robustness check on the DiD results, we implement the partially linear Double/Debiased Machine Learning estimator of Chernozhukov et al. (2018). This approach estimates:
+
+$$ Y_{it} = \theta \cdot D_{it} + g(X_{it}) + \varepsilon_{it} $$
+
+where the treatment $D_{it}$ is the continuous hydro-social vocabulary intensity interacted with the Britain indicator ($D_{it} = \text{vocab\_intensity}_t \times \mathbf{1}[\text{GBR}_i]$), and $g(\cdot)$ is an unknown function of confounders $X$ estimated by machine learning. The partial-out procedure follows Frisch-Waugh-Lovell logic: ML models separately residualize $Y$ and $D$ on $X$ using $K$-fold cross-fitting ($K=5$), and $\theta$ is recovered by regressing the $Y$-residual on the $D$-residual.
+
+**Confounders and identification.** Confounders $X$ include country fixed effects and a quadratic year trend. Critically, vocabulary intensity itself is excluded from $X$: including it alongside the Britain country dummy would allow the ML to reconstruct $D = \text{vocab\_intensity} \times \mathbf{1}[\text{GBR}]$ almost perfectly, collapsing the treatment residual to zero and rendering the estimator uninformative. This exclusion is the correct identification choice — vocabulary intensity is the treatment mechanism, not a confounder.
+
+**Standard errors.** We report both naive Neyman-orthogonal standard errors and cluster-robust standard errors grouped by country. Since all treatment variation originates from a single country (Britain), the cluster-robust SE is the honest inferential quantity; naive SEs exploit cross-observation independence within Britain's time series and should be treated as a lower bound.
+
+**Mediation test.** To test the enabling sequence water → steam → GDP, we run a second specification that adds raw steam vocabulary intensity to $X$ while retaining water vocabulary as the treatment. If water's GDP effect diminishes substantially when steam is controlled, this is consistent with water operating as a precondition *for* steam rather than as an independent rival channel.
+
+**ML methods.** We implement four learners — Lasso, Ridge, Random Forest, and Gradient Boosting — and report results for each. Gradient Boosting, which flexibly controls for nonlinear year trends, is the preferred specification; linear methods (Lasso, Ridge) produce inflated $\hat{\theta}$ because they cannot fully absorb the nonlinear vocabulary time trend, leaving residual correlation between year and treatment that biases the estimate upward.

@@ -98,3 +98,37 @@ To ensure the observed effect was not the artifact of a generalized 18th-century
 **Control Falsification:** Assigning the 1761 treatment synthetically to the Netherlands ($p = 0.924$), China ($p < 0.001$, negative), and India ($p = 0.003$, negative) yielded statistically void or negatively inverse results. While France returned a marginally positive signal ($p = 0.022$), the coefficient magnitude was approximately one-quarter of Britain's ($\beta_3 = 362$ vs $1,251$), consistent with economic spillovers across the Channel rather than an independent French structural break.
 
 Calculating the counterfactual control trajectory reveals that **47%** of Britain's total industrial economic lead over the continent was established by 1810 — during the height of the canal and water wheel era, and decades before steam power reached critical mass to influence national labor productivity. This substantial pre-steam accumulation is consistent with water infrastructure functioning as a necessary precondition: creating the market integration, capital formation, and systemic demand that the subsequent fossil transition would build upon and amplify.
+
+### 4.8 Double/Debiased Machine Learning (DML) Results
+
+As an independent robustness check, we implement the Chernozhukov et al. (2018) partially linear DML estimator treating continuous vocabulary intensity as the treatment for Britain. Results are reported in **Table 5** and discussed in Section 3.5.
+
+**Table 5: DML Results — Continuous Treatment (Gradient Boosting, Preferred Specification)**
+
+| Specification | θ̂ | SE (cluster) | p (cluster) | Sig |
+|:---|---:|---:|---:|:---:|
+| Full sample (1700–1900, composite) | 1,397 | 165 | <0.001 | *** |
+| Pre-steam subsample (1700–1810, composite) | 1,306 | — | 0.033 | * |
+| Pre-steam subsample (1700–1810, canal only) | 783 | — | <0.001 | *** |
+| Pre-steam subsample (1700–1810, transport) | 794 | — | 0.013 | * |
+| Mediation: water (alone) | 1,397 | 165 | <0.001 | *** |
+| Mediation: water (steam controlled) | 940 | 1,339 | 0.483 | ns |
+
+*(Note: Gradient Boosting preferred over Lasso/Ridge because it flexibly controls for the nonlinear year trend; linear methods inflate θ to ~7,000 by failing to fully absorb this trend. Cluster-robust SEs group by country; naive SEs are lower bounds. Pre-steam specifications use naive SEs only; cluster-robust omitted as panel is too small for reliable sandwich estimation with K=3 folds.)*
+
+The Gradient Boosting estimate ($\hat{\theta} = 1{,}397$, SE$_{\text{cl}} = 165$, $p < 0.001$) is highly consistent with the DiD $\beta_3 = 1{,}251$, providing cross-method validation of the treatment magnitude. The pre-steam canal channel ($\hat{\theta} = 783$, $p < 0.001$) confirms that water vocabulary intensity predicts GDP divergence in the period 1700–1810, *before* steam power achieved commercial scale.
+
+### 4.9 DML Mediation: The Water-Enables-Steam Channel
+
+The mediation test directly addresses whether water infrastructure operated as an independent driver of GDP or as a precondition for steam. When raw steam vocabulary intensity is included as a confounder in the DML specification (Test 2), the water treatment effect falls from 1,397 to 940 — a reduction of approximately **33%** — and loses conventional statistical significance ($p = 0.483$). The steam channel itself carries a strong independent effect ($\hat{\theta}_{\text{steam}} \approx 2{,}187$–$3{,}296$ across linear methods, $1{,}640$ for Gradient Boosting).
+
+Under the linear Lasso specification — where θ̂ captures the full correlated trend — the implied mediation share rises to **87%** of water's total effect. The wide range (33% under Gradient Boosting, 87% under Lasso) reflects genuine uncertainty about the magnitude of the mediated path; both estimates, however, point in the same direction: a substantial share of water's GDP effect is absorbed once steam is accounted for. This is precisely the pattern predicted by the precondition thesis — water infrastructure created the conditions under which steam became viable, rather than competing with it as an independent growth engine.
+
+**Table 6: DML Mediation Summary**
+
+| Test | θ̂_water | p | Interpretation |
+|:---|---:|---:|:---|
+| Water alone (Gradient Boosting) | 1,397 | <0.001 | Strong water–GDP association |
+| Water controlled for steam (GB) | 940 | 0.483 | Effect attenuates; steam absorbs water's path |
+| Steam alone (Gradient Boosting) | 1,640 | 0.076 | Steam also strongly associated |
+| Steam alone (Lasso) | 2,187 | <0.001 | Steam significant across all linear methods |

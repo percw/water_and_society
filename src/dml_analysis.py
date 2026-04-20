@@ -159,22 +159,33 @@ def build_dml_panel(df_gdp, df_ngram, channel='composite'):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def dml_partial_linear(panel, outcome='GDP_per_Capita', treatment='D',
-                       n_splits=5, ml_method='all', seed=42):
+                       n_splits=5, ml_method='all', seed=42,
+                       extra_controls=None):
     """Double/Debiased ML estimator for the partially linear model.
 
     Y = θ·D + g(X) + ε
 
     Uses K-fold cross-fitting to avoid overfitting bias.
-    Reports θ̂, SE, t-stat, p-value, and 95% CI.
+
+    IMPORTANT: Vocab_Intensity is intentionally excluded from X.
+    D = vocab_intensity × GBR, and C_GBR is already in X as a country dummy.
+    Including Vocab_Intensity in X would let the ML reconstruct D = Vocab_Intensity × C_GBR
+    perfectly, collapsing ε_D to zero and making DML uninformative.
+
+    SEs are reported both naive (Neyman-orthogonal) and cluster-robust at the
+    country level.  Since all treatment variation comes from GBR, the cluster-
+    robust SE is the honest one — it will be substantially wider.
 
     Parameters
     ----------
-    panel : DataFrame with outcome, treatment, and confounders
-    outcome : str, column name for Y
-    treatment : str, column name for D
-    n_splits : int, number of cross-fitting folds
+    panel : DataFrame
+    outcome : str
+    treatment : str
+    n_splits : int
     ml_method : str, 'lasso', 'ridge', 'rf', 'gb', or 'all'
-    seed : int, random seed
+    extra_controls : list[str] | None — additional columns to include in X
+                     (e.g. steam vocabulary when testing water-mediation)
+    seed : int
 
     Returns
     -------
@@ -184,9 +195,13 @@ def dml_partial_linear(panel, outcome='GDP_per_Capita', treatment='D',
     from sklearn.preprocessing import StandardScaler
     from sklearn.pipeline import Pipeline
 
-    # Confounders: country dummies + year trends
+    # Confounders: country FEs + polynomial year trend.
+    # Vocab_Intensity deliberately excluded — it is the treatment mechanism,
+    # not a confounder. Including it allows ML to reconstruct D perfectly.
     country_cols = [c for c in panel.columns if c.startswith('C_')]
-    X_cols = country_cols + ['Year_centered', 'Year_sq', 'Vocab_Intensity']
+    X_cols = country_cols + ['Year_centered', 'Year_sq']
+    if extra_controls:
+        X_cols += [c for c in extra_controls if c in panel.columns]
     X = panel[X_cols].values
     Y = panel[outcome].values
     D = panel[treatment].values
@@ -248,22 +263,57 @@ def dml_partial_linear(panel, outcome='GDP_per_Capita', treatment='D',
         # DML step 3: θ̂ = (ε_D' ε_D)^{-1} (ε_D' ε_Y)
         theta = np.dot(resid_D, resid_Y) / np.dot(resid_D, resid_D)
 
-        # Neyman-orthogonal standard error
+        # Neyman-orthogonal influence function
         n = len(Y)
         psi = resid_D * (resid_Y - theta * resid_D)
-        var_theta = np.mean(psi ** 2) / (np.mean(resid_D ** 2) ** 2) / n
+        denom_sq = np.mean(resid_D ** 2) ** 2
+
+        # Naive SE (assumes i.i.d.)
+        var_theta = np.mean(psi ** 2) / denom_sq / n
         se_theta = np.sqrt(var_theta)
 
+        # Cluster-robust SE grouped by country.
+        # All treatment variation comes from one country (GBR), so clustering
+        # is the honest SE here — it will be substantially wider.
+        countries_arr = panel['Country'].values
+        unique_c = np.unique(countries_arr)
+        G = len(unique_c)
+        score_sq_sum = 0.0
+        for g in unique_c:
+            mask = countries_arr == g
+            score_sq_sum += np.sum(psi[mask]) ** 2
+        # Small-sample correction G/(G-1) · n/(n-K)
+        K = X.shape[1]
+        correction = (G / (G - 1)) * (n / (n - K))
+        if denom_sq < 1e-20 or score_sq_sum < 1e-20:
+            # resid_D ≈ 0 (ML perfectly fits D — estimator degenerate for this method)
+            se_cl = np.nan
+        else:
+            var_theta_cl = correction * score_sq_sum / (n ** 2 * denom_sq)
+            se_cl = np.sqrt(var_theta_cl)
+            if se_cl < 1e-6:
+                se_cl = np.nan  # numerical underflow
+
         t_stat = theta / se_theta
+        t_cl = theta / se_cl if (se_cl is not None and not np.isnan(se_cl)) else np.nan
         p_val = 2 * (1 - stats.norm.cdf(np.abs(t_stat)))
+        p_cl = 2 * (1 - stats.norm.cdf(np.abs(t_cl))) if not np.isnan(t_cl) else np.nan
         ci_lo = theta - 1.96 * se_theta
         ci_hi = theta + 1.96 * se_theta
+        ci_lo_cl = (theta - 1.96 * se_cl) if not np.isnan(se_cl) else np.nan
+        ci_hi_cl = (theta + 1.96 * se_cl) if not np.isnan(se_cl) else np.nan
         sig = '***' if p_val < 0.001 else '**' if p_val < 0.01 else '*' if p_val < 0.05 else 'ns'
+        sig_cl = ('***' if p_cl < 0.001 else '**' if p_cl < 0.01 else '*' if p_cl < 0.05 else 'ns') \
+                 if not np.isnan(p_cl) else 'n/a'
 
         results[name] = {
-            'theta': theta, 'se': se_theta, 't_stat': t_stat,
-            'pval': p_val, 'ci': (ci_lo, ci_hi), 'sig': sig,
-            'n': n, 'resid_Y': resid_Y, 'resid_D': resid_D,
+            'theta': theta,
+            'se': se_theta, 't_stat': t_stat, 'pval': p_val,
+            'ci': (ci_lo, ci_hi), 'sig': sig,
+            'se_cl': se_cl, 't_cl': t_cl, 'pval_cl': p_cl,
+            'ci_cl': (ci_lo_cl, ci_hi_cl), 'sig_cl': sig_cl,
+            'n': n, 'n_clusters': G,
+            'resid_Y': resid_Y, 'resid_D': resid_D,
         }
 
     return results
@@ -298,8 +348,8 @@ def run_channel_dml(df_gdp, df_ngram, n_splits=5):
         print(f"\n  Channel: {ch.upper()}")
         for name, r in results.items():
             print(f"    {name:<20}  θ = {r['theta']:>8.1f}  "
-                  f"(SE={r['se']:.1f})  p = {r['pval']:.4f}  {r['sig']}  "
-                  f"95% CI [{r['ci'][0]:.1f}, {r['ci'][1]:.1f}]")
+                  f"SE(naive)={r['se']:.1f} p={r['pval']:.4f}{r['sig']}  "
+                  f"SE(cluster)={r['se_cl']:.1f} p={r['pval_cl']:.4f}{r['sig_cl']}")
 
     print(f"{'='*70}\n")
     return channel_results
@@ -422,15 +472,14 @@ def run_mediation_dml(df_gdp, df_ngram, n_splits=5):
     X_cols_base = country_cols + ['Year_centered', 'Year_sq', 'D_water_raw']
 
     print("\n  Test 2: Water effect WITH steam controlled (steam in X)")
-    # Manually add steam to confounders
-    panel_med = panel.copy()
-    panel_med['steam_confounder'] = panel_med['D_steam']
-
+    # Use D_steam_raw (raw steam intensity, same for all countries) as the
+    # confounder — NOT D_steam (= steam_intensity × GBR), which would let ML
+    # reconstruct D_water = D_water_raw × C_GBR via an analogous shortcut.
     from sklearn.model_selection import KFold
     from sklearn.ensemble import GradientBoostingRegressor
 
     X_cols = [c for c in panel.columns if c.startswith('C_')] + \
-             ['Year_centered', 'Year_sq', 'D_water_raw', 'D_steam']
+             ['Year_centered', 'Year_sq', 'D_steam_raw']
 
     Y = panel['GDP_per_Capita'].values
     D = panel['D_water'].values
@@ -497,7 +546,116 @@ def run_mediation_dml(df_gdp, df_ngram, n_splits=5):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 6. Visualization
+# 6. Placebo DML — In-Space Validation
+# ─────────────────────────────────────────────────────────────────────────────
+
+def run_placebo_dml(df_gdp, df_ngram, n_splits=5):
+    """Assign treatment to each control country in turn.
+
+    If the DML identifies a real Britain-specific effect, placebo θ should
+    be near zero (or opposite-signed) for all control countries.
+    """
+    print(f"\n{'='*70}")
+    print("PLACEBO DML — In-Space Validation (Gradient Boosting)")
+    print("Britain θ vs. each control country assigned as 'treated'")
+    print(f"{'='*70}")
+
+    from sklearn.model_selection import KFold
+    from sklearn.ensemble import GradientBoostingRegressor
+    from sklearn.pipeline import Pipeline
+
+    countries = [c for c in ALL_COUNTRIES if c in df_gdp.columns]
+
+    # Compute composite vocabulary intensity
+    agrarian = [w for w in AGRARIAN_WORDS if w in df_ngram.columns]
+    industrial = [w for w in INDUSTRIAL_WORDS if w in df_ngram.columns]
+    a_sum = df_ngram[agrarian].sum(axis=1)
+    i_sum = df_ngram[industrial].sum(axis=1)
+    vocab_intensity = i_sum / (a_sum + i_sum)
+
+    results = {}
+    # True treatment: GBR
+    target_countries = ['GBR'] + [c for c in countries if c != 'GBR']
+
+    for treated_country in target_countries:
+        years = df_gdp.index
+        rows = []
+        for year in years:
+            if year not in vocab_intensity.index:
+                continue
+            vi = float(vocab_intensity.loc[year])
+            for c in countries:
+                gdp = df_gdp.loc[year, c]
+                if pd.isna(gdp):
+                    continue
+                is_treated = 1 if c == treated_country else 0
+                rows.append({
+                    'Year': int(year),
+                    'Country': c,
+                    'GDP_per_Capita': float(gdp),
+                    'D': vi * is_treated,
+                    'Year_centered': int(year) - 1800,
+                    'Year_sq': (int(year) - 1800) ** 2,
+                })
+
+        panel = pd.DataFrame(rows)
+        for c_code in countries:
+            panel[f'C_{c_code}'] = (panel['Country'] == c_code).astype(int)
+
+        country_cols = [col for col in panel.columns if col.startswith('C_')]
+        X_cols = country_cols + ['Year_centered', 'Year_sq']
+        X = panel[X_cols].values
+        Y = panel['GDP_per_Capita'].values
+        D = panel['D'].values
+
+        if D.std() < 1e-10:
+            print(f"  {treated_country:<5}  SKIPPED (no variation in D)")
+            continue
+
+        kf = KFold(n_splits=min(n_splits, 3), shuffle=True, random_state=42)
+        resid_Y = np.zeros_like(Y, dtype=float)
+        resid_D = np.zeros_like(D, dtype=float)
+
+        for train_idx, test_idx in kf.split(X):
+            gb_y = GradientBoostingRegressor(n_estimators=100, max_depth=4,
+                                              learning_rate=0.05, random_state=42)
+            gb_y.fit(X[train_idx], Y[train_idx])
+            resid_Y[test_idx] = Y[test_idx] - gb_y.predict(X[test_idx])
+
+            gb_d = GradientBoostingRegressor(n_estimators=100, max_depth=4,
+                                              learning_rate=0.05, random_state=42)
+            gb_d.fit(X[train_idx], D[train_idx])
+            resid_D[test_idx] = D[test_idx] - gb_d.predict(X[test_idx])
+
+        theta = np.dot(resid_D, resid_Y) / np.dot(resid_D, resid_D)
+        n = len(Y)
+        psi = resid_D * (resid_Y - theta * resid_D)
+
+        # Cluster-robust SE
+        countries_arr = panel['Country'].values
+        unique_c = np.unique(countries_arr)
+        G = len(unique_c)
+        K = X.shape[1]
+        score_sq_sum = sum(np.sum(psi[countries_arr == g]) ** 2 for g in unique_c)
+        correction = (G / (G - 1)) * (n / (n - K))
+        denom_sq = np.mean(resid_D ** 2) ** 2
+        se_cl = np.sqrt(correction * score_sq_sum / (n ** 2 * denom_sq))
+        t_cl = theta / se_cl
+        p_cl = 2 * (1 - stats.norm.cdf(np.abs(t_cl)))
+        sig_cl = '***' if p_cl < 0.001 else '**' if p_cl < 0.01 else '*' if p_cl < 0.05 else 'ns'
+
+        tag = ' ← REAL TREATMENT' if treated_country == 'GBR' else ''
+        print(f"  {treated_country:<5}  θ = {theta:>8.1f}  "
+              f"SE(cl)={se_cl:.1f}  p={p_cl:.4f}  {sig_cl}{tag}")
+        results[treated_country] = {'theta': theta, 'se_cl': se_cl,
+                                     'pval_cl': p_cl, 'sig_cl': sig_cl}
+
+    print(f"{'='*70}\n")
+    return results
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 7. Visualization
 # ─────────────────────────────────────────────────────────────────────────────
 
 def plot_dml_results(full_results, channel_results, presteam_results, mediation):
@@ -652,14 +810,14 @@ def print_dml_summary(full_results, channel_results, presteam_results, mediation
     print(f"\n{'='*80}")
     print("DML ANALYSIS — PUBLICATION SUMMARY TABLE")
     print(f"{'='*80}")
-    print(f"\n  {'Specification':<45} {'θ̂':>8} {'SE':>8} {'p':>8} {'Sig':>5}")
-    print(f"  {'-'*74}")
+    print(f"\n  {'Specification':<45} {'θ̂':>8} {'SE(naive)':>10} {'p(naive)':>9} {'SE(cl)':>8} {'p(cl)':>7} {'Sig':>5}")
+    print(f"  {'-'*92}")
 
     # Full sample results
     print(f"  {'FULL SAMPLE (1700-1900)':<45}")
     for name, r in full_results.items():
-        print(f"    {f'Composite × {name}':<43} {r['theta']:>8.1f} {r['se']:>8.1f} "
-              f"{r['pval']:>8.4f} {r['sig']:>5}")
+        print(f"    {f'Composite × {name}':<43} {r['theta']:>8.1f} {r['se']:>10.1f} "
+              f"{r['pval']:>9.4f} {r['se_cl']:>8.1f} {r['pval_cl']:>7.4f} {r['sig_cl']:>5}")
 
     # Channel decomposition
     print(f"\n  {'CHANNEL DECOMPOSITION (Gradient Boosting)':<45}")
@@ -736,6 +894,14 @@ def main():
           f"{panel.loc[panel['Treated']==1, 'D'].max():.3f}]")
     print(f"  Treatment D for controls: {panel.loc[panel['Treated']==0, 'D'].mean():.3f}")
 
+    # Diagnostic: treatment variation summary
+    n_treated = (panel['Treated'] == 1).sum()
+    n_control = (panel['Treated'] == 0).sum()
+    n_countries = panel['Country'].nunique()
+    print(f"  Effective treatment obs (GBR): {n_treated} / {n_treated+n_control} total")
+    print(f"  Countries: {n_countries}  (1 treated + {n_countries-1} controls)")
+    print(f"  ⚠  All treatment variation from 1 country → cluster-robust SE is the honest estimate\n")
+
     full_results = dml_partial_linear(panel, n_splits=args.n_splits)
 
     print(f"\n{'='*70}")
@@ -743,11 +909,12 @@ def main():
     print(f"{'='*70}")
     for name, r in full_results.items():
         print(f"\n  {name}:")
-        print(f"    θ̂  = {r['theta']:.1f}  (effect of 1-unit increase in vocab intensity for GBR)")
-        print(f"    SE = {r['se']:.1f}")
-        print(f"    t  = {r['t_stat']:.3f}")
-        print(f"    p  = {r['pval']:.6f}  {r['sig']}")
-        print(f"    95% CI = [{r['ci'][0]:.1f}, {r['ci'][1]:.1f}]")
+        print(f"    θ̂           = {r['theta']:.1f}")
+        print(f"    SE (naive)   = {r['se']:.1f}  p={r['pval']:.6f}  {r['sig']}")
+        print(f"    SE (cluster) = {r['se_cl']:.1f}  p={r['pval_cl']:.6f}  {r['sig_cl']}")
+        print(f"    95% CI (naive)   = [{r['ci'][0]:.1f}, {r['ci'][1]:.1f}]")
+        print(f"    95% CI (cluster) = [{r['ci_cl'][0]:.1f}, {r['ci_cl'][1]:.1f}]")
+        print(f"    N={r['n']}, G={r['n_clusters']} clusters")
     print(f"{'='*70}")
 
     # ── Channel decomposition ─────────────────────────────────────────────
@@ -761,6 +928,10 @@ def main():
     # ── Mediation analysis ────────────────────────────────────────────────
     print("\n── Mediation: Water Enables Steam ──────────────────────────")
     mediation = run_mediation_dml(df_gdp, df_ngram, n_splits=args.n_splits)
+
+    # ── Placebo DML ───────────────────────────────────────────────────────
+    print("\n── Placebo DML (In-Space Validation) ───────────────────────")
+    placebo_results = run_placebo_dml(df_gdp, df_ngram, n_splits=args.n_splits)
 
     # ── Visualization ─────────────────────────────────────────────────────
     print("\n── Generating Plots ────────────────────────────────────────")

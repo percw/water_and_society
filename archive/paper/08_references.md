@@ -12,6 +12,8 @@ Broadberry, Stephen, Bruce M. S. Campbell, Alexander Klein, Mark Overton, and Ba
 
 Cameron, A. Colin, Jonah B. Gelbach, and Douglas L. Miller. 2008. "Bootstrap-Based Improvements for Inference with Clustered Errors." *Review of Economics and Statistics* 90 (3): 414–427.
 
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. "Double/Debiased Machine Learning for Treatment and Structural Parameters." *The Econometrics Journal* 21 (1): C1–C68.
+
 Crafts, Nicholas F. R. 1985. *British Economic Growth during the Industrial Revolution*. Oxford: Clarendon Press.
 
 De Chaisemartin, Clément, and Xavier D'Haultfœuille. 2020. "Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects." *American Economic Review* 110 (9): 2964–2996.

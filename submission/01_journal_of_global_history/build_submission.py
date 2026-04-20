@@ -40,6 +40,7 @@ BIBLIOGRAPHY = {
     "Bolt and van Zanden 2020": 'Jutta Bolt and Jan Luiten van Zanden, "Maddison Style Estimates of the Evolution of the World Economy: A New 2020 Update", _Maddison-Project Working Paper_, WP-154 (2020).',
     "Broadberry et al. 2015": 'Stephen Broadberry et al., _British Economic Growth, 1270–1870_ (Cambridge: Cambridge University Press, 2015).',
     "Cameron, Gelbach, and Miller 2008": 'A. Colin Cameron, Jonah B. Gelbach, and Douglas L. Miller, "Bootstrap-Based Improvements for Inference with Clustered Errors", _Review of Economics and Statistics_ 90, no. 3 (2008): 414–427.',
+    "Chernozhukov et al. 2018": 'Victor Chernozhukov et al., "Double/Debiased Machine Learning for Treatment and Structural Parameters", _The Econometrics Journal_ 21, no. 1 (2018): C1–C68.',
     "Crafts 1985": 'Nicholas F. R. Crafts, _British Economic Growth during the Industrial Revolution_ (Oxford: Clarendon Press, 1985).',
     "De Chaisemartin and D'Haultfœuille 2020": "Clément de Chaisemartin and Xavier D'Haultfœuille, \"Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects\", _American Economic Review_ 110, no. 9 (2020): 2964–2996.",
     "Kanefsky and Robey 1980": 'John Kanefsky and John Robey, "Steam Engines in 18th-Century Britain: A Quantitative Assessment", _Technology and Culture_ 21, no. 2 (1980): 161–186.',
