@@ -75,44 +75,49 @@ Industrial Revolution by demonstrating that a measurable structural
 break in Britain's macroeconomic trajectory originated during the
 earlier era of water infrastructure. Using Natural Language Processing
 on the Google Books \emph{eng\_gb\_2019} corpus, we identify a 1766
-structural crossover where British vocabulary permanently shifted from
-naturalistic to engineered water terminology. Anchoring a
-Difference-in-Differences framework to the 1761 opening of the
-Bridgewater Canal as an exogenous shock, and deploying an expanded panel
-of 13 countries drawn from the Maddison Project Database, we find
-Britain's post-treatment trajectory diverged by \textasciitilde1,251 GDP
+structural crossover where British vocabulary shifted from naturalistic
+to engineered water terminology. Anchoring a Difference-in-Differences
+framework to the 1761 opening of the Bridgewater Canal as an exogenous
+shock, and deploying an expanded panel of 13 countries drawn from the
+Maddison Project Database, we find that Britain's post-treatment
+trajectory diverged by approximately 1,251 international dollars in GDP
 per capita relative to continental controls (\(p = 0.042\), HAC).
-Magnitude metrics confirm a very large effect (Cohen's \(d\) = 1.2--1.5,
-representing \textasciitilde50\% of pre-treatment British GDP).
-Crucially, 47\% of this divergence was established before steam power
-achieved commercial dominance. Corroborating these results, a
-Double/Debiased Machine Learning (DML) estimator (Chernozhukov et
-al.~2018) recovers a consistent treatment effect
-(\(\hat{\theta} \approx 1{,}397\), cluster-robust \(p < 0.001\)) and
-finds that approximately 87\% of water's effect on GDP operates through
-the steam channel, directly supporting the precondition thesis. Placebo
-falsification tournaments confirm that only the water infrastructure
-shock uniquely predicts the timing of GDP divergence. The data positions
-canal-era infrastructure as a necessary precondition --- an era of
-geographical symbiosis that created the market integration the fossil
-transition would amplify.
+Magnitude metrics indicate a large effect (Cohen's \(d\) = 1.2--1.5,
+representing approximately 50\% of pre-treatment British GDP).
+Approximately 47\% of this divergence was established before steam power
+achieved commercial dominance. A Double/Debiased Machine Learning
+estimator (Chernozhukov et al.~2018) recovers a consistent treatment
+effect (\(\hat{\theta} \approx 1{,}397\), cluster-robust \(p < 0.001\)),
+and mediation analysis suggests that a substantial share of water's GDP
+effect operates through the steam channel, consistent with the
+precondition thesis. Placebo falsification tournaments confirm that only
+the water infrastructure shock predicts the timing of GDP divergence.
+The evidence is consistent with canal-era infrastructure functioning as
+a necessary precondition --- an era of geographical symbiosis that
+created the market integration the fossil transition would subsequently
+amplify.
+
+\textbf{Keywords:} Industrial Revolution, water infrastructure,
+Difference-in-Differences, Google Books Ngram, Great Divergence, canal
+era
+
+\textbf{JEL Classification:} N13, N73, O14, C21, C23
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{1. Introduction}\label{introduction}
 
-The origins of the British Industrial Revolution have been heavily
+The origins of the British Industrial Revolution have been extensively
 debated, yet prominent perspectives often gravitate toward a singular
 technological rupture: the adoption of coal and the maturation of the
 steam engine. According to this narrative---deeply rooted in the
-\emph{Unbound Prometheus} paradigm formalized by David S. Landes (1969)
-and enduring across both classical Marxist and neoclassical
+paradigm formalized by David S. Landes (1969) in \emph{The Unbound
+Prometheus} and enduring across both classical Marxist and neoclassical
 historiography---macroeconomic modernity accelerated significantly when
 economies broke free from the natural limitations of the organic economy
 by extracting subterranean fossil fuels. Within this framework,
-industrialization is frequently characterized philosophically and
-economically as humanity's uncoupling from, and mastery over, the
-natural environment.
+industrialization is frequently characterized as humanity's uncoupling
+from, and mastery over, the natural environment.
 
 This perspective is entrenched in the historiography of economic
 development. E.A. Wrigley famously conceptualized the Industrial
@@ -121,10 +126,10 @@ economy''---limited by the photosynthetic capture of solar energy via
 wood and wind---to a ``mineral-based energy economy'' built on coal
 (Wrigley 2010). In his view, sustained exponential growth was physically
 impossible within the confines of organic flows. Similarly, Robert
-Allen's robust ``High Wage Economy'' thesis posits that Britain's unique
-matrix of cheap coal and high labor costs structurally induced the
-invention of the steam engine, treating geological luck as the prime
-engine of British divergence (Allen 2009).
+Allen's ``High Wage Economy'' thesis posits that Britain's unique matrix
+of cheap coal and high labor costs structurally induced the invention of
+the steam engine, treating geological luck as the prime engine of
+British divergence (Allen 2009).
 
 However, this energy-centric perspective operates alongside equally
 foundational institutional and cultural theories. Deirdre McCloskey
@@ -140,15 +145,16 @@ Furthermore, the material realities of early manufacturing complicate
 the coal-centric timeline. The sprawling networks of navigable canals,
 aqueducts, and mechanized water wheels suggest that the foundation of
 the British economic trajectory was laid not by subverting the landscape
-via fossil extraction, but by actively partnering with it. As Andreas
-Malm argues in \emph{Fossil Capital}, the eventual transition from water
-to steam power in the mid-19th century was not driven by thermodynamic
-superiority or absolute scarcity of water, but by the socio-spatial
-demands of capital. Steam engines allowed factories to be relocated to
-urban centers where labor could be disciplined, whereas water power
-required factories to adapt to remote riverine ecologies (Malm 2016). If
-the energetic foundation of modernity was actually established in the
-organic era, the timeline of industrialization is fundamentally late.
+via fossil extraction, but by working within its existing ecological
+constraints. As Andreas Malm argues in \emph{Fossil Capital}, the
+eventual transition from water to steam power in the mid-19th century
+was not driven by thermodynamic superiority or absolute scarcity of
+water, but by the socio-spatial demands of capital. Steam engines
+allowed factories to be relocated to urban centers where labor could be
+disciplined, whereas water power required factories to adapt to remote
+riverine ecologies (Malm 2016). If the energetic foundation of modernity
+was actually established in the organic era, the timeline of
+industrialization is fundamentally late.
 
 This paper examines whether the linguistic commodification of water
 preceded the semantic integration of fossil fuels, and whether this
@@ -164,23 +170,23 @@ would amplify---rather than representing an alternative to it.
 This paper makes three specific contributions. First, we introduce a
 novel text-as-data identification strategy to cliometrics, constructing
 composite vocabulary indices from 71 period-appropriate terms in the
-Google Books \texttt{eng\_gb\_2019} corpus and identifying the precise
-structural crossover year (1766) at which British print culture
-permanently shifted from naturalistic to engineered water terminology.
-Second, we anchor a formal Difference-in-Differences framework to the
-1761 opening of the Bridgewater Canal --- a universally recognized
-exogenous infrastructure shock --- allowing the NLP-derived crossover to
-serve as an independent mechanism validator rather than an endogenous
-treatment variable. Third, deploying an expanded 13-country panel from
-the Maddison Project Database, we estimate that Britain's post-1761
-trajectory diverged by approximately 1,251 GDP per capita relative to
-continental controls (\(p = 0.042\) with HAC correction), a very large
-effect (Cohen's \(d\) = 1.2--1.5) representing approximately 50\% of
-pre-treatment British GDP. Crucially, 47\% of the ultimate industrial
+Google Books \texttt{eng\_gb\_2019} corpus and identifying the
+structural crossover year (1766) at which British print culture shifted
+from naturalistic to engineered water terminology. Second, we anchor a
+formal Difference-in-Differences framework to the 1761 opening of the
+Bridgewater Canal --- a universally recognized exogenous infrastructure
+shock --- allowing the NLP-derived crossover to serve as an independent
+mechanism validator rather than an endogenous treatment variable. Third,
+deploying an expanded 13-country panel from the Maddison Project
+Database, we estimate that Britain's post-1761 trajectory diverged by
+approximately 1,251 international dollars in GDP per capita relative to
+continental controls (\(p = 0.042\) with HAC correction), a large effect
+(Cohen's \(d\) = 1.2--1.5) representing approximately 50\% of
+pre-treatment British GDP. Approximately 47\% of the ultimate industrial
 lead was established before steam power achieved commercial dominance.
 Placebo falsification tournaments across rival vocabularies (textiles,
 coal, finance, agriculture) confirm that only the water infrastructure
-shock uniquely predicts the timing of GDP divergence.
+shock predicts the timing of GDP divergence.
 
 By deploying a dual-pronged computational methodology---merging
 unsupervised natural language processing (NLP) of centuries of
@@ -386,22 +392,21 @@ hazard}) 2. \textbf{The Engineered/Commodified Lexicon:} (e.g.,
 Using unsupervised machine learning tools, these frequency matrices were
 standardized and smoothed using a Savitzky-Golay algorithm (window=11,
 degree=3) to eliminate temporary publishing noise. By comparing the
-relative trajectories of these matrices, we mathematically derive the
-exact structural crossover point where the British print industry
-permanently ceased discussing natural water hazards as the primary
-context for water, and accelerated its printing of engineered
-hydro-infrastructure. The resulting structural crossover year occurred
-in 1766. However, relying on this linguistic crossover as the primary
-treatment variable (\(T_0\)) would introduce endogenous treatment
-timing, as publishing trends are themselves outcomes of broader economic
-transformations.
+relative trajectories of these matrices, we derive the structural
+crossover point where the British print industry shifted from discussing
+natural water hazards as the primary context for water toward the
+language of engineered hydro-infrastructure. The resulting structural
+crossover year occurred in 1766. However, relying on this linguistic
+crossover as the primary treatment variable (\(T_0\)) would introduce
+endogenous treatment timing, as publishing trends are themselves
+outcomes of broader economic transformations.
 
 To ensure rigorous causal identification, we instead deploy the opening
 of the Bridgewater Canal in 1761---a universally recognized exogenous
 infrastructural shock---as the precise historical treatment intervention
-(\(T_0=1761\)). The 1766 linguistic crossover thus serves primarily as a
-robust ``mechanism validator,'' proving that the exogenous 1761 physical
-shock successfully catalyzed a profound cultural shift five years later.
+(\(T_0=1761\)). The 1766 linguistic crossover thus serves as an
+independent ``mechanism validator,'' confirming that the exogenous 1761
+physical shock catalyzed a measurable cultural shift five years later.
 
 \subsubsection{3.2 Vocabulary
 Construction}\label{vocabulary-construction}
@@ -469,28 +474,27 @@ contributions that increasingly dominate the general corpus after 1800.
 Database (Bolt and van Zanden 2020), which aggregates pre-industrial
 growth accounting from pioneering works like Crafts (1985) and the
 definitive historical GDP reconstructions of Broadberry et al.~(2015).
-We provide continuous annual GDP per capita estimates for Britain,
-matched against an expanded panel of 12 control countries. The primary
-European controls --- France and the Netherlands --- share comparable
-institutional development, maritime trade exposure, and Enlightenment
-intellectual traditions, isolating the treatment effect of Britain's
-unique water infrastructure endowment. An extended European panel adds
-Belgium, Sweden, Germany, Spain, Portugal, Poland, and Italy,
-substantially increasing cross-sectional variation and statistical
-power. China, India, and Japan serve as extended ``Great Divergence''
-controls, directly engaging the framework formalized by Pomeranz (2000).
-Spain, Portugal, and Poland provide particularly dense pre-treatment
-coverage (61+ annual observations before 1761), strengthening inference
-on pre-treatment parallel trends.
+We provide continuous annual GDP per capita estimates (in 2011
+international dollars) for Britain, matched against an expanded panel of
+12 control countries. The primary European controls --- France and the
+Netherlands --- share comparable institutional development, maritime
+trade exposure, and Enlightenment intellectual traditions, isolating the
+treatment effect of Britain's unique water infrastructure endowment. An
+extended European panel adds Belgium, Sweden, Germany, Spain, Portugal,
+Poland, and Italy, substantially increasing cross-sectional variation
+and statistical power. China, India, and Japan serve as extended ``Great
+Divergence'' controls, directly engaging the framework formalized by
+Pomeranz (2000). Spain, Portugal, and Poland provide particularly dense
+pre-treatment coverage (61+ annual observations before 1761),
+strengthening inference on pre-treatment parallel trends.
 
 \subsubsection{3.4 Econometric Merge
 (Difference-in-Differences)}\label{econometric-merge-difference-in-differences}
 
 To explicitly test the structural association between this cultural
-phenomenon and exponential geometric growth---the hallmark of
-macroeconomic modernity---the 1761 exogenous shock is overlaid as the
-treatment variable onto real historical GDP data from the Maddison
-Project Database (Bolt and van Zanden 2020).
+phenomenon and sustained economic growth, the 1761 exogenous shock is
+overlaid as the treatment variable onto real historical GDP data from
+the Maddison Project Database (Bolt and van Zanden 2020).
 
 We construct a multi-specification Difference-in-Differences (DiD) model
 treating Great Britain as the primary experimental group, using France
@@ -508,28 +512,27 @@ post-shock environment (\(t \ge 1761\)). The parameters \(\gamma_i\) and
 \(\delta_t\) represent country and year fixed effects, respectively,
 which absorb unobserved cultural/geographical baselines and global
 structural shocks. The interaction coefficient \(\beta\) identifies the
-overarching hydro-social divergence effect. Serial autocorrelation,
-standard in multi-century economic datasets, is resolved via Newey-West
-HAC robust standard errors (\(\text{lag}=3\)).
+hydro-social divergence effect. Serial autocorrelation, standard in
+multi-century economic datasets, is addressed via Newey-West HAC robust
+standard errors (\(\text{lag}=15\)).
 
 This methodology strictly bounds the temporal investigation.
 Pre-treatment parallel trends are validated using a dynamic event-study
-specification to uniquely map the precise temporal evolution of the
-structural break:
+specification to map the temporal evolution of the structural break:
 
 \[ Y_{it} = \alpha + \sum_{k=-K}^{L} \beta_k (\text{GBR}_i \times \mathbb{I}(t = 1761 + k)) + \gamma_i + \delta_t + \epsilon_{it} \]
 
 Where the coefficients \(\beta_k\) isolate the dynamic divergence using
 5-year binned increments (\(k\)) relative to the structural break. This
-formal methodology mathematically evaluates pre-existing trajectory bias
-(testing that \(\beta_k = 0\) for \(k < 0\)), ensuring that the British
-geometric takeoff did not autonomously precede the infrastructural
-shift, but coincided sequentially with it. Finally, iterating the
-\(T_0\) thresholds in the event study matrix across the linguistic
-trajectories of \emph{textiles}, \emph{coal}, and \emph{finance}
-establishes a distinct placebo falsification tournament, guaranteeing
-that the statistical alignment of the 1761 structural break is not a
-generic artifact of 18th-century development.
+specification tests for pre-existing trajectory bias (\(\beta_k = 0\)
+for \(k < 0\)), verifying that the British economic takeoff did not
+autonomously precede the infrastructural shift, but coincided
+sequentially with it. Finally, iterating the \(T_0\) thresholds in the
+event study matrix across the linguistic trajectories of
+\emph{textiles}, \emph{coal}, and \emph{finance} establishes a placebo
+falsification tournament, testing whether the statistical alignment of
+the 1761 structural break is uniquely associated with water vocabulary
+rather than a generic artifact of 18th-century development.
 
 \subsubsection{3.5 Double/Debiased Machine Learning
 (DML)}\label{doubledebiased-machine-learning-dml}
@@ -585,10 +588,9 @@ treatment that biases the estimate upward.
 
 \section{4. Results}\label{results}
 
-We mapped the cultural integration of water technology against Britain's
-economic performance, revealing that the initial phase of industrial
-divergence originated during the era of hydro-infrastructure and was
-subsequently amplified during the fossil transition.
+The following sections report the empirical findings from our
+multi-method analysis, documenting the association between the 1761
+infrastructure shock and Britain's subsequent economic divergence.
 
 \subsubsection{4.1 Summary Statistics}\label{summary-statistics}
 
@@ -600,14 +602,33 @@ Netherlands).
 \textbf{Table 1: Summary Statistics (1700--1900)}
 
 {\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}lrrrrr@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
 \toprule\noalign{}
-Variable & Obs & Mean & Std. Dev. & Min & Max \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Obs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Std. Dev.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Min
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-GDP per Capita (1990 GK\$) & 603 & 1950.4 & 845.2 & 890.0 & 4520.0 \\
+GDP per Capita (2011 int'l \$) & 603 & 1950.4 & 845.2 & 890.0 &
+4520.0 \\
 Log GDP per Capita & 603 & 7.48 & 0.42 & 6.79 & 8.41 \\
 Treated (GBR=1) & 603 & 0.33 & 0.47 & 0.00 & 1.00 \\
 Post (Year \(\ge\) 1761) & 603 & 0.67 & 0.47 & 0.00 & 1.00 \\
@@ -623,28 +644,27 @@ opening of the Bridgewater Canal---a universally recognized exogenous
 infrastructure shock that catalyzed the canal mania era.
 
 We validate this physical shock using trajectory analysis of the
-\texttt{eng\_gb\_2019} vocabulary corpus, which indicates a highly
-distinct semantic paradigm shift shortly thereafter. Analysis of 71 key
-technological and social terms reveals that in the year
-\textbf{1766}---exactly five years post-shock---the frequency of
-``commodified water'' terminology definitively crossed and overtook
-naturalistic or hazard-based uses of water terminology.
+\texttt{eng\_gb\_2019} vocabulary corpus, which reveals a marked
+semantic shift shortly thereafter. Analysis of 71 key technological and
+social terms indicates that in the year \textbf{1766}---exactly five
+years post-shock---the frequency of ``commodified water'' terminology
+crossed and overtook naturalistic or hazard-based uses of water
+terminology.
 
-This sequential alignment confirms that the physical 1761 shock
-successfully transformed water culturally from an uncontrollable natural
-force into a harnessed, engineered asset. This dynamic is visually
-isolated in \textbf{Figure 1}, plotting the linguistic shift relative to
-the exogenous shock and the concurrent takeoff of British GDP per
-capita.
+This sequential alignment is consistent with the physical 1761 shock
+transforming water culturally from an uncontrollable natural force into
+a harnessed, engineered asset. This dynamic is presented in
+\textbf{Figure 1}, which plots the linguistic shift relative to the
+exogenous shock and the concurrent takeoff of British GDP per capita.
 
 Figure 1: Identification of the British Hydro-Social Shift. The data
 plots the normalized rolling frequencies of technical
 hydro-infrastructure vocabulary against fossil/steam terminology. The
-exogenous infrastructural shock (\(T_0=1761\)) triggers a measurable
-cultural shift, culminating in the formal semantic crossover just five
-years later (1766). This structural break sequence aligns with the
-initial takeoff of the GDP per capita gap against continental controls
-(France and the Netherlands). The approximately 50-year gap between the
+exogenous infrastructural shock (\(T_0=1761\)) precedes a measurable
+cultural shift, culminating in the formal semantic crossover five years
+later (1766). This structural break sequence aligns with the initial
+takeoff of the GDP per capita gap against continental controls (France
+and the Netherlands). The approximately 50-year gap between the
 hydro-social shift and the eventual steam transition (post-1810) is
 consistent with water infrastructure serving as a necessary precondition
 --- creating the integrated markets and accumulated capital upon which
@@ -654,18 +674,19 @@ the fossil era subsequently built.
 Estimation}\label{difference-in-differences-did-estimation}
 
 Using the 1761 exogenous shock (opening of the Bridgewater Canal) as the
-\(T_0\) treatment intervention, we executed a DiD regression on annual
-Maddison Project GDP per capita estimates (Bolt and van Zanden 2020).
+\(T_0\) treatment intervention, we estimate a DiD regression on annual
+Maddison Project GDP per capita data (Bolt and van Zanden 2020).
 Assigning Britain as the treatment group against continental European
 controls (France and the Netherlands), we specify both year and country
 fixed effects with Newey-West HAC standard errors (lag=15) to address
 serial autocorrelation.
 
-The resulting interaction variable (\(\beta_3\)) is \textbf{1,250.9}
-(\(p = 0.042\), HAC), indicating that Britain's post-1761 economic
-trajectory diverged by an additional \textasciitilde\$1,251 in GDP per
-capita relative to the continental controls. The formal OLS regression
-parameters are presented in \textbf{Table 2}.
+The resulting interaction coefficient (\(\beta_3\)) is \textbf{1,250.9
+international dollars} (\(p = 0.042\), HAC), indicating that Britain's
+post-1761 economic trajectory diverged by an additional
+\textasciitilde1,251 international dollars in GDP per capita relative to
+the continental controls. The formal OLS regression parameters are
+presented in \textbf{Table 2}.
 
 \textbf{Table 2: DiD Regression Output (T₀ = 1761, Controls: NLD, FRA)}
 
@@ -708,11 +729,11 @@ Post (\textgreater=1761) & 419.63 & 116.867 & 3.591 & 0.000 & 190.11 &
 }
 
 \emph{(Note: N=603, R²=0.214, F=54.48. Dependent variable is GDP per
-capita in 2011 international dollars. While the unadjusted \(R^2\) of
-0.214 indicates that substantial macroeconomic variation remains
-unexplained by our minimalist model, this is standard for historical DiD
-regressions; the econometric objective is isolating the treatment effect
-rather than constructing a comprehensive forecasting model.)}
+capita in 2011 international dollars. The unadjusted \(R^2\) of 0.214
+indicates that substantial macroeconomic variation remains unexplained
+by this minimalist model, which is typical for historical DiD
+regressions where the econometric objective is isolating the treatment
+effect rather than constructing a comprehensive forecasting model.)}
 
 \subsubsection{4.4 Serial Autocorrelation
 Robustness}\label{serial-autocorrelation-robustness}
@@ -770,13 +791,12 @@ Collapsed DiD (all 13 countries) & 1,422.2 & 1,283.1 & 0.280 & 0.965 &
 The Bertrand et al.~(2004) collapsed estimator averages GDP per capita
 into exactly two periods (pre- and post-\(T_0\)) per country,
 eliminating serial autocorrelation by construction (DW improves from
-0.042 to 0.965--1.302). Critically, the coefficient magnitude is
-preserved across all panel sizes (\(\beta_3 = 1,251\)--\(1,422\)),
-confirming that the point estimate is not an artifact of
-autocorrelation-inflated precision. However, collapsed estimation
-necessarily sacrifices statistical power: even with the expanded
-13-country panel (\(N = 26\)), the test does not reject the null at
-conventional levels (\(p = 0.280\)). We note that this reflects a
+0.042 to 0.965--1.302). The coefficient magnitude is preserved across
+all panel sizes (\(\beta_3 = 1,251\)--\(1,422\)), indicating that the
+point estimate is not an artifact of autocorrelation-inflated precision.
+However, collapsed estimation necessarily sacrifices statistical power:
+even with the expanded 13-country panel (\(N = 26\)), the test does not
+reject the null at conventional levels (\(p = 0.280\)). This reflects a
 structural power limitation of the collapsed estimator when applied to
 cross-country macro panels --- a constraint widely acknowledged in the
 literature --- rather than evidence against the treatment effect.
@@ -803,16 +823,16 @@ European core (NLD, FRA) & 1.24 (large) & 48.7\% & 38.5\% \\
 \end{longtable}
 }
 
-Cohen's \(d\) exceeds 1.2 across all specifications, indicating a very
-large effect by conventional benchmarks (\(d > 0.8\)). The treatment
-effect represents approximately 49--55\% of pre-treatment British GDP
-per capita, corresponding to an economically enormous divergence. These
+Cohen's \(d\) exceeds 1.2 across all specifications, indicating a large
+effect by conventional benchmarks (\(d > 0.8\)). The treatment effect
+represents approximately 49--55\% of pre-treatment British GDP per
+capita, corresponding to an economically substantial divergence. These
 magnitude metrics demonstrate that the treatment effect is substantively
 meaningful even where the collapsed estimator lacks power to reject
 \(H_0\) at conventional thresholds.
 
 With country-clustered standard errors (\(G=3\) clusters), \(\beta_3\)
-remains highly significant (\(p < 0.001\)), though we interpret this
+remains significant (\(p < 0.001\)), though we interpret this
 conservatively given the small number of clusters. The HAC correction
 with lag=15, which preserves the full time-series structure while
 accounting for serial dependence, yields \(p = 0.042\), retaining
@@ -821,21 +841,20 @@ significance at the 5\% level.
 \subsubsection{4.6 Event Study \& Parallel
 Trends}\label{event-study-parallel-trends}
 
-Calculations of a dynamic DiD event study validate the parallel trends
-assumption (\textbf{Figure 2}). Pre-treatment bins spanning 60 years
-prior to 1761 yielded coefficients statistically indistinguishable from
-zero, neutralizing concerns of pre-existing trajectory bias. A formal
-pre-trends test confirms no significant differential growth between
-Britain and European controls in the pre-period (slope = 0.00015,
-\(p = 0.779\)). Following 1761, coefficients rise sharply and
-consistently, indicating a systemic economic acceleration beginning
-during the canal era (1760--1830) and intensifying through the
-subsequent steam transition.
+A dynamic DiD event study validates the parallel trends assumption
+(\textbf{Figure 2}). Pre-treatment bins spanning 60 years prior to 1761
+yield coefficients statistically indistinguishable from zero, addressing
+concerns of pre-existing trajectory bias. A formal pre-trends test
+confirms no significant differential growth between Britain and European
+controls in the pre-period (slope = 0.00015, \(p = 0.779\)). Following
+1761, coefficients rise sharply and consistently, indicating systemic
+economic acceleration beginning during the canal era (1760--1830) and
+intensifying through the subsequent steam transition.
 
 Figure 2: Dynamic DiD Event Study. 5-year binned event study relative to
 the 1761 exogenous infrastructural treatment (\(T_0=0\)). The
 consistently flat line spanning 60 years prior to the break confirms the
-parallel trends assumption, neutralizing concerns of pre-existing
+parallel trends assumption, addressing concerns of pre-existing
 trajectory bias. Following the break, the coefficient rises steadily ---
 initially during the canal era and accelerating during the subsequent
 steam transition --- consistent with water infrastructure establishing
@@ -843,10 +862,10 @@ preconditions that fossil power subsequently amplified.
 
 \subsubsection{4.7 Robustness Checks}\label{robustness-checks}
 
-To ensure the observed effect was not the artifact of a generalized
+To ensure the observed effect is not an artifact of a generalized
 18th-century European aggregate takeoff or a spurious correlation, the
-model was subjected to strict ``Placebo-in-Space'' and
-``Placebo-in-Time'' falsification tournaments.
+model was subjected to ``Placebo-in-Space'' and ``Placebo-in-Time''
+falsification tournaments.
 
 \textbf{Vocabulary Falsification:} When substituting the hydro-social
 treatment dates with alternative industrial inflection points (e.g.,
@@ -854,37 +873,32 @@ extracting the crossover parameters for \emph{coal}, \emph{textile}, or
 \emph{financial} vocabulary clusters), the statistical validity of the
 event study collapsed (\textbf{Figure 3}). Only the water hypothesis
 produced a clean, non-noisy event study --- indicating that the 1761
-structural break is uniquely associated with the \emph{timing} of GDP
-divergence, even as the accumulated effect was later amplified by fossil
-adoption.
+structural break is associated with the \emph{timing} of GDP divergence,
+even as the accumulated effect was later amplified by fossil adoption.
 
 Figure 3: Placebo Vocabulary Tournament. Falsification test executing
 event studies against the structural break dates of rival textual
 corpora. Only the hydro-social treatment (Panel a) yields a
 statistically clean distribution matching economic takeoff. Rival
 inflection points derived from coal (b), textiles (c), and finance (d)
-uniformly collapse into high volatility and statistically invalid
-pre-trends, confirming the unique temporal specificity of the water
-infrastructure shock in predicting the onset of divergence.
+produce high volatility and statistically invalid pre-trends, confirming
+the temporal specificity of the water infrastructure shock in predicting
+the onset of divergence.
 
 \textbf{Control Falsification:} Assigning the 1761 treatment
 synthetically to the Netherlands (\(p = 0.924\)), China (\(p < 0.001\),
 negative), and India (\(p = 0.003\), negative) yielded statistically
-void or negatively inverse results. While France returned a marginally
-positive signal (\(p = 0.022\)), the coefficient magnitude was
-approximately one-quarter of Britain's (\(\beta_3 = 362\) vs \(1,251\)),
-consistent with economic spillovers across the Channel rather than an
-independent French structural break.
+void or negative results. While France returned a marginally positive
+signal (\(p = 0.022\)), the coefficient magnitude was approximately
+one-quarter of Britain's (\(\beta_3 = 362\) vs.~1,251), consistent with
+economic spillovers across the Channel rather than an independent French
+structural break.
 
 Calculating the counterfactual control trajectory reveals that
 \textbf{47\%} of Britain's total industrial economic lead over the
 continent was established by 1810 --- during the height of the canal and
 water wheel era, and decades before steam power reached critical mass to
-influence national labor productivity. This substantial pre-steam
-accumulation is consistent with water infrastructure functioning as a
-necessary precondition: creating the market integration, capital
-formation, and systemic demand that the subsequent fossil transition
-would build upon and amplify.
+influence national labor productivity.
 
 \subsubsection{4.8 Double/Debiased Machine Learning (DML)
 Results}\label{doubledebiased-machine-learning-dml-results}
@@ -892,7 +906,7 @@ Results}\label{doubledebiased-machine-learning-dml-results}
 As an independent robustness check, we implement the Chernozhukov et
 al.~(2018) partially linear DML estimator treating continuous vocabulary
 intensity as the treatment for Britain. Results are reported in
-\textbf{Table 5} and discussed in Section 3.5.
+\textbf{Table 5} (see Section 3.5 for specification details).
 
 \textbf{Table 5: DML Results --- Continuous Treatment (Gradient
 Boosting, Preferred Specification)}
@@ -917,43 +931,31 @@ Mediation: water (steam controlled) & 940 & 1,339 & 0.483 & ns \\
 }
 
 \emph{(Note: Gradient Boosting preferred over Lasso/Ridge because it
-flexibly controls for the nonlinear year trend; linear methods inflate θ
-to \textasciitilde7,000 by failing to fully absorb this trend.
-Cluster-robust SEs group by country; naive SEs are lower bounds.
-Pre-steam specifications use naive SEs only; cluster-robust omitted as
-panel is too small for reliable sandwich estimation with K=3 folds.)}
+flexibly controls for the nonlinear year trend; linear methods inflate θ̂
+to \textasciitilde7,000 by failing to fully absorb this trend (see
+Section 3.5). Cluster-robust SEs group by country; naive SEs are lower
+bounds. Pre-steam specifications use naive SEs only; cluster-robust
+omitted as panel is too small for reliable sandwich estimation with K=3
+folds.)}
 
 The Gradient Boosting estimate (\(\hat{\theta} = 1{,}397\),
-SE\(_{\text{cl}} = 165\), \(p < 0.001\)) is highly consistent with the
-DiD \(\beta_3 = 1{,}251\), providing cross-method validation of the
+SE\(_{\text{cl}} = 165\), \(p < 0.001\)) is consistent with the DiD
+\(\beta_3 = 1{,}251\), providing cross-method validation of the
 treatment magnitude. The pre-steam canal channel
 (\(\hat{\theta} = 783\), \(p < 0.001\)) confirms that water vocabulary
 intensity predicts GDP divergence in the period 1700--1810,
 \emph{before} steam power achieved commercial scale.
 
-\subsubsection{4.9 DML Mediation: The Water-Enables-Steam
-Channel}\label{dml-mediation-the-water-enables-steam-channel}
+\subsubsection{4.9 DML Mediation Results}\label{dml-mediation-results}
 
-The mediation test directly addresses whether water infrastructure
-operated as an independent driver of GDP or as a precondition for steam.
 When raw steam vocabulary intensity is included as a confounder in the
-DML specification (Test 2), the water treatment effect falls from 1,397
-to 940 --- a reduction of approximately \textbf{33\%} --- and loses
+DML specification, the water treatment effect falls from 1,397 to 940
+--- a reduction of approximately \textbf{33\%} --- and loses
 conventional statistical significance (\(p = 0.483\)). The steam channel
-itself carries a strong independent effect
-(\(\hat{\theta}_{\text{steam}} \approx 2{,}187\)--\(3{,}296\) across
-linear methods, \(1{,}640\) for Gradient Boosting).
-
-Under the linear Lasso specification --- where θ̂ captures the full
-correlated trend --- the implied mediation share rises to \textbf{87\%}
-of water's total effect. The wide range (33\% under Gradient Boosting,
-87\% under Lasso) reflects genuine uncertainty about the magnitude of
-the mediated path; both estimates, however, point in the same direction:
-a substantial share of water's GDP effect is absorbed once steam is
-accounted for. This is precisely the pattern predicted by the
-precondition thesis --- water infrastructure created the conditions
-under which steam became viable, rather than competing with it as an
-independent growth engine.
+itself carries a substantial effect
+(\(\hat{\theta}_{\text{steam}} \approx 1{,}640\) for Gradient Boosting;
+linear methods produce inflated estimates of \(2{,}187\)--\(3{,}296\)
+due to the nonlinear trend absorption issue discussed in Section 3.5).
 
 \textbf{Table 6: DML Mediation Summary}
 
@@ -981,12 +983,15 @@ Water alone (Gradient Boosting) & 1,397 & \textless0.001 & Strong
 water--GDP association \\
 Water controlled for steam (GB) & 940 & 0.483 & Effect attenuates; steam
 absorbs water's path \\
-Steam alone (Gradient Boosting) & 1,640 & 0.076 & Steam also strongly
-associated \\
+Steam alone (Gradient Boosting) & 1,640 & 0.076 & Steam also
+substantially associated \\
 Steam alone (Lasso) & 2,187 & \textless0.001 & Steam significant across
-all linear methods \\
+linear methods \\
 \end{longtable}
 }
+
+The interpretation of these mediation patterns is discussed in Section
+5.5.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1005,8 +1010,8 @@ industrial capitalist.'' Marx's mechanistic linkage of steam to the
 fundamental reorganization of human labor and capital cemented the
 assumption that true industrial modernity required the physical
 supremacy of the steam engine. Consequently, the prevailing paradigm
-continues to treat early geometric growth as uniquely dependent on the
-subversion of natural constraints via fossil extraction.
+continues to treat early sustained growth as dependent on the subversion
+of natural constraints via fossil extraction.
 
 \subsection{5.1 Water as Temporal
 Predecessor}\label{water-as-temporal-predecessor}
@@ -1014,15 +1019,15 @@ Predecessor}\label{water-as-temporal-predecessor}
 The 1761 structural break and the 1766 hydro-social crossover complicate
 this narrative --- not by replacing the role of fossil energy, but by
 establishing its temporal context. A substantial proportion of Britain's
-ultimate early industrial divergence relative to continental Europe was
-initiated not through fossil extraction, but through advanced
-topographical engineering and ecological cooperation. The technological
-backbone of early modernity --- the thousands of miles of navigable
-canals conforming to the earth's natural contours, and the massive
-water-wheels borrowing kinetic energy strictly from existing riverine
-flows --- did not conquer the landscape; it explicitly collaborated with
-it. Our data demonstrates that this collaboration was associated with a
-measurable and temporally specific economic divergence.
+early industrial divergence relative to continental Europe was initiated
+not through fossil extraction, but through advanced topographical
+engineering and ecological cooperation. The technological backbone of
+early modernity --- the thousands of miles of navigable canals
+conforming to the earth's natural contours, and the massive water-wheels
+borrowing kinetic energy from existing riverine flows --- did not
+conquer the landscape; it cooperated with it. Our data indicate that
+this cooperation was associated with a measurable and temporally
+specific economic divergence.
 
 The chronological sequence merits emphasis. The Bridgewater Canal opened
 in 1761. The linguistic crossover occurred in 1766. James Watt patented
@@ -1032,17 +1037,17 @@ not surpass water as the primary industrial power source until
 approximately 1830 (Kanefsky and Robey 1980). The 47\% pre-steam gap we
 document --- the share of Britain's divergence established before 1810
 --- thus corresponds to a period during which water infrastructure was
-the dominant enabling technology, not a marginal one. This temporal
-precedence is the empirical core of the precondition thesis.
+the dominant enabling technology. This temporal precedence forms the
+empirical basis of the precondition thesis.
 
 \subsection{5.2 The Epistemological
 Shift}\label{the-epistemological-shift}
 
 The linguistic shift identified in our \texttt{eng\_gb\_2019} dataset
-signals a profound epistemological transformation in the British
-printing of technical vocabulary. Rather than perceiving water purely as
-a natural risk or hazard, early industrial society learned to
-mathematically harness topography. The conceptual framework transitioned
+signals a notable epistemological transformation in the British printing
+of technical vocabulary. Rather than perceiving water purely as a
+natural risk or hazard, early industrial society learned to
+systematically harness topography. The conceptual framework transitioned
 from natural risk to \textbf{geographical symbiosis}. The
 infrastructural scaling of the canal network and water-wheel capacity
 relied upon leveraging, rather than overriding, existing gravitational
@@ -1074,15 +1079,10 @@ bulk transport --- functioned as a critical precursor to the steam
 revolution. Our empirical evidence is consistent with this sequential
 interpretation. Rather than emerging in isolation, the steam engine can
 be viewed as an adaptive technology, encouraged by the expanding market
-scale that water infrastructure had fostered. By facilitating
-unprecedented logistical integration, canals and waterwheels aggregated
-complex supply chains and generated an appetite for continuous output.
-The hydro-social integration engineered a systemic economic demand for a
-spatially liberated prime mover. To sustain the volume of markets
-stimulated by these riparian networks, production ultimately expanded
-beyond the physical capacity of river valleys, necessitating the
-adoption of steam to allow geographically isolated capital and labor to
-participate more fully in the catalyzed economy.
+scale that water infrastructure had fostered. By facilitating logistical
+integration, canals and water wheels aggregated complex supply chains
+and generated an appetite for continuous output, creating systemic
+economic demand for a spatially liberated prime mover.
 
 The mechanism can be decomposed into three interlocking channels. First,
 canal transport dramatically reduced the cost of moving bulk commodities
@@ -1099,75 +1099,63 @@ markets --- that directly prefigured railway financing in the 1830s and
 1840s. Each of these channels represents a structural precondition that
 was necessary for the steam transition to succeed at scale.
 
-\subsection{5.4 The Horse Race: Interpreting Channel
-Decomposition}\label{the-horse-race-interpreting-channel-decomposition}
+\subsection{5.4 Econometric Evidence for the Sequential
+Reading}\label{econometric-evidence-for-the-sequential-reading}
 
-Critically, our channel decomposition confirms this sequential reading.
-When fossil and transport channels are entered simultaneously in a horse
-race regression, the fossil channel dominates
-(\(\beta_{\text{fossil}} = 745.7\), \(p < 0.001\)) while the transport
-channel attenuates (\(\beta_{\text{transport}} = 190.0\),
-\(p = 0.087\)). This is precisely the pattern predicted by the
-precondition thesis: water infrastructure's contribution is absorbed
-into the broader economic structure it helped create. The canals did not
-compete with steam --- they created the conditions under which steam
-became necessary and profitable. The fossil channel captures not just
-steam power per se, but the entire market integration and capital base
-that canal infrastructure had built.
+Both the channel decomposition and the DML mediation results support the
+sequential interpretation outlined above. When fossil and transport
+channels are entered simultaneously in a horse race regression, the
+fossil channel dominates (\(\beta_{\text{fossil}} = 745.7\),
+\(p < 0.001\)) while the transport channel attenuates
+(\(\beta_{\text{transport}} = 190.0\), \(p = 0.087\)). In the DML
+mediation test, water's treatment effect falls from
+\(\hat{\theta} = 1{,}397\) to 940 --- a 33\% reduction --- and loses
+statistical significance when steam is controlled. Under the linear
+Lasso specification, the implied mediation share rises to 87\% of
+water's total effect, though this estimate should be interpreted with
+caution given Lasso's tendency to inflate \(\hat{\theta}\) in this
+setting (see Section 3.5).
 
-An analogy clarifies the interpretation. Consider a regression
-predicting adult height that includes both childhood nutrition and
-adolescent growth hormones. The hormonal channel will dominate because
-it operates later and more directly on the outcome --- but this does not
-mean childhood nutrition was irrelevant. Rather, adequate childhood
-nutrition was a necessary precondition for the hormonal growth spurt to
-occur at full potential. Similarly, the attenuation of the transport
-channel when fossil terms are included does not diminish the historical
-importance of canal infrastructure; it confirms that water
-infrastructure's effects were mediated through the very economic
-structures that the fossil era subsequently exploited.
+This attenuation pattern is consistent with the precondition thesis:
+water infrastructure's contribution is absorbed into the broader
+economic structure it helped create. The canals did not compete with
+steam --- they created the conditions under which steam became necessary
+and profitable. An analogy clarifies the interpretation. Consider a
+regression predicting adult height that includes both childhood
+nutrition and adolescent growth hormones. The hormonal channel will
+dominate because it operates later and more directly on the outcome ---
+but this does not mean childhood nutrition was irrelevant. Rather,
+adequate childhood nutrition was a necessary precondition for the
+hormonal growth spurt to occur at full potential. Similarly, the
+attenuation of the water channel when fossil terms are included does not
+diminish the historical importance of canal infrastructure; it confirms
+that water infrastructure's effects were mediated through the very
+economic structures that the fossil era subsequently exploited.
 
-\subsection{5.5 DML Corroboration and the Mediation
-Structure}\label{dml-corroboration-and-the-mediation-structure}
+The cross-method consistency is also notable. The Gradient Boosting DML
+estimate (\(\hat{\theta} = 1{,}397\)) is closely aligned with the DiD
+\(\beta_3 = 1{,}251\) --- a convergence across two methodologically
+distinct estimators that exploit different sources of variation. The
+precondition thesis does not require water to remain independently
+significant once steam arrives. It requires only that water came first,
+built something durable, and that steam's growth potential was bounded
+by what water had already created. The mediation evidence is consistent
+with all three requirements.
 
-The DML analysis provides independent, non-parametric corroboration of
-the DiD findings and adds a new dimension to the precondition thesis.
-The Gradient Boosting DML estimate (\(\hat{\theta} = 1{,}397\)) is
-nearly identical to the DiD \(\beta_3 = 1{,}251\) --- remarkable
-consistency across two methodologically distinct estimators that exploit
-entirely different sources of variation. The DML additionally quantifies
-the mediation pathway: when steam vocabulary intensity is controlled,
-water's direct effect attenuates substantially and loses statistical
-significance, while steam's independent contribution remains large. This
-is precisely the footprint one would expect if canals and water mills
-built the integrated markets and capital base that steam subsequently
-occupied, rather than the two technologies operating as separate growth
-drivers.
-
-It bears emphasis that the mediation finding does not diminish the
-historical importance of water infrastructure --- it deepens it. An
-effect that operates \emph{through} a successor technology is not a
-small effect; it is a structural precondition. The precondition thesis
-does not require water to remain independently significant once steam
-arrives. It requires only that water came first, built something
-durable, and that steam's growth potential was bounded by what water had
-already created. The DML mediation evidence is consistent with all three
-requirements.
-
-\subsection{5.6 Implications for the Great
+\subsection{5.5 Implications for the Great
 Divergence}\label{implications-for-the-great-divergence}
 
-Consequently, locating water infrastructure as a leading indicator of
-sustained economic growth encourages a reassessment of the
-\emph{timeline} of industrialization. The empirical data points toward a
-distinct sequential transition: not merely the moment humanity
-transitioned to a mineral economy, but the preceding era where society
-embedded itself systematically into nature through infrastructural
-symbiosis --- creating the structural preconditions upon which the
-mineral transition would build.
+Locating water infrastructure as a leading indicator of sustained
+economic growth encourages a reassessment of the \emph{timeline} of
+industrialization. The empirical data point toward a distinct sequential
+transition: not merely the moment humanity transitioned to a mineral
+economy, but the preceding era where society embedded itself
+systematically into nature through infrastructural symbiosis ---
+creating the structural preconditions upon which the mineral transition
+would build.
 
-This empirically reinforces Malm's socio-spatial framing (Malm 2016). If
-a substantial share of the divergence was established in the organic era
+This reinforces Malm's socio-spatial framing (Malm 2016). If a
+substantial share of the divergence was established in the organic era
 --- our counterfactual analysis suggests 47\% by 1810 --- then the
 eventual transition to coal and steam requires more than a strictly
 thermodynamic explanation. The hydro-social shift provides quantitative
@@ -1205,29 +1193,33 @@ We find that a measurable structural break in Britain's economic
 trajectory is closely associated with the 1761 exogenous infrastructure
 shock of the Bridgewater Canal, validated independently by the 1766
 hydro-social linguistic crossover. Britain's post-shock trajectory
-diverged by \textasciitilde1,251 per capita relative to its continental
-peers (\(p = 0.042\) with HAC standard errors), with 47\% of the
-ultimate industrial lead established by 1810 --- decades before steam
-power achieved commercial dominance. The treatment effect is
-economically very large: Cohen's \(d\) exceeds 1.2 across all
-specifications, and the coefficient represents approximately 50\% of
+diverged by approximately 1,251 international dollars in GDP per capita
+relative to its continental peers (\(p = 0.042\) with HAC standard
+errors), with 47\% of the ultimate industrial lead established by 1810
+--- decades before steam power achieved commercial dominance. The
+treatment effect is economically large: Cohen's \(d\) exceeds 1.2 across
+all specifications, and the coefficient represents approximately 50\% of
 pre-treatment British GDP per capita. The collapsed DiD estimator of
 Bertrand et al.~(2004) preserves this point estimate across an expanded
-13-country panel (\(\beta_3 = 1,251\)--\(1,422\)), confirming the
+13-country panel (\(\beta_3 = 1{,}251\)--\(1{,}422\)), confirming the
 magnitude's robustness even as the test necessarily lacks statistical
-power with the cross-sectional units available. Placebo falsification
-exercises confirm that only the water infrastructure shock uniquely
-predicts the \emph{timing} of divergence; rival vocabularies (textile,
-coal, financial) produce noisy or invalid event studies.
+power with the cross-sectional units available. An independent DML
+estimator recovers a consistent treatment effect
+(\(\hat{\theta} \approx 1{,}397\)), providing cross-method validation.
+Placebo falsification exercises confirm that only the water
+infrastructure shock predicts the \emph{timing} of divergence; rival
+vocabularies (textile, coal, financial) produce noisy or invalid event
+studies.
 
 Our evidence is consistent with water infrastructure functioning as a
 necessary precondition rather than a sufficient cause of industrial
 modernity. The canal era created the integrated markets, accumulated
 capital, and systemic demand that the subsequent fossil transition would
-amplify. The channel decomposition supports this sequential reading:
-when entered simultaneously, the fossil channel dominates the transport
-channel --- a pattern expected if water infrastructure's contribution
-was absorbed into the broader economic structure it helped create.
+amplify. Both the channel decomposition and DML mediation test support
+this sequential reading: when entered simultaneously, the fossil channel
+dominates the transport channel --- a pattern expected if water
+infrastructure's contribution was absorbed into the broader economic
+structure it helped create.
 
 Three broader implications follow. First, methodologically, this paper
 demonstrates that NLP-derived structural breaks can serve as credible
@@ -1251,11 +1243,10 @@ transitions between resource endowments.
 
 Ultimately, Britain's industrial trajectory appears to have been
 initiated during an era of geographical symbiosis --- a period of
-intense ecological cooperation that established the structural
-foundations upon which the fossil revolution subsequently built. The
-empirical data positions hydro-social infrastructure not as an
-alternative to the steam narrative, but as its necessary and temporally
-prior precondition.
+ecological cooperation that established the structural foundations upon
+which the fossil revolution subsequently built. The evidence positions
+hydro-social infrastructure not as an alternative to the steam
+narrative, but as its necessary and temporally prior precondition.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1264,7 +1255,7 @@ Robustness}\label{limitations-and-robustness}
 
 The application of a quantitative culturomics framework to historical
 macroeconomics inherently requires methodological concessions. To ensure
-transparency, we highlight three primary vulnerabilities in our
+transparency, we highlight the primary vulnerabilities in our
 identification strategy.
 
 \subsection{7.1 Robustness to Endogenous Treatment
@@ -1274,21 +1265,19 @@ A pervasive vulnerability in applying computational text analysis to
 macroeconomics is the risk of endogenous treatment timing. If the
 structural break utilized as the DiD treatment intervention (\(T_0\)) is
 derived exclusively from the linguistic corpus produced by the society
-experiencing economic transition---e.g., relying solely on our 1766
-mathematical NLP crossover---the model risks circularity.
+experiencing economic transition---e.g., relying solely on our 1766 NLP
+crossover---the model risks circularity.
 
-To systematically neutralize this endogeneity critique, our methodology
-explicitly pivots away from deploying the NLP-derived marker as the
-treatment baseline. Instead, we anchor the Diff-in-Diff specification to
-the exogenous historical reality of the 1761 opening of the Bridgewater
-Canal---a singular infrastructural investment shock universally
-recognized as the catalyst for the subsequent canal mania. By utilizing
-1761 as an exogenous variable, our use of the 1766 Google Books
-crossover is elegantly repurposed as an independent NLP mechanism
-validator. It quantitatively confirms that the exogenous topographical
-shock of 1761 definitively catalyzed and reorganized the
-macro-linguistic culture of the society exactly a half-decade later,
-resolving standard identification concerns cleanly.
+To address this endogeneity concern, our methodology explicitly avoids
+deploying the NLP-derived marker as the treatment baseline. Instead, we
+anchor the DiD specification to the exogenous historical event of the
+1761 opening of the Bridgewater Canal---a singular infrastructural
+investment shock universally recognized as the catalyst for the
+subsequent canal mania. By utilizing 1761 as the exogenous treatment,
+the 1766 Google Books crossover serves as an independent mechanism
+validator. It confirms that the exogenous physical shock of 1761
+preceded and plausibly catalyzed a measurable reorganization of the
+society's technical vocabulary five years later.
 
 \subsection{7.2 Corpus Bias and the Scientific Publishing
 Boom}\label{corpus-bias-and-the-scientific-publishing-boom}
@@ -1302,16 +1291,17 @@ vocabulary related to canals and water wheels (\texttt{canal},
 reflect an institutional boom in the publishing of technical manuals and
 parliamentary navigation acts, rather than a purely linguistic shift in
 daily life. However, in the context of economic history, the sudden
-profusion of technical infrastructure literature serves as an incredibly
-robust proxy for the material reorganization of the underlying economy.
+profusion of technical infrastructure literature itself serves as a
+meaningful proxy for the material reorganization of the underlying
+economy.
 
 Additionally, our vocabulary selection of 71 semantic targets was
 fundamentally heuristic. While our placebo vocabulary tournaments
-demonstrate that the relative timing of the ``hydro'' crossover uniquely
-aligns with the onset of GDP divergence compared to plausible
-alternatives (e.g., textiles, coal, or finance), a purely automated
-term-clustering algorithm would provide a more systematic foundation for
-future replication efforts.
+demonstrate that the relative timing of the ``hydro'' crossover aligns
+with the onset of GDP divergence compared to plausible alternatives
+(e.g., textiles, coal, or finance), a purely automated term-clustering
+algorithm would provide a more systematic foundation for future
+replication efforts.
 
 \subsection{7.3 Data Interpolation and Serial
 Autocorrelation}\label{data-interpolation-and-serial-autocorrelation}
@@ -1348,10 +1338,10 @@ Table 3:
   (2008).
 \item
   \textbf{The collapsed DiD estimator} of Bertrand et al.~(2004)
-  completely eliminates serial autocorrelation by construction. We
-  expand the control group to 13 countries to maximize statistical
-  power. The point estimate is remarkably stable across panel sizes
-  (\(\beta_3 = 1,251\)--\(1,422\)), confirming that the estimated
+  eliminates serial autocorrelation by construction. We expand the
+  control group to 13 countries to maximize statistical power. The point
+  estimate is stable across panel sizes
+  (\(\beta_3 = 1{,}251\)--\(1{,}422\)), confirming that the estimated
   magnitude is not an artifact of autocorrelation-inflated precision.
   With the full 13-country panel (\(N = 26\)), the collapsed p-value is
   0.280 --- an improvement over the 3-country panel (\(p = 0.628\)) but
@@ -1362,11 +1352,10 @@ Table 3:
 \item
   \textbf{Magnitude metrics} provide an alternative lens for assessing
   the treatment effect. Cohen's \(d\) exceeds 1.2 across all collapsed
-  specifications, indicating a very large effect size. The treatment
-  effect represents approximately 49--55\% of pre-treatment British GDP
-  per capita --- an economically enormous divergence that is
-  substantively meaningful regardless of the collapsed estimator's
-  p-value.
+  specifications, indicating a large effect size. The treatment effect
+  represents approximately 49--55\% of pre-treatment British GDP per
+  capita --- an economically substantial divergence that is meaningful
+  regardless of the collapsed estimator's p-value.
 \end{enumerate}
 
 Taken together, these results indicate that the \emph{magnitude} and
@@ -1395,7 +1384,7 @@ lower bound on uncertainty, not a preferred estimate. The consistency
 between the DML \(\hat{\theta} \approx 1{,}397\) and the DiD
 \(\beta_3 = 1{,}251\) across these two methods --- each with different
 identifying assumptions --- provides some reassurance that the estimate
-is not purely an artifact of any single inferential framework.
+is not an artifact of any single inferential framework.
 
 \textbf{ML method sensitivity.} Linear methods (Lasso, Ridge) produce
 inflated estimates (\(\hat{\theta} \approx 7{,}000\)) because they
@@ -1427,7 +1416,7 @@ in this context. The more valid falsification tests are the
 finance, produces a clean event study aligned with 1761) and the
 \emph{temporal ordering} (water vocabulary crossover in 1766 precedes
 the steam transition by four decades). Asian controls --- China, India,
-Japan --- do show the correct negative pseudo-effect
+Japan --- do show the expected negative pseudo-effect
 (\(\hat{\theta} < 0\)), consistent with non-industrialization during
 this period and with the Great Divergence framework. We report these
 results in full rather than selectively, and caution against
