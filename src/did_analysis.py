@@ -1409,11 +1409,9 @@ def compute_presteam_gap(df_gdp, t0):
 def plot_figure_one(df_gdp, t0):
     """The paper's key figure: three curves proving water came first.
 
-    Green: Canal/transport vocabulary (normalized)
-    Red: Steam/fossil vocabulary (normalized)
-    Blue dashed: GDP gap GBR − NLD/FRA (normalized)
-
-    If green rises before red, and blue tracks green, that's the paper.
+    Designed for B&W print: each series uses a distinct combination of
+    line style, marker, and grayscale tone so they are easily
+    distinguishable without colour.
     """
     ngram_path = DATA_DIR / 'ngram_english.csv'
     if not ngram_path.exists():
@@ -1446,36 +1444,40 @@ def plot_figure_one(df_gdp, t0):
 
     fig, ax = plt.subplots(figsize=(14, 8))
 
-    # GDP gap as filled area
-    ax.fill_between(g_norm.index, 0, g_norm.values, alpha=0.08, color='#1a5276')
-    ax.plot(g_norm.index, g_norm.values, color='#1a5276', linewidth=2.5,
-            linestyle='--', label='GDP Gap: GBR − NLD/FRA', alpha=0.9)
+    # GDP gap as filled area + dashed line with triangle markers
+    ax.fill_between(g_norm.index, 0, g_norm.values, alpha=0.08, color='#555555')
+    ax.plot(g_norm.index, g_norm.values, color='#222222', linewidth=2.5,
+            linestyle='--', marker='^', markevery=8, markersize=6,
+            label='GDP Gap: GBR − NLD/FRA')
 
-    # Canal/transport
-    ax.plot(t_norm.index, t_norm.values, color='#27ae60', linewidth=3,
-            label='Canal/Transport Vocabulary', alpha=0.9)
+    # Canal/transport — solid, heavy, circle markers
+    ax.plot(t_norm.index, t_norm.values, color='#000000', linewidth=3,
+            linestyle='-', marker='o', markevery=8, markersize=6,
+            label='Canal/Transport Vocabulary')
 
-    # Water power
-    ax.plot(p_norm.index, p_norm.values, color='#2980b9', linewidth=2,
-            label='Water Power Vocabulary', alpha=0.7, linestyle='-.')
+    # Water power — dash-dot, lighter gray, square markers
+    ax.plot(p_norm.index, p_norm.values, color='#777777', linewidth=2,
+            linestyle='-.', marker='s', markevery=8, markersize=5,
+            label='Water Power Vocabulary')
 
-    # Steam/fossil
-    ax.plot(f_norm.index, f_norm.values, color='#e74c3c', linewidth=3,
-            label='Steam/Fossil Vocabulary', alpha=0.9)
+    # Steam/fossil — dotted, medium gray, diamond markers
+    ax.plot(f_norm.index, f_norm.values, color='#444444', linewidth=2.5,
+            linestyle=':', marker='D', markevery=8, markersize=5,
+            label='Steam/Fossil Vocabulary')
 
-    # T₀ line
-    ax.axvline(x=t0, color='darkorange', linewidth=2.5, linestyle=':',
-               alpha=0.8, label=f'T₀ = {t0} (water commodification crossover)')
+    # T₀ line — thin solid black
+    ax.axvline(x=t0, color='black', linewidth=2, linestyle='-',
+               alpha=0.6, label=f'T₀ = {t0} (water commodification crossover)')
 
-    # Key annotation: canal era
-    ax.axvspan(1760, 1810, alpha=0.06, color='green')
+    # Key annotation: canal era (hatched)
+    ax.axvspan(1760, 1810, alpha=0.10, color='#999999', hatch='///')
     ax.text(1785, 0.95, 'CANAL ERA\n(1760–1810)', ha='center', fontsize=10,
-            fontweight='bold', color='darkgreen', alpha=0.8)
+            fontweight='bold', color='#333333', alpha=0.9)
 
-    # Annotation: steam era
-    ax.axvspan(1810, 1900, alpha=0.04, color='red')
+    # Annotation: steam era (hatched differently)
+    ax.axvspan(1810, 1900, alpha=0.07, color='#aaaaaa', hatch='...')
     ax.text(1855, 0.95, 'STEAM ERA\n(1810–1900)', ha='center', fontsize=10,
-            fontweight='bold', color='darkred', alpha=0.6)
+            fontweight='bold', color='#555555', alpha=0.8)
 
     ax.set_xlabel('Year', fontsize=13)
     ax.set_ylabel('Normalized Index (0–1)', fontsize=13)
