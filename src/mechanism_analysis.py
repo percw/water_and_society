@@ -142,3 +142,57 @@ if pf.exists():
     pc = p[p.navigation.str.contains('CANAL')]; print(pc.groupby((pc.first_act // 10) * 10).size().to_string()); print(f'canals first authorised 1760-1829: {((pc.first_act>=1760)&(pc.first_act<1830)).sum()}, of which 1790-1799: {((pc.first_act>=1790)&(pc.first_act<1800)).sum()}')
 else:
     print('not available')
+
+# ---------------------------------------------------------------- 12. predetermined doses
+hdr('12. PREDETERMINED DOSES (referee check on reverse causality)')
+print('Canals were built where demand was growing (regime_analysis §3e). Two doses fixed before the outcome window:')
+print('  (i) completion-based canal stock lagged 10 and 15 years; (ii) cumulative count of navigations first AUTHORISED by')
+print('  Parliament (Priestley 1831), lagged 10 years — authorisation precedes opening by ~7 years and cannot respond to later output.')
+pr = pd.read_csv(EXT / 'priestley_1831_acts.csv'); prc = pr[pr.navigation.str.contains('CANAL')]
+auth = pd.Series(0.0, index=range(1700, 1901)); auth.update(prc.groupby('first_act').size().astype(float)); auth_cum = auth.cumsum()
+t2 = pd.Series((np.arange(1700, 1901) - 1700.0) ** 2 / 1000, index=range(1700, 1901))
+
+
+def dose_reg(y, x, a=1700, e=1830, quad=False):
+    d = pd.concat([y.rename('y'), x.rename('x')], axis=1); d['t'] = d.index.astype(float)
+    if quad: d['t2'] = t2.reindex(d.index)
+    d = d.loc[a:e].dropna(); r = sm.OLS(d['y'], sm.add_constant(d.drop(columns='y'))).fit(**HAC)
+    return r.params['x'], r.pvalues['x']
+
+
+print(f'\n{"outcome":10s} {"miles lag10":>22s} {"miles lag15":>22s} {"auth count lag10 (per 10 canals)":>34s} {"auth lag10 + quad trend":>24s}')
+for c in ['Coal', 'Ind', 'PopGB', 'Serv', 'GDPpc', 'Agri']:
+    r1 = dose_reg(lg[c], canal_k.shift(10), a=1710); r2 = dose_reg(lg[c], canal_k.shift(15), a=1715)
+    r3 = dose_reg(lg[c], auth_cum.shift(10) / 10, a=1710); r4 = dose_reg(lg[c], auth_cum.shift(10) / 10, a=1710, quad=True)
+    print(f'{c:10s} {100*r1[0]:+8.1f}% (p={r1[1]:.3f})   {100*r2[0]:+8.1f}% (p={r2[1]:.3f})   {100*r3[0]:+8.1f}% (p={r3[1]:.3f})               {100*r4[0]:+8.1f}% (p={r4[1]:.3f})')
+print('\nLocal projections with the authorisation count (per 10 canals authorised, lagged 10 years):')
+show('Δ_h log coal        on authorised canals (lag 10)', lp(lg['Coal'], auth_cum.shift(10) / 10, a=1710))
+show('Δ_h log population  on authorised canals (lag 10)', lp(lg['PopGB'], auth_cum.shift(10) / 10, a=1710))
+show('Δ_h log GDP/capita  on authorised canals (lag 10)', lp(lg['GDPpc'], auth_cum.shift(10) / 10, a=1710))
+show('Δ_h log agriculture on authorised canals (lag 10)', lp(lg['Agri'], auth_cum.shift(10) / 10, a=1710))
+print('Reverse check: Δ authorisations_t on Σ_{k=1..10} Δlog coal_{t-k}:')
+dy = lg['Coal'].diff(); Z = pd.concat([dy.shift(k).rename(f'l{k}') for k in range(1, 11)], axis=1)
+d = pd.concat([auth.rename('da'), Z], axis=1).loc[1711:1830].dropna(); r = sm.OLS(d['da'], sm.add_constant(d.drop(columns='da'))).fit(**HAC)
+print(f'  sum coef={r.params.drop("const").sum():+.2f}, joint p={float(r.f_test(np.eye(10, 11, 1)).pvalue):.3f}')
+
+# ---------------------------------------------------------------- 13. steam link without interpolated horsepower
+hdr('13. STEAM LINK WITH AN INDEPENDENT STEAM MEASURE (print frequency of "steam engine")')
+lse = np.log(bg['steam engine'].replace(0, np.nan)).dropna()
+show('Δ_h log "steam engine" on canal stock', lp(lse, canal_k, a=1740))
+show('Δ_h log "steam engine" on log coal output', lp(lse, lg['Coal'], a=1740))
+show('Δ_h log "steam engine" on log coal, + canal control', lp(lse, lg['Coal'], a=1740, controls=[canal_k]))
+show('Δ_h log GDP/capita  on log "steam engine", 1740-1830', lp(lg['GDPpc'], lse, a=1740))
+show('Δ_h log GDP/capita  on log "steam engine", 1740-1870', lp(lg['GDPpc'], lse, a=1740, e=1870))
+print(f'corr(log steam hp interpolated, log "steam engine" freq) 1760-1870: {np.corrcoef(lsteam.loc[1760:1870], lse.loc[1760:1870])[0,1]:.2f}')
+
+# ---------------------------------------------------------------- 14. semantic thresholds: robustness
+hdr('14. SEMANTIC THRESHOLD ROBUSTNESS (smoothing window x reference year)')
+
+
+def thr(s, frac, ref, win):
+    s = s.rolling(win, center=True).mean(); lvl = s.loc[ref] * frac; hit = s[(s.index <= ref) & (s >= lvl)]; return int(hit.index.min()) if len(hit) else None
+
+
+print(f'{"series":22s} ' + '  '.join(f'{"25%/"+str(ref)+"/w"+str(win):>14s}' for ref in (1850, 1830) for win in (3, 5, 9)))
+for lab, s in [('coal barge', bg['coal barge']), ('coal wharf', bg['coal wharf']), ('canal (unigram)', ng['canal']), ('coal-by-water group', g_water), ('steam engine', bg['steam engine']), ('steam power', bg['steam power']), ('coal-by-steam group', g_steam)]:
+    print(f'{lab:22s} ' + '  '.join(f'{str(thr(s, .25, ref, win)):>14s}' for ref in (1850, 1830) for win in (3, 5, 9)))

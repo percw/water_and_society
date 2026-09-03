@@ -66,6 +66,6 @@ Master log for tracking limitations and their resolution across iterations.
 | 22 | Binary 1761 treatment cannot separate the two canal waves | `resolved` | Continuous dose: cumulative canal miles from 155 completion years; corroborated by 152 Priestley (1831) authorisations. `fetch_external.py`, `regime_analysis.py` §3 | 06 |
 | 23 | Precondition claim needs sequence + dependence, not a horse race | `resolved` | Local projections canal→coal→steam hp→GDPpc; steam raises GDPpc only post-1830. `mechanism_analysis.py` §8 | 06 |
 | 24 | Steam proxied by print frequency | `in-progress` | Kanefsky (1979)/Crafts (2004) horsepower benchmarks interpolated; engine counts by decade (Kanefsky & Robey 1980) still to add | 06 |
-| 25 | Canal dose endogenous (past coal/pop growth predicts openings, p≤0.03) | `pending` | Acknowledged §7.1. County panel with CAMPOP waterways + coal deposits is the next design | 06 |
+| 25 | Canal dose endogenous (past coal/pop growth predicts openings, p≤0.03) | `in-progress` | §4.2 predetermined doses (stock lagged 10/15 yrs; Priestley authorisation count lagged 10 yrs) reproduce the pattern; anticipation acknowledged §7.1. County panel with CAMPOP waterways is the remaining design | 06 |
 | 26 | Mediation decomposition not identified with quadratic trend | `resolved` | Reported as negative result; sequencing rests on local projections | 06 |
 | 27 | Citation errors (Bogart 2024 → 2014 chapter; MPD 2023 → Bolt & van Zanden 2024) | `resolved` | References rewritten; DOIs verified via Crossref | 06 |

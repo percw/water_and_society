@@ -431,6 +431,16 @@ a first-difference model with ten lags of new mileage, and a horse race
 that adds installed steam horsepower and a dummy for war years.
 Coefficients that survive all four are the ones we build on.
 
+\textbf{Predetermined doses.} Canals were promoted where trade was
+growing, so the contemporaneous stock is not exogenous. We therefore
+also use two doses fixed before the outcome window: the completion-based
+stock lagged ten and fifteen years, and the cumulative number of canals
+\emph{authorised} by Act of Parliament, from Priestley, lagged ten
+years. An Act precedes opening by seven years on average and cannot
+respond to output after it is passed. These doses remove contemporaneous
+feedback; they do not remove anticipation, and we test for it directly
+by regressing new authorisations on past output growth.
+
 \textbf{Sequencing by local projection.} To test the chain water → coal
 → steam → income per head, we estimate local projections in the sense of
 Jordà (Jordà 2005): the change in the log outcome over horizons of one
@@ -460,7 +470,13 @@ result and rest the sequencing evidence on the local projections.
 \textbf{Semantic sequencing.} For each bigram group we record the first
 year in which the five-year moving average reaches 10, 25 and 50 per
 cent of its 1850 level, and the year in which ``steam engine'' overtakes
-``fire engine'' in print.
+``fire engine'' in print. Because the British sub-corpus is thin before
+1780, we repeat the 25 per cent threshold with three-, five- and
+nine-year windows and with 1830 as well as 1850 as the reference year,
+and report whether the ordering survives. We also re-estimate the steam
+links of the chain with the print frequency of ``steam engine'' in place
+of interpolated horsepower, as an independent, if noisier, measure of
+steam's diffusion.
 
 \textbf{Cross-country.} We re-estimate the two-way fixed-effects
 difference-in-differences of the earlier version on log GDP per head,
@@ -697,12 +713,28 @@ since the canals were dug to move it. The second is that the placebo
 rows behave. Income per head does not respond to canals in any
 specification, and agriculture's only significant coefficient is
 negative, in first differences, which is the structural shift away from
-farming rather than an effect on farming. We note, and return to in
-Section 7, that the reverse regression is not empty: past growth in
-coal, total output and population predicts subsequent canal openings.
-Canals were built where demand was growing. The dose is not exogenous,
-and we do not claim that it is; what we claim is that its timing and
-incidence are those of a precondition.
+farming rather than an effect on farming.
+
+The reverse regression is not empty: past growth in coal, total output
+and population predicts subsequent canal openings, and past coal growth
+predicts new parliamentary authorisations with a joint p-value below
+0.001. Canals were built where demand was growing. The predetermined
+doses address the contemporaneous part of this. With the completion
+stock lagged ten or fifteen years, coal responds by 48 to 49 per cent
+per thousand miles, industry by 40 to 43, population by 24 to 25, and
+income per head by nothing, the same pattern as Table 3. With the
+parliamentary authorisation count lagged ten years, each ten canals
+authorised is followed by 12 per cent more coal, 10 per cent more
+industrial output and 6 per cent more population, again with no response
+in income per head. Under a quadratic trend the authorisation dose keeps
+its coefficient for coal at the 7 per cent level and for population and
+services at 5 per cent, and loses it for industry. In local projections
+the authorisation dose predicts coal at every horizon from five to
+twenty years and does not predict population, income per head or
+agriculture. Coal is, once more, the channel that survives everything.
+The dose is not exogenous, and we do not claim that it is; what we claim
+is that its timing and incidence, under both contemporaneous and
+predetermined measures, are those of a precondition.
 
 \subsection{4.3 The precondition chain}\label{the-precondition-chain}
 
@@ -745,6 +777,17 @@ phenomenon. Canals raise coal and population (the population response is
 significant) and leave income per head where it was. The bottom-right
 panel, agriculture, is negative at intermediate horizons, again the
 composition effect, and returns to zero.
+
+Because the horsepower series is interpolated, we re-estimate the steam
+links with the print frequency of ``steam engine'', which correlates at
+0.90 with interpolated horsepower over 1760--1870 but varies year to
+year. The ordering survives, more weakly: the canal stock predicts
+``steam engine'' at ten years (p = 0.06) and coal output predicts it at
+twenty (p = 0.003), while ``steam engine'' does not predict income per
+head on either sample. Print frequency records that engines were being
+discussed, not how much power they supplied, so the last link of the
+chain has to rest on the horsepower benchmarks and on the 1818 break in
+income per head.
 
 The chain, read from Figure 3, is: canals raise coal within a decade;
 canals and coal are followed by steam capacity over one to two decades;
@@ -849,6 +892,16 @@ equal-weighted ``coal barge'', ``coal wharf'', ``coal boat'', ``canal
 boat''. Coal-by-steam: ``steam engine'', ``steam power'', ``steam
 boat''. Source: Google Books Ngram, eng\_gb\_2019.
 
+The ordering does not depend on the smoothing or the reference year.
+Across three-, five- and nine-year windows and with 1830 or 1850 as
+reference, ``coal barge'' reaches a quarter of its reference level in
+1780--1781, ``canal'' in 1763--1766, ``steam engine'' in 1807--1809 and
+``steam power'' in 1822--1826; the coal-by-water group crosses between
+1785 and 1801 and the coal-by-steam group between 1810 and 1813 in every
+combination. The one sensitive term is ``coal wharf'', which crosses in
+1776 against an 1830 reference and in 1800 against 1850, and in both
+cases before the steam terms.
+
 The corpus also tells us what kind of thing the infrastructure
 vocabulary measures. The frequency of ``canal'' correlates at 0.91 with
 the cumulative mileage of canals in existence over 1740--1850 and at
@@ -873,9 +926,9 @@ log gap places the single break in 1807, with the next-best candidates
 post-1761 bin is significant until the one beginning 45 years after
 treatment.
 
-Figure 4(a) shows what happened in 1807. Britain's income per head,
-indexed to 1790, stood at 106 in 1805 and 110 in 1815. The Netherlands'
-fell from 100 in 1805 to 63 in 1808 and was still at 72 in 1815. Table 6
+Figure 4 shows what happened in 1807. Britain's income per head, indexed
+to 1790, stood at 106 in 1805 and 110 in 1815. The Netherlands' fell
+from 100 in 1805 to 63 in 1808 and was still at 72 in 1815. Table 6
 gives the drawdowns for the whole panel. Between the late 1780s and the
 Napoleonic trough the Netherlands lost 44 per cent of its income per
 head, Portugal 48, Sweden 27, France 22 and Spain 13. Britain lost 1.4
@@ -907,18 +960,15 @@ Germany & 1,820 (1792) & 1,725 (1805) & −5.2\% & +8.1\% \\
 \end{longtable}
 }
 
-Figure 4: Why a cross-country difference-in-differences on GDP per head
-cannot identify a canal-era effect. (a) GDP per head, 1790 = 100, for
-Britain, France and the Netherlands, with the war years shaded and the
-estimated break in the Britain--controls gap. (b) Britain's log GDP per
-head relative to two control groups, normalised to 1751--60. Source:
+Figure 4: The 1807 ``break'' in the cross-country design is the Dutch
+collapse. GDP per head, 1790 = 100, for Britain, France and the
+Netherlands, with the Revolutionary and Napoleonic war years shaded and
+the estimated break in the Britain--controls gap marked. Source:
 Maddison Project Database 2023.
 
-Changing the control group does not rescue the design. Figure 4(b) plots
-Britain's log gap relative to the Netherlands and France and relative to
-France, Sweden, Germany and Spain, normalised to 1751--60. Against the
-second group Britain's relative position rises in the 1760s and again in
-the 1790s, but it was also rising from 1700 to 1720, so the
+Changing the control group does not rescue the design. Against France,
+Sweden, Germany and Spain Britain's relative position rises in the 1760s
+and again in the 1790s, but it was also rising from 1700 to 1720, so the
 pre-treatment bins of the event study are significantly negative and
 parallel trends fail in the opposite direction. The 1790s step is again
 a control-side collapse. And underneath all of this is the fact
@@ -939,8 +989,7 @@ total output grew 240 per cent. The next European economy, Germany, grew
 124 per cent; France 50; the Netherlands 9. Britain's population grew
 148 per cent, more than any European country except Sweden's 104, and
 Britain alone among them combined that population growth with a rise in
-income per head of 37 per cent. Figure 6 juxtaposes this with the power
-benchmarks.
+income per head of 37 per cent.
 
 \textbf{Table 7: Growth between Maddison benchmark years, per cent}
 
@@ -976,12 +1025,6 @@ Netherlands & −11 & +23 & +9 & +47 \\
 China & −43 & +176 & +58 & +7 \\
 \end{longtable}
 }
-
-Figure 6: Steam was a minority power source when Britain's aggregate
-divergence was already established. (a) Installed steam and water
-horsepower, thousands, log scale. (b) Growth of total real GDP
-1700--1820. Sources: Kanefsky (1979) via Crafts (2004); Maddison Project
-Database 2023.
 
 The Dutch row deserves attention because it is the comparative case
 Tvedt's argument needs. The Netherlands had the densest network of
@@ -1178,13 +1221,18 @@ national time series, and it carries the limitations of that design.
 Canals were built where coal and people were. The reverse regressions
 confirm it: ten years of past growth in coal, total output or population
 predicts subsequent canal openings, with joint p-values of 0.002 to
-0.03. The dose-response coefficients in Table 3 are therefore not causal
-effects of an exogenous treatment. What the design can establish is that
-the canal stock precedes coal output by five to twenty years in the
-local projections, that the relationship survives a quadratic trend for
-coal but not for industry or total output, and that the placebo series
-do not respond. Turnbull's regional evidence and Alvarez-Palau, Bogart,
-Satchell and Shaw-Taylor's market-access estimates supply the
+0.03, and past coal growth predicts new parliamentary authorisations.
+The dose-response coefficients in Table 3 are therefore not causal
+effects of an exogenous treatment. The predetermined doses in Section
+4.2, the lagged stock and the lagged authorisation count, remove
+contemporaneous feedback and leave the pattern intact, but they cannot
+remove anticipation: a promoter who expected coal demand to grow would
+seek an Act in advance of it. What the design can establish is that the
+canal stock precedes coal output by five to twenty years under every
+measure of the dose, that the relationship survives a quadratic trend
+for coal but not for industry or total output, and that the placebo
+series do not respond. Turnbull's regional evidence and Alvarez-Palau,
+Bogart, Satchell and Shaw-Taylor's market-access estimates supply the
 cross-sectional identification this paper lacks (Turnbull 1987;
 Alvarez-Palau et al.~2024); a county panel joining the Cambridge Group's
 waterway reconstruction to coal output and population is the natural
@@ -1213,12 +1261,15 @@ Kanefsky's estimates exist at four benchmark dates within our sample
 (1760, 1800, 1830, 1870). The interpolated annual series is log-linear
 between them, so the local projections involving steam identify ordering
 across benchmarks rather than annual dynamics, and their standard errors
-understate the true uncertainty. Replacing the interpolation with the
-engine counts by decade in Kanefsky and Robey would tighten the second
-and third links of the chain (Kanefsky and Robey 1980). The finding that
-steam raises income per head only on the sample extending past 1830 does
-not depend on the interpolation; it follows from the 1818 break in
-income per head and the 1833 crossover in installed power.
+understate the true uncertainty. We have checked the second link against
+the print frequency of ``steam engine'', which is annual and independent
+of Kanefsky, and it holds, weakly; the print series cannot check the
+third link because it measures discussion rather than capacity.
+Replacing the interpolation with the engine counts by decade in Kanefsky
+and Robey would tighten both links (Kanefsky and Robey 1980). The
+finding that steam raises income per head only on the sample extending
+past 1830 does not depend on the interpolation; it follows from the 1818
+break in income per head and the 1833 crossover in installed power.
 
 \subsection{7.4 Agriculture is an imperfect
 placebo}\label{agriculture-is-an-imperfect-placebo}
@@ -1235,11 +1286,13 @@ speech}\label{text-frequencies-measure-print-not-speech}
 
 The Google Books corpus over-represents technical and legal publishing,
 and its British-English sub-corpus is small in the eighteenth century,
-so bigram frequencies before 1770 are noisy. We use thresholds of the
-1850 level rather than absolute frequencies for that reason, and we use
-groups of terms rather than single terms where we can. ``Coal barge''
-reaching a quarter of its mid-century frequency in 1781 is robust to the
-smoothing window; the exact year is not.
+so bigram frequencies before 1770 are noisy. We use thresholds of a
+reference level rather than absolute frequencies for that reason, and we
+use groups of terms rather than single terms where we can. The ordering
+of water terms before steam terms holds for every combination of
+smoothing window and reference year we tried; individual crossing years
+move by one or two years, and ``coal wharf'' by more. The exact years
+should be read as decades.
 
 \subsection{7.6 What the cross-country data cannot
 do}\label{what-the-cross-country-data-cannot-do}

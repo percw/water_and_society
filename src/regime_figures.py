@@ -64,20 +64,14 @@ for ax in axs[:, 0]: ax.set_ylabel('Cumulative log response')
 fig.suptitle('Figure 3. Local projections along the precondition chain (95% HAC bands). Per 1,000 canal miles, or per log point of the regressor.', x=0.01, ha='left', fontsize=10)
 fig.tight_layout(); fig.savefig(OUT / 'fig3_local_projections.png'); plt.close(fig)
 
-# Figure 4 — war confound
-fig, axs = plt.subplots(1, 2, figsize=(10, 4))
-ax = axs[0]
+# Figure 4 — war confound (single panel)
+fig, ax = plt.subplots(figsize=(7.5, 4))
 for c, lab, ls, col in [('GBR', 'Britain', '-', C['k']), ('FRA', 'France', '--', C['g']), ('NLD', 'Netherlands', ':', C['a'])]:
     s = w[c].loc[1780:1830] / w.loc[1790, c] * 100; ax.plot(s.index, s, ls, color=col, lw=1.5, label=lab)
 ax.axvspan(1793, 1815, color=C['l'], alpha=.35, lw=0); ax.text(1794, 122, 'Revolutionary and Napoleonic Wars', fontsize=7, color=C['g']); ax.axvline(1807, color=C['g'], lw=.8, ls='-.')
-ax.set_ylim(50, 125); ax.set_ylabel('GDP per capita, 1790 = 100'); ax.set_title('(a) The 1807 "break" is the Dutch collapse', loc='left'); ax.legend(loc='lower left')
-ax = axs[1]
-lw_ = np.log(w); gap = lw_['GBR'] - lw_[['NLD', 'FRA']].mean(axis=1); gap2 = lw_['GBR'] - lw_[['FRA', 'SWE', 'DEU', 'ESP']].mean(axis=1)
-ax.plot(gap.index, gap - gap.loc[1751:1760].mean(), color=C['k'], lw=1.4, label='vs Netherlands + France')
-ax.plot(gap2.index, gap2 - gap2.loc[1751:1760].mean(), '--', color=C['g'], lw=1.4, label='vs France, Sweden, Germany, Spain')
-ax.axhline(0, color=C['l'], lw=.8); ax.axvline(1761, color=C['g'], lw=.8, ls='-.'); ax.set_xlim(1700, 1900); ax.set_ylabel('Log gap relative to 1751–60')
-ax.set_title('(b) Britain\'s per-capita lead over controls', loc='left'); ax.legend(loc='upper left')
-fig.suptitle('Figure 4. Why a cross-country DiD on GDP per capita cannot identify a canal-era effect', x=0.01, ha='left', fontsize=10)
+ax.text(1807.5, 52, 'estimated break in the\nBritain–controls gap', fontsize=7, color=C['g'])
+ax.set_ylim(50, 125); ax.set_ylabel('GDP per capita, 1790 = 100'); ax.legend(loc='lower left')
+ax.set_title('Figure 4. The 1807 "break" in the cross-country design is the Dutch collapse', loc='left')
 fig.tight_layout(); fig.savefig(OUT / 'fig4_war_confound.png'); plt.close(fig)
 
 # Figure 5 — semantic sequencing
@@ -88,13 +82,4 @@ for col, lab, ls, c in [('canal', '“canal”', '-', C['k']), ('coal_by_water',
 ax.set_ylim(0, 130); ax.set_ylabel('Frequency, 1850 = 100 (5-year mean)'); ax.legend(loc='upper left'); ax.set_title('Figure 5. In print, coal travels by water before it is burned in engines (Google Books, British English)', loc='left')
 fig.tight_layout(); fig.savefig(OUT / 'fig5_semantic_sequence.png'); plt.close(fig)
 
-# Figure 6 — power capacity and the 1700-1820 benchmark
-fig, axs = plt.subplots(1, 2, figsize=(10, 4))
-hp4 = hp.loc[1760:1870]; ax = axs[0]; ax.plot(hp4.index, hp4.steam_hp_k, 'o-', color=C['k'], lw=1.4, label='Steam'); ax.plot(hp4.index, hp4.water_hp_k, 's--', color=C['a'], lw=1.4, label='Water'); ax.set_yscale('log')
-ax.set_ylabel('Installed horsepower, thousands (log)'); ax.set_title('(a) Water out-powers steam until 1830', loc='left'); ax.legend(loc='upper left'); ax.set_xticks(hp4.index)
-ax = axs[1]; bench = pd.DataFrame({'Britain': 240, 'Germany': 124, 'Belgium': 85, 'Portugal': 75, 'Spain': 69, 'France': 50, 'Sweden': 44, 'Netherlands': 9}, index=['g']).T.sort_values('g')
-ax.barh(bench.index, bench.g, color=[C['k'] if i == 'Britain' else C['l'] for i in bench.index]); ax.set_xlabel('Growth of total real GDP 1700–1820, per cent')
-ax.set_title('(b) The pre-steam divergence in benchmark years', loc='left')
-fig.suptitle('Figure 6. Steam was a minority power source when Britain\'s aggregate divergence was already established', x=0.01, ha='left', fontsize=10)
-fig.tight_layout(); fig.savefig(OUT / 'fig6_power_benchmark.png'); plt.close(fig)
 print('wrote', sorted(p.name for p in OUT.glob('fig*_*.png')))

@@ -55,5 +55,5 @@ Keep Maddison, but only: (a) benchmark-year growth 1700→1820 (Britain total GD
 3. ◐ Steam measured as Kanefsky (1979)/Crafts (2004) horsepower benchmarks, log-interpolated (`power_hp.csv`). Kanefsky–Robey engine counts by decade still to add.
 4. ✅ Coal-by-water vs coal-by-steam bigram sequencing (`mechanism_analysis.py` §10, Figure 5, Table 5).
 5. ✅ Decided against DML for the within-Britain series (over-fits trend on 130 obs); linear local projections used; mediation reported as a negative result (§9).
-6. ✅ Manuscript rewritten (all sections), six new figures, seven tables, references verified via Crossref, JGH build scripts and replication package updated.
+6. ✅ Manuscript rewritten (all sections), five figures, seven tables, references verified via Crossref, JGH build scripts and replication package updated.
 7. ☐ Next: county panel with CAMPOP waterways + coal deposits for cross-sectional identification (requires GIS or the Cambridge Group's tabulated data); author biography for the JGH title page; double spacing in Word.

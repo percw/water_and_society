@@ -24,7 +24,7 @@
 | Anonymity | Fully anonymised manuscript; author details on separate title page | ✅ repository URL redacted; no author names in body |
 | Title page | Author, affiliation, email, ORCID (optional), biography ≤100 words, funding, competing interests | ✅ 62-word biography in `author_config.ini`; ORCID to be pasted |
 | Spacing | Double-spaced text | ✅ body double-spaced by `build_submission.py` (footnotes, tables single) |
-| Figures | Digital, ≥300 dpi, individual files, captions in text with sources | ✅ `data/fig1…fig6` at 300 dpi, grayscale-safe; captions with sources in manuscript |
+| Figures | Digital, ≥300 dpi, individual files, captions in text with sources | ✅ `data/fig1…fig5` at 300 dpi, grayscale-safe; captions with sources in manuscript |
 | Tables | In text | ✅ seven tables |
 | Data availability | Encouraged | ✅ statement + public repository + replication ZIP |
 | Competing interests | Mandatory declaration | ✅ on title page |

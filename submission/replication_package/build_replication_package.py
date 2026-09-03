@@ -51,7 +51,6 @@ INCLUDE_FILES = {
     "data/fig3_local_projections.png": "figures/fig3_local_projections.png",
     "data/fig4_war_confound.png": "figures/fig4_war_confound.png",
     "data/fig5_semantic_sequence.png": "figures/fig5_semantic_sequence.png",
-    "data/fig6_power_benchmark.png": "figures/fig6_power_benchmark.png",
     "data/did_event_study.png": "figures/earlier_version_did_event_study.png",
 
     # Results logs

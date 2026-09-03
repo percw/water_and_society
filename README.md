@@ -35,14 +35,14 @@ src/
   fetch_external.py      Bank of England millennium data, Maddison 2023, canal list [new]
   regime_analysis.py     War confound, two regimes, canal dose, benchmarks, NLP proxy [new]
   mechanism_analysis.py  Horsepower, local projections, mediation, bigram sequencing [new]
-  regime_figures.py      Figures 1–6 for the paper                                  [new]
+  regime_figures.py      Figures 1–5 for the paper                                  [new]
   did_analysis.py        Cross-country DiD / event study / placebos (Section 4.6)   [original]
   dml_analysis.py        Cross-country DML (replication of the earlier version)     [original]
 data/
   external/              Tidy CSVs: boe_gb, mpd_panel, uk_canals_wiki, canal_cum_miles,
                          power_hp, priestley_1831_acts, ngram_bigrams_coal_transport
   external/raw/          Downloaded xlsx and OCR text (git-ignored; fetch_external.py)
-  fig1_…fig6_*.png       Paper figures
+  fig1_…fig5_*.png       Paper figures
   did_*.png              Figures of the earlier version
 docs/
   strategy_v2.md         Research strategy and order of work

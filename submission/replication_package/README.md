@@ -25,7 +25,7 @@ code/
   fetch_external.py        Bank of England millennium data, Maddison 2023, canal list -> data/external/*.csv
   regime_analysis.py       Sections 4.1, 4.2, 4.6, 4.7 and the NLP-stock result (Tables 1–3, 6, 7)
   mechanism_analysis.py    Sections 4.3–4.5 (Table 4, 5; Figure 3 inputs; mediation negative result)
-  regime_figures.py        Figures 1–6
+  regime_figures.py        Figures 1–5
   did_analysis.py          Earlier-version cross-country DiD, event study, placebos
   dml_analysis.py          Earlier-version cross-country DML
 data/
@@ -67,7 +67,7 @@ Scripts expect the repository layout (`src/`, `data/`); when running from this p
 | Table 4 | mechanism_analysis §7 | results_mechanism_v1.txt |
 | Table 5, Figure 5 | mechanism_analysis §10 | results_mechanism_v1.txt, semantic_sequence.csv |
 | Table 6, Figure 4, §4.6 | regime_analysis §1; did_analysis.py | results_regime_v1.txt; results_earlier_version_did.txt |
-| Table 7, Figure 6 | regime_analysis §4; mechanism_analysis §7 | results_regime_v1.txt |
+| Table 7 | regime_analysis §4 | results_regime_v1.txt |
 | NLP stock correlation (§4.5) | regime_analysis §5 | results_regime_v1.txt |
 | Mediation (negative result, §3.5) | mechanism_analysis §9 | results_mechanism_v1.txt |
 

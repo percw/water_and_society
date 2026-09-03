@@ -352,7 +352,7 @@ The paper is a quantitative test of the argument Terje Tvedt made in this journa
 
 **Why this journal.** The paper engages Tvedt (2010) directly and extends the Great Divergence debate with the comparative case his argument needs: the Netherlands, with Europe's densest waterways and no coal, grew 9 per cent in total output between 1700 and 1820; Britain, with both, grew 240 per cent. The paper also contains a methodological result for historians who use cross-country difference-in-differences for the long eighteenth century: the apparent British take-off in 1807 in such designs is the Napoleonic collapse of the continental control group. We withdraw an earlier version's estimate on exactly that ground and explain why.
 
-The manuscript is approximately 9,300 words including footnotes and tables, with six figures and seven tables. A full replication package (data, code and documentation) is publicly available at https://github.com/percw/water_and_society.
+The manuscript is approximately 9,300 words including footnotes and tables, with five figures and seven tables. A full replication package (data, code and documentation) is publicly available at https://github.com/percw/water_and_society.
 
 This manuscript has not been submitted to or published in any other journal. {cfg['competing_interests']} {cfg['funding']}
 
@@ -464,7 +464,7 @@ def main():
     print("    1. manuscript_jgh.docx")
     print("    2. title_page.docx        (editors only)")
     print("    3. cover_letter.docx")
-    print("    4. data/fig1_two_regimes.png … data/fig6_power_benchmark.png (six figures)")
+    print("    4. data/fig1_two_regimes.png … data/fig5_semantic_sequence.png (five figures)")
     print()
 
 
