@@ -1,0 +1,141 @@
+
+==============================================================================
+1. WAR CONFOUND IN THE CROSS-COUNTRY DiD (Maddison 2023, GDP per capita)
+==============================================================================
+Trend growth of log GDP per capita, %/yr
+  GBR: 1700-1760: 0.25  1760-1790: 0.08  1790-1815: 0.40  1815-1830: 0.50  1830-1870: 1.19
+  NLD: 1700-1760: 0.03  1760-1790:-0.24  1790-1815:-2.15  1815-1830: 0.78  1830-1870: 0.62
+  FRA: 1700-1760: 0.06  1760-1790: 0.10  1790-1815: 0.61  1815-1830: 1.42  1830-1870: 1.25
+  BEL: 1700-1760:-0.01  1760-1790: 0.13  1790-1815: 0.13  1815-1830: 0.38  1830-1870: 1.48
+  SWE: 1700-1760:-0.53  1760-1790: 0.08  1790-1815:-0.74  1815-1830: 0.48  1830-1870: 0.80
+  DEU: 1700-1760: 0.15  1760-1790: 0.17  1790-1815: 0.14  1815-1830: 0.93  1830-1870: 0.91
+  ESP: 1700-1760: 0.37  1760-1790: 0.24  1790-1815: 0.06  1815-1830: 0.61  1830-1870: 0.55
+
+Peak (1785-95) to trough (1795-1815) drawdown, and 1815 vs 1790
+  GBR: peak   3207 (1795) trough   3161 (1798) drawdown   -1.4%  1815/1790 +13.6%
+  NLD: peak   4666 (1794) trough   2632 (1808) drawdown  -43.6%  1815/1790 -28.3%
+  FRA: peak   2016 (1788) trough   1580 (1801) drawdown  -21.7%  1815/1790  +1.3%
+  BEL: peak   2305 (1795) trough   2305 (1795) drawdown    0.0%  1815/1790  +3.0%
+  SWE: peak   1661 (1791) trough   1221 (1809) drawdown  -26.5%  1815/1790 -11.9%
+  DEU: peak   1820 (1792) trough   1725 (1805) drawdown   -5.2%  1815/1790  +8.1%
+  ESP: peak   1454 (1790) trough   1265 (1811) drawdown  -13.0%  1815/1790  +3.2%
+  PRT: peak   2063 (1785) trough   1072 (1811) drawdown  -48.0%  1815/1790 -24.1%
+  ITA: peak   2512 (1795) trough   2501 (1813) drawdown   -0.4%  1815/1790  -0.2%
+
+Sup-F break in GBR minus mean(NLD,FRA) log gap: (1807, 93.7)
+Share of 1761-1900 level-gap growth (GBR vs NLD+FRA) occurring 1790-1815: 39%
+Sup-F break GBR minus each control (log gdppc): {'NLD': (1808, 166.7), 'FRA': (1792, 84.5), 'SWE': (1855, 92.3), 'DEU': (1844, 85.5), 'ESP': (1835, 26.1)}
+
+TWFE DiD on log GDP per capita, T0=1761, HAC(15) — note pre-trend failures in the event study below
+  NLD+FRA          1700-1790: beta= 0.077 p=0.000 N=273
+  NLD+FRA          1700-1810: beta= 0.137 p=0.000 N=333
+  NLD+FRA          1700-1900: beta= 0.313 p=0.000 N=603
+  FRA only         1700-1790: beta= 0.140 p=0.000 N=182
+  FRA only         1700-1810: beta= 0.197 p=0.000 N=222
+  FRA only         1700-1900: beta= 0.224 p=0.000 N=402
+  FRA,SWE,DEU,ESP  1700-1790: beta= 0.135 p=0.000 N=455
+  FRA,SWE,DEU,ESP  1700-1810: beta= 0.177 p=0.000 N=555
+  FRA,SWE,DEU,ESP  1700-1900: beta= 0.239 p=0.000 N=1005
+
+Event study (10y bins, ref 1751-60), GBR vs NLD+FRA:
+   1691:-0.03(0.12)  1701:-0.09(0.01)  1711:-0.12(0.00)  1721:-0.04(0.16)  1731:-0.00(0.96)  1741:-0.02(0.39)  1761:+0.02(0.30)  1771:+0.01(0.54)  1781:+0.06(0.00)  1791:+0.13(0.00)  1801:+0.23(0.00)  1811:+0.37(0.00)  1821:+0.32(0.00)  1831:+0.32(0.00)  1841:+0.33(0.00)  1851:+0.39(0.00)  1861:+0.39(0.00)  1871:+0.40(0.00)  1881:+0.38(0.00)  1891:+0.39(0.00)
+
+Event study (10y bins, ref 1751-60), GBR vs FRA,SWE,DEU,ESP:
+   1691:-0.13(0.00)  1701:-0.09(0.00)  1711:-0.12(0.00)  1721:-0.06(0.00)  1731:-0.04(0.00)  1741:-0.00(0.98)  1761:+0.09(0.00)  1771:+0.09(0.00)  1781:+0.07(0.00)  1791:+0.16(0.00)  1801:+0.21(0.00)  1811:+0.19(0.00)  1821:+0.13(0.00)  1831:+0.20(0.00)  1841:+0.25(0.00)  1851:+0.29(0.00)  1861:+0.29(0.00)  1871:+0.23(0.00)  1881:+0.22(0.00)  1891:+0.19(0.00)
+
+==============================================================================
+2. BRITAIN: CANAL-ERA REGIME SHIFT (Broadberry et al. 2015 via Bank of England)
+==============================================================================
+Trend growth %/yr
+  1700-1760: GDP=0.55  GDPpc=0.25  Ind=0.47  Agri=0.75  Serv=0.50  Coal=0.87  Iron=0.71  PopGB=0.29
+  1760-1790: GDP=0.82  GDPpc=0.08  Ind=1.16  Agri=0.60  Serv=0.83  Coal=2.05  Iron=1.21  PopGB=0.74
+  1790-1815: GDP=1.58  GDPpc=0.40  Ind=1.81  Agri=0.81  Serv=2.02  Coal=2.85  Iron=5.03  PopGB=1.18
+  1815-1830: GDP=1.98  GDPpc=0.50  Ind=3.64  Agri=0.63  Serv=1.62  Coal=2.84  Iron=6.75  PopGB=1.49
+  1830-1870: GDP=2.35  GDPpc=1.19  Ind=2.85  Agri=0.78  Serv=2.62  Coal=3.57  Iron=5.37  PopGB=1.16
+
+Trend-slope change at 1761 (sample 1700-1830, HAC): pre-slope %/yr, change pp/yr, p
+  GDP      :  0.52 +0.85 (p=0.000)
+  Ind      :  0.39 +1.42 (p=0.000)
+  Coal     :  0.77 +1.62 (p=0.000)
+  Iron     :  0.26 +3.24 (p=0.000)
+  Textiles :  0.69 +1.51 (p=0.000)
+  Serv     :  0.44 +1.07 (p=0.000)
+  PopGB    :  0.23 +0.83 (p=0.000)
+  GDPpc    :  0.29 +0.02 (p=0.824)
+  Agri     :  0.82 -0.04 (p=0.836)
+
+Sup-F single break (level+trend) 1700-1870 and best two breaks
+  GDP      : single (1792, 777.7)   two (1775, 1818)
+  Ind      : single (1789, 909.3)   two (1774, 1823)
+  Serv     : single (1786, 927.4)   two (1775, 1844)
+  Coal     : single (1784, 667.4)   two (1741, 1798)
+  Iron     : single (1786, 1293.8)   two (1786, 1815)
+  Textiles : single (1779, 240.4)   two (1728, 1817)
+  PopGB    : single (1777, 3051.7)   two (1730, 1783)
+  GDPpc    : single (1818, 270.4)   two (1720, 1818)
+  Agri     : single (1728, 4.2)   two (1720, 1757)
+
+Coal output per capita, 1700=100: {1700: 100.0, 1760: 131.0, 1780: 176.0, 1790: 202.0, 1800: 246.0, 1810: 279.0, 1830: 369.0, 1850: 575.0}
+
+==============================================================================
+3. CANAL MILEAGE AS A DOSE (Britain, 1700-1830, pre-railway)
+==============================================================================
+Canal miles opened per decade: {1700: 34, 1710: 10, 1720: 87, 1730: 71, 1740: 0, 1750: 15, 1760: 117, 1770: 353, 1780: 83, 1790: 548, 1800: 479, 1810: 344, 1820: 176, 1830: 129, 1840: 34}
+Cumulative miles: {1760: 218, 1770: 357, 1780: 692, 1790: 772, 1800: 1487, 1810: 1855, 1820: 2151, 1830: 2320}
+
+(a) log y ~ trend + canal miles (000s)                 (b) + quadratic trend + war dummy                (c) horse race: + steam vocab (1830=1)
+  Coal  : (a)   46.5% p=0.000 | (b)   29.8% p=0.001 | (c) canal   40.8% p=0.000, steam   12.6% p=0.079
+  Ind   : (a)   40.1% p=0.000 | (b)   -0.9% p=0.890 | (c) canal   28.8% p=0.000, steam   30.4% p=0.003
+  Iron  : (a)   99.3% p=0.000 | (b)   61.2% p=0.013 | (c) canal   88.2% p=0.000, steam   35.6% p=0.172
+  Serv  : (a)   32.3% p=0.000 | (b)   12.2% p=0.002 | (c) canal   28.4% p=0.000, steam   14.2% p=0.019
+  PopGB : (a)   24.0% p=0.000 | (b)    4.1% p=0.073 | (c) canal   18.6% p=0.000, steam   15.0% p=0.000
+  GDP   : (a)   24.7% p=0.000 | (b)    2.2% p=0.523 | (c) canal   18.8% p=0.000, steam   19.0% p=0.000
+  GDPpc : (a)    0.8% p=0.694 | (b)   -1.9% p=0.609 | (c) canal    0.2% p=0.938, steam    4.0% p=0.082
+  Agri  : (a)   -0.5% p=0.900 | (b)   -5.1% p=0.559 | (c) canal   -1.5% p=0.722, steam    7.3% p=0.069
+
+(d) First differences 1711-1830: Δlog y on Δmiles lags 0..10 (sum of coefficients, joint F)
+  Coal  :  +27.0% per 1,000 miles, joint p=0.000
+  Ind   :  +14.3% per 1,000 miles, joint p=0.000
+  PopGB :  +16.6% per 1,000 miles, joint p=0.000
+  GDP   :   +4.2% per 1,000 miles, joint p=0.254
+  GDPpc :  -12.4% per 1,000 miles, joint p=0.333
+  Agri  :  -18.8% per 1,000 miles, joint p=0.000
+
+(e) Reverse causality: Δmiles_t on Σ_{k=1..10} Δlog y_{t-k}
+  Coal  : sum=+0.602, joint p=0.002
+  Ind   : sum=+0.400, joint p=0.343
+  GDP   : sum=+1.296, joint p=0.026
+  PopGB : sum=+2.401, joint p=0.002
+
+==============================================================================
+4. BENCHMARK YEARS 1700 -> 1820 -> 1870 (Maddison 2023; population is real only at benchmarks)
+==============================================================================
+cc    gdppc 1700-1820      pop  total GDP |  gdppc 1820-70      pop
+GBR              +37%    +148%      +240% |           +76%     +48%
+NLD              -11%     +23%        +9% |           +47%     +55%
+FRA               +3%     +46%       +50% |           +65%     +23%
+BEL               +8%     +72%       +85% |           +82%     +48%
+SWE              -29%    +104%       +44% |           +52%     +62%
+DEU              +35%     +66%      +124% |           +44%     +58%
+ESP              +22%     +39%       +69% |           +16%     +33%
+PRT               +6%     +65%       +75% |            -7%     +31%
+CHN              -43%    +176%       +58% |            +7%      -6%
+JPN              +23%     +15%       +41% |           +20%     +11%
+
+==============================================================================
+5. NLP INDEX AS A STOCK PROXY (eng_gb_2019 "canal" vs canal network)
+==============================================================================
+corr(ngram canal, cumulative miles) 1740-1850:        0.91
+corr(ngram canal, miles opened in 10y window) 1740-1850: -0.04
+Peaks of canal-related vocabulary: {'canal': 1833, 'navigation': 1831, 'inland navigation': 1816, 'canal navigation': 1833}
+
+==============================================================================
+6. SEQUENCING: canal stock -> coal output -> steam (local projections, 1700-1830)
+==============================================================================
+Δ_h log coal on canal stock (000 miles), controlling level and trend:    h=5: +0.294 (p=0.000)  h=10: +0.381 (p=0.000)  h=15: +0.438 (p=0.000)  h=20: +0.435 (p=0.002)
+Δ_h log steam-vocab on canal stock:                                    h=5: +0.430 (p=0.450)  h=10: +0.938 (p=0.093)  h=15: +1.093 (p=0.039)  h=20: +1.225 (p=0.019)
+Δ_h log steam-vocab on log coal output:                                h=5: +0.703 (p=0.375)  h=10: +1.185 (p=0.270)  h=15: +1.100 (p=0.377)  h=20: +0.923 (p=0.445)
+Δ_h log GDP per capita on canal stock:                                 h=5: -0.011 (p=0.452)  h=10: -0.025 (p=0.096)  h=15: -0.014 (p=0.390)  h=20: -0.003 (p=0.870)
+Δ_h log GDP per capita on log steam-vocab:                             h=5: +0.002 (p=0.793)  h=10: -0.011 (p=0.126)  h=15: -0.014 (p=0.001)  h=20: -0.004 (p=0.424)
+
+Reading: canals -> coal -> steam -> per-capita income is the precondition chain (Tvedt 2010).

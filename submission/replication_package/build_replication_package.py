@@ -22,28 +22,42 @@ OUTPUT_DIR = PROJECT_DIR / "submission"
 INCLUDE_FILES = {
     # Core scripts
     "src/fetch_data.py": "code/fetch_data.py",
+    "src/fetch_external.py": "code/fetch_external.py",
+    "src/regime_analysis.py": "code/regime_analysis.py",
+    "src/mechanism_analysis.py": "code/mechanism_analysis.py",
+    "src/regime_figures.py": "code/regime_figures.py",
     "src/did_analysis.py": "code/did_analysis.py",
     "src/dml_analysis.py": "code/dml_analysis.py",
 
     # Dependencies
     "requirements.txt": "requirements.txt",
 
-    # Data outputs (CSV only — reproducible from scripts)
-    "data/maddison_gdp.csv": "data/maddison_gdp.csv",
+    # Data (tidy CSVs; raw downloads regenerate via fetch_external.py)
+    "data/maddison_real_gdp.csv": "data/maddison_real_gdp.csv",
     "data/ngram_english.csv": "data/ngram_english.csv",
+    "data/external/boe_gb.csv": "data/external/boe_gb.csv",
+    "data/external/mpd_panel.csv": "data/external/mpd_panel.csv",
+    "data/external/uk_canals_wiki.csv": "data/external/uk_canals_wiki.csv",
+    "data/external/canal_cum_miles.csv": "data/external/canal_cum_miles.csv",
+    "data/external/priestley_1831_acts.csv": "data/external/priestley_1831_acts.csv",
+    "data/external/power_hp.csv": "data/external/power_hp.csv",
+    "data/external/ngram_bigrams_coal_transport.csv": "data/external/ngram_bigrams_coal_transport.csv",
+    "data/external/lp_irfs.csv": "data/external/lp_irfs.csv",
+    "data/external/semantic_sequence.csv": "data/external/semantic_sequence.csv",
 
-    # Figures (for reviewer reference)
-    "data/did_figure_one.png": "figures/did_figure_one.png",
-    "data/did_event_study.png": "figures/did_event_study.png",
-    "data/did_vocab_tournament.png": "figures/did_vocab_tournament.png",
-    "data/did_channel_decomposition.png": "figures/did_channel_decomposition.png",
-    "data/did_parallel_trends.png": "figures/did_parallel_trends.png",
-    "data/did_permutation_test.png": "figures/did_permutation_test.png",
-    "data/did_regression_results.png": "figures/did_regression_results.png",
-    "data/did_subperiod.png": "figures/did_subperiod.png",
+    # Figures
+    "data/fig1_two_regimes.png": "figures/fig1_two_regimes.png",
+    "data/fig2_canal_dose.png": "figures/fig2_canal_dose.png",
+    "data/fig3_local_projections.png": "figures/fig3_local_projections.png",
+    "data/fig4_war_confound.png": "figures/fig4_war_confound.png",
+    "data/fig5_semantic_sequence.png": "figures/fig5_semantic_sequence.png",
+    "data/fig6_power_benchmark.png": "figures/fig6_power_benchmark.png",
+    "data/did_event_study.png": "figures/earlier_version_did_event_study.png",
 
-    # Results log
-    "docs/results.txt": "output/results.txt",
+    # Results logs
+    "docs/results_regime_v1.txt": "output/results_regime_v1.txt",
+    "docs/results_mechanism_v1.txt": "output/results_mechanism_v1.txt",
+    "docs/results_v5.txt": "output/results_earlier_version_did.txt",
 
     # Manuscript
     "archive/paper/compiled_manuscript.md": "manuscript/compiled_manuscript.md",

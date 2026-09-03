@@ -1,0 +1,77 @@
+
+==============================================================================
+7. INSTALLED POWER: STEAM vs WATER HORSEPOWER (Kanefsky 1979 via Crafts 2004)
+==============================================================================
+      steam_hp_k  water_hp_k  wind_hp_k
+Year                                   
+1760           5          70         10
+1800          35         120         15
+1830         160         160         20
+1870        2060         230         10
+
+Steam share of stationary power (interpolated): {1760: '6%', 1780: '11%', 1800: '21%', 1810: '28%', 1820: '37%', 1830: '47%', 1840: '61%', 1850: '74%', 1870: '90%'}
+Steam overtakes water + wind: 1833
+Coal output per unit of installed steam hp (1760=100), i.e. how much coal moved without steam: {1760: 100, 1780: 58, 1800: 37, 1830: 19, 1850: 10, 1870: 6}
+
+==============================================================================
+8. LOCAL PROJECTIONS ALONG THE CHAIN (1760-1830 for steam hp; 1700-1830 otherwise)
+==============================================================================
+Δ_h log coal        on canal stock (000 mi)               h=5: +0.294 (p=0.000)  h=10: +0.381 (p=0.000)  h=15: +0.438 (p=0.000)  h=20: +0.435 (p=0.002)
+Δ_h log coal        on canal stock, + log steam hp controlh=5: +0.207 (p=0.000)  h=10: +0.208 (p=0.006)  h=15: +0.022 (p=0.728)  h=20: -0.044 (p=0.294)
+Δ_h log steam hp    on canal stock                        h=5: +0.018 (p=0.000)  h=10: +0.031 (p=0.000)  h=15: +0.032 (p=0.000)  h=20: +0.026 (p=0.001)
+Δ_h log steam hp    on log coal output                    h=5: +0.009 (p=0.032)  h=10: +0.009 (p=0.348)  h=15: +0.011 (p=0.370)  h=20: +0.010 (p=0.446)
+Δ_h log steam hp    on log coal, + canal stock control    h=5: +0.004 (p=0.027)  h=10: +0.003 (p=0.645)  h=15: +0.008 (p=0.449)  h=20: +0.011 (p=0.390)
+Δ_h log water hp    on canal stock                        h=5: -0.034 (p=0.000)  h=10: -0.060 (p=0.000)  h=15: -0.062 (p=0.000)  h=20: -0.050 (p=0.001)
+Δ_h log industry    on canal stock                        h=5: +0.257 (p=0.000)  h=10: +0.340 (p=0.000)  h=15: +0.340 (p=0.000)  h=20: +0.372 (p=0.000)
+Δ_h log industry    on log steam hp                       h=5: +4.165 (p=0.000)  h=10: +5.816 (p=0.000)  h=15: +7.878 (p=0.000)  h=20: +11.356 (p=0.000)
+Δ_h log GDP/capita  on canal stock                        h=5: -0.011 (p=0.452)  h=10: -0.025 (p=0.096)  h=15: -0.014 (p=0.390)  h=20: -0.003 (p=0.870)
+Δ_h log GDP/capita  on log steam hp                       h=5: -0.594 (p=0.266)  h=10: -0.920 (p=0.188)  h=15: -0.681 (p=0.433)  h=20: +0.548 (p=0.708)
+Δ_h log GDP/capita  on log steam hp, sample 1760-1870     h=5: +0.553 (p=0.000)  h=10: +0.655 (p=0.000)  h=15: +0.828 (p=0.000)  h=20: +0.896 (p=0.000)
+Δ_h log population  on canal stock                        h=5: +0.034 (p=0.029)  h=10: +0.057 (p=0.005)  h=15: +0.066 (p=0.000)  h=20: +0.059 (p=0.013)
+Δ_h log agriculture on canal stock (placebo)              h=5: -0.051 (p=0.108)  h=10: -0.081 (p=0.001)  h=15: -0.058 (p=0.022)  h=20: -0.023 (p=0.443)
+
+==============================================================================
+9. MEDIATION: canal stock -> coal -> outcome (linear, 1700-1830, moving-block bootstrap)
+==============================================================================
+industry       : total   -3.8% [-23.2,+14.5] | via coal   +8.4% [-1.0,+22.0] | direct  -12.2% [-28.0,+5.5] | mediated share -224%
+population     : total   +3.2% [-3.7,+8.0] | via coal   +1.1% [-0.6,+2.9] | direct   +2.1% [-3.9,+7.1] | mediated share 35%
+GDP per capita : total   +0.2% [-8.8,+13.4] | via coal   +0.7% [-1.1,+5.7] | direct   -0.4% [-10.9,+12.8] | mediated share 285%
+services       : total  +15.1% [+1.5,+24.0] | via coal   -0.7% [-2.9,+2.3] | direct  +15.8% [+1.2,+24.0] | mediated share -5%
+(effects per 1,000 canal miles, quadratic trend controlled; 95% block-bootstrap intervals)
+Reading: with a quadratic trend absorbed, the mediation decomposition is NOT identified on 130 annual observations —
+         intervals span zero for every path. The sequencing evidence rests on the local projections (section 8), not on this table.
+
+==============================================================================
+10. SEMANTIC SEQUENCING: coal moved by water before coal burned in engines (eng_gb_2019 bigrams)
+==============================================================================
+series                            10% of 1850    25%    50%
+coal-by-water bigrams                    1780   1800   1817
+canal boat                               1812   1823   1825
+coal wharf                               1774   1800   1815
+coal barge                               1753   1781   1783
+"canal" (unigram)                        1743   1763   1809
+coal-by-steam bigrams                    1806   1811   1813
+steam engine                             1800   1808   1821
+steam power                              1821   1826   1831
+coal field                               1788   1820   1831
+fire engine (18th-c. term)               1744   1747   1750
+
+"steam engine" overtakes "fire engine" in print: 1800
+"water carriage"/"land carriage" ratio: 1750 0.79, 1790 0.50, 1810 0.68, 1840 0.63
+Cross-correlation log coal-by-water_t with log coal-by-steam_{t-k} (k<0: steam leads; k>0: water leads): k=-30:0.50  k=-25:0.51  k=-20:0.56  k=-15:0.49  k=-10:0.47  k=-5:0.58  k=0:0.53  k=5:0.52  k=10:0.60  k=15:0.54  k=20:0.51  k=25:0.52  k=30:0.48
+
+==============================================================================
+11. PARLIAMENTARY AUTHORISATION (Priestley 1831, OCR-parsed; provisional)
+==============================================================================
+152 navigations with regnal act years parsed; first-act decade counts (canals only):
+first_act
+1700     5
+1710     1
+1760     2
+1770     7
+1780     8
+1790    30
+1800     8
+1810    11
+1820     4
+canals first authorised 1760-1829: 70, of which 1790-1799: 30

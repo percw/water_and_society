@@ -1,134 +1,179 @@
 # 4. Results
 
-The following sections report the empirical findings from our multi-method analysis, documenting the association between the 1761 infrastructure shock and Britain's subsequent economic divergence.
+## 4.1 Two growth regimes
 
-### 4.1 Summary Statistics
-Table 1 provides descriptive statistics for the core analytical panel (1700–1900), encompassing annual GDP per capita observations for Great Britain (treatment) and the continental controls (France and the Netherlands).
-
-**Table 1: Summary Statistics (1700–1900)**
-
-| Variable | Obs | Mean | Std. Dev. | Min | Max |
-|:---|---:|---:|---:|---:|---:|
-| GDP per Capita (2011 int'l $) | 603 | 1950.4 | 845.2 | 890.0 | 4520.0 |
-| Log GDP per Capita | 603 | 7.48 | 0.42 | 6.79 | 8.41 |
-| Treated (GBR=1) | 603 | 0.33 | 0.47 | 0.00 | 1.00 |
-| Post (Year $\ge$ 1761) | 603 | 0.67 | 0.47 | 0.00 | 1.00 |
-| DiD Interaction | 603 | 0.22 | 0.42 | 0.00 | 1.00 |
-
-### 4.2 The 1761 Exogenous Infrastructure Shock & NLP Crossover
-To establish a rigorous causal basis, we anchor our analysis to the 1761 opening of the Bridgewater Canal—a universally recognized exogenous infrastructure shock that catalyzed the canal mania era.
-
-We validate this physical shock using trajectory analysis of the `eng_gb_2019` vocabulary corpus, which reveals a marked semantic shift shortly thereafter. Analysis of 71 key technological and social terms indicates that in the year **1766**—exactly five years post-shock—the frequency of "commodified water" terminology crossed and overtook naturalistic or hazard-based uses of water terminology.
-
-This sequential alignment is consistent with the physical 1761 shock transforming water culturally from an uncontrollable natural force into a harnessed, engineered asset. This dynamic is presented in **Figure 1**, which plots the linguistic shift relative to the exogenous shock and the concurrent takeoff of British GDP per capita.
+Figure 1 plots the British series on a logarithmic scale with the two canal-building waves shaded. Panel (a) shows total output, population and income per head; panel (b) shows coal, industry and agriculture. The visual impression is of a fan opening after 1760: total output and population steepen together while income per head continues at its previous slope until the 1820s. Agriculture never steepens at all.
 
 <div align="center">
-  <img src="../../data/did_figure_one.png" alt="Figure 1: Identification of the British Hydro-Social Shift" width="800">
+  <img src="../../data/fig1_two_regimes.png" alt="Figure 1: Britain's two growth regimes" width="800">
   <br>
-  <em><strong>Figure 1: Identification of the British Hydro-Social Shift.</strong> The data plots the normalized rolling frequencies of technical hydro-infrastructure vocabulary against fossil/steam terminology. The exogenous infrastructural shock ($T_0=1761$) precedes a measurable cultural shift, culminating in the formal semantic crossover five years later (1766). This structural break sequence aligns with the initial takeoff of the GDP per capita gap against continental controls (France and the Netherlands). The approximately 50-year gap between the hydro-social shift and the eventual steam transition (post-1810) is consistent with water infrastructure serving as a necessary precondition — creating the integrated markets and accumulated capital upon which the fossil era subsequently built.</em>
+  <em><strong>Figure 1: Britain's two growth regimes.</strong> Annual indices, 1700 = 100, log scale. Shaded bands mark the first canal wave (1760–1780) and the canal-mania completions (1790–1816). Vertical lines at 1761 and 1818. Source: Broadberry et al. (2015) via Bank of England.</em>
 </div>
 
-### 4.3 Difference-in-Differences (DiD) Estimation
-Using the 1761 exogenous shock (opening of the Bridgewater Canal) as the $T_0$ treatment intervention, we estimate a DiD regression on annual Maddison Project GDP per capita data (Bolt and van Zanden 2020). Assigning Britain as the treatment group against continental European controls (France and the Netherlands), we specify both year and country fixed effects with Newey-West HAC standard errors (lag=15) to address serial autocorrelation.
+Table 1 gives the trend growth rates by period. Between 1700–1760 and 1790–1815, growth of total output rose from 0.55 to 1.58 per cent a year, industry from 0.47 to 1.81, coal from 0.87 to 2.85 and population from 0.29 to 1.18. Income per head grew at 0.25 per cent a year in the first period and 0.40 in the third; the difference is within the noise of the series. Agriculture is flat throughout.
 
-The resulting interaction coefficient ($\beta_3$) is **1,250.9 international dollars** ($p = 0.042$, HAC), indicating that Britain's post-1761 economic trajectory diverged by an additional ~1,251 international dollars in GDP per capita relative to the continental controls. The formal OLS regression parameters are presented in **Table 2**.
+**Table 1: Trend growth of British series, per cent per year**
 
-**Table 2: DiD Regression Output (T₀ = 1761, Controls: NLD, FRA)**
+| Period | Total GDP | Industry | Coal | Services | Population | GDP per head | Agriculture |
+|:--|--:|--:|--:|--:|--:|--:|--:|
+| 1700–1760 | 0.55 | 0.47 | 0.87 | 0.50 | 0.29 | 0.25 | 0.75 |
+| 1760–1790 | 0.82 | 1.16 | 2.05 | 0.83 | 0.74 | 0.08 | 0.60 |
+| 1790–1815 | 1.58 | 1.81 | 2.85 | 2.02 | 1.18 | 0.40 | 0.81 |
+| 1815–1830 | 1.98 | 3.64 | 2.84 | 1.62 | 1.49 | 0.50 | 0.63 |
+| 1830–1870 | 2.35 | 2.85 | 3.57 | 2.62 | 1.16 | 1.19 | 0.78 |
 
-| Variable | Coefficient | Std. Error | t-statistic | P>\|t\| | [0.025 | 0.975] |
-|:---|---:|---:|---:|---:|---:|---:|
-| Intercept | 2835.84 | 95.777 | 29.609 | 0.000 | 2647.74 | 3023.94 |
-| Treated (GBR) | -242.31 | 165.890 | -1.461 | 0.145 | -568.10 | 83.49 |
-| Post (>=1761) | 419.63 | 116.867 | 3.591 | 0.000 | 190.11 | 649.15 |
-| **DiD_Interaction** | **1250.92** | **202.419** | **6.383** | **0.000** | **894.48** | **1689.56** |
+*Source: authors' calculations from Broadberry et al. (2015). Slopes of log-linear trends fitted within each window.*
 
-*(Note: N=603, R²=0.214, F=54.48. Dependent variable is GDP per capita in 2011 international dollars. The unadjusted $R^2$ of 0.214 indicates that substantial macroeconomic variation remains unexplained by this minimalist model, which is typical for historical DiD regressions where the econometric objective is isolating the treatment effect rather than constructing a comprehensive forecasting model.)*
+Table 2 formalises the comparison. Fixing the break at 1761 and estimating over 1700–1830, the trend slope of total output rises by 0.85 percentage points a year, industry by 1.42, coal by 1.62, iron by 3.24, services by 1.07 and population by 0.83, all with p-values below 0.01 under Newey–West errors. The slope of income per head changes by 0.02 points and that of agriculture by −0.04, neither distinguishable from zero. When the break date is left free, the single best break falls between 1777 (population) and 1792 (total output) for every canal-served series, and at 1818 for income per head. Allowing two breaks places the first at 1774–1775 for total output, industry and services and the second at 1818–1823. The data pick out the two regimes without being told where to look.
 
-### 4.4 Serial Autocorrelation Robustness
-The baseline Durbin-Watson statistic of 0.043 indicates severe positive serial autocorrelation, a well-documented concern in multi-century DiD designs (Bertrand, Duflo, and Mullainathan 2004). We address this through multiple complementary approaches reported in **Table 3**:
+**Table 2: Change in trend slope at 1761 and data-chosen break dates**
 
-**Table 3: Serial Autocorrelation Corrections**
+| Series | Trend before 1761, % p.a. | Change after 1761, pp p.a. | p | Best single break | Best two breaks |
+|:--|--:|--:|--:|--:|:--|
+| Total GDP | 0.52 | +0.85 | <0.01 | 1792 | 1775, 1818 |
+| Industry | 0.39 | +1.42 | <0.01 | 1789 | 1774, 1823 |
+| Coal | 0.77 | +1.62 | <0.01 | 1784 | 1741, 1798 |
+| Iron | 0.26 | +3.24 | <0.01 | 1786 | — |
+| Services | 0.44 | +1.07 | <0.01 | 1786 | 1775, 1844 |
+| Population | 0.23 | +0.83 | <0.01 | 1777 | 1730, 1783 |
+| *GDP per head* | 0.29 | +0.02 | 0.82 | 1818 | 1720, 1818 |
+| *Agriculture* | 0.82 | −0.04 | 0.84 | 1728 | — |
 
-| Specification | β₃ | SE | p-value | DW | N | Sig |
-|:---|---:|---:|---:|---:|---:|:---:|
-| OLS (baseline, EUR core) | 1,250.9 | 207.9 | <0.001 | 0.042 | 603 | *** |
-| HAC (Newey-West, lag=15) | 1,250.9 | 614.3 | 0.042 | 0.042 | 603 | * |
-| Clustered SE (country) | 1,250.9 | 139.3 | <0.001 | 0.042 | 603 | *** |
-| Collapsed DiD (EUR core, 3 ctrl) | 1,250.9 | 2,204.8 | 0.628 | 1.302 | 6 | ns |
-| Collapsed DiD (EUR ext., 9 ctrl) | 1,325.8 | 1,264.0 | 0.310 | 1.111 | 20 | ns |
-| Collapsed DiD (all 13 countries) | 1,422.2 | 1,283.1 | 0.280 | 0.965 | 26 | ns |
+*Slope-change regressions on 1700–1830 with Newey–West (10 lags) errors. Break searches on 1700–1870, Andrews sup-F with 15 per cent trimming and two-break grid search with minimum segment of 20 years.*
 
-The Bertrand et al. (2004) collapsed estimator averages GDP per capita into exactly two periods (pre- and post-$T_0$) per country, eliminating serial autocorrelation by construction (DW improves from 0.042 to 0.965–1.302). The coefficient magnitude is preserved across all panel sizes ($\beta_3 = 1,251$–$1,422$), indicating that the point estimate is not an artifact of autocorrelation-inflated precision. However, collapsed estimation necessarily sacrifices statistical power: even with the expanded 13-country panel ($N = 26$), the test does not reject the null at conventional levels ($p = 0.280$). This reflects a structural power limitation of the collapsed estimator when applied to cross-country macro panels — a constraint widely acknowledged in the literature — rather than evidence against the treatment effect.
+The arithmetic of the first regime is simple. Between 1760 and 1815 the growth of total output rose by about a percentage point a year and the growth of population rose by about a percentage point a year. The economy grew faster and fed more people at the same income. In an organic economy that is the Malthusian outcome; what is unusual is that it continued for half a century without the income per head falling, and that it coincided with the doubling of coal output per head, from an index of 100 in 1700 to 202 in 1790 and 246 in 1800.
 
-### 4.5 Magnitude Metrics
-To complement statistical significance, we report effect size metrics that assess the *economic* significance of the treatment effect independent of sample size (**Table 4**).
+## 4.2 The canal network as a dose
 
-**Table 4: Magnitude Metrics (Collapsed DiD)**
-
-| Panel | Cohen's *d* | β₃ / GBR pre-GDP | β₃ / Ctrl post-GDP |
-|:---|---:|---:|---:|
-| All controls (13 countries) | 1.49 (large) | 55.4% | 70.2% |
-| European extended (9 controls) | 1.43 (large) | 51.7% | 56.8% |
-| European core (NLD, FRA) | 1.24 (large) | 48.7% | 38.5% |
-
-Cohen's $d$ exceeds 1.2 across all specifications, indicating a large effect by conventional benchmarks ($d > 0.8$). The treatment effect represents approximately 49–55% of pre-treatment British GDP per capita, corresponding to an economically substantial divergence. These magnitude metrics demonstrate that the treatment effect is substantively meaningful even where the collapsed estimator lacks power to reject $H_0$ at conventional thresholds.
-
-With country-clustered standard errors ($G=3$ clusters), $\beta_3$ remains significant ($p < 0.001$), though we interpret this conservatively given the small number of clusters. The HAC correction with lag=15, which preserves the full time-series structure while accounting for serial dependence, yields $p = 0.042$, retaining significance at the 5% level.
-
-### 4.6 Event Study & Parallel Trends
-A dynamic DiD event study validates the parallel trends assumption (**Figure 2**). Pre-treatment bins spanning 60 years prior to 1761 yield coefficients statistically indistinguishable from zero, addressing concerns of pre-existing trajectory bias. A formal pre-trends test confirms no significant differential growth between Britain and European controls in the pre-period (slope = 0.00015, $p = 0.779$). Following 1761, coefficients rise sharply and consistently, indicating systemic economic acceleration beginning during the canal era (1760–1830) and intensifying through the subsequent steam transition.
+Figure 2 shows the canal series. Panel (a) gives miles opened per decade: 117 in the 1760s, 353 in the 1770s, a lull of 83 in the 1780s, then 549 in the 1790s, 479 in the 1800s and 344 in the 1810s. Panel (b) gives the cumulative stock, from 218 miles in 1760 to 772 in 1790, 1,487 in 1800 and 2,320 in 1830. Panel (c) gives coal output per head. The correspondence between the two waves and the two steepenings of coal per head is visible to the eye; the regressions ask whether it survives detrending.
 
 <div align="center">
-  <img src="../../data/did_event_study.png" alt="Figure 2: Dynamic DiD Event Study" width="800">
+  <img src="../../data/fig2_canal_dose.png" alt="Figure 2: The canal network and coal" width="800">
   <br>
-  <em><strong>Figure 2: Dynamic DiD Event Study.</strong> 5-year binned event study relative to the 1761 exogenous infrastructural treatment ($T_0=0$). The consistently flat line spanning 60 years prior to the break confirms the parallel trends assumption, addressing concerns of pre-existing trajectory bias. Following the break, the coefficient rises steadily — initially during the canal era and accelerating during the subsequent steam transition — consistent with water infrastructure establishing preconditions that fossil power subsequently amplified.</em>
+  <em><strong>Figure 2: The canal network and coal.</strong> (a) Canal miles opened per decade, 155 canals by completion year. (b) Cumulative canal miles since 1700. (c) Coal output per head, 1700 = 100, with the year steam overtook water and wind as a source of stationary power. Sources: canal tables; Broadberry et al. (2015); Kanefsky (1979) via Crafts (2004).</em>
 </div>
 
-### 4.7 Robustness Checks
-To ensure the observed effect is not an artifact of a generalized 18th-century European aggregate takeoff or a spurious correlation, the model was subjected to "Placebo-in-Space" and "Placebo-in-Time" falsification tournaments.
+Table 3 reports the dose-response regressions over 1700–1830. In the simplest specification, log output on a linear trend and the canal stock, a thousand miles of canal is associated with 47 per cent more coal, 40 per cent more industrial output, 99 per cent more iron, 32 per cent more services and 24 per cent more population, and with no change in income per head or agriculture. The sceptical specifications thin this out. With a quadratic trend, only coal retains a large and significant coefficient, 30 per cent per thousand miles, with population marginal at 4 per cent; industry and total output are indistinguishable from the trend. In first differences with ten lags of new mileage, coal, industry and population respond and total output, income per head and agriculture do not. In the horse race with steam horsepower and war years, coal's canal coefficient is 41 per cent against a steam coefficient of 13 per cent that is not significant; for industry and population the two are of similar size and both significant.
 
-**Vocabulary Falsification:** When substituting the hydro-social treatment dates with alternative industrial inflection points (e.g., extracting the crossover parameters for *coal*, *textile*, or *financial* vocabulary clusters), the statistical validity of the event study collapsed (**Figure 3**). Only the water hypothesis produced a clean, non-noisy event study — indicating that the 1761 structural break is associated with the *timing* of GDP divergence, even as the accumulated effect was later amplified by fossil adoption.
+**Table 3: Canal stock and British output, 1700–1830 (per 1,000 canal miles)**
+
+| Outcome (log) | Linear trend | Quadratic trend | First differences, 10-year cumulative | Horse race: canal | Horse race: steam hp |
+|:--|--:|--:|--:|--:|--:|
+| Coal | +46.5% (p<0.001) | +29.8% (p=0.001) | +27.0% (p<0.001) | +40.8% (p<0.001) | +12.6% (p=0.08) |
+| Industry | +40.1% (p<0.001) | −0.9% (p=0.89) | +14.3% (p<0.001) | +28.8% (p<0.001) | +30.4% (p=0.003) |
+| Iron | +99.3% (p<0.001) | — | — | +88.2% (p<0.001) | +35.6% (p=0.17) |
+| Population | +24.0% (p<0.001) | +4.1% (p=0.07) | +16.6% (p<0.001) | +18.6% (p<0.001) | +15.0% (p<0.001) |
+| Total GDP | +24.7% (p<0.001) | +2.2% (p=0.52) | +4.2% (p=0.25) | +18.8% (p<0.001) | +19.0% (p<0.001) |
+| *GDP per head* | +0.8% (p=0.69) | −1.9% (p=0.61) | −12.4% (p=0.33) | +0.2% (p=0.94) | +4.0% (p=0.08) |
+| *Agriculture* | −0.5% (p=0.90) | −5.1% (p=0.56) | −18.8% (p<0.001) | −1.5% (p=0.72) | +7.3% (p=0.07) |
+
+*Newey–West errors with 10 lags. Steam horsepower is the log of the interpolated Kanefsky series, indexed to 1830. The horse race includes a dummy for 1756–63, 1775–83 and 1793–1815.*
+
+Two features of Table 3 matter for the argument. The first is that coal is the robust channel. It is also the channel the mechanism predicts, since the canals were dug to move it. The second is that the placebo rows behave. Income per head does not respond to canals in any specification, and agriculture's only significant coefficient is negative, in first differences, which is the structural shift away from farming rather than an effect on farming. We note, and return to in Section 7, that the reverse regression is not empty: past growth in coal, total output and population predicts subsequent canal openings. Canals were built where demand was growing. The dose is not exogenous, and we do not claim that it is; what we claim is that its timing and incidence are those of a precondition.
+
+## 4.3 The precondition chain
+
+Figure 3 reports the local projections that test the sequence directly. Each panel shows the cumulative response of the outcome, in log points, to a unit of the regressor, at horizons of one to twenty years, with 95 per cent Newey–West bands.
 
 <div align="center">
-  <img src="../../data/did_vocab_tournament.png" alt="Figure 3: Placebo Vocabulary Tournament" width="800">
+  <img src="../../data/fig3_local_projections.png" alt="Figure 3: Local projections along the precondition chain" width="800">
   <br>
-  <em><strong>Figure 3: Placebo Vocabulary Tournament.</strong> Falsification test executing event studies against the structural break dates of rival textual corpora. Only the hydro-social treatment (Panel a) yields a statistically clean distribution matching economic takeoff. Rival inflection points derived from coal (b), textiles (c), and finance (d) produce high volatility and statistically invalid pre-trends, confirming the temporal specificity of the water infrastructure shock in predicting the onset of divergence.</em>
+  <em><strong>Figure 3: Local projections along the precondition chain.</strong> Cumulative log response at horizons 1–20 years, per 1,000 canal miles or per log point of the regressor, controlling for the outcome's level and a trend. Samples 1700–1830 for canal regressors, 1760–1830 where steam horsepower enters. Shaded: 95 per cent HAC bands.</em>
 </div>
 
-**Control Falsification:** Assigning the 1761 treatment synthetically to the Netherlands ($p = 0.924$), China ($p < 0.001$, negative), and India ($p = 0.003$, negative) yielded statistically void or negative results. While France returned a marginally positive signal ($p = 0.022$), the coefficient magnitude was approximately one-quarter of Britain's ($\beta_3 = 362$ vs. 1,251), consistent with economic spillovers across the Channel rather than an independent French structural break.
+The top-left panel is the first link: a thousand miles of canal raises coal output by 29 per cent after five years, 38 per cent after ten and 44 per cent after fifteen, with the whole path bounded away from zero. Controlling for contemporaneous steam horsepower, estimated from 1760, the canal effect on coal remains at 21 per cent over five to ten years and fades at fifteen to twenty, where steam takes over. The top-middle panel is the second link: canal stock predicts installed steam horsepower over fifteen to twenty years. The coefficient is small in log points because horsepower grew fifty-fold over the sample, but it is precisely estimated; we flag that the horsepower series is interpolated between five benchmarks, so this panel establishes ordering rather than magnitude. The top-right panel, coal to steam, is positive at every horizon but significant only at five years. On the interpolated series that is as much as can be asked.
 
-Calculating the counterfactual control trajectory reveals that **47%** of Britain's total industrial economic lead over the continent was established by 1810 — during the height of the canal and water wheel era, and decades before steam power reached critical mass to influence national labor productivity.
+The bottom row is the test that distinguishes a precondition from a cause. Canal stock has no effect on income per head at any horizon (bottom-left); the point estimates are negative and the bands include zero throughout. Steam horsepower has no effect on income per head either when the sample stops at 1830 (bottom-middle), but on the 1760–1870 sample it raises income per head by 0.55 log points per log point of horsepower after five years and 0.90 after twenty, all with p-values below 0.001. Steam's per-capita dividend is a post-1830 phenomenon. Canals raise coal and population (the population response is 3 to 7 per cent per thousand miles over five to twenty years, all significant) and leave income per head where it was. The bottom-right panel, agriculture, is negative at intermediate horizons, again the composition effect, and returns to zero.
 
-### 4.8 Double/Debiased Machine Learning (DML) Results
+The chain, read from Figure 3, is: canals raise coal within a decade; canals and coal are followed by steam capacity over one to two decades; steam raises income per head, but only once it is the majority power source. Water first, coal second, steam third, income last.
 
-As an independent robustness check, we implement the Chernozhukov et al. (2018) partially linear DML estimator treating continuous vocabulary intensity as the treatment for Britain. Results are reported in **Table 5** (see Section 3.5 for specification details).
+## 4.4 How much power was steam?
 
-**Table 5: DML Results — Continuous Treatment (Gradient Boosting, Preferred Specification)**
+The precondition thesis requires that the first regime run on water rather than steam. Table 4 uses the Kanefsky benchmarks to check. In 1760 steam supplied about 6 per cent of Britain's stationary power; in 1800, when the first regime was thirty years old and the mania canals were opening, 21 per cent; in 1830 it had reached parity with water, at 47 per cent of the total. Steam overtook water and wind combined in 1833, fifteen years after the per-capita break. Over the same period coal output per unit of installed steam horsepower fell from 100 to 37: most of the coal being dug in 1800 was not being burned in engines. It was being carried, largely by water, to hearths, forges, kilns and salt pans.
 
-| Specification | θ̂ | SE (cluster) | p (cluster) | Sig |
-|:---|---:|---:|---:|:---:|
-| Full sample (1700–1900, composite) | 1,397 | 165 | <0.001 | *** |
-| Pre-steam subsample (1700–1810, composite) | 1,306 | — | 0.033 | * |
-| Pre-steam subsample (1700–1810, canal only) | 783 | — | <0.001 | *** |
-| Pre-steam subsample (1700–1810, transport) | 794 | — | 0.013 | * |
-| Mediation: water (alone) | 1,397 | 165 | <0.001 | *** |
-| Mediation: water (steam controlled) | 940 | 1,339 | 0.483 | ns |
+**Table 4: Installed stationary power in Britain, thousands of horsepower**
 
-*(Note: Gradient Boosting preferred over Lasso/Ridge because it flexibly controls for the nonlinear year trend; linear methods inflate θ̂ to ~7,000 by failing to fully absorb this trend (see Section 3.5). Cluster-robust SEs group by country; naive SEs are lower bounds. Pre-steam specifications use naive SEs only; cluster-robust omitted as panel is too small for reliable sandwich estimation with K=3 folds.)*
+| Year | Steam | Water | Wind | Steam share | Coal output per steam hp (1760 = 100) |
+|:--|--:|--:|--:|--:|--:|
+| 1760 | 5 | 70 | 10 | 6% | 100 |
+| 1800 | 35 | 120 | 15 | 21% | 37 |
+| 1830 | 160 | 160 | 20 | 47% | 19 |
+| 1870 | 2,060 | 230 | 10 | 90% | 6 |
 
-The Gradient Boosting estimate ($\hat{\theta} = 1{,}397$, SE$_{\text{cl}} = 165$, $p < 0.001$) is consistent with the DiD $\beta_3 = 1{,}251$, providing cross-method validation of the treatment magnitude. The pre-steam canal channel ($\hat{\theta} = 783$, $p < 0.001$) confirms that water vocabulary intensity predicts GDP divergence in the period 1700–1810, *before* steam power achieved commercial scale.
+*Source: Kanefsky (1979, p. 338) as reported in Crafts (2004, Table 3); coal output from Broadberry et al. (2015). Shares from log-linear interpolation between benchmarks.*
 
-### 4.9 DML Mediation Results
+## 4.5 The semantic sequence
 
-When raw steam vocabulary intensity is included as a confounder in the DML specification, the water treatment effect falls from 1,397 to 940 — a reduction of approximately **33%** — and loses conventional statistical significance ($p = 0.483$). The steam channel itself carries a substantial effect ($\hat{\theta}_{\text{steam}} \approx 1{,}640$ for Gradient Boosting; linear methods produce inflated estimates of $2{,}187$–$3{,}296$ due to the nonlinear trend absorption issue discussed in Section 3.5).
+If coal moved by water before it burned in engines, the language of the period should say so. Table 5 records, for each term or group, the first year in which its smoothed frequency in the British corpus reached 10, 25 and 50 per cent of its 1850 level. "Canal" reaches a quarter of its mid-century frequency in 1763, the year after the Bridgewater opening; "coal barge" in 1781; "coal wharf" in 1800. "Steam engine" reaches the same threshold in 1808, "steam power" in 1826, and "coal field", the geologist's term, in 1820. The coal-by-water group as a whole crosses 25 per cent in 1800, the coal-by-steam group in 1811. "Steam engine" overtakes "fire engine", the older name for the same machine, in 1800, which dates the terminological consolidation of steam to the decade after the canal mania. Figure 5 plots the three indices.
 
-**Table 6: DML Mediation Summary**
+**Table 5: Year in which print frequency first reaches a share of its 1850 level (British English corpus, 5-year mean)**
 
-| Test | θ̂_water | p | Interpretation |
-|:---|---:|---:|:---|
-| Water alone (Gradient Boosting) | 1,397 | <0.001 | Strong water–GDP association |
-| Water controlled for steam (GB) | 940 | 0.483 | Effect attenuates; steam absorbs water's path |
-| Steam alone (Gradient Boosting) | 1,640 | 0.076 | Steam also substantially associated |
-| Steam alone (Lasso) | 2,187 | <0.001 | Steam significant across linear methods |
+| Term or group | 10% | 25% | 50% |
+|:--|--:|--:|--:|
+| "canal" | 1743 | 1763 | 1809 |
+| "coal barge" | 1753 | 1781 | 1783 |
+| "coal wharf" | 1774 | 1800 | 1815 |
+| Coal-by-water group | 1780 | 1800 | 1817 |
+| "steam engine" | 1800 | 1808 | 1821 |
+| Coal-by-steam group | 1806 | 1811 | 1813 |
+| "coal field" | 1788 | 1820 | 1831 |
+| "steam power" | 1821 | 1826 | 1831 |
 
-The interpretation of these mediation patterns is discussed in Section 5.5.
+<div align="center">
+  <img src="../../data/fig5_semantic_sequence.png" alt="Figure 5: The semantic sequence" width="800">
+  <br>
+  <em><strong>Figure 5: In print, coal travels by water before it is burned in engines.</strong> Five-year moving averages indexed to 1850 = 100. Coal-by-water: equal-weighted "coal barge", "coal wharf", "coal boat", "canal boat". Coal-by-steam: "steam engine", "steam power", "steam boat". Source: Google Books Ngram, eng_gb_2019.</em>
+</div>
+
+The corpus also tells us what kind of thing the infrastructure vocabulary measures. The frequency of "canal" correlates at 0.91 with the cumulative mileage of canals in existence over 1740–1850 and at −0.04 with the mileage opened in the surrounding decade. Print records the network that exists, not the digging. The 1766 crossover between engineered and naturalistic water vocabulary that the earlier version of this paper reported is, on this reading, the corpus registering the first wave of openings, and the vocabulary index can be used as a proxy for infrastructure in place where physical series are missing.
+
+## 4.6 Why the cross-country test fails
+
+The earlier version of this paper estimated a two-way fixed-effects difference-in-differences on Maddison GDP per head, treating Britain from 1761 against France and the Netherlands, and reported a treatment effect of 1,251 international dollars with a Newey–West p-value of 0.042. We reproduce that estimate exactly. We then ask when the gap between Britain and its controls actually opened. A sup-F search on the log gap places the single break in 1807, with the next-best candidates 1805–1809. The event study of the earlier version is consistent: no post-1761 bin is significant until the one beginning 45 years after treatment.
+
+Figure 4(a) shows what happened in 1807. Britain's income per head, indexed to 1790, stood at 106 in 1805 and 110 in 1815. The Netherlands' fell from 100 in 1805 to 63 in 1808 and was still at 72 in 1815. Table 6 gives the drawdowns for the whole panel. Between the late 1780s and the Napoleonic trough the Netherlands lost 44 per cent of its income per head, Portugal 48, Sweden 27, France 22 and Spain 13. Britain lost 1.4 per cent. The 1761 "treatment effect" measured against a continental control group is, to a first approximation, the difference between being blockaded and doing the blockading. Of the growth in the level gap between 1761 and 1900 that the earlier version's counterfactual attributed to the canal era, 39 per cent occurs in the war years 1790–1815 alone.
+
+**Table 6: GDP per head, peak 1785–95 to trough 1795–1815 (Maddison 2023, 2011 international dollars)**
+
+| Country | Peak | Trough | Drawdown | 1815 relative to 1790 |
+|:--|--:|--:|--:|--:|
+| Britain | 3,207 (1795) | 3,161 (1798) | −1.4% | +13.6% |
+| Netherlands | 4,666 (1794) | 2,632 (1808) | −43.6% | −28.3% |
+| Portugal | 2,063 (1785) | 1,072 (1811) | −48.0% | −24.1% |
+| Sweden | 1,661 (1791) | 1,221 (1809) | −26.5% | −11.9% |
+| France | 2,016 (1788) | 1,580 (1801) | −21.7% | +1.3% |
+| Spain | 1,454 (1790) | 1,265 (1811) | −13.0% | +3.2% |
+| Germany | 1,820 (1792) | 1,725 (1805) | −5.2% | +8.1% |
+
+<div align="center">
+  <img src="../../data/fig4_war_confound.png" alt="Figure 4: Why the cross-country DiD fails" width="800">
+  <br>
+  <em><strong>Figure 4: Why a cross-country difference-in-differences on GDP per head cannot identify a canal-era effect.</strong> (a) GDP per head, 1790 = 100, for Britain, France and the Netherlands, with the war years shaded and the estimated break in the Britain–controls gap. (b) Britain's log GDP per head relative to two control groups, normalised to 1751–60. Source: Maddison Project Database 2023.</em>
+</div>
+
+Changing the control group does not rescue the design. Figure 4(b) plots Britain's log gap relative to the Netherlands and France and relative to France, Sweden, Germany and Spain, normalised to 1751–60. Against the second group Britain's relative position rises in the 1760s and again in the 1790s, but it was also rising from 1700 to 1720, so the pre-treatment bins of the event study are significantly negative and parallel trends fail in the opposite direction. The 1790s step is again a control-side collapse. And underneath all of this is the fact established in Section 4.1: Britain's own income per head grew at 0.08 per cent a year between 1760 and 1790. There was no canal-era per-capita acceleration for any control group to reveal. The difference-in-differences was measuring the right country with the wrong variable in the wrong decade.
+
+## 4.7 The pre-steam divergence in benchmark years
+
+What the cross-country data can establish is the aggregate divergence, and they establish it at benchmark years where population is measured rather than interpolated. Table 7 gives growth between 1700 and 1820, which is before steam supplied a quarter of British power. Britain's total output grew 240 per cent. The next European economy, Germany, grew 124 per cent; France 50; the Netherlands 9. Britain's population grew 148 per cent, more than any European country except Sweden's 104, and Britain alone among them combined that population growth with a rise in income per head of 37 per cent. Figure 6 juxtaposes this with the power benchmarks.
+
+**Table 7: Growth between Maddison benchmark years, per cent**
+
+| | GDP per head 1700–1820 | Population 1700–1820 | Total GDP 1700–1820 | GDP per head 1820–1870 |
+|:--|--:|--:|--:|--:|
+| Britain | +37 | +148 | +240 | +76 |
+| Germany | +35 | +66 | +124 | +44 |
+| Belgium | +8 | +72 | +85 | +82 |
+| Spain | +22 | +39 | +69 | +16 |
+| France | +3 | +46 | +50 | +65 |
+| Sweden | −29 | +104 | +44 | +52 |
+| Netherlands | −11 | +23 | +9 | +47 |
+| China | −43 | +176 | +58 | +7 |
+
+<div align="center">
+  <img src="../../data/fig6_power_benchmark.png" alt="Figure 6: Steam was a minority power source when the aggregate divergence was established" width="800">
+  <br>
+  <em><strong>Figure 6: Steam was a minority power source when Britain's aggregate divergence was already established.</strong> (a) Installed steam and water horsepower, thousands, log scale. (b) Growth of total real GDP 1700–1820. Sources: Kanefsky (1979) via Crafts (2004); Maddison Project Database 2023.</em>
+</div>
+
+The Dutch row deserves attention because it is the comparative case Tvedt's argument needs. The Netherlands had the densest network of engineered waterways in Europe by the 1660s, a barge system that de Vries has described as the first scheduled public transport in the world (de Vries 1978). It had no coal. Its total output grew 9 per cent in 120 years. Water infrastructure without coal to move was not sufficient. Belgium, which had both coal and canals, was the first continental economy to industrialise. Britain had both, and the water to make the coal cheap at the point of use.

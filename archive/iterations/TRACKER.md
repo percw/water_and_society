@@ -56,3 +56,16 @@ Master log for tracking limitations and their resolution across iterations.
 - **#4 (Cliometric Fallacy):** ADF tests run; permutation test provides non-parametric alternative. Main DiD framework now anchored to exogenous 1761 shock rather than Granger, substantially mitigating this concern.
 - **#5 (NLP Methodological Catastrophe):** PPMI-SVD partially addresses; LDA approach validated separately (#17). Paper no longer depends on co-occurrence embeddings for core claims.
 - **#12 (Diachronic Alignment):** PPMI-SVD mitigates; Procrustes alignment not implemented. Paper's core claims do not depend on cross-temporal cosine similarity.
+
+## Iteration 06 — 3 September 2026: identification failure and reframing
+
+| # | Limitation | Status | Solution Summary | Iteration |
+|---|-----------|--------|-----------------|-----------|
+| 20 | Cross-country DiD break (1807) is the Dutch collapse under French occupation; event study has no significant post bin before +45 years; sub-period 1700–1810 DiD ns (p=0.16) | `resolved` | Design withdrawn as the central estimate. Retained as §4.6 methodological caution with war-drawdown table (`regime_analysis.py` §1). 47% counterfactual withdrawn. | 06 |
+| 21 | GDP per capita is the wrong outcome for a canal-era mechanism (GBR per-capita growth 0.08%/yr 1760–1790) | `resolved` | Outcomes switched to sectoral output and population (Broadberry et al. 2015 via Bank of England). Two-regime result: breaks 1775–1792 (aggregate) vs 1818 (per capita). `regime_analysis.py` §2 | 06 |
+| 22 | Binary 1761 treatment cannot separate the two canal waves | `resolved` | Continuous dose: cumulative canal miles from 155 completion years; corroborated by 152 Priestley (1831) authorisations. `fetch_external.py`, `regime_analysis.py` §3 | 06 |
+| 23 | Precondition claim needs sequence + dependence, not a horse race | `resolved` | Local projections canal→coal→steam hp→GDPpc; steam raises GDPpc only post-1830. `mechanism_analysis.py` §8 | 06 |
+| 24 | Steam proxied by print frequency | `in-progress` | Kanefsky (1979)/Crafts (2004) horsepower benchmarks interpolated; engine counts by decade (Kanefsky & Robey 1980) still to add | 06 |
+| 25 | Canal dose endogenous (past coal/pop growth predicts openings, p≤0.03) | `pending` | Acknowledged §7.1. County panel with CAMPOP waterways + coal deposits is the next design | 06 |
+| 26 | Mediation decomposition not identified with quadratic trend | `resolved` | Reported as negative result; sequencing rests on local projections | 06 |
+| 27 | Citation errors (Bogart 2024 → 2014 chapter; MPD 2023 → Bolt & van Zanden 2024) | `resolved` | References rewritten; DOIs verified via Crossref | 06 |

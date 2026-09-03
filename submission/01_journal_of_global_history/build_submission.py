@@ -31,32 +31,42 @@ CONFIG_PATH = SCRIPT_DIR / "author_config.ini"
 
 # ── Bibliography ─────────────────────────────────────────────────────────────
 BIBLIOGRAPHY = {
-    "Allen 2009": 'Robert C. Allen, _The British Industrial Revolution in Global Perspective_ (Cambridge: Cambridge University Press, 2009).',
-    "Angrist and Pischke 2009": "Joshua D. Angrist and Jörn-Steffen Pischke, _Mostly Harmless Econometrics: An Empiricist's Companion_ (Princeton: Princeton University Press, 2009).",
-    "Bertrand, Duflo, and Mullainathan 2004": 'Marianne Bertrand, Esther Duflo, and Sendhil Mullainathan, "How Much Should We Trust Differences-in-Differences Estimates?", _Quarterly Journal of Economics_ 119, no. 1 (2004): 249–275.',
-    "Bertrand et al. 2004": 'Bertrand, Duflo, and Mullainathan, "How Much Should We Trust Differences-in-Differences Estimates?".',
-    "Bertrand et al.": 'Bertrand, Duflo, and Mullainathan, "How Much Should We Trust Differences-in-Differences Estimates?".',
-    "Bogart 2024": 'Dan Bogart, _The Transport Revolution in Industrializing Britain: A Survey_ (Cambridge: Cambridge University Press, 2024).',
-    "Bolt and van Zanden 2020": 'Jutta Bolt and Jan Luiten van Zanden, "Maddison Style Estimates of the Evolution of the World Economy: A New 2020 Update", _Maddison-Project Working Paper_, WP-154 (2020).',
-    "Broadberry et al. 2015": 'Stephen Broadberry et al., _British Economic Growth, 1270–1870_ (Cambridge: Cambridge University Press, 2015).',
-    "Cameron, Gelbach, and Miller 2008": 'A. Colin Cameron, Jonah B. Gelbach, and Douglas L. Miller, "Bootstrap-Based Improvements for Inference with Clustered Errors", _Review of Economics and Statistics_ 90, no. 3 (2008): 414–427.',
-    "Chernozhukov et al. 2018": 'Victor Chernozhukov et al., "Double/Debiased Machine Learning for Treatment and Structural Parameters", _The Econometrics Journal_ 21, no. 1 (2018): C1–C68.',
-    "Crafts 1985": 'Nicholas F. R. Crafts, _British Economic Growth during the Industrial Revolution_ (Oxford: Clarendon Press, 1985).',
-    "De Chaisemartin and D'Haultfœuille 2020": "Clément de Chaisemartin and Xavier D'Haultfœuille, \"Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects\", _American Economic Review_ 110, no. 9 (2020): 2964–2996.",
-    "Kanefsky and Robey 1980": 'John Kanefsky and John Robey, "Steam Engines in 18th-Century Britain: A Quantitative Assessment", _Technology and Culture_ 21, no. 2 (1980): 161–186.',
-    "Landes 1969": 'David S. Landes, _The Unbound Prometheus: Technological Change and Industrial Development in Western Europe from 1750 to the Present_ (Cambridge: Cambridge University Press, 1969).',
-    "Malm 2016": 'Andreas Malm, _Fossil Capital: The Rise of Steam Power and the Roots of Global Warming_ (London: Verso, 2016).',
-    "Marx 1847": 'Karl Marx, _The Poverty of Philosophy_ (1847; repr., Moscow: Progress Publishers, 1955).',
-    "McCloskey 2010": "Deirdre N. McCloskey, _Bourgeois Dignity: Why Economics Can't Explain the Modern World_ (Chicago: University of Chicago Press, 2010).",
-    "Michel et al. 2011": 'Jean-Baptiste Michel et al., "Quantitative Analysis of Culture Using Millions of Digitized Books", _Science_ 331, no. 6014 (2011): 176–82.',
-    "Mokyr 2009": 'Joel Mokyr, _The Enlightened Economy: An Economic History of Britain 1700–1850_ (New Haven: Yale University Press, 2009).',
-    "Musson and Robinson 1969": 'Albert E. Musson and Eric Robinson, _Science and Technology in the Industrial Revolution_ (Manchester: Manchester University Press, 1969).',
-    "Pechenick et al. 2015": 'Eitan Adam Pechenick, Christopher M. Danforth, and Peter Sheridan Dodds, "Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution", _PLOS ONE_ 10, no. 10 (2015): e0137041.',
-    "Pomeranz 2000": 'Kenneth Pomeranz, _The Great Divergence: China, Europe, and the Making of the Modern World Economy_ (Princeton: Princeton University Press, 2000).',
-    "Rambachan and Roth 2023": 'Ashesh Rambachan and Jonathan Roth, "A More Credible Approach to Parallel Trends", _Review of Economic Studies_ 90, no. 5 (2023): 2555–2591.',
-    "Roth et al. 2023": "Jonathan Roth et al., \"What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature\", _Journal of Econometrics_ 235, no. 2 (2023): 2218–2244.",
-    "Tvedt 2010": 'Terje Tvedt, "Why England and Not China and India? Water Systems and the History of the Industrial Revolution", _Journal of Global History_ 5, no. 1 (2010): 29–50.',
-    "Wrigley 2010": 'E. A. Wrigley, _Energy and the English Industrial Revolution_ (Cambridge: Cambridge University Press, 2010).',
+    'Allen 2009': 'Robert C. Allen, _The British Industrial Revolution in Global Perspective_ (Cambridge: Cambridge University Press, 2009).',
+    'Alvarez-Palau et al. 2024': 'Eduard J. Alvarez-Palau, Dan Bogart, Max Satchell, and Leigh Shaw-Taylor, “Transport and Urban Growth in the First Industrial Revolution”, _Economic Journal_ 135, no. 668 (2024): 1191–1228.',
+    'Andrews 1993': 'Donald W. K. Andrews, “Tests for Parameter Instability and Structural Change with Unknown Change Point”, _Econometrica_ 61, no. 4 (1993): 821–856.',
+    'Bai and Perron 1998': 'Jushan Bai and Pierre Perron, “Estimating and Testing Linear Models with Multiple Structural Changes”, _Econometrica_ 66, no. 1 (1998): 47–78.',
+    'Bertrand, Duflo, and Mullainathan 2004': 'Marianne Bertrand, Esther Duflo, and Sendhil Mullainathan, “How Much Should We Trust Differences-in-Differences Estimates?”, _Quarterly Journal of Economics_ 119, no. 1 (2004): 249–275.',
+    'Bogart 2014': 'Dan Bogart, “The Transport Revolution in Industrialising Britain: A Survey”, in _The Cambridge Economic History of Modern Britain, Volume 1: 1700–1870_, ed. Roderick Floud, Jane Humphries, and Paul Johnson (Cambridge: Cambridge University Press, 2014), 368–391.',
+    'Bolt and van Zanden 2024': 'Jutta Bolt and Jan Luiten van Zanden, “Maddison-Style Estimates of the Evolution of the World Economy: A New 2023 Update”, _Journal of Economic Surveys_ 39, no. 2 (2024): 631–671.',
+    'Broadberry et al. 2015': 'Stephen Broadberry, Bruce M. S. Campbell, Alexander Klein, Mark Overton, and Bas van Leeuwen, _British Economic Growth, 1270–1870_ (Cambridge: Cambridge University Press, 2015).',
+    'Clark and Jacks 2007': 'Gregory Clark and David Jacks, “Coal and the Industrial Revolution, 1700–1869”, _European Review of Economic History_ 11, no. 1 (2007): 39–72.',
+    'Crafts 1985': 'Nicholas F. R. Crafts, _British Economic Growth during the Industrial Revolution_ (Oxford: Clarendon Press, 1985).',
+    'Crafts 2004': 'Nicholas F. R. Crafts, “Steam as a General Purpose Technology: A Growth Accounting Perspective”, _Economic Journal_ 114, no. 495 (2004): 338–351.',
+    'Crafts and Harley 1992': 'Nicholas F. R. Crafts and C. Knick Harley, “Output Growth and the British Industrial Revolution: A Restatement of the Crafts–Harley View”, _Economic History Review_ 45, no. 4 (1992): 703–730.',
+    'Crouzet 1964': 'François Crouzet, “Wars, Blockade, and Economic Change in Europe, 1792–1815”, _Journal of Economic History_ 24, no. 4 (1964): 567–588.',
+    'de Vries 1978': 'Jan de Vries, _Barges and Capitalism: Passenger Transportation in the Dutch Economy, 1632–1839_ (Utrecht: HES Publishers, 1978).',
+    "Fernihough and O'Rourke 2021": "Alan Fernihough and Kevin Hjortshøj O'Rourke, “Coal and the European Industrial Revolution”, _Economic Journal_ 131, no. 635 (2021): 1135–1149.",
+    'Hadfield 1984': 'Charles Hadfield, _British Canals: An Illustrated History_, 7th ed. (Newton Abbot: David and Charles, 1984).',
+    'Jordà 2005': 'Òscar Jordà, “Estimation and Inference of Impulse Responses by Local Projections”, _American Economic Review_ 95, no. 1 (2005): 161–182.',
+    'Kanefsky 1979': 'John W. Kanefsky, “The Diffusion of Power Technology in British Industry, 1760–1870” (PhD thesis, University of Exeter, 1979).',
+    'Kanefsky and Robey 1980': 'John Kanefsky and John Robey, “Steam Engines in 18th-Century Britain: A Quantitative Assessment”, _Technology and Culture_ 21, no. 2 (1980): 161–186.',
+    'Landes 1969': 'David S. Landes, _The Unbound Prometheus_ (Cambridge: Cambridge University Press, 1969).',
+    'Malm 2016': 'Andreas Malm, _Fossil Capital: The Rise of Steam Power and the Roots of Global Warming_ (London: Verso, 2016).',
+    'Michel et al. 2011': 'Jean-Baptiste Michel et al., “Quantitative Analysis of Culture Using Millions of Digitized Books”, _Science_ 331, no. 6014 (2011): 176–182.',
+    'Newey and West 1987': 'Whitney K. Newey and Kenneth D. West, “A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix”, _Econometrica_ 55, no. 3 (1987): 703–708.',
+    'Pechenick et al. 2015': 'Eitan Adam Pechenick, Christopher M. Danforth, and Peter Sheridan Dodds, “Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution”, _PLOS ONE_ 10, no. 10 (2015): e0137041.',
+    'Pomeranz 2000': 'Kenneth Pomeranz, _The Great Divergence: China, Europe, and the Making of the Modern World Economy_ (Princeton: Princeton University Press, 2000).',
+    'Priestley 1831': 'Joseph Priestley, _Historical Account of the Navigable Rivers, Canals, and Railways, throughout Great Britain_ (London: Longman, Rees, Orme, Brown and Green, 1831).',
+    'Rambachan and Roth 2023': 'Ashesh Rambachan and Jonathan Roth, “A More Credible Approach to Parallel Trends”, _Review of Economic Studies_ 90, no. 5 (2023): 2555–2591.',
+    'Roth et al. 2023': "Jonathan Roth, Pedro H. C. Sant'Anna, Alyssa Bilinski, and John Poe, “What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature”, _Journal of Econometrics_ 235, no. 2 (2023): 2218–2244.",
+    'Szostak 1991': "Rick Szostak, _The Role of Transportation in the Industrial Revolution: A Comparison of England and France_ (Montreal: McGill-Queen's University Press, 1991).",
+    'Thomas and Dimsdale 2017': 'Ryland Thomas and Nicholas Dimsdale, _A Millennium of UK Data_, Bank of England OBRA dataset (2017).',
+    'Turnbull 1987': 'Gerard Turnbull, “Canals, Coal and Regional Growth during the Industrial Revolution”, _Economic History Review_ 40, no. 4 (1987): 537–560.',
+    'Tvedt 2010': 'Terje Tvedt, “Why England and Not China and India? Water Systems and the History of the Industrial Revolution”, _Journal of Global History_ 5, no. 1 (2010): 29–50.',
+    'Ward 1974': 'J. R. Ward, _The Finance of Canal Building in Eighteenth-Century England_ (Oxford: Oxford University Press, 1974).',
+    'Wrigley 1988': 'E. A. Wrigley, _Continuity, Chance and Change: The Character of the Industrial Revolution in England_ (Cambridge: Cambridge University Press, 1988).',
+    'Wrigley 2010': 'E. A. Wrigley, _Energy and the English Industrial Revolution_ (Cambridge: Cambridge University Press, 2010).',
+    'Wrigley 2016': "E. A. Wrigley, _The Path to Sustained Growth: England's Transition from an Organic Economy to an Industrial Revolution_ (Cambridge: Cambridge University Press, 2016).",
 }
 
 
@@ -78,6 +88,7 @@ def load_config() -> dict:
         "country": parser.get("author", "country", fallback="[Country]"),
         "email": parser.get("author", "email", fallback="[email]"),
         "orcid": parser.get("author", "orcid", fallback=""),
+        "biography": parser.get("author", "biography", fallback="[AUTHOR BIOGRAPHY, max 100 words]"),
         "date": parser.get("submission", "date", fallback="today"),
         "acknowledgments": parser.get("declarations", "acknowledgments", fallback=""),
         "funding": parser.get("declarations", "funding", fallback="This research received no external funding."),
@@ -105,6 +116,8 @@ def convert_to_footnotes(text: str) -> str:
     def repl(match):
         raw = match.group(1).strip()
         parts = [p.strip() for p in raw.split(';')]
+        if not any(p in BIBLIOGRAPHY for p in parts):
+            return match.group(0)
         note_parts = []
         for part in parts:
             ref = BIBLIOGRAPHY.get(part)
@@ -120,7 +133,7 @@ def convert_to_footnotes(text: str) -> str:
         footnotes.append(f'[^{counter[0]}]: {" ".join(note_parts)}')
         return f'[^{counter[0]}]'
 
-    pattern = r'\((?![\$\\])([A-Z][a-zéœ]+(?: (?:and|et al\.?|,) [A-Za-zéœ\']+)* \d{4}(?:;\s*[A-Z][a-zéœ]+(?: (?:and|et al\.?|,) [A-Za-zéœ\']+)* \d{4})*)\)'
+    pattern = r"\((?![\$\\])((?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?(?:;\s*(?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?)*)\)"
     text = re.sub(pattern, repl, text)
     if footnotes:
         text += '\n\n---\n\n' + '\n'.join(footnotes)
@@ -183,7 +196,7 @@ def fix_for_docx(text: str) -> str:
         # Resolve relative path to absolute
         abs_path = (SCRIPT_DIR / src).resolve()
         if abs_path.exists():
-            return f'![{alt}]({abs_path})'
+            return f'![{alt}]({src})'
         else:
             return m.group(0)  # leave unchanged if file not found
     text = _re.sub(
@@ -211,7 +224,7 @@ def build_manuscript() -> Path:
     # Fix dollar signs and math for clean docx conversion
     text = fix_for_docx(text)
 
-    header = '---\ntitle: "The Linguistic Hydro-Social Cycle: Water Infrastructure as a Precondition for British Industrialization"\njournal: Journal of Global History\ntype: Original Research Article\nword_count: ~8,000\n---\n\n'
+    header = '---\ntitle: "Water Before Steam: Canals, Coal and the Making of Britain\'s Fossil Economy, 1700–1870"\njournal: Journal of Global History\ntype: Original Research Article\nword_count: ~9,300\n---\n\n'
 
     out = SCRIPT_DIR / "manuscript_jgh.md"
     out.write_text(header + text)
@@ -240,7 +253,7 @@ def build_title_page(cfg: dict) -> Path:
 
 ## Title
 
-**The Linguistic Hydro-Social Cycle: Water Infrastructure as a Precondition for British Industrialization**
+**Water Before Steam: Canals, Coal and the Making of Britain's Fossil Economy, 1700–1870**
 
 ---
 
@@ -263,15 +276,21 @@ Email: {cfg['email']}
 ## Keywords
 
 1. Industrial Revolution
-2. Water infrastructure
-3. Canal engineering
-4. Great Divergence
-5. Difference-in-differences
-6. Natural language processing
-7. Geographical symbiosis
+2. Canals
+3. Coal
+4. Water infrastructure
+5. Growth regimes
+6. Great Divergence
+7. Google Books Ngram
 8. British economic history
-9. Hydro-social
-10. Bridgewater Canal
+9. Steam power
+10. Transport revolution
+
+---
+
+## Author Biography
+
+{cfg['biography']}
 
 ---
 
@@ -295,13 +314,13 @@ Email: {cfg['email']}
 
 ## Data Availability Statement
 
-All data and code required to reproduce the analyses in this paper are publicly available at https://github.com/percw/water_and_society. Historical GDP per capita data are sourced from the Maddison Project Database 2023 (Bolt and van Zanden 2020). Linguistic frequency data are drawn from the Google Books Ngram Corpus (`eng_gb_2019`). A self-contained replication package is available as a supplementary archive.
+All code and data required to reproduce the analyses are publicly available at https://github.com/percw/water_and_society. British sectoral output and population are from the Bank of England's *A Millennium of Macroeconomic Data for the UK*, reproducing Broadberry et al. (2015). Cross-country GDP per head and population are from the Maddison Project Database 2023 (Bolt and van Zanden 2024). Installed horsepower is from Kanefsky (1979) via Crafts (2004). Canal completion years and parliamentary authorisations (Priestley 1831) are included with their construction scripts. Word and phrase frequencies are from the Google Books Ngram Corpus, British English 2019 edition. A self-contained replication package is available as a supplementary archive.
 
 ---
 
 ## Word Count
 
-Approximately 8,000 words (including footnotes).
+Approximately 9,300 words (including footnotes and tables).
 """
     out = SCRIPT_DIR / "title_page.md"
     out.write_text(content)
@@ -327,20 +346,13 @@ Cambridge University Press
 
 Dear Editors,
 
-I am pleased to submit the manuscript entitled **"The Linguistic Hydro-Social Cycle: Water Infrastructure as a Precondition for British Industrialization"** for consideration as an original research article in the *Journal of Global History*.
+I am pleased to submit the manuscript **"Water Before Steam: Canals, Coal and the Making of Britain's Fossil Economy, 1700–1870"** for consideration as an original research article in the *Journal of Global History*.
 
-This paper builds directly on the theoretical framework established by Terje Tvedt in "Why England and not China and India? Water Systems and the History of the Industrial Revolution," published in this journal in 2010. Where Tvedt proposed that Britain's unique hydro-topographical endowments functioned as a critical precursor to the steam revolution, our study provides the first quantitative test of this hypothesis by merging natural language processing (NLP) of historical print culture with formal Difference-in-Differences (DiD) econometric modeling.
+The paper is a quantitative test of the argument Terje Tvedt made in this journal in 2010: that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. Using annual British sectoral output for 1700–1870, a new year-by-year series of canal mileage, installed steam and water horsepower, the Maddison Project Database 2023 and the Google Books British corpus, we show that Britain passed through two growth regimes. Aggregate output, coal, iron and population accelerated between 1775 and 1792 as the canal network was built, while income per head did not move; income per head accelerated only after 1818, once steam was becoming the majority power source. Canal mileage predicts coal output over the following two decades and predicts population, but not income per head or agriculture. Steam raises income per head only after 1830. In print, “coal barge” and “coal wharf” precede “steam engine” and “steam power” by a generation.
 
-**Key findings:**
+**Why this journal.** The paper engages Tvedt (2010) directly and extends the Great Divergence debate with the comparative case his argument needs: the Netherlands, with Europe's densest waterways and no coal, grew 9 per cent in total output between 1700 and 1820; Britain, with both, grew 240 per cent. The paper also contains a methodological result for historians who use cross-country difference-in-differences for the long eighteenth century: the apparent British take-off in 1807 in such designs is the Napoleonic collapse of the continental control group. We withdraw an earlier version's estimate on exactly that ground and explain why.
 
-- Using a 71-term vocabulary index applied to the Google Books British English corpus (1700–1900), we identify a permanent structural crossover in 1766 at which engineered water terminology overtook naturalistic water terminology in British print culture — five years after the exogenous shock of the Bridgewater Canal opening (1761).
-- A DiD framework anchored to the 1761 Canal opening, deployed across an expanded 13-country panel from the Maddison Project Database, estimates that Britain's post-shock trajectory diverged by approximately 1,251 GDP per capita relative to European controls (p = 0.042, HAC-corrected). Magnitude metrics confirm a very large effect (Cohen's d = 1.2–1.5, representing ~50% of pre-treatment British GDP).
-- Counterfactual analysis suggests 47% of Britain's ultimate industrial lead was established by 1810 — during the canal and water wheel era, before steam power achieved commercial dominance.
-- Placebo falsification tournaments across rival vocabularies (coal, textiles, finance, agriculture) confirm that only the water infrastructure shock uniquely predicts the timing of GDP divergence.
-
-We believe this paper is particularly well-suited to the *Journal of Global History* for three reasons. First, it provides empirical validation of a framework your readership already knows, extending Tvedt's qualitative argument with formal econometric evidence. Second, the comparative dimension — using an expanded panel of 13 countries including France, the Netherlands, Germany, Spain, Japan, China, and India as controls — directly engages the Great Divergence debate central to the journal's intellectual tradition. Third, the paper includes historical illustrations comparing English canal infrastructure with Asian river transport, underscoring the geographical specificity of Britain's water engineering advantage.
-
-The manuscript is approximately 8,000 words including footnotes. A full replication package (data, code, and documentation) is publicly available at https://github.com/percw/water_and_society.
+The manuscript is approximately 9,300 words including footnotes and tables, with six figures and seven tables. A full replication package (data, code and documentation) is publicly available at https://github.com/percw/water_and_society.
 
 This manuscript has not been submitted to or published in any other journal. {cfg['competing_interests']} {cfg['funding']}
 
@@ -358,12 +370,45 @@ Sincerely,
     return out
 
 
+def double_space_docx(docx: Path) -> None:
+    """JGH asks for double-spaced text. Set line spacing to 480 (= 2.0) in the document defaults
+    and in the body/first-paragraph styles, leaving tables, footnotes and captions untouched."""
+    import zipfile, shutil, re as _re
+    tmp = docx.with_suffix('.tmp.docx')
+    with zipfile.ZipFile(docx) as zin, zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+            if item.filename == 'word/styles.xml':
+                xml = data.decode('utf8')
+                # document defaults
+                if '<w:pPrDefault>' in xml:
+                    xml = _re.sub(r'<w:pPrDefault>\s*<w:pPr>', '<w:pPrDefault><w:pPr><w:spacing w:line="480" w:lineRule="auto"/>', xml, count=1)
+                    xml = xml.replace('<w:pPrDefault/>', '<w:pPrDefault><w:pPr><w:spacing w:line="480" w:lineRule="auto"/></w:pPr></w:pPrDefault>')
+                else:
+                    xml = xml.replace('<w:docDefaults>', '<w:docDefaults><w:pPrDefault><w:pPr><w:spacing w:line="480" w:lineRule="auto"/></w:pPr></w:pPrDefault>', 1)
+                # pandoc body styles carry their own spacing; override line spacing there too
+                for sid in ('BodyText', 'FirstParagraph'):
+                    xml = _re.sub(r'(<w:style [^>]*w:styleId="%s"[^>]*>.*?<w:pPr>)(.*?)(</w:pPr>)' % sid,
+                                  lambda m: m.group(1) + _re.sub(r'<w:spacing[^>]*/>', '', m.group(2)) + '<w:spacing w:before="0" w:after="180" w:line="480" w:lineRule="auto"/>' + m.group(3),
+                                  xml, count=1, flags=_re.DOTALL)
+                # footnotes and tables stay single-spaced
+                for sid in ('FootnoteText', 'Compact', 'TableCaption', 'ImageCaption', 'Caption'):
+                    xml = _re.sub(r'(<w:style [^>]*w:styleId="%s"[^>]*>.*?<w:pPr>)(.*?)(</w:pPr>)' % sid,
+                                  lambda m: m.group(1) + _re.sub(r'<w:spacing[^>]*/>', '', m.group(2)) + '<w:spacing w:line="240" w:lineRule="auto"/>' + m.group(3),
+                                  xml, count=1, flags=_re.DOTALL)
+                data = xml.encode('utf8')
+            zout.writestr(item, data)
+    shutil.move(tmp, docx)
+
+
 # ── DOCX ─────────────────────────────────────────────────────────────────────
 def to_docx(md_path: Path) -> Path:
     docx = md_path.with_suffix('.docx')
     try:
-        subprocess.run(['pandoc', str(md_path), '-o', str(docx), '--standalone'],
+        subprocess.run(['pandoc', str(md_path), '-o', str(docx), '--standalone'], cwd=str(SCRIPT_DIR),
                        check=True, capture_output=True)
+        if md_path.name.startswith('manuscript'):
+            double_space_docx(docx)
         kb = docx.stat().st_size // 1024
         print(f"  ✅ Word export:   {docx.name}  ({kb} KB)")
         return docx
@@ -419,9 +464,7 @@ def main():
     print("    1. manuscript_jgh.docx")
     print("    2. title_page.docx        (editors only)")
     print("    3. cover_letter.docx")
-    print("    4. data/did_figure_one.png")
-    print("    5. data/did_event_study.png")
-    print("    6. data/did_vocab_tournament.png")
+    print("    4. data/fig1_two_regimes.png … data/fig6_power_benchmark.png (six figures)")
     print()
 
 

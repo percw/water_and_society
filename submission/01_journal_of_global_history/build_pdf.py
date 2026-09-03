@@ -68,7 +68,7 @@ ACADEMIC_CSS = """
     margin: 30mm 25mm 30mm 25mm;
 
     @top-center {
-        content: "The Linguistic Hydro-Social Cycle";
+        content: "Water Before Steam";
         font-family: 'Source Sans 3', 'Helvetica Neue', sans-serif;
         font-size: 8pt;
         color: #999;
@@ -513,7 +513,7 @@ def build_html(md_text: str, doc_type: str = 'manuscript') -> str:
     if doc_type == 'manuscript':
         title_html = '''
         <div class="title-block">
-            <h1>The Linguistic Hydro-Social Cycle:<br>Water Infrastructure as a Precondition<br>for British Industrialization</h1>
+            <h1>Water Before Steam:<br>Canals, Coal and the Making<br>of Britain's Fossil Economy, 1700–1870</h1>
         </div>
         '''
     elif doc_type == 'title_page':

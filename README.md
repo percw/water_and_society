@@ -1,122 +1,77 @@
-# The Linguistic Hydro-Social Cycle
+# Water Before Steam
 
-[![Status: Pre-Print](https://img.shields.io/badge/Status-Pre--Print-blue.svg)](#)
+[![Status: Working Paper](https://img.shields.io/badge/Status-Working--Paper-blue.svg)](#)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-📖 **[Read the Full Pre-Print Manuscript Draft Here](archive/paper/compiled_manuscript.md)**
+**Canals, coal and the precondition for Britain's steam economy, 1700–1870.**
 
-> **Did water infrastructure establish the preconditions for British industrialization — decades before the steam engine?**
-> This project applies natural language processing (NLP) to historical texts to quantify the integration of "hydro-social" vocabulary over the 18th and 19th centuries. By merging these linguistic milestones with real GDP data in a Difference-in-Differences (DiD) framework, we trace the origins of Britain's macroeconomic divergence to the canal era — establishing that water infrastructure functioned as a necessary precondition for the fossil transition that followed.
+📖 [Compiled manuscript](archive/paper/compiled_manuscript.md) · 🧭 [Research strategy](docs/strategy_v2.md) · 📝 [Analysis memo, 3 September 2026](docs/memos/2026-09-03_canals_before_steam.html)
+
+> Britain's industrial take-off is usually dated by steam. This project dates it by water. Using annual British sectoral output (Broadberry et al. 2015), a new year-by-year series of canal mileage, installed steam and water horsepower, the Maddison Project Database 2023 and the Google Books British corpus, we show that Britain passed through **two growth regimes**: an aggregate acceleration in 1775–1792 that ran on water and was absorbed by population, and a per-capita acceleration after 1818 that ran on steam. Canal mileage predicts coal output and population, not income per head. Steam raises income per head only after 1830. Water infrastructure was the precondition, in Tvedt's (2010) sense, that made a coal economy possible.
 
 <div align="center">
-  <img src="data/did_figure_one.png" alt="Figure 1: The Hydro-Social Shift vs British GDP Divergence" width="800">
-  <br>
-  <em>Figure 1: 47% of Britain's ultimate GDP lead was established by 1810 — decades before steam power reached commercial dominance.</em>
+  <img src="data/fig1_two_regimes.png" alt="Figure 1: Britain's two growth regimes" width="900">
 </div>
 
 ---
 
-## The Great Divergence in Infrastructure
+## Findings
 
-Britain's industrial trajectory was not simply a story of coal and steam. Before the first commercially viable steam engines, Britain had already engineered a national network of navigable canals, towpaths, and water-powered mills — cooperating with the landscape rather than overriding it. This "geographical symbiosis" created the integrated markets, accumulated capital, and systemic demand that the subsequent fossil revolution would build upon.
-
-The contrast with contemporary Asian river transport illustrates why Britain's specific hydro-topographical engineering mattered. While Chinese river systems were vast, they lacked the engineered infrastructure — towpaths, locks, low-profile barges — that made British canals uniquely efficient for bulk industrial transport.
-
-<table>
-<tr>
-<td width="50%">
-
-<div align="center">
-  <img src="data/illustrations/England_River.png" alt="English Canal Infrastructure, c. 1743" width="100%">
-  <br>
-  <em><strong>English Canal Infrastructure, c. 1743.</strong> Observed loading at Loxley Quay. Note the engineered towpath, horse-drawn traction, low-profile barge ("The Industry") designed for bridge clearance, crane-assisted loading, and the integrated water wheel powering adjacent mills. A single horse replaces dozens of labourers.</em>
-</div>
-
-</td>
-<td width="50%">
-
-<div align="center">
-  <img src="data/illustrations/Asia_River.png" alt="Asian River Transport, Three Gorges, c. 1750" width="100%">
-  <br>
-  <em><strong>Asian River Transport, Three Gorges, c. 1750.</strong> In stark contrast: no continuous towpath, no horse traction, no engineered profile. Massive crews haul wide-hulled junks by brute force through fast current. The sheer difficulty of transport without topographical engineering magnified costs and constrained market integration.</em>
-</div>
-
-</td>
-</tr>
-</table>
-
-This infrastructural contrast sits at the heart of the ["Great Divergence"](https://en.wikipedia.org/wiki/Great_Divergence) debate (Pomeranz 2000; Tvedt 2010). Britain's advantage was not merely geological (coal) or cultural (rhetoric) — it was *topographical*: a landscape uniquely amenable to engineered water cooperation, systematically exploited through canal construction from 1761 onward.
+1. **Two regimes, not one.** Trend breaks in total output, industry, services, coal, iron and population fall between 1775 and 1792. Income per head breaks in 1818. Agriculture never breaks. Between 1760 and 1815 aggregate growth rose by about one percentage point a year and population growth by about one point; income per head kept growing at 0.3 per cent.
+2. **Canals are a dose that predicts the right things.** Cumulative canal miles (155 canals, 2,967 miles; two waves, 1760–80 and 1790–1816, corroborated by 152 parliamentary authorisations parsed from Priestley 1831) predict coal output over 5–20 years in every specification, including quadratic trend and first differences, and predict population. They predict neither income per head nor agriculture.
+3. **The chain runs water → coal → steam → income.** Local projections: canal stock raises coal within a decade and installed steam horsepower over 15–20 years; steam horsepower raises income per head only on samples extending past 1830. Steam overtook water and wind as a power source in 1833.
+4. **Print agrees.** In the British corpus "coal barge" (1781) and "coal wharf" (1800) reach a quarter of their 1850 frequency a generation before "steam engine" (1808) and "steam power" (1826). The frequency of "canal" tracks the physical canal stock at r = 0.91 and the building rate not at all.
+5. **The cross-country DiD was measuring the Napoleonic wars.** The 1761 treatment effect against France and the Netherlands (β₃ = 1,251, HAC p = 0.042) reproduces exactly and breaks in 1807, when Dutch income per head fell 44 per cent under French occupation. Britain fell 1.4 per cent. We withdraw the earlier estimate and its 47 per cent counterfactual and keep the analysis as a methodological caution.
+6. **The aggregate divergence was pre-steam.** Between the Maddison benchmark years 1700 and 1820 Britain's total output grew 240 per cent, twice Germany's, while steam supplied at most a fifth of its power. The Netherlands, with Europe's densest waterways and no coal, grew 9 per cent.
 
 ---
 
-## Key Findings
+## Repository layout
 
-- **The 1761 Structural Break:** The opening of the Bridgewater Canal serves as the exogenous treatment shock ($T_0$). The 1766 NLP crossover in the Google Books `eng_gb_2019` corpus — where water terminology permanently shifts from naturalistic to engineered — validates the mechanism five years later.
-- **The Treatment Effect:** DiD regression yields $\beta_3 = 1{,}251$ additional GDP per capita for Britain relative to continental controls ($p = 0.042$, HAC). The point estimate is robust across all variance corrections, including the collapsed estimator of Bertrand et al. (2004).
-- **The Precondition Thesis:** 47% of Britain's ultimate industrial divergence was established by 1810 — during the canal and water wheel era. When fossil and transport channels are entered simultaneously, the fossil channel dominates — consistent with water infrastructure's contribution being absorbed into the broader economic structure it created.
-- **Falsification:** Only the water infrastructure shock produces a clean event study. Rival vocabularies (coal, textiles, finance) yield noisy or invalid pre-trends.
+```
+src/
+  fetch_data.py          Google Books unigrams (71 terms) and Maddison cache        [original]
+  fetch_external.py      Bank of England millennium data, Maddison 2023, canal list [new]
+  regime_analysis.py     War confound, two regimes, canal dose, benchmarks, NLP proxy [new]
+  mechanism_analysis.py  Horsepower, local projections, mediation, bigram sequencing [new]
+  regime_figures.py      Figures 1–6 for the paper                                  [new]
+  did_analysis.py        Cross-country DiD / event study / placebos (Section 4.6)   [original]
+  dml_analysis.py        Cross-country DML (replication of the earlier version)     [original]
+data/
+  external/              Tidy CSVs: boe_gb, mpd_panel, uk_canals_wiki, canal_cum_miles,
+                         power_hp, priestley_1831_acts, ngram_bigrams_coal_transport
+  external/raw/          Downloaded xlsx and OCR text (git-ignored; fetch_external.py)
+  fig1_…fig6_*.png       Paper figures
+  did_*.png              Figures of the earlier version
+docs/
+  strategy_v2.md         Research strategy and order of work
+  results_regime_v1.txt, results_mechanism_v1.txt   Frozen output of the two analysis scripts
+  memos/                 Analysis memo (HTML) and its generator
+archive/paper/           Manuscript sections 00–08 and compile_paper.py
+submission/              Journal of Global History build scripts and replication package
+```
 
----
-
-## Methodology
-
-<details>
-<summary><strong>1. Linguistic Trigger (Ngram NLP)</strong></summary>
-<br>
-We track a targeted vocabulary array of 71 terms across the <code>eng_gb_2019</code> text corpus. A crossover index establishes the exact mathematical "shock" year when British print culture structurally embraced water as an industrial asset rather than a natural hazard.
-</details>
-
-<details>
-<summary><strong>2. Difference-in-Differences (DiD) Analysis</strong></summary>
-<br>
-Using high-density annual data from the Maddison Project, we deploy the 1761 Bridgewater Canal opening as the exogenous treatment $T_0$. We run parallel trend analyses, static & dynamic DiD regressions, HAC/clustered/collapsed robustness checks, and placebo permutations against European controls.
-</details>
-
-<details>
-<summary><strong>3. Placebo Falsification Tournaments</strong></summary>
-<br>
-To demonstrate specificity, the script executes identical DiD event studies assigning placebo 18th-century "takeoff" years derived from alternative sectors (Coal/Mining, Textile, Financial, Agricultural). Only the water hypothesis produced a clean, non-noisy event study aligned with the timing of GDP divergence.
-</details>
-
----
-
-## Replication Setup
-
-To reproduce the data fetching and exact econometric graphs for publication:
+## Reproduce
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/percw/water_and_society.git
-cd water_and_society
-
-# 2. Setup virtual environment
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
-# 3. Pull linguistic data and regenerate causal plots
-python src/fetch_data.py --force
-python src/did_analysis.py
+python src/fetch_data.py                 # ngram unigrams + Maddison cache (uses embedded fallback offline)
+python src/fetch_external.py             # Bank of England, Maddison 2023, canal list (~35 MB download)
+python src/regime_analysis.py    | tee docs/results_regime_v1.txt
+python src/mechanism_analysis.py | tee docs/results_mechanism_v1.txt
+python src/regime_figures.py
+python src/did_analysis.py               # earlier cross-country design, Section 4.6
+cd archive/paper && python compile_paper.py
 ```
 
-## Repository Structure
+The two horsepower benchmark files and the canal table are small and committed; everything else regenerates.
 
-```text
-├── archive/              # Paper sections (Markdown + compiled LaTeX)
-│   └── paper/
-│       ├── 00_abstract.md ... 08_references.md
-│       ├── compiled_manuscript.md
-│       └── compiled_manuscript.tex
-├── data/                 # Datasets, generated plots, and illustrations
-│   ├── illustrations/    # Historical canal infrastructure comparisons
-│   ├── did_figure_one.png
-│   ├── did_event_study.png
-│   └── ...
-├── docs/                 # Research results and pipeline outputs
-├── src/                  # Core Python pipeline
-│   ├── fetch_data.py
-│   └── did_analysis.py
-├── requirements.txt
-└── README.md
-```
+## Sources
+
+Broadberry, Campbell, Klein, Overton and van Leeuwen (2015) via the Bank of England *Millennium of Macroeconomic Data* v3.1 · Maddison Project Database 2023 (Bolt and van Zanden 2024) · Kanefsky (1979) horsepower via Crafts (2004) · Priestley (1831), *Historical Account of the Navigable Rivers, Canals, and Railways* (archive.org OCR) · Google Books Ngram, `eng_gb_2019` · canal completion table compiled from published reference lists.
+
+## Citation
+
+Working paper, September 2026. Please cite the repository until a preprint DOI is issued.
