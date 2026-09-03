@@ -379,7 +379,7 @@ All code and data required to reproduce the analyses are publicly available at h
 
 ## Word Count
 
-Approximately 11,000 words including footnotes, tables and captions (JGH limit 12,500).
+Approximately 12,000 words including footnotes, tables and captions (JGH limit 12,500).
 """
     out = SCRIPT_DIR / "title_page.md"
     out.write_text(content)
@@ -413,7 +413,7 @@ The paper tests, on annual British data for 1700–1870, the argument Terje Tved
 
 **Disclosure for double-anonymous review.** An earlier and substantially different version of this analysis, which reported the cross-country difference-in-differences that the present paper withdraws, has been public in a code repository since spring 2026. The manuscript has been anonymised, but referees who search for the topic may encounter that repository. All figures are the author's own, generated from public data.
 
-The manuscript is approximately 11,000 words including footnotes, tables and captions, with five figures and seven tables. A full replication package (data, code and documentation) is available and the repository URL is given on the title page.
+The manuscript is approximately 12,000 words including footnotes, tables and captions, with five figures and seven tables. A full replication package (data, code and documentation) is available and the repository URL is given on the title page.
 
 This manuscript has not been submitted to or published in any other journal. {cfg['competing_interests']} {cfg['funding']}
 
