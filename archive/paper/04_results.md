@@ -7,10 +7,10 @@ Figure 1 plots the British series on a logarithmic scale with the two canal-buil
 <div align="center">
   <img src="../../data/fig1_two_regimes.png" alt="Figure 1: Britain's two growth regimes" width="800">
   <br>
-  <em><strong>Figure 1: Britain's two growth regimes.</strong> Annual indices, 1700 = 100, log scale. Shaded bands mark the first canal wave (1760–1780) and the canal-mania completions (1790–1816). Vertical lines at 1761 and 1818. Source: Broadberry et al. (2015) via Bank of England.</em>
+  <em><strong>Figure 1: Britain's two growth regimes.</strong> Annual indices, 1700 = 100, log scale. Shaded bands mark the first canal wave (1760–1780) and the canal-mania completions (1790–1816). Vertical lines at 1761 and 1818. Source: Bank of England millennium dataset (Broadberry et al. 2015).</em>
 </div>
 
-Table 1 gives the trend growth rates by period. Between 1700–1760 and 1790–1815, growth of total output rose from 0.55 to 1.58 per cent a year, industry from 0.47 to 1.81, coal from 0.87 to 2.85 and population from 0.29 to 1.18. Income per head grew at 0.25 per cent a year in the first period and 0.40 in the third; the difference is within the noise of the series. Agriculture is flat throughout.
+Table 1 gives the trend growth rates by period. Between 1700–1760 and 1790–1815, growth of total output rose from 0.55 to 1.58 per cent a year, industry from 0.47 to 1.81, coal from 0.87 to 2.85 and population from 0.29 to 1.18. Income per head grew at 0.25 per cent a year in the first period, 0.08 in 1760–1790 and 0.40 in 1790–1815. Agriculture is flat throughout.
 
 **Table 1: Trend growth of British series, per cent per year**
 
@@ -22,78 +22,80 @@ Table 1 gives the trend growth rates by period. Between 1700–1760 and 1790–1
 | 1815–1830 | 1.98 | 3.64 | 2.84 | 1.62 | 1.49 | 0.50 | 0.63 |
 | 1830–1870 | 2.35 | 2.85 | 3.57 | 2.62 | 1.16 | 1.19 | 0.78 |
 
-*Source: authors' calculations from Broadberry et al. (2015). Slopes of log-linear trends fitted within each window.*
+*Source: own calculations from the Bank of England millennium dataset (Broadberry et al. 2015). Slopes of log-linear trends fitted within each window.*
 
-Table 2 formalises the comparison. Fixing the break at 1761 and estimating over 1700–1830, the trend slope of total output rises by 0.85 percentage points a year, industry by 1.42, coal by 1.62, iron by 3.24, services by 1.07 and population by 0.83, all with p-values below 0.01 under Newey–West errors. The slope of income per head changes by 0.02 points and that of agriculture by −0.04, neither distinguishable from zero. When the break date is left free, the single best break falls between 1777 (population) and 1792 (total output) for every canal-served series, and at 1818 for income per head. Allowing two breaks places the first at 1774–1775 for total output, industry and services and the second at 1818–1823. The data pick out the two regimes without being told where to look.
+Table 2 formalises the comparison. Fixing the break at 1761 and estimating over 1700–1830, the trend slope of total output rises by 0.85 percentage points a year, industry by 1.42, coal by 1.62, iron by 3.24, textiles by 1.51, services by 1.07 and population by 0.83, all with p-values below 0.01 under Newey–West errors. The slope of income per head changes by 0.02 points and that of agriculture by −0.04, neither distinguishable from zero. The fixed date is a pre-test, so the table also reports the break the data choose. The single best break falls between 1777 (population) and 1792 (total output) for every canal-served series, with sup-F statistics far above the Andrews critical value, and at 1818 for income per head. Agriculture's best break is not significant: there is none. Allowing two breaks places the first in 1774–1775 for total output, industry and services and the second in 1818–1823 for output and industry; coal's first break falls earlier, in 1741, and its second in 1798, which we return to below. The data pick out the two regimes without being told where to look.
 
 **Table 2: Change in trend slope at 1761 and data-chosen break dates**
 
-| Series | Trend before 1761, % p.a. | Change after 1761, pp p.a. | p | Best single break | Best two breaks |
+| Series | Trend before 1761, % per year | Change after 1761, points per year | p | Best single break (sup-F) | Best two breaks |
 |:--|--:|--:|--:|--:|:--|
-| Total GDP | 0.52 | +0.85 | <0.01 | 1792 | 1775, 1818 |
-| Industry | 0.39 | +1.42 | <0.01 | 1789 | 1774, 1823 |
-| Coal | 0.77 | +1.62 | <0.01 | 1784 | 1741, 1798 |
-| Iron | 0.26 | +3.24 | <0.01 | 1786 | — |
-| Services | 0.44 | +1.07 | <0.01 | 1786 | 1775, 1844 |
-| Population | 0.23 | +0.83 | <0.01 | 1777 | 1730, 1783 |
-| *GDP per head* | 0.29 | +0.02 | 0.82 | 1818 | 1720, 1818 |
-| *Agriculture* | 0.82 | −0.04 | 0.84 | 1728 | — |
+| Total GDP | 0.52 | +0.85 | <0.01 | 1792 (778) | 1775, 1818 |
+| Industry | 0.39 | +1.42 | <0.01 | 1789 (909) | 1774, 1823 |
+| Coal | 0.77 | +1.62 | <0.01 | 1784 (667) | 1741, 1798 |
+| Iron | 0.26 | +3.24 | <0.01 | 1786 (1,294) | 1786, 1815 |
+| Textiles | 0.69 | +1.51 | <0.01 | 1779 (240) | 1728, 1817 |
+| Services | 0.44 | +1.07 | <0.01 | 1786 (927) | 1775, 1844 |
+| Population | 0.23 | +0.83 | <0.01 | 1777 (3,052) | 1730, 1783 |
+| *GDP per head* | 0.29 | +0.02 | 0.82 | 1818 (270) | 1720, 1818 |
+| *Agriculture* | 0.82 | −0.04 | 0.84 | none (4.2, not significant) | 1720, 1757 |
 
-*Slope-change regressions on 1700–1830 with Newey–West (10 lags) errors. Break searches on 1700–1870, Andrews sup-F with 15 per cent trimming and two-break grid search with minimum segment of 20 years.*
+*Slope-change regressions on 1700–1830 with Newey–West (10 lags) errors. Break searches on 1700–1870: Andrews sup-F with 15 per cent trimming (5 per cent critical value approximately 11.8 for two parameters) and a two-break grid search with a minimum segment of 20 years, which cannot place a break after 1850.*
 
-The arithmetic of the first regime is simple. Between 1760 and 1815 the growth of total output rose by about a percentage point a year and the growth of population rose by about a percentage point a year. The economy grew faster and fed more people at the same income. In an organic economy that is the Malthusian outcome; what is unusual is that it continued for half a century without the income per head falling, and that it coincided with the doubling of coal output per head, from an index of 100 in 1700 to 202 in 1790 and 246 in 1800.
+The arithmetic of the first regime is simple. Between 1760 and 1815 the growth of total output rose by about a percentage point a year and the growth of population rose by about a percentage point a year. The economy grew faster and fed more people at the same income. In an organic economy that is the Malthusian outcome; what is unusual is that it continued for half a century without income per head falling, and that it coincided with the doubling of coal output per head, from an index of 100 in 1700 to 202 in 1790 and 246 in 1800. Coal's early break in 1741 is a reminder that the coal trade did not begin with canals: the coastal trade from the Tyne to London was already the largest bulk-freight flow in Europe (Hatcher 1993; Flinn 1984). What the canal era added was inland coal, and the second break in 1798 dates it.
 
 ## 4.2 The canal network as a dose
 
-Figure 2 shows the canal series. Panel (a) gives miles opened per decade: 117 in the 1760s, 353 in the 1770s, a lull of 83 in the 1780s, then 549 in the 1790s, 479 in the 1800s and 344 in the 1810s. Panel (b) gives the cumulative stock, from 218 miles in 1760 to 772 in 1790, 1,487 in 1800 and 2,320 in 1830. Panel (c) gives coal output per head. The correspondence between the two waves and the two steepenings of coal per head is visible to the eye; the regressions ask whether it survives detrending.
+Figure 2 shows the canal series. Panel (a) gives miles opened per decade: 117 in the 1760s, 353 in the 1770s, a lull of 83 in the 1780s, then 548 in the 1790s, 479 in the 1800s and 344 in the 1810s. Panel (b) gives the cumulative stock, from 218 miles in 1760 to 772 in 1790, 1,487 in 1800 and 2,320 in 1830. Panel (c) gives coal output per head. The correspondence between the two waves and the two steepenings of coal per head is visible to the eye; the regressions ask whether it survives detrending.
 
 <div align="center">
   <img src="../../data/fig2_canal_dose.png" alt="Figure 2: The canal network and coal" width="800">
   <br>
-  <em><strong>Figure 2: The canal network and coal.</strong> (a) Canal miles opened per decade, 155 canals by completion year. (b) Cumulative canal miles since 1700. (c) Coal output per head, 1700 = 100, with the year steam overtook water and wind as a source of stationary power. Sources: canal tables; Broadberry et al. (2015); Kanefsky (1979) via Crafts (2004).</em>
+  <em><strong>Figure 2: The canal network and coal.</strong> (a) Canal miles opened per decade, 155 canals by completion year. (b) Cumulative canal miles since 1700. (c) Coal output per head, 1700 = 100, with the year steam overtook water and wind as a source of stationary power. Sources: canal reference table described in the data section; Bank of England millennium dataset (Broadberry et al. 2015); horsepower benchmarks from Kanefsky as tabulated in Crafts (Kanefsky 1979; Crafts 2004).</em>
 </div>
 
-Table 3 reports the dose-response regressions over 1700–1830. In the simplest specification, log output on a linear trend and the canal stock, a thousand miles of canal is associated with 47 per cent more coal, 40 per cent more industrial output, 99 per cent more iron, 32 per cent more services and 24 per cent more population, and with no change in income per head or agriculture. The sceptical specifications thin this out. With a quadratic trend, only coal retains a large and significant coefficient, 30 per cent per thousand miles, with population marginal at 4 per cent; industry and total output are indistinguishable from the trend. In first differences with ten lags of new mileage, coal, industry and population respond and total output, income per head and agriculture do not. In the horse race with steam horsepower and war years, coal's canal coefficient is 41 per cent against a steam coefficient of 13 per cent that is not significant; for industry and population the two are of similar size and both significant.
+Table 3 reports the dose-response regressions over 1700–1830. In the simplest specification, log output on a linear trend and the canal stock, a thousand miles of canal is associated with 47 per cent more coal, 40 per cent more industrial output, 99 per cent more iron, 32 per cent more services and 24 per cent more population, and with no change in income per head or agriculture. The sceptical specifications thin this out. With a quadratic trend and a war dummy, coal, iron and services retain large and significant coefficients, 30, 61 and 12 per cent per thousand miles; population is marginal at 4 per cent; industry and total output are indistinguishable from the trend. In first differences with ten lags of new mileage, coal, industry and population respond, total output and income per head do not, and agriculture's response is negative. In a horse race that adds the print frequency of "steam" and the war dummy, coal's canal coefficient is 41 per cent against a steam coefficient of 13 per cent that is not significant; for industry and population the two are of similar size and both significant. A horse race against installed steam horsepower is not informative and we do not report it as one: over 1760–1830 the interpolated horsepower series, the interpolated water-power series and the canal stock are all near-linear in time and correlate at 0.98, so the partial coefficients apportion a common trend rather than separate three stocks. The ordering evidence has to come from timing, which is the subject of the next section.
 
 **Table 3: Canal stock and British output, 1700–1830 (per 1,000 canal miles)**
 
-| Outcome (log) | Linear trend | Quadratic trend | First differences, 10-year cumulative | Horse race: canal | Horse race: steam hp |
+| Outcome (log) | Linear trend | Quadratic trend + war | First differences, 10-year cumulative | Horse race: canal | Horse race: "steam" in print |
 |:--|--:|--:|--:|--:|--:|
 | Coal | +46.5% (p<0.001) | +29.8% (p=0.001) | +27.0% (p<0.001) | +40.8% (p<0.001) | +12.6% (p=0.08) |
 | Industry | +40.1% (p<0.001) | −0.9% (p=0.89) | +14.3% (p<0.001) | +28.8% (p<0.001) | +30.4% (p=0.003) |
-| Iron | +99.3% (p<0.001) | — | — | +88.2% (p<0.001) | +35.6% (p=0.17) |
+| Iron | +99.3% (p<0.001) | +61.2% (p=0.013) | — | — | — |
+| Services | +32.3% (p<0.001) | +12.2% (p=0.002) | — | — | — |
 | Population | +24.0% (p<0.001) | +4.1% (p=0.07) | +16.6% (p<0.001) | +18.6% (p<0.001) | +15.0% (p<0.001) |
 | Total GDP | +24.7% (p<0.001) | +2.2% (p=0.52) | +4.2% (p=0.25) | +18.8% (p<0.001) | +19.0% (p<0.001) |
 | *GDP per head* | +0.8% (p=0.69) | −1.9% (p=0.61) | −12.4% (p=0.33) | +0.2% (p=0.94) | +4.0% (p=0.08) |
 | *Agriculture* | −0.5% (p=0.90) | −5.1% (p=0.56) | −18.8% (p<0.001) | −1.5% (p=0.72) | +7.3% (p=0.07) |
 
-*Newey–West errors with 10 lags. Steam horsepower is the log of the interpolated Kanefsky series, indexed to 1830. The horse race includes a dummy for 1756–63, 1775–83 and 1793–1815.*
+*Newey–West errors with 10 lags. The first-difference column reports the sum of the coefficients on lags 0–10 of new mileage, with the p-value of the joint F-test that all eleven are zero. The steam regressor is the Google Books frequency of "steam", indexed to 1830. The war dummy covers 1756–63, 1775–83 and 1793–1815. An augmented Dickey–Fuller test rejects a unit root in the residuals of the linear-trend regressions at 5 per cent for every outcome except population (p = 0.24).*
 
 Two features of Table 3 matter for the argument. The first is that coal is the robust channel. It is also the channel the mechanism predicts, since the canals were dug to move it. The second is that the placebo rows behave. Income per head does not respond to canals in any specification, and agriculture's only significant coefficient is negative, in first differences, which is the structural shift away from farming rather than an effect on farming.
 
-The reverse regression is not empty: past growth in coal, total output and population predicts subsequent canal openings, and past coal growth predicts new parliamentary authorisations with a joint p-value below 0.001. Canals were built where demand was growing. The predetermined doses address the contemporaneous part of this. With the completion stock lagged ten or fifteen years, coal responds by 48 to 49 per cent per thousand miles, industry by 40 to 43, population by 24 to 25, and income per head by nothing, the same pattern as Table 3. With the parliamentary authorisation count lagged ten years, each ten canals authorised is followed by 12 per cent more coal, 10 per cent more industrial output and 6 per cent more population, again with no response in income per head. Under a quadratic trend the authorisation dose keeps its coefficient for coal at the 7 per cent level and for population and services at 5 per cent, and loses it for industry. In local projections the authorisation dose predicts coal at every horizon from five to twenty years and does not predict population, income per head or agriculture. Coal is, once more, the channel that survives everything. The dose is not exogenous, and we do not claim that it is; what we claim is that its timing and incidence, under both contemporaneous and predetermined measures, are those of a precondition.
+The reverse regression is not empty: past growth in coal, total output and population predicts subsequent canal openings, and past coal growth predicts new parliamentary authorisations with a joint p-value below 0.001. Canals were built where demand was growing. The predetermined doses address the contemporaneous part of this. With the completion stock lagged ten or fifteen years, coal responds by 48 to 49 per cent per thousand miles, industry by 40 to 43, population by 24 to 25, and income per head by nothing, the same pattern as Table 3. With the parliamentary authorisation count lagged ten years, each ten canals authorised is followed by 12 per cent more coal, 10 per cent more industrial output and 6 per cent more population, again with no response in income per head; adding the outcome's own growth over the preceding decade as a control leaves these at 11, 9 and 5 per cent, all significant at 1 per cent. Under a quadratic trend the authorisation dose falls to 4 per cent for coal, significant only at the 7 per cent level, and to 1 to 3 per cent for population and services. In local projections the authorisation dose predicts coal at every horizon from five to twenty years and does not predict population, income per head or agriculture. Coal is, once more, the channel that survives most. The dose is not exogenous, and we do not claim that it is; what we claim is that its timing and incidence, under both contemporaneous and predetermined measures, are those of a precondition.
 
 ## 4.3 The precondition chain
 
-Figure 3 reports the local projections that test the sequence directly. Each panel shows the cumulative response of the outcome, in log points, to a unit of the regressor, at horizons of one to twenty years, with 95 per cent Newey–West bands.
+Figure 3 reports the local projections that test the sequence directly. Each panel shows the cumulative response of the outcome, in log points, to a unit of the regressor, at horizons of one to twenty years, with 95 per cent Newey–West bands whose bandwidth grows with the horizon.
 
 <div align="center">
   <img src="../../data/fig3_local_projections.png" alt="Figure 3: Local projections along the precondition chain" width="800">
   <br>
-  <em><strong>Figure 3: Local projections along the precondition chain.</strong> Cumulative log response at horizons 1–20 years, per 1,000 canal miles or per log point of the regressor, controlling for the outcome's level and a trend. Samples 1700–1830 for canal regressors, 1760–1830 where steam horsepower enters. Shaded: 95 per cent HAC bands.</em>
+  <em><strong>Figure 3: Local projections along the precondition chain.</strong> Cumulative log response at horizons 1–20 years, per 1,000 canal miles or per log point of the regressor, controlling for the outcome's level and a trend. Samples 1700–1830 where the canal stock is the regressor and 1760–1830 where steam horsepower enters, including the steam-to-income panel. Shaded: 95 per cent bands with Newey–West bandwidth equal to the larger of ten years and the horizon.</em>
 </div>
 
-The top-left panel is the first link: a thousand miles of canal raises coal output by 29 per cent after five years, 38 per cent after ten and 44 per cent after fifteen, with the whole path bounded away from zero. Controlling for contemporaneous steam horsepower, estimated from 1760, the canal effect on coal remains at 21 per cent over five to ten years and fades at fifteen to twenty, where steam takes over. The top-middle panel is the second link: canal stock predicts installed steam horsepower over fifteen to twenty years. The coefficient is small in log points because horsepower grew fifty-fold over the sample, but it is precisely estimated; we flag that the horsepower series is interpolated between five benchmarks, so this panel establishes ordering rather than magnitude. The top-right panel, coal to steam, is positive at every horizon but significant only at five years. On the interpolated series that is as much as can be asked.
+The top-left panel is the first link: a thousand miles of canal raises coal output by 29 per cent after five years, 38 per cent after ten and 44 per cent after fifteen, with the band excluding zero at every horizon shown. Controlling for contemporaneous steam horsepower, estimated from 1760, the canal effect on coal remains at 21 per cent over five to ten years and is gone at fifteen to twenty. The top-middle panel, canal stock to steam horsepower, is positive and precisely estimated at every horizon, but the horsepower series is interpolated between four benchmarks and grew thirty-fold between 1760 and 1830, so this panel establishes that steam capacity rose after the network did, not the speed at which it did so. The top-right panel, coal to steam, is positive at every horizon but significant only at five years. On the interpolated series that is as much as can be asked.
 
-The bottom row is the test that distinguishes a precondition from a cause. Canal stock has no effect on income per head at any horizon (bottom-left); the point estimates are negative and the bands include zero throughout. Steam horsepower has no effect on income per head either when the sample stops at 1830 (bottom-middle), but on the 1760–1870 sample it raises income per head by 0.55 log points per log point of horsepower after five years and 0.90 after twenty, all with p-values below 0.001. Steam's per-capita dividend is a post-1830 phenomenon. Canals raise coal and population (the population response is 3 to 7 per cent per thousand miles over five to twenty years, all significant) and leave income per head where it was. The bottom-right panel, agriculture, is negative at intermediate horizons, again the composition effect, and returns to zero.
+The bottom row is the test that distinguishes a precondition from a cause. Canal stock has no effect on income per head at any horizon (bottom-left); the point estimates are negative and the bands include zero throughout. Steam horsepower has no effect on income per head when the sample stops at 1830 (bottom-middle). On the 1760–1870 sample it does, at every horizon and with p-values below 0.002; estimated on 1830–1870 alone the response is again positive at every horizon with p-values below 0.001, and an interaction of horsepower with a post-1830 indicator is positive and significant. The elasticities themselves, between 0.2 and 0.9 log points per log point of horsepower depending on sample and horizon, should not be read as magnitudes, for the reason given above; the sign and the timing are the result. Steam's per-capita dividend is a post-1830 phenomenon. Canals raise coal and population (the population response is 3 to 7 per cent per thousand miles over five to twenty years, significant beyond five years at the family-wise threshold) and leave income per head where it was. The bottom-right panel, agriculture, is negative at intermediate horizons, again the composition effect, and returns to zero.
 
-Because the horsepower series is interpolated, we re-estimate the steam links with the print frequency of "steam engine", which correlates at 0.90 with interpolated horsepower over 1760–1870 but varies year to year. The ordering survives, more weakly: the canal stock predicts "steam engine" at ten years (p = 0.06) and coal output predicts it at twenty (p = 0.003), while "steam engine" does not predict income per head on either sample. Print frequency records that engines were being discussed, not how much power they supplied, so the last link of the chain has to rest on the horsepower benchmarks and on the 1818 break in income per head.
+Because the horsepower series is interpolated, we re-estimate the steam links with the print frequency of "steam engine", which correlates at 0.90 with interpolated horsepower over 1760–1870 but varies year to year. The ordering survives, more weakly: the canal stock predicts "steam engine" at ten years (p = 0.06) and coal output predicts it at twenty (p = 0.003). The print series predicts income per head negatively at fifteen years on both samples, which is a warning about the series rather than about steam: the frequency of a term records that engines were being discussed, not how much power they supplied, and it peaks in the 1830s and 1840s when income per head was still accelerating. The last link of the chain therefore rests on the horsepower benchmarks, the 1818 break in income per head and the 1833 crossover in installed power.
 
-The chain, read from Figure 3, is: canals raise coal within a decade; canals and coal are followed by steam capacity over one to two decades; steam raises income per head, but only once it is the majority power source. Water first, coal second, steam third, income last.
+The chain, read from Figure 3 and Table 4, is: canals raise coal within a decade; steam capacity rises after the network and after coal, on a scale that only the benchmarks can date; steam raises income per head, but only once it is the majority power source. Water first, coal second, steam third, income last.
 
 ## 4.4 How much power was steam?
 
-The precondition thesis requires that the first regime run on water rather than steam. Table 4 uses the Kanefsky benchmarks to check. In 1760 steam supplied about 6 per cent of Britain's stationary power; in 1800, when the first regime was thirty years old and the mania canals were opening, 21 per cent; in 1830 it had reached parity with water, at 47 per cent of the total. Steam overtook water and wind combined in 1833, fifteen years after the per-capita break. Over the same period coal output per unit of installed steam horsepower fell from 100 to 37: most of the coal being dug in 1800 was not being burned in engines. It was being carried, largely by water, to hearths, forges, kilns and salt pans.
+The precondition thesis requires that the first regime run on water rather than steam. Table 4 uses the Kanefsky benchmarks to check. In 1760 steam supplied about 6 per cent of Britain's installed stationary power; in 1800, when the first regime was thirty years old and the mania canals were opening, 21 per cent; by 1820 about a third; in 1830 it had reached parity with water, at 47 per cent of the total. Steam overtook water and wind combined in 1833, fifteen years after the per-capita break. Over the same period coal output per unit of installed steam horsepower fell from 100 to 37, which says that coal output grew far faster than the engines that could burn it: most of the coal being dug in 1800 was going to hearths, forges, kilns and salt pans, and inland it was going by water.
 
 **Table 4: Installed stationary power in Britain, thousands of horsepower**
 
@@ -104,46 +106,51 @@ The precondition thesis requires that the first regime run on water rather than 
 | 1830 | 160 | 160 | 20 | 47% | 19 |
 | 1870 | 2,060 | 230 | 10 | 90% | 6 |
 
-*Source: Kanefsky (1979, p. 338) as reported in Crafts (2004, Table 3); coal output from Broadberry et al. (2015). Shares from log-linear interpolation between benchmarks.*
+*Source: Kanefsky's estimates as tabulated in Crafts (Kanefsky 1979; Crafts 2004); coal output from the Bank of England millennium dataset (Broadberry et al. 2015). Shares from log-linear interpolation between benchmarks, wind included.*
 
 ## 4.5 The semantic sequence
 
-If coal moved by water before it burned in engines, the language of the period should say so. Table 5 records, for each term or group, the first year in which its smoothed frequency in the British corpus reached 10, 25 and 50 per cent of its 1850 level. "Canal" reaches a quarter of its mid-century frequency in 1763, the year after the Bridgewater opening; "coal barge" in 1781; "coal wharf" in 1800. "Steam engine" reaches the same threshold in 1808, "steam power" in 1826, and "coal field", the geologist's term, in 1820. The coal-by-water group as a whole crosses 25 per cent in 1800, the coal-by-steam group in 1811. "Steam engine" overtakes "fire engine", the older name for the same machine, in 1800, which dates the terminological consolidation of steam to the decade after the canal mania. Figure 5 plots the three indices.
+If coal moved by water before it burned in engines, the language of the period should say so. Table 5 records, for each term or group, the first year in which its smoothed frequency in the British corpus reached 10, 25 and 50 per cent of its 1850 level. "Canal" reaches a quarter of its mid-century frequency in 1763, the year after the Bridgewater opening; "coal barge" in 1781; "coal wharf" in 1800; "canal boat", a later coinage, in 1823. "Steam engine" reaches the same threshold in 1808, "steam power" in 1826, and "coal field", the geologist's term, in 1820. The coal-by-water group as a whole crosses 25 per cent in 1800, the coal-by-steam group in 1819. "Steam engine" overtakes "fire engine", the older name for the same machine, in 1800, which dates the terminological consolidation of steam to the decade after the canal mania. Figure 4 plots the three indices.
 
-**Table 5: Year in which print frequency first reaches a share of its 1850 level (British English corpus, 5-year mean)**
+**Table 5: Year in which print frequency first reaches a share of its 1850 level (British English corpus, five-year mean)**
 
 | Term or group | 10% | 25% | 50% |
 |:--|--:|--:|--:|
 | "canal" | 1743 | 1763 | 1809 |
 | "coal barge" | 1753 | 1781 | 1783 |
 | "coal wharf" | 1774 | 1800 | 1815 |
+| "canal boat" | 1812 | 1823 | 1825 |
 | Coal-by-water group | 1780 | 1800 | 1817 |
 | "steam engine" | 1800 | 1808 | 1821 |
-| Coal-by-steam group | 1806 | 1811 | 1813 |
-| "coal field" | 1788 | 1820 | 1831 |
 | "steam power" | 1821 | 1826 | 1831 |
+| Coal-by-steam group | 1804 | 1819 | 1825 |
+| "coal field" | 1788 | 1820 | 1831 |
+
+*Source: Google Books Ngram corpus, British English 2019 edition, three-year API smoothing and a five-year centred mean. Groups are equal-weighted averages of member terms each indexed to 1850; the coal-by-water group also contains "coal boat", which is too rare before 1800 to threshold on its own.*
 
 <div align="center">
-  <img src="../../data/fig5_semantic_sequence.png" alt="Figure 5: The semantic sequence" width="800">
+  <img src="../../data/fig4_semantic_sequence.png" alt="Figure 4: The semantic sequence" width="800">
   <br>
-  <em><strong>Figure 5: In print, coal travels by water before it is burned in engines.</strong> Five-year moving averages indexed to 1850 = 100. Coal-by-water: equal-weighted "coal barge", "coal wharf", "coal boat", "canal boat". Coal-by-steam: "steam engine", "steam power", "steam boat". Source: Google Books Ngram, eng_gb_2019.</em>
+  <em><strong>Figure 4: In print, coal travels by water before it is burned in engines.</strong> Five-year moving averages indexed to 1850 = 100. Coal-by-water: equal-weighted "coal barge", "coal wharf", "coal boat", "canal boat". Coal-by-steam: "steam engine", "steam power". Source: Google Books Ngram corpus, British English 2019 edition.</em>
 </div>
 
-The ordering does not depend on the smoothing or the reference year. Across three-, five- and nine-year windows and with 1830 or 1850 as reference, "coal barge" reaches a quarter of its reference level in 1780–1781, "canal" in 1763–1766, "steam engine" in 1807–1809 and "steam power" in 1822–1826; the coal-by-water group crosses between 1785 and 1801 and the coal-by-steam group between 1810 and 1813 in every combination. The one sensitive term is "coal wharf", which crosses in 1776 against an 1830 reference and in 1800 against 1850, and in both cases before the steam terms.
+The ordering does not depend on the smoothing or the reference year. Across three-, five- and nine-year windows and with 1830 or 1850 as reference, "coal barge" reaches a quarter of its reference level in 1780–1781, "canal" in 1763–1766, "steam engine" in 1807–1809 and "steam power" in 1822–1826; the coal-by-water group crosses between 1785 and 1801 and the coal-by-steam group between 1814 and 1819 in every combination. The one sensitive term is "coal wharf", which crosses in 1776 against an 1830 reference and in 1800 against 1850, and in both cases before the steam terms. The years should be read as decades, and read that way the order is stable.
 
-The corpus also tells us what kind of thing the infrastructure vocabulary measures. The frequency of "canal" correlates at 0.91 with the cumulative mileage of canals in existence over 1740–1850 and at −0.04 with the mileage opened in the surrounding decade. Print records the network that exists, not the digging. The 1766 crossover between engineered and naturalistic water vocabulary that the earlier version of this paper reported is, on this reading, the corpus registering the first wave of openings, and the vocabulary index can be used as a proxy for infrastructure in place where physical series are missing.
+The corpus also tells us what kind of thing the infrastructure vocabulary measures, and the answer is more limited than a raw correlation suggests. The frequency of "canal" correlates at 0.91 with the cumulative mileage of canals in existence over 1740–1850 and at −0.04 with the mileage opened in the surrounding decade over 1745–1845. Both series trend, and once each is linearly detrended the correlation falls to 0.23; in first differences it is 0.16. Print records the level of the network, which is written about every year it exists, and not the rate of building. The vocabulary index is therefore a fair proxy for infrastructure in place and a poor one for investment, and we use it only in the first sense.
 
 ## 4.6 Why the cross-country test fails
 
-The earlier version of this paper estimated a two-way fixed-effects difference-in-differences on Maddison GDP per head, treating Britain from 1761 against France and the Netherlands, and reported a treatment effect of 1,251 international dollars with a Newey–West p-value of 0.042. We reproduce that estimate exactly. We then ask when the gap between Britain and its controls actually opened. A sup-F search on the log gap places the single break in 1807, with the next-best candidates 1805–1809. The event study of the earlier version is consistent: no post-1761 bin is significant until the one beginning 45 years after treatment.
+The natural test of an eighteenth-century British take-off is a difference-in-differences on Maddison GDP per head, treating Britain from 1761 against continental controls. In levels, with France and the Netherlands as controls, year and country effects and Newey–West errors with fifteen lags on the stacked panel, the treatment coefficient is 1,251 international dollars with a p-value of 0.042; clustered by country it is far smaller, and the collapsed two-period estimator of Bertrand, Duflo and Mullainathan gives a p-value of 0.63 (Bertrand, Duflo, and Mullainathan 2004). In logs the same design returns coefficients of 0.08 to 0.31 with p-values below 0.001 for every control group and sample window we tried, including windows that end in 1790, before the wars. Taken at face value these say that Britain pulled away from the continent from 1761. We do not take them at face value, for three reasons.
 
-Figure 4 shows what happened in 1807. Britain's income per head, indexed to 1790, stood at 106 in 1805 and 110 in 1815. The Netherlands' fell from 100 in 1805 to 63 in 1808 and was still at 72 in 1815. Table 6 gives the drawdowns for the whole panel. Between the late 1780s and the Napoleonic trough the Netherlands lost 44 per cent of its income per head, Portugal 48, Sweden 27, France 22 and Spain 13. Britain lost 1.4 per cent. The 1761 "treatment effect" measured against a continental control group is, to a first approximation, the difference between being blockaded and doing the blockading. Of the growth in the level gap between 1761 and 1900 that the earlier version's counterfactual attributed to the canal era, 39 per cent occurs in the war years 1790–1815 alone.
+First, the event study fails on both sides of the treatment. In ten-year bins relative to 1751–60, Britain's log gap to the Netherlands and France is significantly negative in the 1700s and 1710s and significantly positive by the 1780s; against France, Sweden, Germany and Spain the pre-treatment bins are negative and significant from 1691 to 1731. Britain was converging on the continent for the first half of the century, so there is no parallel pre-trend to break. Second, the gap opens in two steps, and both are on the control side. A sup-F search on the log gap to the Netherlands and France places the single break in 1807, with 1805–1809 as the next-best candidates. Figure 5 shows what happened then. Britain's income per head, indexed to 1790, stood at 109 in 1805 and 114 in 1815. The Netherlands' stood at 100 in 1805, 63 in 1808 and 72 in 1815. The earlier step, in the 1780s and 1790s, is the French series falling by a fifth during the Revolution. Third, and underneath both, is the fact established in Table 1: Britain's own income per head grew at 0.08 per cent a year between 1760 and 1790. There was no canal-era per-capita acceleration for any control group to reveal. The design was measuring the right country with the wrong variable in the wrong decade.
 
-**Table 6: GDP per head, peak 1785–95 to trough 1795–1815 (Maddison 2023, 2011 international dollars)**
+Table 6 gives the drawdowns for the whole panel. Between the late 1780s and the Napoleonic trough the Netherlands lost 44 per cent of its income per head, Portugal 48, Sweden 27, France 22 and Spain 13. Britain lost 1.4 per cent. The 1761 "treatment effect" measured against a continental control group is, to a first approximation, the difference between being blockaded and doing the blockading. Of the growth in the level gap between 1761 and 1900, 39 per cent occurs in the war years 1790–1815 alone; a counterfactual that attributes the pre-1810 share of that gap to canals inherits the war.
+
+**Table 6: GDP per head, peak 1785–95 to trough 1795–1815 (Maddison Project Database 2023, 2011 international dollars)**
 
 | Country | Peak | Trough | Drawdown | 1815 relative to 1790 |
 |:--|--:|--:|--:|--:|
-| Britain | 3,207 (1795) | 3,161 (1798) | −1.4% | +13.6% |
+| Britain (UK) | 3,207 (1795) | 3,161 (1798) | −1.4% | +13.6% |
 | Netherlands | 4,666 (1794) | 2,632 (1808) | −43.6% | −28.3% |
 | Portugal | 2,063 (1785) | 1,072 (1811) | −48.0% | −24.1% |
 | Sweden | 1,661 (1791) | 1,221 (1809) | −26.5% | −11.9% |
@@ -151,23 +158,24 @@ Figure 4 shows what happened in 1807. Britain's income per head, indexed to 1790
 | Spain | 1,454 (1790) | 1,265 (1811) | −13.0% | +3.2% |
 | Germany | 1,820 (1792) | 1,725 (1805) | −5.2% | +8.1% |
 
-<div align="center">
-  <img src="../../data/fig4_war_confound.png" alt="Figure 4: The 1807 break is the Dutch collapse" width="700">
-  <br>
-  <em><strong>Figure 4: The 1807 "break" in the cross-country design is the Dutch collapse.</strong> GDP per head, 1790 = 100, for Britain, France and the Netherlands, with the Revolutionary and Napoleonic war years shaded and the estimated break in the Britain–controls gap marked. Source: Maddison Project Database 2023.</em>
-</div>
+*Source: Maddison Project Database 2023 (Bolt and van Zanden 2025). The series labelled Britain is the United Kingdom, including Ireland.*
 
-Changing the control group does not rescue the design. Against France, Sweden, Germany and Spain Britain's relative position rises in the 1760s and again in the 1790s, but it was also rising from 1700 to 1720, so the pre-treatment bins of the event study are significantly negative and parallel trends fail in the opposite direction. The 1790s step is again a control-side collapse. And underneath all of this is the fact established in Section 4.1: Britain's own income per head grew at 0.08 per cent a year between 1760 and 1790. There was no canal-era per-capita acceleration for any control group to reveal. The difference-in-differences was measuring the right country with the wrong variable in the wrong decade.
+<div align="center">
+  <img src="../../data/fig5_war_confound.png" alt="Figure 5: The 1807 break is the Dutch collapse" width="700">
+  <br>
+  <em><strong>Figure 5: The 1807 "break" in the cross-country design is the Dutch collapse.</strong> GDP per head, 1790 = 100, for Britain, France and the Netherlands, with the Revolutionary and Napoleonic war years shaded and the estimated break in the Britain–controls gap marked. Source: Maddison Project Database 2023 (Bolt and van Zanden 2025).</em>
+</div>
 
 ## 4.7 The pre-steam divergence in benchmark years
 
-What the cross-country data can establish is the aggregate divergence, and they establish it at benchmark years where population is measured rather than interpolated. Table 7 gives growth between 1700 and 1820, which is before steam supplied a quarter of British power. Britain's total output grew 240 per cent. The next European economy, Germany, grew 124 per cent; France 50; the Netherlands 9. Britain's population grew 148 per cent, more than any European country except Sweden's 104, and Britain alone among them combined that population growth with a rise in income per head of 37 per cent.
+What the cross-country data can establish is the aggregate divergence, and they establish it at benchmark years where population is measured rather than interpolated. Table 7 gives growth between 1700 and 1820, which is before steam supplied a third of British power. The Maddison series for Britain is the United Kingdom including Ireland; the Broadberry series for Great Britain alone is shown beneath it. On either measure British output roughly tripled. The next European economy, Germany, doubled; France grew by half; the Netherlands by 9 per cent. Britain's population grew by more than any other country in the European panel, and Britain was the only economy in the panel to double its population while also raising income per head.
 
-**Table 7: Growth between Maddison benchmark years, per cent**
+**Table 7: Growth between benchmark years, per cent**
 
 | | GDP per head 1700–1820 | Population 1700–1820 | Total GDP 1700–1820 | GDP per head 1820–1870 |
 |:--|--:|--:|--:|--:|
-| Britain | +37 | +148 | +240 | +76 |
+| Britain (UK, Maddison) | +37 | +148 | +240 | +76 |
+| Great Britain (Broadberry) | +37 | +125 | +209 | +76 |
 | Germany | +35 | +66 | +124 | +44 |
 | Belgium | +8 | +72 | +85 | +82 |
 | Spain | +22 | +39 | +69 | +16 |
@@ -176,5 +184,6 @@ What the cross-country data can establish is the aggregate divergence, and they 
 | Netherlands | −11 | +23 | +9 | +47 |
 | China | −43 | +176 | +58 | +7 |
 
+*Sources: Maddison Project Database 2023 (Bolt and van Zanden 2025); Great Britain row from the Bank of England millennium dataset (Broadberry et al. 2015). The 1700 figure for China is contested (Broadberry, Guan, and Li 2018).*
 
-The Dutch row deserves attention because it is the comparative case Tvedt's argument needs. The Netherlands had the densest network of engineered waterways in Europe by the 1660s, a barge system that de Vries has described as the first scheduled public transport in the world (de Vries 1978). It had no coal. Its total output grew 9 per cent in 120 years. Water infrastructure without coal to move was not sufficient. Belgium, which had both coal and canals, was the first continental economy to industrialise. Britain had both, and the water to make the coal cheap at the point of use.
+The Dutch and Belgian rows are the comparative cases Tvedt's argument invites, and we discuss what they can and cannot show in the next section.

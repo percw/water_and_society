@@ -49,8 +49,8 @@ INCLUDE_FILES = {
     "data/fig1_two_regimes.png": "figures/fig1_two_regimes.png",
     "data/fig2_canal_dose.png": "figures/fig2_canal_dose.png",
     "data/fig3_local_projections.png": "figures/fig3_local_projections.png",
-    "data/fig4_war_confound.png": "figures/fig4_war_confound.png",
-    "data/fig5_semantic_sequence.png": "figures/fig5_semantic_sequence.png",
+    "data/fig4_semantic_sequence.png": "figures/fig4_semantic_sequence.png",
+    "data/fig5_war_confound.png": "figures/fig5_war_confound.png",
     "data/did_event_study.png": "figures/earlier_version_did_event_study.png",
 
     # Results logs

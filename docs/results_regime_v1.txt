@@ -23,6 +23,8 @@ Peak (1785-95) to trough (1795-1815) drawdown, and 1815 vs 1790
   ITA: peak   2512 (1795) trough   2501 (1813) drawdown   -0.4%  1815/1790  -0.2%
 
 Sup-F break in GBR minus mean(NLD,FRA) log gap: (1807, 93.7)
+  top-5 break candidates: [1807, 1808, 1806, 1809, 1805]
+  GBR gdppc index (1790=100): {1805: 109, 1810: 113, 1815: 114}  NLD: {1805: 100, 1808: 63, 1815: 72}
 Share of 1761-1900 level-gap growth (GBR vs NLD+FRA) occurring 1790-1815: 39%
 Sup-F break GBR minus each control (log gdppc): {'NLD': (1808, 166.7), 'FRA': (1792, 84.5), 'SWE': (1855, 92.3), 'DEU': (1844, 85.5), 'ESP': (1835, 26.1)}
 
@@ -64,16 +66,16 @@ Trend-slope change at 1761 (sample 1700-1830, HAC): pre-slope %/yr, change pp/yr
   GDPpc    :  0.29 +0.02 (p=0.824)
   Agri     :  0.82 -0.04 (p=0.836)
 
-Sup-F single break (level+trend) 1700-1870 and best two breaks
-  GDP      : single (1792, 777.7)   two (1775, 1818)
-  Ind      : single (1789, 909.3)   two (1774, 1823)
-  Serv     : single (1786, 927.4)   two (1775, 1844)
-  Coal     : single (1784, 667.4)   two (1741, 1798)
-  Iron     : single (1786, 1293.8)   two (1786, 1815)
-  Textiles : single (1779, 240.4)   two (1728, 1817)
-  PopGB    : single (1777, 3051.7)   two (1730, 1783)
-  GDPpc    : single (1818, 270.4)   two (1720, 1818)
-  Agri     : single (1728, 4.2)   two (1720, 1757)
+Sup-F single break (level+trend) 1700-1870 [Andrews (1993) 5%% critical value for q=2, 15%% trimming ~ 11.8; 1%% ~ 15.4] and best two breaks
+  GDP      : single 1792 (sup-F=777.7)   two (1775, 1818)
+  Ind      : single 1789 (sup-F=909.3)   two (1774, 1823)
+  Serv     : single 1786 (sup-F=927.4)   two (1775, 1844)
+  Coal     : single 1784 (sup-F=667.4)   two (1741, 1798)
+  Iron     : single 1786 (sup-F=1293.8)   two (1786, 1815)
+  Textiles : single 1779 (sup-F=240.4)   two (1728, 1817)
+  PopGB    : single 1777 (sup-F=3051.7)   two (1730, 1783)
+  GDPpc    : single 1818 (sup-F=270.4)   two (1720, 1818)
+  Agri     : single 1728 (sup-F=4.2, NOT significant)   two (1720, 1757)
 
 Coal output per capita, 1700=100: {1700: 100.0, 1760: 131.0, 1780: 176.0, 1790: 202.0, 1800: 246.0, 1810: 279.0, 1830: 369.0, 1850: 575.0}
 
@@ -83,15 +85,23 @@ Coal output per capita, 1700=100: {1700: 100.0, 1760: 131.0, 1780: 176.0, 1790: 
 Canal miles opened per decade: {1700: 34, 1710: 10, 1720: 87, 1730: 71, 1740: 0, 1750: 15, 1760: 117, 1770: 353, 1780: 83, 1790: 548, 1800: 479, 1810: 344, 1820: 176, 1830: 129, 1840: 34}
 Cumulative miles: {1760: 218, 1770: 357, 1780: 692, 1790: 772, 1800: 1487, 1810: 1855, 1820: 2151, 1830: 2320}
 
-(a) log y ~ trend + canal miles (000s)                 (b) + quadratic trend + war dummy                (c) horse race: + steam vocab (1830=1)
-  Coal  : (a)   46.5% p=0.000 | (b)   29.8% p=0.001 | (c) canal   40.8% p=0.000, steam   12.6% p=0.079
-  Ind   : (a)   40.1% p=0.000 | (b)   -0.9% p=0.890 | (c) canal   28.8% p=0.000, steam   30.4% p=0.003
-  Iron  : (a)   99.3% p=0.000 | (b)   61.2% p=0.013 | (c) canal   88.2% p=0.000, steam   35.6% p=0.172
-  Serv  : (a)   32.3% p=0.000 | (b)   12.2% p=0.002 | (c) canal   28.4% p=0.000, steam   14.2% p=0.019
-  PopGB : (a)   24.0% p=0.000 | (b)    4.1% p=0.073 | (c) canal   18.6% p=0.000, steam   15.0% p=0.000
-  GDP   : (a)   24.7% p=0.000 | (b)    2.2% p=0.523 | (c) canal   18.8% p=0.000, steam   19.0% p=0.000
-  GDPpc : (a)    0.8% p=0.694 | (b)   -1.9% p=0.609 | (c) canal    0.2% p=0.938, steam    4.0% p=0.082
-  Agri  : (a)   -0.5% p=0.900 | (b)   -5.1% p=0.559 | (c) canal   -1.5% p=0.722, steam    7.3% p=0.069
+(a) log y ~ trend + canal miles (000s), 1700-1830   (b) + quadratic trend + war dummy   (c) horse race 1760-1830: + log steam HORSEPOWER (Kanefsky, interpolated) + war dummy
+   canal miles and interpolated water hp are collinear over 1760-1830 (r=0.977), so water hp cannot enter (c) as a separate regressor.
+   Canal table: 155 canals, 2967 miles; open by 1830: 2320 miles
+  Coal  : (a)   46.5% p=0.000 [ADF resid p=0.021] | (b)   29.8% p=0.001 | (c) canal   11.1% p=0.086, log steam hp +2.77 p=0.000
+  Ind   : (a)   40.1% p=0.000 [ADF resid p=0.001] | (b)   -0.9% p=0.890 | (c) canal    1.0% p=0.939, log steam hp +4.99 p=0.011
+  Iron  : (a)   99.3% p=0.000 [ADF resid p=0.002] | (b)   61.2% p=0.013 | (c) canal   69.2% p=0.130, log steam hp +4.03 p=0.469
+  Serv  : (a)   32.3% p=0.000 [ADF resid p=0.002] | (b)   12.2% p=0.002 | (c) canal   16.2% p=0.003, log steam hp +3.33 p=0.001
+  PopGB : (a)   24.0% p=0.000 [ADF resid p=0.239] | (b)    4.1% p=0.073 | (c) canal    2.2% p=0.237, log steam hp +3.10 p=0.000
+  GDP   : (a)   24.7% p=0.000 [ADF resid p=0.000] | (b)    2.2% p=0.523 | (c) canal    7.6% p=0.116, log steam hp +3.43 p=0.000
+  GDPpc : (a)    0.8% p=0.694 [ADF resid p=0.000] | (b)   -1.9% p=0.609 | (c) canal    5.4% p=0.198, log steam hp +0.33 p=0.590
+  Agri  : (a)   -0.5% p=0.900 [ADF resid p=0.000] | (b)   -5.1% p=0.559 | (c) canal    3.4% p=0.426, log steam hp +0.99 p=0.080
+   (c2) same horse race with steam VOCABULARY (1830=1) over 1700-1830, for reference:
+     Coal  : canal   40.8% p=0.000, steam vocab   12.6% p=0.079
+     Ind   : canal   28.8% p=0.000, steam vocab   30.4% p=0.003
+     PopGB : canal   18.6% p=0.000, steam vocab   15.0% p=0.000
+     GDPpc : canal    0.2% p=0.938, steam vocab    4.0% p=0.082
+     Agri  : canal   -1.5% p=0.722, steam vocab    7.3% p=0.069
 
 (d) First differences 1711-1830: Δlog y on Δmiles lags 0..10 (sum of coefficients, joint F)
   Coal  :  +27.0% per 1,000 miles, joint p=0.000
@@ -126,7 +136,8 @@ JPN              +23%     +15%       +41% |           +20%     +11%
 5. NLP INDEX AS A STOCK PROXY (eng_gb_2019 "canal" vs canal network)
 ==============================================================================
 corr(ngram canal, cumulative miles) 1740-1850:        0.91
-corr(ngram canal, miles opened in 10y window) 1740-1850: -0.04
+  same, linearly detrended: 0.23; first differences: 0.16
+corr(ngram canal, miles opened in 10y window) 1745-1845: -0.04
 Peaks of canal-related vocabulary: {'canal': 1833, 'navigation': 1831, 'inland navigation': 1816, 'canal navigation': 1833}
 
 ==============================================================================

@@ -32,12 +32,12 @@ CONFIG_PATH = SCRIPT_DIR / "author_config.ini"
 # ── Bibliography ─────────────────────────────────────────────────────────────
 BIBLIOGRAPHY = {
     'Allen 2009': 'Robert C. Allen, _The British Industrial Revolution in Global Perspective_ (Cambridge: Cambridge University Press, 2009).',
-    'Alvarez-Palau et al. 2024': 'Eduard J. Alvarez-Palau, Dan Bogart, Max Satchell, and Leigh Shaw-Taylor, “Transport and Urban Growth in the First Industrial Revolution”, _Economic Journal_ 135, no. 668 (2024): 1191–1228.',
+    'Alvarez-Palau et al. 2025': 'Eduard J. Alvarez-Palau, Dan Bogart, Max Satchell, and Leigh Shaw-Taylor, “Transport and Urban Growth in the First Industrial Revolution”, _Economic Journal_ 135, no. 668 (2025): 1191–1228.',
     'Andrews 1993': 'Donald W. K. Andrews, “Tests for Parameter Instability and Structural Change with Unknown Change Point”, _Econometrica_ 61, no. 4 (1993): 821–856.',
     'Bai and Perron 1998': 'Jushan Bai and Pierre Perron, “Estimating and Testing Linear Models with Multiple Structural Changes”, _Econometrica_ 66, no. 1 (1998): 47–78.',
     'Bertrand, Duflo, and Mullainathan 2004': 'Marianne Bertrand, Esther Duflo, and Sendhil Mullainathan, “How Much Should We Trust Differences-in-Differences Estimates?”, _Quarterly Journal of Economics_ 119, no. 1 (2004): 249–275.',
     'Bogart 2014': 'Dan Bogart, “The Transport Revolution in Industrialising Britain: A Survey”, in _The Cambridge Economic History of Modern Britain, Volume 1: 1700–1870_, ed. Roderick Floud, Jane Humphries, and Paul Johnson (Cambridge: Cambridge University Press, 2014), 368–391.',
-    'Bolt and van Zanden 2024': 'Jutta Bolt and Jan Luiten van Zanden, “Maddison-Style Estimates of the Evolution of the World Economy: A New 2023 Update”, _Journal of Economic Surveys_ 39, no. 2 (2024): 631–671.',
+    'Bolt and van Zanden 2025': 'Jutta Bolt and Jan Luiten van Zanden, “Maddison-Style Estimates of the Evolution of the World Economy: A New 2023 Update”, _Journal of Economic Surveys_ 39, no. 2 (2025): 631–671.',
     'Broadberry et al. 2015': 'Stephen Broadberry, Bruce M. S. Campbell, Alexander Klein, Mark Overton, and Bas van Leeuwen, _British Economic Growth, 1270–1870_ (Cambridge: Cambridge University Press, 2015).',
     'Clark and Jacks 2007': 'Gregory Clark and David Jacks, “Coal and the Industrial Revolution, 1700–1869”, _European Review of Economic History_ 11, no. 1 (2007): 39–72.',
     'Crafts 1985': 'Nicholas F. R. Crafts, _British Economic Growth during the Industrial Revolution_ (Oxford: Clarendon Press, 1985).',
@@ -66,9 +66,68 @@ BIBLIOGRAPHY = {
     'Ward 1974': 'J. R. Ward, _The Finance of Canal Building in Eighteenth-Century England_ (Oxford: Oxford University Press, 1974).',
     'Wrigley 1988': 'E. A. Wrigley, _Continuity, Chance and Change: The Character of the Industrial Revolution in England_ (Cambridge: Cambridge University Press, 1988).',
     'Wrigley 2010': 'E. A. Wrigley, _Energy and the English Industrial Revolution_ (Cambridge: Cambridge University Press, 2010).',
+    'Broadberry, Guan, and Li 2018': 'Stephen Broadberry, Hanhui Guan, and David Daokui Li, “China, Europe, and the Great Divergence: A Study in Historical National Accounting, 980–1850”, _Journal of Economic History_ 78, no. 4 (2018): 955–1000.',
+    'de Vries and van der Woude 1997': 'Jan de Vries and Ad van der Woude, _The First Modern Economy: Success, Failure, and Perseverance of the Dutch Economy, 1500–1815_ (Cambridge: Cambridge University Press, 1997).',
+    'de Zeeuw 1978': 'J. W. de Zeeuw, “Peat and the Dutch Golden Age: The Historical Meaning of Energy-Attainability”, _A.A.G. Bijdragen_ 21 (1978): 3–31.',
+    'Flinn 1984': 'Michael W. Flinn, _The History of the British Coal Industry, Volume 2: 1700–1830, The Industrial Revolution_ (Oxford: Clarendon Press, 1984).',
+    'Hatcher 1993': 'John Hatcher, _The History of the British Coal Industry, Volume 1: Before 1700_ (Oxford: Clarendon Press, 1993).',
+    'Kander, Malanima, and Warde 2013': 'Astrid Kander, Paolo Malanima, and Paul Warde, _Power to the People: Energy in Europe over the Last Five Centuries_ (Princeton: Princeton University Press, 2013).',
+    'Maw 2013': 'Peter Maw, _Transport and the Industrial City: Manchester and the Canal Age, 1750–1850_ (Manchester: Manchester University Press, 2013).',
+    'Mokyr 1976': 'Joel Mokyr, _Industrialization in the Low Countries, 1795–1850_ (New Haven: Yale University Press, 1976).',
+    'Pollard 1980': 'Sidney Pollard, “A New Estimate of British Coal Production, 1750–1850”, _Economic History Review_ 33, no. 2 (1980): 212–235.',
+    'Warde 2007': 'Paul Warde, _Energy Consumption in England and Wales, 1560–2000_ (Naples: CNR-ISSM, 2007).',
     'Wrigley 2016': "E. A. Wrigley, _The Path to Sustained Growth: England's Transition from an Organic Economy to an Industrial Revolution_ (Cambridge: Cambridge University Press, 2016).",
 }
 
+
+SHORT_TITLES = {
+    'Allen 2009': 'Allen, _British Industrial Revolution_',
+    'Alvarez-Palau et al. 2025': 'Alvarez-Palau et al., “Transport and Urban Growth”',
+    'Andrews 1993': 'Andrews, “Tests for Parameter Instability”',
+    'Bai and Perron 1998': 'Bai and Perron, “Estimating and Testing”',
+    'Bertrand, Duflo, and Mullainathan 2004': 'Bertrand, Duflo, and Mullainathan, “How Much Should We Trust”',
+    'Bogart 2014': 'Bogart, “Transport Revolution”',
+    'Bolt and van Zanden 2025': 'Bolt and van Zanden, “Maddison-Style Estimates”',
+    'Broadberry et al. 2015': 'Broadberry et al., _British Economic Growth_',
+    'Broadberry, Guan, and Li 2018': 'Broadberry, Guan, and Li, “China, Europe, and the Great Divergence”',
+    'Clark and Jacks 2007': 'Clark and Jacks, “Coal and the Industrial Revolution”',
+    'Crafts 1985': 'Crafts, _British Economic Growth_',
+    'Crafts 2004': 'Crafts, “Steam as a General Purpose Technology”',
+    'Crafts and Harley 1992': 'Crafts and Harley, “Output Growth”',
+    'Crouzet 1964': 'Crouzet, “Wars, Blockade, and Economic Change”',
+    'de Vries 1978': 'de Vries, _Barges and Capitalism_',
+    'de Vries and van der Woude 1997': 'de Vries and van der Woude, _First Modern Economy_',
+    'de Zeeuw 1978': 'de Zeeuw, “Peat and the Dutch Golden Age”',
+    "Fernihough and O'Rourke 2021": "Fernihough and O'Rourke, “Coal and the European Industrial Revolution”",
+    'Flinn 1984': 'Flinn, _British Coal Industry_, vol. 2',
+    'Hadfield 1984': 'Hadfield, _British Canals_',
+    'Hatcher 1993': 'Hatcher, _British Coal Industry_, vol. 1',
+    'Jordà 2005': 'Jordà, “Local Projections”',
+    'Kander, Malanima, and Warde 2013': 'Kander, Malanima, and Warde, _Power to the People_',
+    'Kanefsky 1979': 'Kanefsky, “Diffusion of Power Technology”',
+    'Kanefsky and Robey 1980': 'Kanefsky and Robey, “Steam Engines”',
+    'Landes 1969': 'Landes, _Unbound Prometheus_',
+    'Malm 2016': 'Malm, _Fossil Capital_',
+    'Maw 2013': 'Maw, _Transport and the Industrial City_',
+    'Michel et al. 2011': 'Michel et al., “Quantitative Analysis of Culture”',
+    'Mokyr 1976': 'Mokyr, _Industrialization in the Low Countries_',
+    'Newey and West 1987': 'Newey and West, “Simple, Positive Semi-Definite”',
+    'Pechenick et al. 2015': 'Pechenick, Danforth, and Dodds, “Characterizing the Google Books Corpus”',
+    'Pollard 1980': 'Pollard, “New Estimate”',
+    'Pomeranz 2000': 'Pomeranz, _Great Divergence_',
+    'Priestley 1831': 'Priestley, _Historical Account_',
+    'Rambachan and Roth 2023': 'Rambachan and Roth, “More Credible Approach”',
+    'Roth et al. 2023': 'Roth et al., “What’s Trending”',
+    'Szostak 1991': 'Szostak, _Role of Transportation_',
+    'Thomas and Dimsdale 2017': 'Thomas and Dimsdale, _Millennium of UK Data_',
+    'Turnbull 1987': 'Turnbull, “Canals, Coal and Regional Growth”',
+    'Tvedt 2010': 'Tvedt, “Why England”',
+    'Ward 1974': 'Ward, _Finance of Canal Building_',
+    'Warde 2007': 'Warde, _Energy Consumption_',
+    'Wrigley 1988': 'Wrigley, _Continuity, Chance and Change_',
+    'Wrigley 2010': 'Wrigley, _Energy and the English Industrial Revolution_',
+    'Wrigley 2016': 'Wrigley, _Path to Sustained Growth_',
+}
 
 # ── Config ───────────────────────────────────────────────────────────────────
 def load_config() -> dict:
@@ -92,11 +151,11 @@ def load_config() -> dict:
         "date": parser.get("submission", "date", fallback="today"),
         "acknowledgments": parser.get("declarations", "acknowledgments", fallback=""),
         "funding": parser.get("declarations", "funding", fallback="This research received no external funding."),
-        "competing_interests": parser.get("declarations", "competing_interests", fallback="The author(s) declare no competing interests."),
+        "competing_interests": parser.get("declarations", "competing_interests", fallback="The author declares no competing interests."),
     }
 
     if cfg["date"].lower() == "today":
-        cfg["date"] = date.today().strftime("%d %B %Y")
+        cfg["date"] = date.today().strftime("%-d %B %Y")
 
     # Warn on unfilled fields
     for field in ["author_name", "department", "institution", "email"]:
@@ -123,14 +182,14 @@ def convert_to_footnotes(text: str) -> str:
             ref = BIBLIOGRAPHY.get(part)
             if ref:
                 if part in seen:
-                    note_parts.append(f'{part}.')
+                    note_parts.append(SHORT_TITLES.get(part, part) + '.')
                 else:
                     seen[part] = True
                     note_parts.append(ref)
             else:
                 note_parts.append(f'{part}.')
         counter[0] += 1
-        footnotes.append(f'[^{counter[0]}]: {" ".join(note_parts)}')
+        footnotes.append(f'[^{counter[0]}]: ' + '; '.join(np.rstrip('.') for np in note_parts) + '.')
         return f'[^{counter[0]}]'
 
     pattern = r"\((?![\$\\])((?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?(?:;\s*(?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?)*)\)"
@@ -216,6 +275,8 @@ def build_manuscript() -> Path:
     text = source.read_text()
     # Strip references section
     text = re.sub(r'\n# 8\. References.*?(?=\n# |\Z)', '', text, flags=re.DOTALL)
+    # JGH house style: unnumbered headings
+    text = re.sub(r'^(#{1,3}) \d+(?:\.\d+)*\.? +', r'\1 ', text, flags=re.M)
     # Convert citations
     text = convert_to_footnotes(text)
     # Anonymize
@@ -224,7 +285,7 @@ def build_manuscript() -> Path:
     # Fix dollar signs and math for clean docx conversion
     text = fix_for_docx(text)
 
-    header = '---\ntitle: "Water Before Steam: Canals, Coal and the Making of Britain\'s Fossil Economy, 1700–1870"\njournal: Journal of Global History\ntype: Original Research Article\nword_count: ~9,300\n---\n\n'
+    header = '---\ntitle: "Water Before Steam: Canals, Coal and the Making of Britain\'s Fossil Economy, 1700–1870"\njournal: Journal of Global History\ntype: Original Research Article\nword_count: see title page\n---\n\n'
 
     out = SCRIPT_DIR / "manuscript_jgh.md"
     out.write_text(header + text)
@@ -279,12 +340,10 @@ Email: {cfg['email']}
 2. Canals
 3. Coal
 4. Water infrastructure
-5. Growth regimes
-6. Great Divergence
-7. Google Books Ngram
-8. British economic history
-9. Steam power
-10. Transport revolution
+5. Transport revolution
+6. Organic economy
+7. Growth regimes
+8. Great Divergence
 
 ---
 
@@ -320,7 +379,7 @@ All code and data required to reproduce the analyses are publicly available at h
 
 ## Word Count
 
-Approximately 9,300 words (including footnotes and tables).
+Approximately 11,000 words including footnotes, tables and captions (JGH limit 12,500).
 """
     out = SCRIPT_DIR / "title_page.md"
     out.write_text(content)
@@ -348,11 +407,13 @@ Dear Editors,
 
 I am pleased to submit the manuscript **"Water Before Steam: Canals, Coal and the Making of Britain's Fossil Economy, 1700–1870"** for consideration as an original research article in the *Journal of Global History*.
 
-The paper is a quantitative test of the argument Terje Tvedt made in this journal in 2010: that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. Using annual British sectoral output for 1700–1870, a new year-by-year series of canal mileage, installed steam and water horsepower, the Maddison Project Database 2023 and the Google Books British corpus, we show that Britain passed through two growth regimes. Aggregate output, coal, iron and population accelerated between 1775 and 1792 as the canal network was built, while income per head did not move; income per head accelerated only after 1818, once steam was becoming the majority power source. Canal mileage predicts coal output over the following two decades and predicts population, but not income per head or agriculture. Steam raises income per head only after 1830. In print, “coal barge” and “coal wharf” precede “steam engine” and “steam power” by a generation.
+The paper tests, on annual British data for 1700–1870, the argument Terje Tvedt made in this journal in 2010: that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. It finds two growth regimes, an aggregate acceleration in 1775–1792 that coincided with the building of the canal network and was absorbed by population, and a per-capita acceleration from 1818 that belongs to steam; it shows that canal mileage predicts coal output but not income per head; and it shows, in the language of the Google Books British corpus, that coal travelled by barge a generation before it burned in engines.
 
-**Why this journal.** The paper engages Tvedt (2010) directly and extends the Great Divergence debate with the comparative case his argument needs: the Netherlands, with Europe's densest waterways and no coal, grew 9 per cent in total output between 1700 and 1820; Britain, with both, grew 240 per cent. The paper also contains a methodological result for historians who use cross-country difference-in-differences for the long eighteenth century: the apparent British take-off in 1807 in such designs is the Napoleonic collapse of the continental control group. We withdraw an earlier version's estimate on exactly that ground and explain why.
+**Why this journal.** The paper engages Tvedt directly, adds the comparative benchmarks his argument invites (the Netherlands, Belgium and China) with an explicit account of what a British time series can and cannot say about them, and contains a methodological result for historians who use cross-country difference-in-differences across the Revolutionary and Napoleonic wars: the apparent British take-off of 1807 in such designs is the collapse of the continental control group.
 
-The manuscript is approximately 9,300 words including footnotes and tables, with five figures and seven tables. A full replication package (data, code and documentation) is publicly available at https://github.com/percw/water_and_society.
+**Disclosure for double-anonymous review.** An earlier and substantially different version of this analysis, which reported the cross-country difference-in-differences that the present paper withdraws, has been public in a code repository since spring 2026. The manuscript has been anonymised, but referees who search for the topic may encounter that repository. All figures are the author's own, generated from public data.
+
+The manuscript is approximately 11,000 words including footnotes, tables and captions, with five figures and seven tables. A full replication package (data, code and documentation) is available and the repository URL is given on the title page.
 
 This manuscript has not been submitted to or published in any other journal. {cfg['competing_interests']} {cfg['funding']}
 

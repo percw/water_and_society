@@ -56,7 +56,7 @@ def lp(y, x, horizons=(5, 10, 15, 20), a=1700, e=1830, controls=None):
     for h in horizons:
         d = pd.concat([(y.shift(-h) - y).rename('dy'), x.rename('x'), y.rename('y0')] + ([c.rename(f'c{i}') for i, c in enumerate(controls)] if controls else []), axis=1)
         d['t'] = d.index.astype(float); d = d.loc[a:e - h].dropna()
-        r = sm.OLS(d['dy'], sm.add_constant(d.drop(columns='dy'))).fit(**HAC)
+        r = sm.OLS(d['dy'], sm.add_constant(d.drop(columns='dy'))).fit(cov_type='HAC', cov_kwds={'maxlags': max(10, h)})   # bandwidth >= horizon (overlapping MA(h-1) errors)
         out.append((h, r.params['x'], r.bse['x'], r.pvalues['x']))
     return out
 
@@ -77,6 +77,9 @@ show('Δ_h log industry    on log steam hp', lp(lg['Ind'], lsteam, a=1760))
 show('Δ_h log GDP/capita  on canal stock', lp(lg['GDPpc'], canal_k))
 show('Δ_h log GDP/capita  on log steam hp', lp(lg['GDPpc'], lsteam, a=1760))
 show('Δ_h log GDP/capita  on log steam hp, sample 1760-1870', lp(lg['GDPpc'], lsteam, a=1760, e=1870))
+show('Δ_h log GDP/capita  on log steam hp, sample 1830-1870 only', lp(lg['GDPpc'], lsteam, a=1830, e=1870))
+show('Δ_h log GDP/capita  on log steam hp, 1760-1870, + post-1830 interaction (coef on steam x post1830)', lp(lg['GDPpc'], lsteam * (lsteam.index >= 1830), a=1760, e=1870, controls=[lsteam]))
+print('  Family-wise note: with 8 outcomes x 4 horizons a Bonferroni threshold is 0.05/32 = 0.0016; coal, industry, population(h>=10) and the 1760-1870 steam->income results clear it; the h=5 population and coal->steam results do not.')
 show('Δ_h log population  on canal stock', lp(lg['PopGB'], canal_k))
 show('Δ_h log agriculture on canal stock (placebo)', lp(lg['Agri'], canal_k))
 # save IRFs for figures
@@ -116,7 +119,7 @@ print('Reading: with a quadratic trend absorbed, the mediation decomposition is 
 hdr('10. SEMANTIC SEQUENCING: coal moved by water before coal burned in engines (eng_gb_2019 bigrams)')
 norm = lambda cols: sum(bg[c] / bg[c].loc[1850] for c in cols) / len(cols)   # equal-weight index, each term = 1 in 1850
 g_water = norm(['coal barge', 'coal wharf', 'coal boat', 'canal boat'])
-g_steam = norm(['steam engine', 'steam power', 'steam boat'])
+g_steam = norm(['steam engine', 'steam power'])   # 'steam boat' excluded: it is water transport as much as steam
 sm5 = lambda s: s.rolling(5, center=True).mean()
 
 
@@ -165,6 +168,10 @@ for c in ['Coal', 'Ind', 'PopGB', 'Serv', 'GDPpc', 'Agri']:
     r1 = dose_reg(lg[c], canal_k.shift(10), a=1710); r2 = dose_reg(lg[c], canal_k.shift(15), a=1715)
     r3 = dose_reg(lg[c], auth_cum.shift(10) / 10, a=1710); r4 = dose_reg(lg[c], auth_cum.shift(10) / 10, a=1710, quad=True)
     print(f'{c:10s} {100*r1[0]:+8.1f}% (p={r1[1]:.3f})   {100*r2[0]:+8.1f}% (p={r2[1]:.3f})   {100*r3[0]:+8.1f}% (p={r3[1]:.3f})               {100*r4[0]:+8.1f}% (p={r4[1]:.3f})')
+print('\nAuthorisation dose (lag 10) with the outcome\'s own past 10-year growth as a control (addresses persistent-demand feedback):')
+for c in ['Coal', 'Ind', 'PopGB', 'GDPpc', 'Agri']:
+    dd = pd.concat([lg[c].rename('y'), (auth_cum.shift(10) / 10).rename('x'), (lg[c].shift(10) - lg[c].shift(20)).rename('g10')], axis=1); dd['t'] = dd.index.astype(float); dd = dd.loc[1720:1830].dropna()
+    rr = sm.OLS(dd['y'], sm.add_constant(dd[['x', 'g10', 't']])).fit(**HAC); print(f'  {c:6s}: auth {100*rr.params["x"]:+6.1f}% (p={rr.pvalues["x"]:.3f}), past growth {rr.params["g10"]:+.2f} (p={rr.pvalues["g10"]:.3f})')
 print('\nLocal projections with the authorisation count (per 10 canals authorised, lagged 10 years):')
 show('Δ_h log coal        on authorised canals (lag 10)', lp(lg['Coal'], auth_cum.shift(10) / 10, a=1710))
 show('Δ_h log population  on authorised canals (lag 10)', lp(lg['PopGB'], auth_cum.shift(10) / 10, a=1710))

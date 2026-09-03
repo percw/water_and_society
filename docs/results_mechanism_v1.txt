@@ -16,19 +16,22 @@ Coal output per unit of installed steam hp (1760=100), i.e. how much coal moved 
 ==============================================================================
 8. LOCAL PROJECTIONS ALONG THE CHAIN (1760-1830 for steam hp; 1700-1830 otherwise)
 ==============================================================================
-Δ_h log coal        on canal stock (000 mi)               h=5: +0.294 (p=0.000)  h=10: +0.381 (p=0.000)  h=15: +0.438 (p=0.000)  h=20: +0.435 (p=0.002)
-Δ_h log coal        on canal stock, + log steam hp controlh=5: +0.207 (p=0.000)  h=10: +0.208 (p=0.006)  h=15: +0.022 (p=0.728)  h=20: -0.044 (p=0.294)
-Δ_h log steam hp    on canal stock                        h=5: +0.018 (p=0.000)  h=10: +0.031 (p=0.000)  h=15: +0.032 (p=0.000)  h=20: +0.026 (p=0.001)
-Δ_h log steam hp    on log coal output                    h=5: +0.009 (p=0.032)  h=10: +0.009 (p=0.348)  h=15: +0.011 (p=0.370)  h=20: +0.010 (p=0.446)
-Δ_h log steam hp    on log coal, + canal stock control    h=5: +0.004 (p=0.027)  h=10: +0.003 (p=0.645)  h=15: +0.008 (p=0.449)  h=20: +0.011 (p=0.390)
-Δ_h log water hp    on canal stock                        h=5: -0.034 (p=0.000)  h=10: -0.060 (p=0.000)  h=15: -0.062 (p=0.000)  h=20: -0.050 (p=0.001)
+Δ_h log coal        on canal stock (000 mi)               h=5: +0.294 (p=0.000)  h=10: +0.381 (p=0.000)  h=15: +0.438 (p=0.001)  h=20: +0.435 (p=0.007)
+Δ_h log coal        on canal stock, + log steam hp controlh=5: +0.207 (p=0.000)  h=10: +0.208 (p=0.006)  h=15: +0.022 (p=0.684)  h=20: -0.044 (p=0.209)
+Δ_h log steam hp    on canal stock                        h=5: +0.018 (p=0.000)  h=10: +0.031 (p=0.000)  h=15: +0.032 (p=0.000)  h=20: +0.026 (p=0.000)
+Δ_h log steam hp    on log coal output                    h=5: +0.009 (p=0.032)  h=10: +0.009 (p=0.348)  h=15: +0.011 (p=0.299)  h=20: +0.010 (p=0.325)
+Δ_h log steam hp    on log coal, + canal stock control    h=5: +0.004 (p=0.027)  h=10: +0.003 (p=0.645)  h=15: +0.008 (p=0.475)  h=20: +0.011 (p=0.392)
+Δ_h log water hp    on canal stock                        h=5: -0.034 (p=0.000)  h=10: -0.060 (p=0.000)  h=15: -0.062 (p=0.000)  h=20: -0.050 (p=0.000)
 Δ_h log industry    on canal stock                        h=5: +0.257 (p=0.000)  h=10: +0.340 (p=0.000)  h=15: +0.340 (p=0.000)  h=20: +0.372 (p=0.000)
 Δ_h log industry    on log steam hp                       h=5: +4.165 (p=0.000)  h=10: +5.816 (p=0.000)  h=15: +7.878 (p=0.000)  h=20: +11.356 (p=0.000)
-Δ_h log GDP/capita  on canal stock                        h=5: -0.011 (p=0.452)  h=10: -0.025 (p=0.096)  h=15: -0.014 (p=0.390)  h=20: -0.003 (p=0.870)
-Δ_h log GDP/capita  on log steam hp                       h=5: -0.594 (p=0.266)  h=10: -0.920 (p=0.188)  h=15: -0.681 (p=0.433)  h=20: +0.548 (p=0.708)
-Δ_h log GDP/capita  on log steam hp, sample 1760-1870     h=5: +0.553 (p=0.000)  h=10: +0.655 (p=0.000)  h=15: +0.828 (p=0.000)  h=20: +0.896 (p=0.000)
-Δ_h log population  on canal stock                        h=5: +0.034 (p=0.029)  h=10: +0.057 (p=0.005)  h=15: +0.066 (p=0.000)  h=20: +0.059 (p=0.013)
-Δ_h log agriculture on canal stock (placebo)              h=5: -0.051 (p=0.108)  h=10: -0.081 (p=0.001)  h=15: -0.058 (p=0.022)  h=20: -0.023 (p=0.443)
+Δ_h log GDP/capita  on canal stock                        h=5: -0.011 (p=0.452)  h=10: -0.025 (p=0.096)  h=15: -0.014 (p=0.381)  h=20: -0.003 (p=0.864)
+Δ_h log GDP/capita  on log steam hp                       h=5: -0.594 (p=0.266)  h=10: -0.920 (p=0.188)  h=15: -0.681 (p=0.453)  h=20: +0.548 (p=0.698)
+Δ_h log GDP/capita  on log steam hp, sample 1760-1870     h=5: +0.553 (p=0.000)  h=10: +0.655 (p=0.000)  h=15: +0.828 (p=0.000)  h=20: +0.896 (p=0.002)
+Δ_h log GDP/capita  on log steam hp, sample 1830-1870 onlyh=5: +0.198 (p=0.000)  h=10: +0.173 (p=0.000)  h=15: +0.178 (p=0.000)  h=20: +0.096 (p=0.000)
+Δ_h log GDP/capita  on log steam hp, 1760-1870, + post-1830 interaction (coef on steam x post1830)h=5: +0.009 (p=0.001)  h=10: +0.010 (p=0.032)  h=15: +0.017 (p=0.000)  h=20: +0.015 (p=0.002)
+  Family-wise note: with 8 outcomes x 4 horizons a Bonferroni threshold is 0.05/32 = 0.0016; coal, industry, population(h>=10) and the 1760-1870 steam->income results clear it; the h=5 population and coal->steam results do not.
+Δ_h log population  on canal stock                        h=5: +0.034 (p=0.029)  h=10: +0.057 (p=0.005)  h=15: +0.066 (p=0.001)  h=20: +0.059 (p=0.024)
+Δ_h log agriculture on canal stock (placebo)              h=5: -0.051 (p=0.108)  h=10: -0.081 (p=0.001)  h=15: -0.058 (p=0.006)  h=20: -0.023 (p=0.263)
 
 ==============================================================================
 9. MEDIATION: canal stock -> coal -> outcome (linear, 1700-1830, moving-block bootstrap)
@@ -50,7 +53,7 @@ canal boat                               1812   1823   1825
 coal wharf                               1774   1800   1815
 coal barge                               1753   1781   1783
 "canal" (unigram)                        1743   1763   1809
-coal-by-steam bigrams                    1806   1811   1813
+coal-by-steam bigrams                    1804   1819   1825
 steam engine                             1800   1808   1821
 steam power                              1821   1826   1831
 coal field                               1788   1820   1831
@@ -58,7 +61,7 @@ fire engine (18th-c. term)               1744   1747   1750
 
 "steam engine" overtakes "fire engine" in print: 1800
 "water carriage"/"land carriage" ratio: 1750 0.79, 1790 0.50, 1810 0.68, 1840 0.63
-Cross-correlation log coal-by-water_t with log coal-by-steam_{t-k} (k<0: steam leads; k>0: water leads): k=-30:0.50  k=-25:0.51  k=-20:0.56  k=-15:0.49  k=-10:0.47  k=-5:0.58  k=0:0.53  k=5:0.52  k=10:0.60  k=15:0.54  k=20:0.51  k=25:0.52  k=30:0.48
+Cross-correlation log coal-by-water_t with log coal-by-steam_{t-k} (k<0: steam leads; k>0: water leads): k=-30:0.62  k=-25:0.62  k=-20:0.62  k=-15:0.51  k=-10:0.47  k=-5:0.59  k=0:0.52  k=5:0.52  k=10:0.63  k=15:0.54  k=20:0.52  k=25:0.55  k=30:0.49
 
 ==============================================================================
 11. PARLIAMENTARY AUTHORISATION (Priestley 1831, OCR-parsed; provisional)
@@ -91,22 +94,29 @@ Serv          +29.2% (p=0.000)      +28.7% (p=0.000)       +7.3% (p=0.000)      
 GDPpc          -2.7% (p=0.119)       -1.2% (p=0.438)       -0.3% (p=0.518)                   +1.4% (p=0.169)
 Agri           -8.1% (p=0.007)       -5.9% (p=0.025)       -1.4% (p=0.070)                   +2.4% (p=0.194)
 
+Authorisation dose (lag 10) with the outcome's own past 10-year growth as a control (addresses persistent-demand feedback):
+  Coal  : auth  +11.1% (p=0.000), past growth +0.23 (p=0.004)
+  Ind   : auth   +9.0% (p=0.000), past growth -0.06 (p=0.554)
+  PopGB : auth   +4.8% (p=0.000), past growth +0.57 (p=0.027)
+  GDPpc : auth   +0.0% (p=0.924), past growth -0.03 (p=0.695)
+  Agri  : auth   -0.5% (p=0.448), past growth -0.04 (p=0.268)
+
 Local projections with the authorisation count (per 10 canals authorised, lagged 10 years):
-Δ_h log coal        on authorised canals (lag 10)         h=5: +0.041 (p=0.000)  h=10: +0.039 (p=0.015)  h=15: +0.033 (p=0.027)  h=20: +0.029 (p=0.022)
-Δ_h log population  on authorised canals (lag 10)         h=5: +0.005 (p=0.155)  h=10: +0.006 (p=0.237)  h=15: +0.005 (p=0.338)  h=20: +0.006 (p=0.280)
-Δ_h log GDP/capita  on authorised canals (lag 10)         h=5: -0.002 (p=0.612)  h=10: -0.004 (p=0.296)  h=15: -0.005 (p=0.276)  h=20: -0.002 (p=0.638)
-Δ_h log agriculture on authorised canals (lag 10)         h=5: -0.011 (p=0.084)  h=10: -0.009 (p=0.134)  h=15: -0.009 (p=0.243)  h=20: -0.012 (p=0.134)
+Δ_h log coal        on authorised canals (lag 10)         h=5: +0.041 (p=0.000)  h=10: +0.039 (p=0.015)  h=15: +0.033 (p=0.033)  h=20: +0.029 (p=0.020)
+Δ_h log population  on authorised canals (lag 10)         h=5: +0.005 (p=0.155)  h=10: +0.006 (p=0.237)  h=15: +0.005 (p=0.352)  h=20: +0.006 (p=0.306)
+Δ_h log GDP/capita  on authorised canals (lag 10)         h=5: -0.002 (p=0.612)  h=10: -0.004 (p=0.296)  h=15: -0.005 (p=0.260)  h=20: -0.002 (p=0.579)
+Δ_h log agriculture on authorised canals (lag 10)         h=5: -0.011 (p=0.084)  h=10: -0.009 (p=0.134)  h=15: -0.009 (p=0.173)  h=20: -0.012 (p=0.033)
 Reverse check: Δ authorisations_t on Σ_{k=1..10} Δlog coal_{t-k}:
   sum coef=+29.66, joint p=0.000
 
 ==============================================================================
 13. STEAM LINK WITH AN INDEPENDENT STEAM MEASURE (print frequency of "steam engine")
 ==============================================================================
-Δ_h log "steam engine" on canal stock                     h=5: +0.328 (p=0.553)  h=10: +0.727 (p=0.064)  h=15: +0.730 (p=0.206)  h=20: +0.607 (p=0.114)
-Δ_h log "steam engine" on log coal output                 h=5: +0.652 (p=0.506)  h=10: +0.184 (p=0.874)  h=15: +1.155 (p=0.253)  h=20: +1.486 (p=0.003)
-Δ_h log "steam engine" on log coal, + canal control       h=5: +0.284 (p=0.799)  h=10: -1.797 (p=0.155)  h=15: +0.159 (p=0.879)  h=20: +1.051 (p=0.000)
-Δ_h log GDP/capita  on log "steam engine", 1740-1830      h=5: +0.005 (p=0.496)  h=10: +0.002 (p=0.691)  h=15: -0.017 (p=0.000)  h=20: -0.007 (p=0.259)
-Δ_h log GDP/capita  on log "steam engine", 1740-1870      h=5: -0.014 (p=0.115)  h=10: -0.018 (p=0.166)  h=15: -0.037 (p=0.003)  h=20: -0.026 (p=0.059)
+Δ_h log "steam engine" on canal stock                     h=5: +0.328 (p=0.553)  h=10: +0.727 (p=0.064)  h=15: +0.730 (p=0.212)  h=20: +0.607 (p=0.119)
+Δ_h log "steam engine" on log coal output                 h=5: +0.652 (p=0.506)  h=10: +0.184 (p=0.874)  h=15: +1.155 (p=0.234)  h=20: +1.486 (p=0.003)
+Δ_h log "steam engine" on log coal, + canal control       h=5: +0.284 (p=0.799)  h=10: -1.797 (p=0.155)  h=15: +0.159 (p=0.883)  h=20: +1.051 (p=0.000)
+Δ_h log GDP/capita  on log "steam engine", 1740-1830      h=5: +0.005 (p=0.496)  h=10: +0.002 (p=0.691)  h=15: -0.017 (p=0.000)  h=20: -0.007 (p=0.162)
+Δ_h log GDP/capita  on log "steam engine", 1740-1870      h=5: -0.014 (p=0.115)  h=10: -0.018 (p=0.166)  h=15: -0.037 (p=0.007)  h=20: -0.026 (p=0.079)
 corr(log steam hp interpolated, log "steam engine" freq) 1760-1870: 0.90
 
 ==============================================================================
@@ -119,4 +129,4 @@ canal (unigram)                  1763            1763            1763           
 coal-by-water group              1801            1800            1800            1785            1785            1799
 steam engine                     1809            1808            1809            1807            1808            1808
 steam power                      1826            1826            1826            1823            1823            1822
-coal-by-steam group              1811            1811            1810            1813            1813            1812
+coal-by-steam group              1819            1819            1818            1814            1814            1814

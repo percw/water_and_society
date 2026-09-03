@@ -73,7 +73,12 @@ for c in ['GBR', 'NLD', 'FRA', 'BEL', 'SWE', 'DEU', 'ESP', 'PRT', 'ITA']:
     pk = w.loc[1785:1795, c].max(); tr = w.loc[1795:1815, c].min()
     print(f'  {c}: peak {pk:6.0f} ({w.loc[1785:1795, c].idxmax()}) trough {tr:6.0f} ({w.loc[1795:1815, c].idxmin()}) drawdown {100*(tr/pk-1):6.1f}%  1815/1790 {100*(w.loc[1815, c]/w.loc[1790, c]-1):+5.1f}%')
 gap = w['GBR'] - w[['NLD', 'FRA']].mean(axis=1)
-print(f'\nSup-F break in GBR minus mean(NLD,FRA) log gap: {supwald(lw["GBR"] - lw[["NLD", "FRA"]].mean(axis=1))}')
+gapl = lw['GBR'] - lw[['NLD', 'FRA']].mean(axis=1); print(f'\nSup-F break in GBR minus mean(NLD,FRA) log gap: {supwald(gapl)}')
+_y = gapl.dropna(); _n = len(_y); _t = np.arange(_n); _X0 = np.column_stack([np.ones(_n), _t]); _ssr0 = ((_y.values - _X0 @ np.linalg.lstsq(_X0, _y.values, rcond=None)[0]) ** 2).sum(); _Fs = {}
+for _k in range(int(.15 * _n), int(.85 * _n)):
+    _d = (_t >= _k).astype(float); _X1 = np.column_stack([_X0, _d, _d * (_t - _k)]); _ssr1 = ((_y.values - _X1 @ np.linalg.lstsq(_X1, _y.values, rcond=None)[0]) ** 2).sum(); _Fs[int(_y.index[_k])] = ((_ssr0 - _ssr1) / 2) / (_ssr1 / (_n - 4))
+print('  top-5 break candidates:', sorted(_Fs, key=_Fs.get, reverse=True)[:5])
+print('  GBR gdppc index (1790=100):', {y: round(float(w.loc[y, 'GBR'] / w.loc[1790, 'GBR'] * 100)) for y in [1805, 1810, 1815]}, ' NLD:', {y: round(float(w.loc[y, 'NLD'] / w.loc[1790, 'NLD'] * 100)) for y in [1805, 1808, 1815]})
 print(f'Share of 1761-1900 level-gap growth (GBR vs NLD+FRA) occurring 1790-1815: {100*(gap[1815]-gap[1790])/(gap[1900]-gap[1761]):.0f}%')
 print('Sup-F break GBR minus each control (log gdppc):', {c: supwald(lw['GBR'] - lw[c]) for c in ['NLD', 'FRA', 'SWE', 'DEU', 'ESP']})
 
@@ -112,9 +117,9 @@ for a, e in [(1700, 1760), (1760, 1790), (1790, 1815), (1815, 1830), (1830, 1870
 print('\nTrend-slope change at 1761 (sample 1700-1830, HAC): pre-slope %/yr, change pp/yr, p')
 for c in ['GDP', 'Ind', 'Coal', 'Iron', 'Textiles', 'Serv', 'PopGB', 'GDPpc', 'Agri']:
     pre, chg, p = trendchange(lg[c], 1761); print(f'  {c:9s}: {pre:5.2f} {chg:+5.2f} (p={p:.3f})')
-print('\nSup-F single break (level+trend) 1700-1870 and best two breaks')
+print('\nSup-F single break (level+trend) 1700-1870 [Andrews (1993) 5%% critical value for q=2, 15%% trimming ~ 11.8; 1%% ~ 15.4] and best two breaks')
 for c in ['GDP', 'Ind', 'Serv', 'Coal', 'Iron', 'Textiles', 'PopGB', 'GDPpc', 'Agri']:
-    print(f'  {c:9s}: single {supwald(lg[c])}   two {twobreak(lg[c])}')
+    yr_, F_ = supwald(lg[c]); print(f'  {c:9s}: single {yr_} (sup-F={F_}{"" if F_ > 11.8 else ", NOT significant"})   two {twobreak(lg[c])}')
 print('\nCoal output per capita, 1700=100:', ((b['Coal'] / b['PopGB']) / (b['Coal'] / b['PopGB']).loc[1700] * 100).loc[[1700, 1760, 1780, 1790, 1800, 1810, 1830, 1850]].round(0).to_dict())
 
 # ---------------------------------------------------------------- 3. dose
@@ -123,7 +128,10 @@ canals = pd.read_csv(EXT / 'uk_canals_wiki.csv')
 dec = canals[(canals.year >= 1700) & (canals.year <= 1850)].groupby((canals.year // 10) * 10).miles.sum()
 print('Canal miles opened per decade:', dec.round(0).astype(int).to_dict())
 print('Cumulative miles:', cum.loc[[1760, 1770, 1780, 1790, 1800, 1810, 1820, 1830]].round(0).astype(int).to_dict())
-steam = ng['steam'] / ng['steam'].loc[1830]
+steam_vocab = ng['steam'] / ng['steam'].loc[1830]
+hpb = pd.read_csv(EXT / 'power_hp.csv').set_index('Year').loc[1760:1870]
+lsteam_hp = np.log(hpb['steam_hp_k']).reindex(range(1760, 1871)).interpolate(method='index')
+lwater_hp = np.log(hpb['water_hp_k']).reindex(range(1760, 1871)).interpolate(method='index')
 war = pd.Series(0, index=range(1700, 1901)); war.loc[1793:1815] = 1; war.loc[1756:1763] = 1; war.loc[1775:1783] = 1
 t2 = pd.Series((np.arange(1700, 1901) - 1700.0) ** 2 / 1000, index=range(1700, 1901))
 
@@ -134,10 +142,17 @@ def reg(c, cols, a=1700, e=1830):
     X = sm.add_constant(X.dropna()); return sm.OLS(y.loc[X.index], X).fit(**HAC)
 
 
-print('\n(a) log y ~ trend + canal miles (000s)                 (b) + quadratic trend + war dummy                (c) horse race: + steam vocab (1830=1)')
+print('\n(a) log y ~ trend + canal miles (000s), 1700-1830   (b) + quadratic trend + war dummy   (c) horse race 1760-1830: + log steam HORSEPOWER (Kanefsky, interpolated) + war dummy')
+print('   canal miles and interpolated water hp are collinear over 1760-1830 (r=%.3f), so water hp cannot enter (c) as a separate regressor.' % np.corrcoef((cum/1000).loc[1760:1830], lwater_hp.loc[1760:1830])[0,1])
+print('   Canal table: %d canals, %.0f miles; open by 1830: %.0f miles' % (len(canals), canals.miles.sum(), cum.loc[1830]))
 for c in ['Coal', 'Ind', 'Iron', 'Serv', 'PopGB', 'GDP', 'GDPpc', 'Agri']:
-    ra = reg(c, {'canal_k': cum / 1000}); rb = reg(c, {'canal_k': cum / 1000, 't2': t2, 'war': war}); rc = reg(c, {'canal_k': cum / 1000, 'steam': steam, 'war': war})
-    print(f'  {c:6s}: (a) {100*ra.params["canal_k"]:6.1f}% p={ra.pvalues["canal_k"]:.3f} | (b) {100*rb.params["canal_k"]:6.1f}% p={rb.pvalues["canal_k"]:.3f} | (c) canal {100*rc.params["canal_k"]:6.1f}% p={rc.pvalues["canal_k"]:.3f}, steam {100*rc.params["steam"]:6.1f}% p={rc.pvalues["steam"]:.3f}')
+    ra = reg(c, {'canal_k': cum / 1000}); rb = reg(c, {'canal_k': cum / 1000, 't2': t2, 'war': war}); rc = reg(c, {'canal_k': cum / 1000, 'steam': lsteam_hp, 'war': war}, a=1760)
+    from statsmodels.tsa.stattools import adfuller
+    adf_p = adfuller(ra.resid, regression='c', autolag='AIC')[1]
+    print(f'  {c:6s}: (a) {100*ra.params["canal_k"]:6.1f}% p={ra.pvalues["canal_k"]:.3f} [ADF resid p={adf_p:.3f}] | (b) {100*rb.params["canal_k"]:6.1f}% p={rb.pvalues["canal_k"]:.3f} | (c) canal {100*rc.params["canal_k"]:6.1f}% p={rc.pvalues["canal_k"]:.3f}, log steam hp {rc.params["steam"]:+.2f} p={rc.pvalues["steam"]:.3f}')
+print('   (c2) same horse race with steam VOCABULARY (1830=1) over 1700-1830, for reference:')
+for c in ['Coal', 'Ind', 'PopGB', 'GDPpc', 'Agri']:
+    rc2 = reg(c, {'canal_k': cum / 1000, 'steam': steam_vocab, 'war': war}); print(f'     {c:6s}: canal {100*rc2.params["canal_k"]:6.1f}% p={rc2.pvalues["canal_k"]:.3f}, steam vocab {100*rc2.params["steam"]:6.1f}% p={rc2.pvalues["steam"]:.3f}')
 dm = (cum / 1000).diff()
 print('\n(d) First differences 1711-1830: Δlog y on Δmiles lags 0..10 (sum of coefficients, joint F)')
 for c in ['Coal', 'Ind', 'PopGB', 'GDP', 'GDPpc', 'Agri']:
@@ -161,7 +176,9 @@ for c in ['GBR', 'NLD', 'FRA', 'BEL', 'SWE', 'DEU', 'ESP', 'PRT', 'CHN', 'JPN']:
 hdr('5. NLP INDEX AS A STOCK PROXY (eng_gb_2019 "canal" vs canal network)')
 yr = cum.diff().fillna(cum.iloc[0]); op10 = yr.rolling(10, center=True).sum(); c_ng = ng['canal']
 print(f'corr(ngram canal, cumulative miles) 1740-1850:        {np.corrcoef(c_ng.loc[1740:1850], cum.loc[1740:1850])[0, 1]:.2f}')
-print(f'corr(ngram canal, miles opened in 10y window) 1740-1850: {np.corrcoef(c_ng.loc[1745:1845], op10.loc[1745:1845])[0, 1]:.2f}')
+_dt = lambda s_: s_ - np.polyval(np.polyfit(s_.index.values.astype(float), s_.values, 1), s_.index.values.astype(float))
+print(f'  same, linearly detrended: {np.corrcoef(_dt(c_ng.loc[1740:1850]), _dt(cum.loc[1740:1850]))[0, 1]:.2f}; first differences: {np.corrcoef(c_ng.diff().loc[1741:1850], cum.diff().loc[1741:1850])[0, 1]:.2f}')
+print(f'corr(ngram canal, miles opened in 10y window) 1745-1845: {np.corrcoef(c_ng.loc[1745:1845], op10.loc[1745:1845])[0, 1]:.2f}')
 print('Peaks of canal-related vocabulary:', {k: int(ng[k].idxmax()) for k in ['canal', 'navigation', 'inland navigation', 'canal navigation']})
 
 # ---------------------------------------------------------------- 6. sequencing

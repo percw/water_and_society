@@ -22,8 +22,11 @@ hp = pd.read_csv(EXT / 'power_hp.csv').set_index('Year')
 
 
 def waves(ax):
-    for a, e, lab in [(1760, 1780, 'first canal wave'), (1790, 1816, 'canal mania completions')]:
-        ax.axvspan(a, e, color=C['l'], alpha=.35, lw=0); ax.text(a + 1, ax.get_ylim()[1], lab, fontsize=7, va='top', color=C['g'])
+    yl = ax.get_ylim(); log = ax.get_yscale() == 'log'
+    for a, e, lab, k in [(1760, 1780, 'first canal\nwave', 1), (1790, 1816, 'canal mania\ncompletions', 1)]:
+        ax.axvspan(a, e, color=C['l'], alpha=.35, lw=0)
+        ytop = yl[1] * (0.93 if log else 1) if log else yl[1] - 0.02 * (yl[1] - yl[0])
+        ax.text(a + 1, ytop, lab, fontsize=6.5, va='top', color=C['g'])
 
 
 # Figure 1 — two growth regimes
@@ -37,7 +40,6 @@ for ax, series, title in [(axs[0], [('Total GDP', 'GDP', '-', C['k']), ('Populat
     ax.axvline(1761, color=C['g'], lw=.8, ls='-.'); ax.axvline(1818, color=C['g'], lw=.8, ls='-.')
     ax.set_title(title, loc='left'); ax.set_ylabel('Index, 1700 = 100 (log scale)'); ax.legend(loc='upper left'); waves(ax)
 axs[0].text(1762, 62, '1761', fontsize=7, color=C['g']); axs[0].text(1819, 62, '1818', fontsize=7, color=C['g'])
-fig.suptitle('Figure 1. Britain\'s two growth regimes: aggregate output and population accelerate in the canal era, income per head only after 1818', x=0.01, ha='left', fontsize=10)
 fig.tight_layout(); fig.savefig(OUT / 'fig1_two_regimes.png'); plt.close(fig)
 
 # Figure 2 — canal dose and coal (three panels, no dual axis)
@@ -49,7 +51,6 @@ cpc = (b['Coal'] / b['PopGB']); axs[2].plot(cpc.loc[1700:1850].index, cpc.loc[17
 lhp = np.log(hp.loc[1760:1870, ['steam_hp_k', 'water_hp_k', 'wind_hp_k']]).reindex(range(1760, 1871)).interpolate(method='index'); sh = np.exp(lhp['steam_hp_k']) / np.exp(lhp).sum(axis=1); xo = int(sh[sh >= .5].index.min())
 axs[2].axvline(xo, color=C['g'], lw=.8, ls='-.'); axs[2].text(xo + 1, 120, f'steam > water + wind\npower, {xo}', fontsize=7, color=C['g'])
 for ax in axs[1:]: waves(ax)
-fig.suptitle('Figure 2. The canal network and coal: two waves of building; coal output per head doubles before steam is the majority power source', x=0.01, ha='left', fontsize=10)
 fig.tight_layout(); fig.savefig(OUT / 'fig2_canal_dose.png'); plt.close(fig)
 
 # Figure 3 — local projections
@@ -61,7 +62,6 @@ for ax, (key, title) in zip(axs.flat, chains):
     ax.axhline(0, color=C['g'], lw=.8); ax.set_title(title, loc='left'); ax.set_xlim(1, 20)
 for ax in axs[1]: ax.set_xlabel('Horizon (years)')
 for ax in axs[:, 0]: ax.set_ylabel('Cumulative log response')
-fig.suptitle('Figure 3. Local projections along the precondition chain (95% HAC bands). Per 1,000 canal miles, or per log point of the regressor.', x=0.01, ha='left', fontsize=10)
 fig.tight_layout(); fig.savefig(OUT / 'fig3_local_projections.png'); plt.close(fig)
 
 # Figure 4 — war confound (single panel)
@@ -71,15 +71,15 @@ for c, lab, ls, col in [('GBR', 'Britain', '-', C['k']), ('FRA', 'France', '--',
 ax.axvspan(1793, 1815, color=C['l'], alpha=.35, lw=0); ax.text(1794, 122, 'Revolutionary and Napoleonic Wars', fontsize=7, color=C['g']); ax.axvline(1807, color=C['g'], lw=.8, ls='-.')
 ax.text(1807.5, 52, 'estimated break in the\nBritain–controls gap', fontsize=7, color=C['g'])
 ax.set_ylim(50, 125); ax.set_ylabel('GDP per capita, 1790 = 100'); ax.legend(loc='lower left')
-ax.set_title('Figure 4. The 1807 "break" in the cross-country design is the Dutch collapse', loc='left')
-fig.tight_layout(); fig.savefig(OUT / 'fig4_war_confound.png'); plt.close(fig)
+ax.set_title('GDP per capita, 1790 = 100', loc='left')
+fig.tight_layout(); fig.savefig(OUT / 'fig5_war_confound.png'); plt.close(fig)
 
 # Figure 5 — semantic sequencing
 fig, ax = plt.subplots(figsize=(10, 4))
 n = lambda s: (s.rolling(5, center=True).mean() / s.rolling(5, center=True).mean().loc[1850]) * 100
-for col, lab, ls, c in [('canal', '“canal”', '-', C['k']), ('coal_by_water', 'coal-by-water bigrams (coal barge, coal wharf, coal boat, canal boat)', '--', C['a']), ('coal_by_steam', 'coal-by-steam bigrams (steam engine, steam power, steam boat)', ':', C['g'])]:
+for col, lab, ls, c in [('canal', '“canal”', '-', C['k']), ('coal_by_water', 'coal-by-water bigrams (coal barge, coal wharf, coal boat, canal boat)', '--', C['a']), ('coal_by_steam', 'coal-by-steam bigrams (steam engine, steam power)', ':', C['g'])]:
     s = n(sem[col]).loc[1740:1850]; ax.plot(s.index, s, ls, color=c, lw=1.5, label=lab)
-ax.set_ylim(0, 130); ax.set_ylabel('Frequency, 1850 = 100 (5-year mean)'); ax.legend(loc='upper left'); ax.set_title('Figure 5. In print, coal travels by water before it is burned in engines (Google Books, British English)', loc='left')
-fig.tight_layout(); fig.savefig(OUT / 'fig5_semantic_sequence.png'); plt.close(fig)
+ax.set_ylim(0, 130); ax.set_ylabel('Frequency, 1850 = 100 (5-year mean)'); ax.legend(loc='upper left'); ax.set_title('Print frequency, 1850 = 100 (five-year mean)', loc='left')
+fig.tight_layout(); fig.savefig(OUT / 'fig4_semantic_sequence.png'); plt.close(fig)
 
 print('wrote', sorted(p.name for p in OUT.glob('fig*_*.png')))

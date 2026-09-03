@@ -10,8 +10,8 @@ def compile_manuscript():
         "03_methodology.md",
         "04_results.md",
         "05_discussion.md",
-        "06_conclusion.md",
         "07_limitations.md",
+        "06_conclusion.md",
         "08_references.md"
     ]
     

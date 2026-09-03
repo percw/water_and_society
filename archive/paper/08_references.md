@@ -2,7 +2,7 @@
 
 Allen, Robert C. 2009. *The British Industrial Revolution in Global Perspective*. Cambridge: Cambridge University Press.
 
-Alvarez-Palau, Eduard J., Dan Bogart, Max Satchell, and Leigh Shaw-Taylor. 2024. "Transport and Urban Growth in the First Industrial Revolution." *The Economic Journal* 135 (668): 1191–1228. https://doi.org/10.1093/ej/ueae111.
+Alvarez-Palau, Eduard J., Dan Bogart, Max Satchell, and Leigh Shaw-Taylor. 2025. "Transport and Urban Growth in the First Industrial Revolution." *The Economic Journal* 135 (668): 1191–1228. https://doi.org/10.1093/ej/ueae111.
 
 Andrews, Donald W. K. 1993. "Tests for Parameter Instability and Structural Change with Unknown Change Point." *Econometrica* 61 (4): 821–856.
 
@@ -12,7 +12,9 @@ Bertrand, Marianne, Esther Duflo, and Sendhil Mullainathan. 2004. "How Much Shou
 
 Bogart, Dan. 2014. "The Transport Revolution in Industrialising Britain: A Survey." In *The Cambridge Economic History of Modern Britain, Volume 1: 1700–1870*, edited by Roderick Floud, Jane Humphries, and Paul Johnson, 368–391. Cambridge: Cambridge University Press. https://doi.org/10.1017/CHO9781139815017.014.
 
-Bolt, Jutta, and Jan Luiten van Zanden. 2024. "Maddison-Style Estimates of the Evolution of the World Economy: A New 2023 Update." *Journal of Economic Surveys* 39 (2): 631–671. https://doi.org/10.1111/joes.12618.
+Bolt, Jutta, and Jan Luiten van Zanden. 2025. "Maddison-Style Estimates of the Evolution of the World Economy: A New 2023 Update." *Journal of Economic Surveys* 39 (2): 631–671. https://doi.org/10.1111/joes.12618.
+
+Broadberry, Stephen, Hanhui Guan, and David Daokui Li. 2018. "China, Europe, and the Great Divergence: A Study in Historical National Accounting, 980–1850." *Journal of Economic History* 78 (4): 955–1000.
 
 Broadberry, Stephen, Bruce M. S. Campbell, Alexander Klein, Mark Overton, and Bas van Leeuwen. 2015. *British Economic Growth, 1270–1870*. Cambridge: Cambridge University Press.
 
@@ -28,11 +30,21 @@ Crouzet, François. 1964. "Wars, Blockade, and Economic Change in Europe, 1792�
 
 de Vries, Jan. 1978. *Barges and Capitalism: Passenger Transportation in the Dutch Economy, 1632–1839*. Utrecht: HES Publishers.
 
+de Vries, Jan, and Ad van der Woude. 1997. *The First Modern Economy: Success, Failure, and Perseverance of the Dutch Economy, 1500–1815*. Cambridge: Cambridge University Press.
+
+de Zeeuw, J. W. 1978. "Peat and the Dutch Golden Age: The Historical Meaning of Energy-Attainability." *A.A.G. Bijdragen* 21: 3–31.
+
 Fernihough, Alan, and Kevin Hjortshøj O'Rourke. 2021. "Coal and the European Industrial Revolution." *The Economic Journal* 131 (635): 1135–1149.
+
+Flinn, Michael W. 1984. *The History of the British Coal Industry, Volume 2: 1700–1830, The Industrial Revolution*. Oxford: Clarendon Press.
 
 Hadfield, Charles. 1984. *British Canals: An Illustrated History*. 7th ed. Newton Abbot: David and Charles.
 
+Hatcher, John. 1993. *The History of the British Coal Industry, Volume 1: Before 1700*. Oxford: Clarendon Press.
+
 Jordà, Òscar. 2005. "Estimation and Inference of Impulse Responses by Local Projections." *American Economic Review* 95 (1): 161–182.
+
+Kander, Astrid, Paolo Malanima, and Paul Warde. 2013. *Power to the People: Energy in Europe over the Last Five Centuries*. Princeton: Princeton University Press.
 
 Kanefsky, John W. 1979. "The Diffusion of Power Technology in British Industry, 1760–1870." PhD thesis, University of Exeter.
 
@@ -40,13 +52,19 @@ Kanefsky, John, and John Robey. 1980. "Steam Engines in 18th-Century Britain: A 
 
 Landes, David S. 1969. *The Unbound Prometheus: Technological Change and Industrial Development in Western Europe from 1750 to the Present*. Cambridge: Cambridge University Press.
 
+Maw, Peter. 2013. *Transport and the Industrial City: Manchester and the Canal Age, 1750–1850*. Manchester: Manchester University Press.
+
 Malm, Andreas. 2016. *Fossil Capital: The Rise of Steam Power and the Roots of Global Warming*. London: Verso.
 
 Michel, Jean-Baptiste, Yuan Kui Shen, Aviva Presser Aiden, Adrian Veres, Matthew K. Gray, and Erez Lieberman Aiden. 2011. "Quantitative Analysis of Culture Using Millions of Digitized Books." *Science* 331 (6014): 176–182.
 
+Mokyr, Joel. 1976. *Industrialization in the Low Countries, 1795–1850*. New Haven: Yale University Press.
+
 Newey, Whitney K., and Kenneth D. West. 1987. "A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix." *Econometrica* 55 (3): 703–708.
 
 Pechenick, Eitan Adam, Christopher M. Danforth, and Peter Sheridan Dodds. 2015. "Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution." *PLOS ONE* 10 (10): e0137041.
+
+Pollard, Sidney. 1980. "A New Estimate of British Coal Production, 1750–1850." *Economic History Review* 33 (2): 212–235.
 
 Pomeranz, Kenneth. 2000. *The Great Divergence: China, Europe, and the Making of the Modern World Economy*. Princeton: Princeton University Press.
 
@@ -66,6 +84,8 @@ Tvedt, Terje. 2010. "Why England and Not China and India? Water Systems and the 
 
 Ward, J. R. 1974. *The Finance of Canal Building in Eighteenth-Century England*. Oxford: Oxford University Press.
 
+Warde, Paul. 2007. *Energy Consumption in England and Wales, 1560–2000*. Naples: CNR-ISSM.
+
 Wrigley, E. A. 1988. *Continuity, Chance and Change: The Character of the Industrial Revolution in England*. Cambridge: Cambridge University Press.
 
 Wrigley, E. A. 2010. *Energy and the English Industrial Revolution*. Cambridge: Cambridge University Press.
@@ -76,4 +96,4 @@ Wrigley, E. A. 2016. *The Path to Sustained Growth: England's Transition from an
 
 # Data Availability Statement
 
-All code and data required to reproduce the analyses are publicly available at [https://github.com/percw/water_and_society](https://github.com/percw/water_and_society). British sectoral output, population and capital stock are from the Bank of England's *A Millennium of Macroeconomic Data for the UK* (Thomas and Dimsdale 2017), which reproduces Broadberry et al. (2015). Cross-country GDP per head and population are from the Maddison Project Database 2023 (Bolt and van Zanden 2024). Installed horsepower benchmarks are from Kanefsky (1979) as reported in Crafts (2004). Canal completion years and lengths are compiled from published reference tables and parliamentary authorisation years are parsed from the digitised text of Priestley (1831); both series are included in the repository with their construction scripts. Word and phrase frequencies are from the Google Books Ngram Corpus, British English 2019 edition. A self-contained replication package is available as a supplementary archive.
+All code and data required to reproduce the analyses are publicly available at [https://github.com/percw/water_and_society](https://github.com/percw/water_and_society). British sectoral output, population and capital stock are from the Bank of England's *A Millennium of Macroeconomic Data for the UK* (Thomas and Dimsdale 2017), which reproduces Broadberry et al. (2015). Cross-country GDP per head and population are from the Maddison Project Database 2023 (Bolt and van Zanden 2025). Installed horsepower benchmarks are from Kanefsky (1979) as reported in Crafts (2004). Canal completion years and lengths are compiled from published reference tables and parliamentary authorisation years are parsed from the digitised text of Priestley (1831); both series are included in the repository with their construction scripts. Word and phrase frequencies are from the Google Books Ngram Corpus, British English 2019 edition. A self-contained replication package is available as a supplementary archive.

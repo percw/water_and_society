@@ -65,8 +65,8 @@ Scripts expect the repository layout (`src/`, `data/`); when running from this p
 | Table 3, Figure 2 | regime_analysis §3 | results_regime_v1.txt |
 | Figure 3, §4.3 | mechanism_analysis §8 | results_mechanism_v1.txt, lp_irfs.csv |
 | Table 4 | mechanism_analysis §7 | results_mechanism_v1.txt |
-| Table 5, Figure 5 | mechanism_analysis §10 | results_mechanism_v1.txt, semantic_sequence.csv |
-| Table 6, Figure 4, §4.6 | regime_analysis §1; did_analysis.py | results_regime_v1.txt; results_earlier_version_did.txt |
+| Table 5, Figure 4 | mechanism_analysis §10 | results_mechanism_v1.txt, semantic_sequence.csv |
+| Table 6, Figure 5, §4.6 | regime_analysis §1; did_analysis.py | results_regime_v1.txt; results_earlier_version_did.txt |
 | Table 7 | regime_analysis §4 | results_regime_v1.txt |
 | NLP stock correlation (§4.5) | regime_analysis §5 | results_regime_v1.txt |
 | Mediation (negative result, §3.5) | mechanism_analysis §9 | results_mechanism_v1.txt |
