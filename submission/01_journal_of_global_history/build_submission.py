@@ -583,6 +583,8 @@ def double_space_docx(docx: Path) -> None:
             data = zin.read(item.filename)
             if item.filename == 'word/styles.xml':
                 xml = data.decode('utf8')
+                # headings and title in black: strip colour and theme-colour attributes from all styles
+                xml = _re.sub(r'<w:color [^>]*/>', '', xml)
                 # fonts: replace theme fonts and any explicit rFonts with Times New Roman; 12pt default
                 xml = _re.sub(r'<w:rFonts [^>]*/>', FONT, xml)
                 if '<w:rPrDefault>' in xml:
