@@ -247,6 +247,7 @@ def footnotes_to_sentence_end(text: str) -> str:
         for a, b in protect: rebuilt = rebuilt.replace(b, a)
         new_paras.append(rebuilt)
     body = '\n\n'.join(new_paras)
+    body = re.sub(r' +([;:,.!?])', r'\1', body)
     # merge adjacent markers and renumber sequentially
     counter = [0]; newdefs = []
     def merge(m):
@@ -311,7 +312,7 @@ def convert_to_footnotes(text: str) -> str:
         footnotes.append(f'[^{counter[0]}]: ' + '; '.join(np.rstrip('.') for np in note_parts) + '.')
         return f'[^{counter[0]}]'
 
-    pattern = r"\((?![\$\\])((?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?(?:;\s*(?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?)*)\)"
+    pattern = r"[ \t]*\((?![\$\\])((?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?(?:;\s*(?:[A-Za-z][\w'’\-\.]*[ ,]*)+? \d{4}[a-z]?)*)\)"
     text = re.sub(pattern, repl, text)
     if footnotes:
         text += '\n\n---\n\n' + '\n'.join(footnotes)
