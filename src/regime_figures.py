@@ -79,7 +79,7 @@ fig, ax = plt.subplots(figsize=(10, 4))
 n = lambda s: (s.rolling(5, center=True).mean() / s.rolling(5, center=True).mean().loc[1850]) * 100
 for col, lab, ls, c in [('canal', '“canal”', '-', C['k']), ('coal_by_water', 'coal-by-water bigrams (coal barge, coal wharf, coal boat, canal boat)', '--', C['a']), ('coal_by_steam', 'coal-by-steam bigrams (steam engine, steam power)', ':', C['g'])]:
     s = n(sem[col]).loc[1740:1850]; ax.plot(s.index, s, ls, color=c, lw=1.5, label=lab)
-ax.set_ylim(0, 130); ax.set_ylabel('Frequency, 1850 = 100 (5-year mean)'); ax.legend(loc='upper left'); ax.set_title('Print frequency, 1850 = 100 (five-year mean)', loc='left')
+ax.set_ylim(0, max(n(sem[c]).loc[1740:1850].max() for c in ['canal', 'coal_by_water', 'coal_by_steam']) * 1.08); ax.set_ylabel('Frequency, 1850 = 100 (5-year mean)'); ax.legend(loc='upper left'); ax.set_title('Print frequency, 1850 = 100 (five-year mean)', loc='left')
 fig.tight_layout(); fig.savefig(OUT / 'fig4_semantic_sequence.png'); plt.close(fig)
 
 print('wrote', sorted(p.name for p in OUT.glob('fig*_*.png')))

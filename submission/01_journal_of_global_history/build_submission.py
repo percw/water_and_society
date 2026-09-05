@@ -563,31 +563,40 @@ Sincerely,
 
 
 def double_space_docx(docx: Path) -> None:
-    """JGH asks for double-spaced text. Set line spacing to 480 (= 2.0) in the document defaults
-    and in the body/first-paragraph styles, leaving tables, footnotes and captions untouched."""
+    """JGH: one font, double-spaced body. Sets Times New Roman 12pt everywhere, line spacing 2.0 in the
+    document defaults and body styles, and single spacing for footnotes, tables and captions."""
     import zipfile, shutil, re as _re
+    FONT = '<w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman"/>'
+    def set_spacing(xml, sid, line):
+        pat = _re.compile(r'(<w:style [^>]*w:styleId="%s"[^>]*>)(.*?)(</w:style>)' % sid, _re.S)
+        def fix(m):
+            body = m.group(2)
+            if '<w:pPr>' in body:
+                body = _re.sub(r'(<w:pPr>)(.*?)(</w:pPr>)', lambda mm: mm.group(1) + _re.sub(r'<w:spacing[^>]*/>', '', mm.group(2)) + f'<w:spacing w:after="{120 if line == 240 else 180}" w:line="{line}" w:lineRule="auto"/>' + mm.group(3), body, count=1, flags=_re.S)
+            else:
+                body = _re.sub(r'(<w:name [^>]*/>(?:<w:basedOn [^>]*/>)?(?:<w:next [^>]*/>)?(?:<w:link [^>]*/>)?)', r'\1' + f'<w:pPr><w:spacing w:after="{120 if line == 240 else 180}" w:line="{line}" w:lineRule="auto"/></w:pPr>', body, count=1)
+            return m.group(1) + body + m.group(3)
+        return pat.sub(fix, xml, count=1)
     tmp = docx.with_suffix('.tmp.docx')
     with zipfile.ZipFile(docx) as zin, zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as zout:
         for item in zin.infolist():
             data = zin.read(item.filename)
             if item.filename == 'word/styles.xml':
                 xml = data.decode('utf8')
-                # document defaults
+                # fonts: replace theme fonts and any explicit rFonts with Times New Roman; 12pt default
+                xml = _re.sub(r'<w:rFonts [^>]*/>', FONT, xml)
+                if '<w:rPrDefault>' in xml:
+                    xml = _re.sub(r'<w:rPrDefault>\s*<w:rPr>(.*?)</w:rPr>', lambda m: '<w:rPrDefault><w:rPr>' + FONT + _re.sub(r'<w:rFonts [^>]*/>|<w:sz [^>]*/>|<w:szCs [^>]*/>', '', m.group(1)) + '<w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr>', xml, count=1, flags=_re.S)
+                # default paragraph spacing 2.0
                 if '<w:pPrDefault>' in xml:
                     xml = _re.sub(r'<w:pPrDefault>\s*<w:pPr>', '<w:pPrDefault><w:pPr><w:spacing w:line="480" w:lineRule="auto"/>', xml, count=1)
                     xml = xml.replace('<w:pPrDefault/>', '<w:pPrDefault><w:pPr><w:spacing w:line="480" w:lineRule="auto"/></w:pPr></w:pPrDefault>')
                 else:
                     xml = xml.replace('<w:docDefaults>', '<w:docDefaults><w:pPrDefault><w:pPr><w:spacing w:line="480" w:lineRule="auto"/></w:pPr></w:pPrDefault>', 1)
-                # pandoc body styles carry their own spacing; override line spacing there too
-                for sid in ('BodyText', 'FirstParagraph'):
-                    xml = _re.sub(r'(<w:style [^>]*w:styleId="%s"[^>]*>.*?<w:pPr>)(.*?)(</w:pPr>)' % sid,
-                                  lambda m: m.group(1) + _re.sub(r'<w:spacing[^>]*/>', '', m.group(2)) + '<w:spacing w:before="0" w:after="180" w:line="480" w:lineRule="auto"/>' + m.group(3),
-                                  xml, count=1, flags=_re.DOTALL)
-                # footnotes and tables stay single-spaced
-                for sid in ('FootnoteText', 'Compact', 'TableCaption', 'ImageCaption', 'Caption'):
-                    xml = _re.sub(r'(<w:style [^>]*w:styleId="%s"[^>]*>.*?<w:pPr>)(.*?)(</w:pPr>)' % sid,
-                                  lambda m: m.group(1) + _re.sub(r'<w:spacing[^>]*/>', '', m.group(2)) + '<w:spacing w:line="240" w:lineRule="auto"/>' + m.group(3),
-                                  xml, count=1, flags=_re.DOTALL)
+                for sid in ('BodyText', 'FirstParagraph', 'Normal'):
+                    xml = set_spacing(xml, sid, 480)
+                for sid in ('FootnoteText', 'Footnote', 'Compact', 'TableCaption', 'ImageCaption', 'Caption', 'CaptionedFigure', 'Figure'):
+                    xml = set_spacing(xml, sid, 240)
                 data = xml.encode('utf8')
             zout.writestr(item, data)
     shutil.move(tmp, docx)
