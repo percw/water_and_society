@@ -56,7 +56,7 @@ BIBLIOGRAPHY = {
     'Newey and West 1987': 'Whitney K. Newey and Kenneth D. West, “A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix”, _Econometrica_ 55, no. 3 (1987): 703–708.',
     'Pechenick et al. 2015': 'Eitan Adam Pechenick, Christopher M. Danforth, and Peter Sheridan Dodds, “Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution”, _PLOS ONE_ 10, no. 10 (2015): e0137041.',
     'Pomeranz 2000': 'Kenneth Pomeranz, _The Great Divergence: China, Europe, and the Making of the Modern World Economy_ (Princeton: Princeton University Press, 2000).',
-    'Priestley 1831': 'Joseph Priestley, _Historical Account of the Navigable Rivers, Canals, and Railways, throughout Great Britain_ (London: Longman, Rees, Orme, Brown and Green, 1831).',
+    'Priestley 1831': 'Joseph Priestley, _Historical Account of the Navigable Rivers, Canals, and Railways, throughout Great Britain_ (Longman, Rees, Orme, Brown and Green, 1831).',
     'Rambachan and Roth 2023': 'Ashesh Rambachan and Jonathan Roth, “A More Credible Approach to Parallel Trends”, _Review of Economic Studies_ 90, no. 5 (2023): 2555–2591.',
     'Roth et al. 2023': "Jonathan Roth, Pedro H. C. Sant'Anna, Alyssa Bilinski, and John Poe, “What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature”, _Journal of Econometrics_ 235, no. 2 (2023): 2218–2244.",
     'Szostak 1991': "Rick Szostak, _The Role of Transportation in the Industrial Revolution: A Comparison of England and France_ (Montreal: McGill-Queen's University Press, 1991).",
@@ -148,6 +148,8 @@ def load_config() -> dict:
         "email": parser.get("author", "email", fallback="[email]"),
         "orcid": parser.get("author", "orcid", fallback=""),
         "biography": parser.get("author", "biography", fallback="[AUTHOR BIOGRAPHY, max 100 words]"),
+        "postal_address": parser.get("author", "postal_address", fallback="[POSTAL ADDRESS]"),
+        "ai_declaration": parser.get("declarations", "ai_declaration", fallback=""),
         "date": parser.get("submission", "date", fallback="today"),
         "acknowledgments": parser.get("declarations", "acknowledgments", fallback=""),
         "funding": parser.get("declarations", "funding", fallback="This research received no external funding."),
@@ -166,6 +168,122 @@ def load_config() -> dict:
     return cfg
 
 
+# ── JGH house-style transforms ───────────────────────────────────────────────
+def _elide_pages(m):
+    a, b = m.group(1), m.group(2)
+    if len(a) != len(b) or len(a) < 3:
+        return m.group(0)
+    # Chicago/JGH: 241–5, 112–13, 1191–228, 2218–44
+    i = 0
+    while i < len(a) - 1 and a[i] == b[i]:
+        i += 1
+    if a[-2] == '1' and len(a) - i > 2:  # keep two digits for 10–19 within a hundred
+        i = len(a) - 2
+    short = b[i:]
+    if len(short) == 1 and a[-2] == '1':
+        short = b[-2:]
+    return f'{a}–{short}'
+
+
+def chicago18(ref: str) -> str:
+    """Chicago 18 / JGH: no place of publication, single curly quotes, elided page ranges, 'PhD diss.'"""
+    ref = re.sub(r'\(([A-Z][A-Za-z .\-]+?): ((?:[A-Z][^,()]*?)(?:Press|Publishers|Verso|CNR-ISSM|Charles|Green|Yale University Press)[^,()]*?), (\d{4})\)', r'(\2, \3)', ref)
+    ref = re.sub(r'\(([A-Z][A-Za-z .\-]+?): ([^,()]+?), (\d{4})\)', r'(\2, \3)', ref)
+    ref = ref.replace('“', '‘').replace('”', '’')
+    ref = ref.replace('PhD thesis', 'PhD diss.')
+    ref = re.sub(r'(\d{2,4})–(\d{2,4})(?=[.,;)]|$)', _elide_pages, ref)
+    return ref
+
+
+def house_style(text: str) -> str:
+    """Body-text conventions: X% not X per cent; 1760–80 within a century; single curly quotes."""
+    text = re.sub(r'(\d[\d,.]*)\s+per cent', r'\1%', text)
+    text = text.replace('the 7 per cent level', 'the 7% level').replace('at 5 per cent', 'at 5%')
+    text = re.sub(r'\b(1[6-9])(\d\d)–\1(\d\d)\b', r'\1\2–\3', text)
+    out = []
+    for line in text.split('\n'):
+        if line.startswith('[^') or line.startswith('<') or line.startswith('!['):
+            out.append(line); continue
+        line = line.replace('“', '‘').replace('”', '’')
+        # straight double quotes -> alternating single curly quotes
+        parts = line.split('"')
+        if len(parts) > 1:
+            line = ''.join(part + (('‘' if i % 2 == 0 else '’') if i < len(parts) - 1 else '') for i, part in enumerate(parts))
+        out.append(line)
+    return '\n'.join(out)
+
+
+def footnotes_to_sentence_end(text: str) -> str:
+    """Move [^n] markers to the end of their sentence; merge markers that land together; renumber."""
+    body, sep, defs = text.partition('\n\n---\n\n[^')
+    if not sep:
+        return text
+    defs = '[^' + defs
+    fn = dict(re.findall(r'^\[\^(\d+)\]: (.*)$', defs, flags=re.M))
+    marker = re.compile(r'\[\^(\d+)\]')
+    sent_end = re.compile(r'[.!?](?=[’”)\]]*(?:\s+[A-Z‘“(\[]|\s*$))')
+    protect = [('et al.', 'et al⁠'), ('no.', 'no⁠'), ('vol.', 'vol⁠'), ('p.', 'p⁠'), ('pp.', 'pp⁠'), ('c.', 'c⁠'), ('e.g.', 'e⁠g⁠'), ('i.e.', 'i⁠e⁠')]
+    paras = body.split('\n\n')
+    new_paras = []
+    for para in paras:
+        if para.startswith(('#', '|', '<', '![', '*', '**Table', '[Table', '[Figure', '---')) or not marker.search(para):
+            new_paras.append(para); continue
+        for a, b in protect: para = para.replace(a, b)
+        # strip markers, remember their positions
+        pos = []; clean = ''; last = 0
+        for m in marker.finditer(para):
+            clean += para[last:m.start()]; pos.append((len(clean), m.group(1))); last = m.end()
+        clean += para[last:]
+        ends = [m.end() for m in sent_end.finditer(clean)]
+        groups = {}
+        for p_, n in pos:
+            # marker already just after sentence end?
+            target = next((e for e in ends if e >= p_ - 1), len(clean))
+            groups.setdefault(target, []).append(n)
+        rebuilt = ''; last = 0
+        for target in sorted(groups):
+            rebuilt += clean[last:target] + ''.join(f'[^{n}]' for n in groups[target]); last = target
+        rebuilt += clean[last:]
+        for a, b in protect: rebuilt = rebuilt.replace(b, a)
+        new_paras.append(rebuilt)
+    body = '\n\n'.join(new_paras)
+    # merge adjacent markers and renumber sequentially
+    counter = [0]; newdefs = []
+    def merge(m):
+        nums = re.findall(r'\d+', m.group(0)); counter[0] += 1
+        texts = [fn.get(n, '').rstrip('.') for n in nums]
+        newdefs.append(f'[^{counter[0]}]: ' + '; '.join(t for t in texts if t) + '.')
+        return f'[^{counter[0]}]'
+    body = re.sub(r'(?:\[\^\d+\])+', merge, body)
+    return body + '\n\n---\n\n' + '\n'.join(newdefs)
+
+
+def tables_to_end(text: str) -> str:
+    """Move markdown tables (bold heading, table, italic note) to a Tables section with placeholders."""
+    pat = re.compile(r'(\*\*Table (\d+):[^\n]*\*\*\n\n(?:\|[^\n]*\n)+(?:\n\*[^\n]*\*\n)?)')
+    tables = []
+    def repl(m):
+        tables.append(m.group(1).rstrip('\n')); return f'[Table {m.group(2)} about here]\n'
+    text = pat.sub(repl, text)
+    if tables:
+        text += '\n\n# Tables\n\n' + '\n\n'.join(tables) + '\n'
+    return text
+
+
+def figures_to_end(text: str) -> str:
+    """Replace inline figure blocks with placeholders + captions; collect figures at the end."""
+    pat = re.compile(r'<div align="center">\s*<img src="([^"]+)" alt="Figure (\d+)[^"]*"[^>]*>\s*<br>\s*<em>(.*?)</em>\s*</div>', flags=re.S)
+    figs = []
+    def repl(m):
+        src, n, cap = m.group(1), m.group(2), m.group(3).strip()
+        figs.append(f'<img src="{src}" alt="Figure {n}" width="800">\n\n*{cap}*')
+        return f'[Figure {n} about here]\n\n*{cap}*'
+    text = pat.sub(repl, text)
+    if figs:
+        text += '\n\n# Figures\n\n' + '\n\n'.join(figs) + '\n'
+    return text
+
+
 # ── Manuscript ───────────────────────────────────────────────────────────────
 def convert_to_footnotes(text: str) -> str:
     footnotes = []
@@ -181,6 +299,7 @@ def convert_to_footnotes(text: str) -> str:
         for part in parts:
             ref = BIBLIOGRAPHY.get(part)
             if ref:
+                ref = chicago18(ref)
                 if part in seen:
                     note_parts.append(SHORT_TITLES.get(part, part) + '.')
                 else:
@@ -273,12 +392,19 @@ def build_manuscript() -> Path:
         sys.exit(1)
 
     text = source.read_text()
+    text = re.sub(r'\n\n---\n\n', '\n\n', text)
     # Strip references section
     text = re.sub(r'\n# 8\. References.*?(?=\n# |\Z)', '', text, flags=re.DOTALL)
     # JGH house style: unnumbered headings
     text = re.sub(r'^(#{1,3}) \d+(?:\.\d+)*\.? +', r'\1 ', text, flags=re.M)
-    # Convert citations
+    # Tables and figures to the end with placeholders (JGH)
+    text = tables_to_end(text)
+    text = figures_to_end(text)
+    # Convert citations, then move markers to sentence ends and merge
     text = convert_to_footnotes(text)
+    text = footnotes_to_sentence_end(text)
+    # House style: %, year spans, single curly quotes
+    text = house_style(text)
     # Anonymize
     text = text.replace('https://github.com/percw/water_and_society', '[REPOSITORY URL REDACTED FOR REVIEW]')
     text = text.replace('percw/water_and_society', '[REPOSITORY REDACTED]')
@@ -323,6 +449,7 @@ def build_title_page(cfg: dict) -> Path:
 **{cfg['author_name']}**
 {affil_line}
 {loc_line}
+Postal address: {cfg['postal_address']}
 Email: {cfg['email']}
 {orcid}
 
@@ -353,13 +480,15 @@ Email: {cfg['email']}
 
 ---
 
-## Acknowledgments
+## Acknowledgements
 
 {ack}
 
+{cfg['ai_declaration']}
+
 ---
 
-## Funding Statement
+## Financial Support
 
 {cfg['funding']}
 
@@ -410,6 +539,8 @@ I am pleased to submit the manuscript **"Water Before Steam: Canals, Coal and th
 The paper tests, on annual British data for 1700–1870, the argument Terje Tvedt made in this journal in 2010: that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. It finds two growth regimes, an aggregate acceleration in 1775–1792 that coincided with the building of the canal network and was absorbed by population, and a per-capita acceleration from 1818 that belongs to steam; it shows that canal mileage predicts coal output but not income per head; and it shows, in the language of the Google Books British corpus, that coal travelled by barge a generation before it burned in engines.
 
 **Why this journal.** The paper engages Tvedt directly, adds the comparative benchmarks his argument invites (the Netherlands, Belgium and China) with an explicit account of what a British time series can and cannot say about them, and contains a methodological result for historians who use cross-country difference-in-differences across the Revolutionary and Napoleonic wars: the apparent British take-off of 1807 in such designs is the collapse of the continental control group.
+
+**Use of AI tools.** {cfg['ai_declaration'].replace('Use of AI tools: the author', 'The author', 1)}
 
 **Disclosure for double-anonymous review.** An earlier and substantially different version of this analysis, which reported the cross-country difference-in-differences that the present paper withdraws, has been public in a code repository since spring 2026. The manuscript has been anonymised, but referees who search for the topic may encounter that repository. All figures are the author's own, generated from public data.
 

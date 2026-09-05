@@ -95,7 +95,7 @@ Our questions are about timing, sequence and incidence within one national econo
 
 **Cross-country.** We estimate the two-way fixed-effects difference-in-differences on Maddison GDP per head, in levels and logs, with 1761 as treatment date, for three control groups and three sample windows, with its ten-year event-study version, in order to show what it measures; Newey–West errors on a stacked panel are not a valid treatment of cross-sectional dependence, so we report clustered and collapsed alternatives beside them. We then compare peak-to-trough drawdowns in GDP per head over 1785–1815 by country and report growth between the Maddison benchmark years.
 
-All code, the tidy data files, the Priestley parsing rules and the horsepower interpolation are in the replication repository named in the data availability statement; the mediation decomposition we also estimated, which is not identified once a quadratic trend is absorbed, is reported there as a negative result.
+All code, the tidy data files, the Priestley parsing rules and the horsepower interpolation are in the replication repository named in the data availability statement; the code and the text were prepared with the assistance of an AI tool under the author's direction, as declared in the acknowledgements; the mediation decomposition we also estimated, which is not identified once a quadratic trend is absorbed, is reported there as a negative result.
 
 
 ---
