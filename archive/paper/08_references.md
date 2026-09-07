@@ -34,6 +34,8 @@ de Vries, Jan, and Ad van der Woude. 1997. *The First Modern Economy: Success, F
 
 de Zeeuw, J. W. 1978. "Peat and the Dutch Golden Age: The Historical Meaning of Energy-Attainability." *A.A.G. Bijdragen* 21: 3–31.
 
+Elvin, Mark. 1973. *The Pattern of the Chinese Past: A Social and Economic Interpretation*. Stanford: Stanford University Press.
+
 Fernihough, Alan, and Kevin Hjortshøj O'Rourke. 2021. "Coal and the European Industrial Revolution." *The Economic Journal* 131 (635): 1135–1149.
 
 Flinn, Michael W. 1984. *The History of the British Coal Industry, Volume 2: 1700–1830, The Industrial Revolution*. Oxford: Clarendon Press.
@@ -61,6 +63,8 @@ Michel, Jean-Baptiste, Yuan Kui Shen, Aviva Presser Aiden, Adrian Veres, Matthew
 Mokyr, Joel. 1976. *Industrialization in the Low Countries, 1795–1850*. New Haven: Yale University Press.
 
 Newey, Whitney K., and Kenneth D. West. 1987. "A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix." *Econometrica* 55 (3): 703–708.
+
+Parthasarathi, Prasannan. 2011. *Why Europe Grew Rich and Asia Did Not: Global Economic Divergence, 1600–1850*. Cambridge: Cambridge University Press.
 
 Pechenick, Eitan Adam, Christopher M. Danforth, and Peter Sheridan Dodds. 2015. "Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution." *PLOS ONE* 10 (10): e0137041.
 

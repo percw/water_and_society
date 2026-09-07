@@ -4,11 +4,11 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**Canals, coal and the precondition for Britain's steam economy, 1700–1870.**
+**Canals, coal and the making of Britain's fossil economy, 1700–1870, and why the Netherlands, China and India did not follow.**
 
 📖 [Compiled manuscript](archive/paper/compiled_manuscript.md) · 🧭 [Research strategy](docs/strategy_v2.md) · 📝 [Analysis memo, 3 September 2026](docs/memos/2026-09-03_canals_before_steam.html)
 
-> Britain's industrial take-off is usually dated by steam. This project dates it by water. Using annual British sectoral output (Broadberry et al. 2015), a new year-by-year series of canal mileage, installed steam and water horsepower, the Maddison Project Database 2023 and the Google Books British corpus, we show that Britain passed through **two growth regimes**: an aggregate acceleration in 1775–1792 that ran on water and was absorbed by population, and a per-capita acceleration after 1818 that ran on steam. Canal mileage predicts coal output and population, not income per head. Steam raises income per head only after 1830. Water infrastructure was the precondition, in Tvedt's (2010) sense, that made a coal economy possible.
+> Why did the fossil economy begin in Britain rather than in the Netherlands, which had Europe's densest waterways, or China, which had coal and rivers in abundance? Tvedt (2010) answered that Britain alone could engineer its water into a system that delivered coal cheaply: water was the *precondition* for a coal economy. That is a claim about sequence, and Britain is the one case where it can be tested on annual data. Using British sectoral output (Broadberry et al. 2015), a new year-by-year series of canal mileage, installed steam and water horsepower and the Google Books British corpus, we find **two growth regimes**: an aggregate acceleration in 1775–1792 that ran on water and was absorbed by population, and a per-capita acceleration after 1818 that ran on steam. Canal mileage predicts coal output and population, not income per head. At the Maddison benchmarks the Dutch, Belgian, Chinese and Indian cases follow the same rule: water without coal, or coal without engineered water, did not industrialise.
 
 <div align="center">
   <img src="data/fig1_two_regimes.png" alt="Figure 1: Britain's two growth regimes" width="900">
@@ -23,7 +23,7 @@
 3. **The chain runs water → coal → steam → income.** Local projections: canal stock raises coal within a decade and installed steam horsepower over 15–20 years; steam horsepower raises income per head only on samples extending past 1830. Steam overtook water and wind as a power source in 1833.
 4. **Print agrees.** In the British corpus "coal barge" (1781) and "coal wharf" (1800) reach a quarter of their 1850 frequency a generation before "steam engine" (1808) and "steam power" (1826). The frequency of "canal" tracks the physical canal stock at r = 0.91 and the building rate not at all.
 5. **The cross-country DiD was measuring the Napoleonic wars.** The 1761 treatment effect against France and the Netherlands (β₃ = 1,251, HAC p = 0.042) reproduces exactly and breaks in 1807, when Dutch income per head fell 44 per cent under French occupation. Britain fell 1.4 per cent. We withdraw the earlier estimate and its 47 per cent counterfactual and keep the analysis as a methodological caution.
-6. **The aggregate divergence was pre-steam.** Between the Maddison benchmark years 1700 and 1820 Britain's total output grew 240 per cent, twice Germany's, while steam supplied at most a fifth of its power. The Netherlands, with Europe's densest waterways and no coal, grew 9 per cent.
+6. **The comparative cases follow the rule.** Between the Maddison benchmark years 1700 and 1820 Britain's total output grew 240 per cent, twice Germany's, while steam supplied at most a fifth of its power. The Netherlands, with Europe's densest waterways, no coal and no falling water, grew 9 per cent. Belgium, whose coalfield canals opened in 1818 and 1832, grew 8 per cent per head before 1820 and 82 per cent in 1820–70, more than Britain. China, with coal a thousand kilometres from the Jiangnan core, added 176 per cent to its population and lost income per head. None of these is a test; all are consistent with the British sequence.
 
 ---
 

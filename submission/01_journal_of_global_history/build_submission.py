@@ -45,6 +45,7 @@ BIBLIOGRAPHY = {
     'Crafts and Harley 1992': 'Nicholas F. R. Crafts and C. Knick Harley, “Output Growth and the British Industrial Revolution: A Restatement of the Crafts–Harley View”, _Economic History Review_ 45, no. 4 (1992): 703–730.',
     'Crouzet 1964': 'François Crouzet, “Wars, Blockade, and Economic Change in Europe, 1792–1815”, _Journal of Economic History_ 24, no. 4 (1964): 567–588.',
     'de Vries 1978': 'Jan de Vries, _Barges and Capitalism: Passenger Transportation in the Dutch Economy, 1632–1839_ (Utrecht: HES Publishers, 1978).',
+    'Elvin 1973': 'Mark Elvin, _The Pattern of the Chinese Past: A Social and Economic Interpretation_ (Stanford: Stanford University Press, 1973).',
     "Fernihough and O'Rourke 2021": "Alan Fernihough and Kevin Hjortshøj O'Rourke, “Coal and the European Industrial Revolution”, _Economic Journal_ 131, no. 635 (2021): 1135–1149.",
     'Hadfield 1984': 'Charles Hadfield, _British Canals: An Illustrated History_, 7th ed. (Newton Abbot: David and Charles, 1984).',
     'Jordà 2005': 'Òscar Jordà, “Estimation and Inference of Impulse Responses by Local Projections”, _American Economic Review_ 95, no. 1 (2005): 161–182.',
@@ -54,6 +55,7 @@ BIBLIOGRAPHY = {
     'Malm 2016': 'Andreas Malm, _Fossil Capital: The Rise of Steam Power and the Roots of Global Warming_ (London: Verso, 2016).',
     'Michel et al. 2011': 'Jean-Baptiste Michel et al., “Quantitative Analysis of Culture Using Millions of Digitized Books”, _Science_ 331, no. 6014 (2011): 176–182.',
     'Newey and West 1987': 'Whitney K. Newey and Kenneth D. West, “A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix”, _Econometrica_ 55, no. 3 (1987): 703–708.',
+    'Parthasarathi 2011': 'Prasannan Parthasarathi, _Why Europe Grew Rich and Asia Did Not: Global Economic Divergence, 1600–1850_ (Cambridge: Cambridge University Press, 2011).',
     'Pechenick et al. 2015': 'Eitan Adam Pechenick, Christopher M. Danforth, and Peter Sheridan Dodds, “Characterizing the Google Books Corpus: Strong Limits to Inferences of Socio-Cultural and Linguistic Evolution”, _PLOS ONE_ 10, no. 10 (2015): e0137041.',
     'Pomeranz 2000': 'Kenneth Pomeranz, _The Great Divergence: China, Europe, and the Making of the Modern World Economy_ (Princeton: Princeton University Press, 2000).',
     'Priestley 1831': 'Joseph Priestley, _Historical Account of the Navigable Rivers, Canals, and Railways, throughout Great Britain_ (Longman, Rees, Orme, Brown and Green, 1831).',
@@ -98,6 +100,7 @@ SHORT_TITLES = {
     'de Vries 1978': 'de Vries, _Barges and Capitalism_',
     'de Vries and van der Woude 1997': 'de Vries and van der Woude, _First Modern Economy_',
     'de Zeeuw 1978': 'de Zeeuw, “Peat and the Dutch Golden Age”',
+    'Elvin 1973': 'Elvin, _Pattern of the Chinese Past_',
     "Fernihough and O'Rourke 2021": "Fernihough and O'Rourke, “Coal and the European Industrial Revolution”",
     'Flinn 1984': 'Flinn, _British Coal Industry_, vol. 2',
     'Hadfield 1984': 'Hadfield, _British Canals_',
@@ -112,6 +115,7 @@ SHORT_TITLES = {
     'Michel et al. 2011': 'Michel et al., “Quantitative Analysis of Culture”',
     'Mokyr 1976': 'Mokyr, _Industrialization in the Low Countries_',
     'Newey and West 1987': 'Newey and West, “Simple, Positive Semi-Definite”',
+    'Parthasarathi 2011': 'Parthasarathi, _Why Europe Grew Rich_',
     'Pechenick et al. 2015': 'Pechenick, Danforth, and Dodds, “Characterizing the Google Books Corpus”',
     'Pollard 1980': 'Pollard, “New Estimate”',
     'Pomeranz 2000': 'Pomeranz, _Great Divergence_',
@@ -537,15 +541,15 @@ Dear Editors,
 
 I am pleased to submit the manuscript **"Water Before Steam: Canals, Coal and the Making of Britain's Fossil Economy, 1700–1870"** for consideration as an original research article in the *Journal of Global History*.
 
-The paper tests, on annual British data for 1700–1870, the argument Terje Tvedt made in this journal in 2010: that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. It finds two growth regimes, an aggregate acceleration in 1775–1792 that coincided with the building of the canal network and was absorbed by population, and a per-capita acceleration from 1818 that belongs to steam; it shows that canal mileage predicts coal output but not income per head; and it shows, in the language of the Google Books British corpus, that coal travelled by barge a generation before it burned in engines.
+The paper takes up a question first posed in this journal: Terje Tvedt's "Why England and not China and India?" (2010), which answered that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. A precondition is a claim about sequence, and Britain is the one economy where sequence can be tested on annual data. The paper does so for 1700–1870 and finds two growth regimes: an aggregate acceleration in 1775–1792 that coincided with the building of the canal network and was absorbed by population, and a per-capita acceleration from 1818 that belongs to steam. Canal mileage predicts coal output but not income per head, and in the Google Books British corpus coal travels by barge a generation before it burns in engines. The British result is then used as a rule against which the Netherlands, Belgium, China and India are read at the Maddison benchmark years: economies with engineered water and no coal, or coal and no engineered water, did not leave the organic regime; the two that had both, Britain and then Belgium, did, in the order the precondition predicts.
 
-**Why this journal.** The paper engages Tvedt directly, adds the comparative benchmarks his argument invites (the Netherlands, Belgium and China) with an explicit account of what a British time series can and cannot say about them, and contains a methodological result for historians who use cross-country difference-in-differences across the Revolutionary and Napoleonic wars: the apparent British take-off of 1807 in such designs is the collapse of the continental control group.
+**Why this journal.** The paper answers a question the journal itself raised, and it does so in the journal's idiom: a global comparative thesis, tested where the data allow and then carried back to the comparison, with an explicit account of what a national time series can and cannot say about other economies. It also contains a methodological result for historians who use cross-country difference-in-differences across the Revolutionary and Napoleonic wars: the apparent British take-off of 1807 in such designs is the collapse of the continental control group.
 
 **Use of AI tools.** {cfg['ai_declaration'].replace('Use of AI tools: the author', 'The author', 1)}
 
 **Disclosure for double-anonymous review.** An earlier and substantially different version of this analysis, which reported the cross-country difference-in-differences that the present paper withdraws, has been public in a code repository since spring 2026. The manuscript has been anonymised, but referees who search for the topic may encounter that repository. All figures are the author's own, generated from public data.
 
-The manuscript is approximately 12,000 words including footnotes, tables and captions, with five figures and seven tables. A full replication package (data, code and documentation) is available and the repository URL is given on the title page.
+The manuscript is within the journal's limit of 12,500 words including footnotes, tables and captions, with five figures and seven tables. A full replication package (data, code and documentation) is available and the repository URL is given on the title page.
 
 This manuscript has not been submitted to or published in any other journal. {cfg['competing_interests']} {cfg['funding']}
 
