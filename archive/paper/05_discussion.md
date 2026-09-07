@@ -26,7 +26,7 @@ What the rule does not do is explain why Britain matched the two when it did. Th
 
 ## 5.5 A caution for historical difference-in-differences
 
-The cross-country result is methodological. In the long eighteenth century the control group went to war on its own territory and the treatment group did not, so a comparison spanning 1790–1815 attributes the difference to whatever the British treatment happens to be, whether canals, enclosure or the Bank of England. The remedies are the ones applied above: locate the break before interpreting the coefficient, examine the controls' own series, and prefer within-country evidence where the treatment is national. The estimator is not at fault; the history is (Roth et al. 2023).
+The cross-country result is methodological. In the long eighteenth century the control group went to war on its own territory and the treatment group did not, so a comparison spanning 1790–1815 attributes the difference to whatever the British treatment happens to be. The remedies are the ones applied above: locate the break before interpreting the coefficient, examine the controls' own series, and prefer within-country evidence where the treatment is national. The estimator is not at fault; the history is (Roth et al. 2023).
 
 ## 5.6 What the text can and cannot measure
 
