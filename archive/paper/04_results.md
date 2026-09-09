@@ -46,7 +46,7 @@ The arithmetic of the first regime is simple. Between 1760 and 1815 the growth o
 
 ## 4.2 The canal network as a dose
 
-Figure 2 shows the canal series. Panel (a) gives miles opened per decade: 117 in the 1760s, 353 in the 1770s, a lull of 83 in the 1780s, then 548 in the 1790s, 479 in the 1800s and 344 in the 1810s. Panel (b) gives the cumulative stock, from 218 miles in 1760 to 772 in 1790, 1,487 in 1800 and 2,320 in 1830. Panel (c) gives coal output per head. The correspondence between the two waves and the two steepenings of coal per head is visible to the eye; the regressions ask whether it survives detrending.
+Figure 2 shows the canal series. Panel (a) gives miles opened per decade: 117 in the 1760s, 353 in the 1770s, a lull of 83 in the 1780s, then 548 in the 1790s, 479 in the 1800s and 344 in the 1810s. Panel (b) gives the cumulative stock, from 218 miles in 1760 to 772 in 1790, 1,487 in 1800 and 2,320 in 1830. Panel (c) gives coal output per head. The correspondence between the two waves and the two steepenings of coal per head is visible; the regressions ask whether it survives detrending.
 
 <div align="center">
   <img src="../../data/fig2_canal_dose.png" alt="Figure 2: The canal network and coal" width="800">
@@ -136,7 +136,7 @@ If coal moved by water before it burned in engines, the language of the period s
 
 The ordering does not depend on the smoothing or the reference year. Across three-, five- and nine-year windows and with 1830 or 1850 as reference, "coal barge" crosses a quarter of its reference level in 1780–1781, "canal" in 1763–1766, "steam engine" in 1807–1809 and "steam power" in 1822–1826; the coal-by-water group crosses between 1785 and 1801 and the coal-by-steam group between 1814 and 1819 in every combination. "Coal wharf" is the one sensitive term, crossing in 1776 or 1800 depending on the reference, and in both cases before steam. Read as decades, the order is stable.
 
-The corpus also tells us what kind of thing the infrastructure vocabulary measures. The frequency of "canal" correlates at 0.91 with the cumulative mileage of canals in existence over 1740–1850 and at −0.04 with the mileage opened in the surrounding decade; linearly detrended, the first correlation falls to 0.23, and in first differences to 0.16. Print records the level of the network, which is written about every year it exists, not the rate of building. The vocabulary index is a fair proxy for infrastructure in place and a poor one for investment, and we use it only in the first sense.
+The corpus also tells us what kind of thing the infrastructure vocabulary measures. The frequency of "canal" correlates at 0.91 with the cumulative mileage of canals in existence over 1740–1850 and at −0.04 with the mileage opened in the surrounding decade; linearly detrended, the first correlation falls to 0.23, and in first differences to 0.16. Print records the level of the network, which is written about every year it exists, not the rate of building. We use it only in the first sense.
 
 ## 4.6 The comparative cases: water without coal, coal without water
 

@@ -70,6 +70,8 @@ Pechenick, Eitan Adam, Christopher M. Danforth, and Peter Sheridan Dodds. 2015. 
 
 Pollard, Sidney. 1980. "A New Estimate of British Coal Production, 1750–1850." *Economic History Review* 33 (2): 212–235.
 
+Satchell, Max. 2017. "Navigable Waterways and the Economy of England and Wales, 1600–1835." Cambridge Group for the History of Population and Social Structure, Online Historical Atlas of Transport.
+
 Pomeranz, Kenneth. 2000. *The Great Divergence: China, Europe, and the Making of the Modern World Economy*. Princeton: Princeton University Press.
 
 Priestley, Joseph. 1831. *Historical Account of the Navigable Rivers, Canals, and Railways, throughout Great Britain*. London: Longman, Rees, Orme, Brown and Green.

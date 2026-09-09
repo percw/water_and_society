@@ -12,7 +12,7 @@ Every series in the paper trends. The level regressions in Table 3 are exposed t
 
 ## 6.3 The canal series is provisional
 
-The mileage series is built from a published reference table of 155 canals by completion year. It omits river navigations improved before 1700 and minor branches, and it dates staged openings to their completion. Priestley's authorisation dates corroborate the two waves independently, but they were recovered by optical character recognition from an 1831 text and only 152 of 325 entries yielded a parseable year. A definitive series would come from the Cambridge Group's *Inland Waterways of England and Wales, 1600–1948* dataset. Our magnitudes per thousand miles should be read with that in mind; the timing is less fragile than the coefficients.
+The mileage series is built from a published reference table of 155 canals by completion year. It omits river navigations improved before 1700 and minor branches, and it dates staged openings to their completion. Priestley's authorisation dates corroborate the two waves independently, but they were recovered by optical character recognition from an 1831 text and only 152 of 325 entries yielded a parseable year. It excludes the Scottish canals, some 150 miles by 1830, against output series for Great Britain. A definitive series would come from the Cambridge Group's sectional opening dates, which are not publicly deposited (Satchell 2017). Our magnitudes per thousand miles should be read with that in mind; the timing is less fragile.
 
 ## 6.4 Steam and water horsepower are interpolated
 
