@@ -199,6 +199,8 @@ p {
 /* ── Tables ────────────────────────────────────────────────────── */
 table {
     width: 100%;
+    max-width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
     margin: 16pt 0 20pt 0;
     font-size: 9.5pt;
@@ -213,16 +215,20 @@ thead {
 thead th {
     font-family: 'Source Sans 3', sans-serif;
     font-weight: 600;
-    padding: 6pt 8pt;
+    padding: 6pt 6pt;
     text-align: left;
     color: #333;
     border-bottom: 2pt solid #333;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
 }
 
 tbody td {
-    padding: 4pt 8pt;
+    padding: 4pt 6pt;
     border-bottom: 0.5pt solid #ddd;
+    overflow-wrap: break-word;
+    hyphens: none;
 }
 
 tbody tr:last-child td {

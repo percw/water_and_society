@@ -612,6 +612,20 @@ def double_space_docx(docx: Path) -> None:
     shutil.move(tmp, docx)
 
 
+def blacken_docx(docx: Path) -> None:
+    """JGH: all headings in black. Pandoc's default styles colour Heading1/2 with the
+    Office accent1 theme colour; strip every w:color so headings and links print black."""
+    import zipfile, shutil, re as _re
+    tmp = docx.with_suffix('.tmp.docx')
+    with zipfile.ZipFile(docx) as zin, zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+            if item.filename in ('word/styles.xml', 'word/document.xml'):
+                data = _re.sub(r'<w:color [^>]*/>', '', data.decode('utf8')).encode('utf8')
+            zout.writestr(item, data)
+    shutil.move(tmp, docx)
+
+
 # ── DOCX ─────────────────────────────────────────────────────────────────────
 def to_docx(md_path: Path) -> Path:
     docx = md_path.with_suffix('.docx')
@@ -620,6 +634,8 @@ def to_docx(md_path: Path) -> Path:
                        check=True, capture_output=True)
         if md_path.name.startswith('manuscript'):
             double_space_docx(docx)
+        else:
+            blacken_docx(docx)
         kb = docx.stat().st_size // 1024
         print(f"  ✅ Word export:   {docx.name}  ({kb} KB)")
         return docx
