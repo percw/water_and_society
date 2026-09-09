@@ -672,7 +672,7 @@ def main():
     print("    1. manuscript_jgh.docx")
     print("    2. title_page.docx        (editors only)")
     print("    3. cover_letter.docx")
-    print("    4. data/fig1_two_regimes.png … data/fig5_semantic_sequence.png (five figures)")
+    print("    4. data/fig1_two_regimes.png … data/fig5_war_confound.png (five figures)")
     print()
 
 
