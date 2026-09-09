@@ -474,10 +474,11 @@ Email: {cfg['email']}
 2. Canals
 3. Coal
 4. Water infrastructure
-5. Transport revolution
-6. Organic economy
-7. Growth regimes
-8. Great Divergence
+5. Great Divergence
+6. Netherlands
+7. China
+8. Energy transition
+9. Growth regimes
 
 ---
 
@@ -515,7 +516,7 @@ All code and data required to reproduce the analyses are publicly available at h
 
 ## Word Count
 
-Approximately 12,000 words including footnotes, tables and captions (JGH limit 12,500).
+12,493 words including footnotes, tables and captions (JGH limit 12,500).
 """
     out = SCRIPT_DIR / "title_page.md"
     out.write_text(content)
@@ -543,7 +544,7 @@ Dear Editors,
 
 I am pleased to submit the manuscript **"Water Before Steam: Canals, Coal and the Making of Britain's Fossil Economy, 1700–1870"** for consideration as an original research article in the *Journal of Global History*.
 
-The paper takes up a question first posed in this journal: Terje Tvedt's "Why England and not China and India?" (2010), which answered that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. A precondition is a claim about sequence, and Britain is the one economy where sequence can be tested on annual data. The paper does so for 1700–1870 and finds two growth regimes: an aggregate acceleration in 1775–1792 that coincided with the building of the canal network and was absorbed by population, and a per-capita acceleration from 1818 that belongs to steam. Canal mileage predicts coal output but not income per head, and in the Google Books British corpus coal travels by barge a generation before it burns in engines. The British result is then used as a rule against which the Netherlands, Belgium, China and India are read at the Maddison benchmark years: economies with engineered water and no coal, or coal and no engineered water, did not leave the organic regime; the two that had both, Britain and then Belgium, did, in the order the precondition predicts.
+The paper takes up a question first posed in this journal: Terje Tvedt's "Why England and not China and India?" (2010), which answered that Britain's water systems were the precondition for its coal-based industrialisation rather than a rival to it. A precondition is a claim about sequence, and Britain is where the annual series to test it exist together. The paper does so for 1700–1870 and finds two growth regimes: an aggregate acceleration in 1775–1792 that coincided with the building of the canal network and was absorbed by population, and a per-capita acceleration from 1818 that belongs to steam. Canal mileage predicts coal output but not income per head, and in the Google Books British corpus coal travels by barge a generation before it burns in engines. The British result is then used as a rule against which the Netherlands, Belgium, China and India are read at the Maddison benchmark years: economies with engineered water and no coal, or coal and no engineered water, did not leave the organic regime; the two that had both, Britain and then Belgium, did, in the order the precondition predicts.
 
 **Why this journal.** The paper answers a question the journal itself raised, and it does so in the journal's idiom: a global comparative thesis, tested where the data allow and then carried back to the comparison, with an explicit account of what a national time series can and cannot say about other economies. It also contains a methodological result for historians who use cross-country difference-in-differences across the Revolutionary and Napoleonic wars: the apparent British take-off of 1807 in such designs is the collapse of the continental control group.
 
