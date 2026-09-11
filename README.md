@@ -8,7 +8,7 @@
 
 📖 [Compiled manuscript](archive/paper/compiled_manuscript.md) · 🧭 [Research strategy](docs/strategy_v2.md) · 📝 [Analysis memo, 3 September 2026](docs/memos/2026-09-03_canals_before_steam.html)
 
-> Why did the fossil economy begin in Britain rather than in the Netherlands, which had Europe's densest waterways, or China, which had coal and rivers in abundance? Tvedt (2010) answered that Britain alone could engineer its water into a system that delivered coal cheaply: water was the *precondition* for a coal economy. That is a claim about sequence, and Britain is the one case where it can be tested on annual data. Using British sectoral output (Broadberry et al. 2015), a new year-by-year series of canal mileage, installed steam and water horsepower and the Google Books British corpus, we find **two growth regimes**: an aggregate acceleration in 1775–1792 that ran on water and was absorbed by population, and a per-capita acceleration after 1818 that ran on steam. Canal mileage predicts coal output and population, not income per head. At the Maddison benchmarks the Dutch, Belgian, Chinese and Indian cases follow the same rule: water without coal, or coal without engineered water, did not industrialise.
+> Why did the fossil economy begin in Britain rather than in the Netherlands, which had Europe's densest waterways, or China, which had coal and rivers in abundance? Tvedt (2010) answered that Britain alone could engineer its water into a system that delivered coal cheaply: water was the *precondition* for a coal economy. That is a claim about sequence, and Britain is where the annual series to test it exist together. Using British sectoral output (Broadberry et al. 2015), a new year-by-year series of canal mileage, installed steam and water horsepower and the Google Books British corpus, we find **two growth regimes**: an aggregate acceleration in 1775–1792 that ran on water and was absorbed by population, and a per-capita acceleration after 1818 that ran on steam. Canal mileage predicts coal output and population, not income per head. At the Maddison benchmarks the Dutch, Belgian, Chinese and Indian records are consistent with the rule that neither engineered water nor coal was sufficient alone.
 
 <div align="center">
   <img src="data/fig1_two_regimes.png" alt="Figure 1: Britain's two growth regimes" width="900">
@@ -36,8 +36,12 @@ src/
   regime_analysis.py     War confound, two regimes, canal dose, benchmarks, NLP proxy [new]
   mechanism_analysis.py  Horsepower, local projections, mediation, bigram sequencing [new]
   regime_figures.py      Figures 1–5 for the paper                                  [new]
-  did_analysis.py        Cross-country DiD / event study / placebos (Section 4.6)   [original]
+  did_analysis.py        Cross-country DiD / event study / placebos (Section 4.7)   [original]
   dml_analysis.py        Cross-country DML (replication of the earlier version)     [original]
+  methods/               Monte Carlo: can an accumulating dose identify a sequence? [new]
+    dose_identification.py   Reusable size and power framework for any dose
+    identification_simulation.py  Application 1: the British canal dose (Figure 6)
+    run_boundary.py          Boundary sweep across dose shapes (Figure 7)
 data/
   external/              Tidy CSVs: boe_gb, mpd_panel, uk_canals_wiki, canal_cum_miles,
                          power_hp, priestley_1831_acts, ngram_bigrams_coal_transport
@@ -50,7 +54,22 @@ docs/
   memos/                 Analysis memo (HTML) and its generator
 archive/paper/           Manuscript sections 00–08 and compile_paper.py
 submission/              Journal of Global History build scripts and replication package
+revision/                JGH referee round: what changed since submission, prepared responses
+expansion/               Methods track: when can an accumulating dose identify a sequence?
 ```
+
+## Two tracks after submission
+
+The manuscript was submitted to the *Journal of Global History* on 9 September 2026.
+Work since then is separated into two directories that do not touch the submitted
+package:
+
+- **[`revision/`](revision/)** — the referee round. What the Monte Carlo found about
+  the paper's own specification, which sentence is now too strong, and prepared
+  answers to the likely objections.
+- **[`expansion/`](expansion/)** — the methods question the paper raised but could not
+  answer: how much non-trend variation does an accumulating dose need before a
+  dose-response regression means what it says?
 
 ## Reproduce
 
