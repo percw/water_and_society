@@ -1,5 +1,8 @@
 # Revision track — *Journal of Global History*
 
+> **Desk-rejected on fit, 22 September 2026.** Assessment, new falsification results and the
+> journal plan: [`2026-09-26_jgh_desk_rejection.md`](2026-09-26_jgh_desk_rejection.md).
+
 Submitted 9 September 2026. This directory holds everything needed for the referee
 round: what has been learned since submission, what would change in a revised
 manuscript, and prepared answers to the objections a referee is most likely to raise.

@@ -19,7 +19,7 @@
 ## Findings
 
 1. **Two regimes, not one.** Trend breaks in total output, industry, services, coal, iron and population fall between 1775 and 1792. Income per head breaks in 1818. Agriculture never breaks. Between 1760 and 1815 aggregate growth rose by about one percentage point a year and population growth by about one point; income per head kept growing at 0.3 per cent.
-2. **Canals are a dose that predicts the right things.** Cumulative canal miles (155 canals, 2,967 miles; two waves, 1760–80 and 1790–1816, corroborated by 152 parliamentary authorisations parsed from Priestley 1831) predict coal output over 5–20 years in every specification, including quadratic trend and first differences, and predict population. They predict neither income per head nor agriculture.
+2. **Canals move with the right things — but the dose does not identify timing.** *(Revised 26 Sep 2026: randomisation inference gives p = 0.22 for coal under a quadratic trend, and leads of the stock fit as well as lags; see [`revision/2026-09-26_jgh_desk_rejection.md`](revision/2026-09-26_jgh_desk_rejection.md).)* Cumulative canal miles (155 canals, 2,967 miles; two waves, 1760–80 and 1790–1816, corroborated by 152 parliamentary authorisations parsed from Priestley 1831) predict coal output over 5–20 years in every specification, including quadratic trend and first differences, and predict population. They predict neither income per head nor agriculture.
 3. **The chain runs water → coal → steam → income.** Local projections: canal stock raises coal within a decade and installed steam horsepower over 15–20 years; steam horsepower raises income per head only on samples extending past 1830. Steam overtook water and wind as a power source in 1833.
 4. **Print agrees.** In the British corpus "coal barge" (1781) and "coal wharf" (1800) reach a quarter of their 1850 frequency a generation before "steam engine" (1808) and "steam power" (1826). The frequency of "canal" tracks the physical canal stock at r = 0.91 and the building rate not at all.
 5. **The cross-country DiD was measuring the Napoleonic wars.** The 1761 treatment effect against France and the Netherlands (β₃ = 1,251, HAC p = 0.042) reproduces exactly and breaks in 1807, when Dutch income per head fell 44 per cent under French occupation. Britain fell 1.4 per cent. We withdraw the earlier estimate and its 47 per cent counterfactual and keep the analysis as a methodological caution.
@@ -42,6 +42,7 @@ src/
     dose_identification.py   Reusable size and power framework for any dose
     identification_simulation.py  Application 1: the British canal dose (Figure 6)
     run_boundary.py          Boundary sweep across dose shapes (Figure 7)
+    falsification.py         Timing placebo and randomisation inference for the canal dose
 data/
   external/              Tidy CSVs: boe_gb, mpd_panel, uk_canals_wiki, canal_cum_miles,
                          power_hp, priestley_1831_acts, ngram_bigrams_coal_transport
@@ -60,7 +61,7 @@ expansion/               Methods track: when can an accumulating dose identify a
 
 ## Two tracks after submission
 
-The manuscript was submitted to the *Journal of Global History* on 9 September 2026.
+The manuscript was submitted to the *Journal of Global History* on 9 September 2026 and desk-rejected on fit on 22 September 2026; the corrected working text for the next journal is in `submission/02_journal_of_energy_history/`.
 Work since then is separated into two directories that do not touch the submitted
 package:
 
