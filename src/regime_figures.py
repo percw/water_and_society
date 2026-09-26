@@ -15,7 +15,7 @@ mpl.rcParams.update({'font.family': 'serif', 'font.serif': ['Times New Roman', '
 C = {'k': '#111111', 'g': '#6d6d6d', 'l': '#b3b3b3', 'a': '#1f5f8b'}  # ink, grey, light, one accent
 b = pd.read_csv(EXT / 'boe_gb.csv').set_index('Year'); b['GDPpc'] = b['GDP'] / b['PopGB']
 cum = pd.read_csv(EXT / 'canal_cum_miles.csv', index_col=0).iloc[:, 0]; cum.index = cum.index.astype(int)
-canals = pd.read_csv(EXT / 'uk_canals_wiki.csv'); panel = pd.read_csv(EXT / 'mpd_panel.csv')
+canals = pd.read_csv(EXT / 'uk_canals_v2.csv'); panel = pd.read_csv(EXT / 'mpd_panel.csv')
 w = np.exp(panel.pivot(index='year', columns='cc', values='lgdppc'))
 irf = pd.read_csv(EXT / 'lp_irfs.csv'); sem = pd.read_csv(EXT / 'semantic_sequence.csv', index_col=0)
 hp = pd.read_csv(EXT / 'power_hp.csv').set_index('Year')

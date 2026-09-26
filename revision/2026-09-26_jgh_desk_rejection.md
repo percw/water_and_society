@@ -114,3 +114,16 @@ akkumulerende dose kan gi HAC-p = 0,001 og RI-p = 0,22 på samme data. Monte Car
 Historical Methods tar artikler på 7 000–10 000 ord ekskl. noter, og krever at bidraget er
 metodisk og ikke bare bruk av etablerte metoder. Den nye DiD-krigskonfunderingen passer
 også her.
+
+## 5. Oppfølging 26. september: full leveranse
+
+Resultatet ligger i [`submission/02_journal_of_energy_history/`](../submission/02_journal_of_energy_history/):
+et nytt manuskript på 6 557 ord, Word og PDF, følgebrev til JEH og JTH, tittelside og en anonymisert
+replikasjonspakke.
+
+Under arbeidet ble det funnet feil i selve kanaltabellen. Kennet & Avon var datert 1727, flere store
+kanaler var datert etter Act-år eller første åpning i stedet for ferdigstillelse, og de sørwalisiske
+kanalene manglet. Serien er rettet (24 endringer, alle dokumentert), og hele analysen er kjørt på
+nytt (`docs/results_*_v2.txt`). Etter rettelsen er kull p = 0,003 med kvadratisk trend, altså akkurat
+på den størrelseskorrigerte terskelen. Randomiserings-p er 0,34 og 0,41 i den lokale projeksjonen.
+Konklusjonene i avsnitt 2 over gjelder uendret.

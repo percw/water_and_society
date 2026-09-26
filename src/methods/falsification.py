@@ -64,6 +64,7 @@ for c in OUT:
         bb, tt = quad(c, cum.shift(s)); rows.append((c, s, bb, tt))
 tab = pd.DataFrame(rows, columns=['outcome', 'shift', 'coef', 't'])
 print(tab.pivot(index='shift', columns='outcome', values='t')[OUT].round(2).to_string())
+tab.to_csv(EXT / 'falsification_timing.csv', index=False)
 print('(t-statistics, Newey-West 10 lags; size-corrected 5% critical value is about |t| > 3.0)')
 
 new = cum.diff().loc[A:E]
@@ -99,11 +100,15 @@ for c in OUT:
     w = np.r_[0, np.ones(11)]; s = w @ r.params.values; se = np.sqrt(w @ r.cov_params().values @ w)
     from scipy import stats as _st; print(f'  {c:6s}: sum {100*s:+6.1f}%  HAC t(sum)={s/se:+.2f} p(sum)={2*_st.norm.sf(abs(s/se)):.3f}  joint F p={float(r.f_test(np.eye(11, 12, 1)).pvalue):.4f}')
 
+ri_rows = []
 print('\n' + '=' * 78 + '\nE. RANDOMISATION INFERENCE, quadratic trend + war (Table 3, column 2)\n' + '=' * 78)
 for c in OUT:
     b0, t0 = quad(c, cum); ts = []
     for k in range(1, n):
         p = pd.Series(np.roll(new.values, k), index=new.index).cumsum().reindex(cum.index).ffill().fillna(0.0)
         ts.append(quad(c, p)[1])
+    ri_rows += [(c, k + 1, t_) for k, t_ in enumerate(ts)] + [(c, 0, t0)]
     ts = np.abs(np.array(ts)); ri = (np.sum(ts >= abs(t0)) + 1) / (len(ts) + 1)
-    print(f'  {c:6s}: {100*b0:+6.1f}% per 1,000 miles, t={t0:+.2f}, RI p={ri:.3f}')
+    far = np.array([min(k, n - k) >= 10 for k in range(1, n)]); ri10 = (np.sum(ts[far] >= abs(t0)) + 1) / (far.sum() + 1)
+    print(f'  {c:6s}: {100*b0:+6.1f}% per 1,000 miles, t={t0:+.2f}, RI p={ri:.3f}  (excluding shifts < 10 years: {ri10:.3f})')
+pd.DataFrame(ri_rows, columns=['outcome', 'shift', 't']).to_csv(EXT / 'falsification_ri_quad.csv', index=False)   # shift 0 = actual dose

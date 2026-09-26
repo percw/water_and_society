@@ -1,0 +1,63 @@
+==============================================================================
+A. TIMING PLACEBO: log y ~ quadratic trend + war + canal stock shifted s years, 1700-1830
+   s > 0: stock s years earlier (lag); s < 0: stock s years later (lead, canals not yet open)
+==============================================================================
+outcome  Coal   Ind  PopGB   GDP  GDPpc  Agri
+shift                                        
+-30     -0.92 -2.39  -7.21 -3.83  -0.34 -0.00
+-25     -0.12 -1.78  -6.68 -3.77  -0.99 -0.80
+-20      1.20 -1.07  -3.52 -2.52  -0.90 -1.10
+-15      2.24 -0.20  -1.38 -1.04  -0.26 -1.25
+-10      3.02  0.06  -0.29 -0.35  -0.20 -1.43
+-5       3.72  0.06   1.29 -0.04  -0.98 -1.32
+ 0       2.97  0.20   3.66  0.99  -0.78 -0.65
+ 5       2.34  1.12   4.87  1.89  -0.77 -0.76
+ 10      1.65  1.65   6.60  2.35  -0.76 -0.84
+ 15      0.80  2.07   8.22  2.74  -0.53 -0.53
+ 20      0.52  3.58   6.93  4.04   0.17 -0.25
+ 25      0.65  3.13   5.02  4.91   1.10  0.30
+ 30      0.61  2.62   3.72  3.99   1.26  0.13
+(t-statistics, Newey-West 10 lags; size-corrected 5% critical value is about |t| > 3.0)
+
+==============================================================================
+B. RANDOMISATION INFERENCE, first differences, 10-lag cumulative response
+   placebo = new-mileage series circularly shifted within 1700-1830 (130 orderings)
+==============================================================================
+  Coal  : sum  +32.4% per 1,000 miles, t=+0.82, RI p=0.344  (placebo |t| 95th pct 1.13)
+  Ind   : sum  +24.0% per 1,000 miles, t=+1.09, RI p=0.504  (placebo |t| 95th pct 2.11)
+  PopGB : sum  +19.7% per 1,000 miles, t=+9.38, RI p=0.107  (placebo |t| 95th pct 10.08)
+  GDP   : sum  +10.9% per 1,000 miles, t=+0.69, RI p=0.603  (placebo |t| 95th pct 1.58)
+  GDPpc : sum   -8.8% per 1,000 miles, t=-0.56, RI p=0.298  (placebo |t| 95th pct 0.91)
+  Agri  : sum  -17.3% per 1,000 miles, t=-0.39, RI p=0.336  (placebo |t| 95th pct 0.73)
+
+==============================================================================
+C. RANDOMISATION INFERENCE, local projection h=10 (level + trend controls)
+   placebo = canal stock rebuilt from the circularly shifted new-mileage series
+==============================================================================
+  Coal  :  +36.0% per 1,000 miles at 10 years, t=+8.27, RI p=0.412
+  Ind   :  +35.2% per 1,000 miles at 10 years, t=+10.72, RI p=0.031
+  PopGB :   +4.5% per 1,000 miles at 10 years, t=+3.16, RI p=0.573
+  GDP   :  +19.7% per 1,000 miles at 10 years, t=+9.80, RI p=0.099
+  GDPpc :   -2.0% per 1,000 miles at 10 years, t=-2.01, RI p=0.038
+  Agri  :   -6.9% per 1,000 miles at 10 years, t=-3.02, RI p=0.107
+
+==============================================================================
+D. WHAT TABLE 3 REPORTS FOR FIRST DIFFERENCES: joint F of 11 lags vs the cumulative sum
+   A significant joint F says the lags are not all zero; it does not say their sum is positive.
+==============================================================================
+  Coal  : sum  +32.4%  HAC t(sum)=+1.95 p(sum)=0.051  joint F p=0.0071
+  Ind   : sum  +24.0%  HAC t(sum)=+1.70 p(sum)=0.090  joint F p=0.0000
+  PopGB : sum  +19.7%  HAC t(sum)=+5.90 p(sum)=0.000  joint F p=0.0000
+  GDP   : sum  +10.9%  HAC t(sum)=+1.28 p(sum)=0.202  joint F p=0.0042
+  GDPpc : sum   -8.8%  HAC t(sum)=-1.05 p(sum)=0.295  joint F p=0.0238
+  Agri  : sum  -17.3%  HAC t(sum)=-1.00 p(sum)=0.319  joint F p=0.0000
+
+==============================================================================
+E. RANDOMISATION INFERENCE, quadratic trend + war (Table 3, column 2)
+==============================================================================
+  Coal  :  +29.8% per 1,000 miles, t=+2.97, RI p=0.336  (excluding shifts < 10 years: 0.310)
+  Ind   :   +1.3% per 1,000 miles, t=+0.20, RI p=0.901  (excluding shifts < 10 years: 0.947)
+  PopGB :   +6.7% per 1,000 miles, t=+3.66, RI p=0.649  (excluding shifts < 10 years: 0.673)
+  GDP   :   +3.7% per 1,000 miles, t=+0.99, RI p=0.733  (excluding shifts < 10 years: 0.770)
+  GDPpc :   -3.0% per 1,000 miles, t=-0.78, RI p=0.458  (excluding shifts < 10 years: 0.389)
+  Agri  :   -6.4% per 1,000 miles, t=-0.65, RI p=0.763  (excluding shifts < 10 years: 0.761)

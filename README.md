@@ -43,6 +43,8 @@ src/
     identification_simulation.py  Application 1: the British canal dose (Figure 6)
     run_boundary.py          Boundary sweep across dose shapes (Figure 7)
     falsification.py         Timing placebo and randomisation inference for the canal dose
+    falsification_figure.py  Figure 3 of the resubmission (fig8_falsification.png)
+  canal_series_v2.py     Corrected canal series (documented in data/external/canal_corrections.csv)
 data/
   external/              Tidy CSVs: boe_gb, mpd_panel, uk_canals_wiki, canal_cum_miles,
                          power_hp, priestley_1831_acts, ngram_bigrams_coal_transport
@@ -61,7 +63,7 @@ expansion/               Methods track: when can an accumulating dose identify a
 
 ## Two tracks after submission
 
-The manuscript was submitted to the *Journal of Global History* on 9 September 2026 and desk-rejected on fit on 22 September 2026; the corrected working text for the next journal is in `submission/02_journal_of_energy_history/`.
+The manuscript was submitted to the *Journal of Global History* on 9 September 2026 and desk-rejected on fit on 22 September 2026. The resubmission package — reframed for energy history, on a corrected canal series, with randomisation inference — is in [`submission/02_journal_of_energy_history/`](submission/02_journal_of_energy_history/).
 Work since then is separated into two directories that do not touch the submitted
 package:
 

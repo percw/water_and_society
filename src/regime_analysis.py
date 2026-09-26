@@ -124,7 +124,7 @@ print('\nCoal output per capita, 1700=100:', ((b['Coal'] / b['PopGB']) / (b['Coa
 
 # ---------------------------------------------------------------- 3. dose
 hdr('3. CANAL MILEAGE AS A DOSE (Britain, 1700-1830, pre-railway)')
-canals = pd.read_csv(EXT / 'uk_canals_wiki.csv')
+canals = pd.read_csv(EXT / 'uk_canals_v2.csv')
 dec = canals[(canals.year >= 1700) & (canals.year <= 1850)].groupby((canals.year // 10) * 10).miles.sum()
 print('Canal miles opened per decade:', dec.round(0).astype(int).to_dict())
 print('Cumulative miles:', cum.loc[[1760, 1770, 1780, 1790, 1800, 1810, 1820, 1830]].round(0).astype(int).to_dict())

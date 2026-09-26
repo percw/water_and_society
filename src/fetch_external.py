@@ -97,3 +97,4 @@ if __name__ == '__main__':
     print('Bank of England millennium dataset'); tidy_boe(download(BOE_URL, RAW / 'boe_millennium.xlsx', a.force))
     print('Maddison Project Database 2023'); tidy_mpd(download(MPD_URL, RAW / 'mpd2023.xlsx', a.force))
     print('UK canal list'); tidy_canals(a.force)
+    import runpy; runpy.run_path(str(Path(__file__).resolve().parent / 'canal_series_v2.py'))   # documented corrections -> canal_cum_miles.csv
