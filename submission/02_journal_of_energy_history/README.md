@@ -14,7 +14,7 @@ Målet med versjonen er å gi størst mulig sjanse for publisering etter desk-av
 | Størrelseskorreksjon | Ikke nevnt | p < 0,003 og minste påviselige effekt (~40 %) |
 | Nytt bidrag | — | Tre-trinns sjekk for infrastruktur-som-forutsetning, overførbar til jernbane, strømnett og rørledninger |
 | DiD | Egen seksjon, tabell og figur | Én setning i det komparative avsnittet |
-| Lengde | 12 500 ord | 6 557 ord inkl. noter, tabeller og figurtekster (tekst 4 961, noter 940); abstract 143 |
+| Lengde | 12 500 ord | ca. 6 650 ord inkl. noter, tabeller og figurtekster; abstract 143 |
 
 Lengden er valgt slik at samme manuskript passer **både** Journal of Energy History og
 Journal of Transport History (maks 8 000 ord inkl. noter, abstract < 150). Det kan dermed sendes
